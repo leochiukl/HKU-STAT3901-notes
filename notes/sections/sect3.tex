@@ -1,0 +1,174 @@
+\section{Life Insurance}
+\label{sect:life-insurance}
+\begin{enumerate}
+\item The decision of whether a policy \faIcon{file-alt} should be sold the
+policyholder \faIcon{user} or not depends critically on the \emph{present
+value} for the cash flows involved in \faIcon{file-alt} (including both
+benefits and premiums).
+\item To improve the tractability, we shall assume that the annual interest
+rate \(i\) is a fixed constant, so that the ``randomness'' of the present value
+(random variable) would only source from the modelled survival distribution for
+\faIcon{user} --- the present value is \emph{life contingent}.
+\item Often the insurance business \faIcon{building} is of very
+large scale and many identical policies may be sold to lives modelled by the
+same survival distribution (the ``ordinary'' one, say).
+\item In such case, the \emph{average} present value of those policies is a
+key metric for the profitability per policy sold. By virtue of \emph{weak
+law of large number} (assuming it is applicable), the average would converge to
+the \emph{expected present value} as the number of such policies sold
+goes to infinity. Hence, the study of life contingencies focuses a lot on the
+expected present value (also known as \defn{actuarial present value} (APV)).
+\item \Cref{sect:life-insurance,sect:life-annuity} mainly focus on determining
+the APV of the benefit payments of the contracts mentioned in
+\cref{subsect:traditional-contracts}.
+\item The contracts can be classified into two big categories, by the payment
+``timing'':
+\begin{enumerate}
+\item Discrete time: insurance \(\rightarrow\) payable at the end of period;
+life annuity \(\rightarrow\) payable at the beginning of period. (\(K_x\) is
+involved mainly.)
+\item Continuous time: insurance \(\rightarrow\) payable ``immediately''; life
+annuity \(\rightarrow\) payable ``continuously'' (\emph{continuous annuity} in
+interest theory). (\(T_x\) is involved mainly.)
+\end{enumerate}
+It turns out that working in continuous time (working with \(T_x\)) is
+mathematically more ``convenient''. However, practical contracts are always
+discrete in nature. So, sometimes quantities for ``discrete'' contracts in
+practice are approximated through working in continuous time instead, for
+mathematical convenience. (The approximation works better if the measurement
+period for the contract is shorter.)
+\end{enumerate}
+\subsection{Valuating Whole Life Insurance}
+\begin{enumerate}
+\subsubsection*{Continuous Case}
+\item Consider a \emph{continuous} whole life insurance with sum insured \$1
+and life insured (\(x\)). The sum insured \$1 is paid \emph{exactly at} time of
+death of (\(x\)), i.e., time \(T_x\) (when the life is aged \(x\), it is time
+0).  \item The present value random variable (p.v.r.v.) (present value of the
+benefit payment) is
+\[
+Z=v^{T_x}=e^{-\delta T_x}.
+\]
+where \(\delta\) is the annual force of interest equivalent to the annual rate
+\(i\). The APV is:
+\[
+\expv{Z}=\expv{e^{-\delta T_x}}=\int_{0}^{\infty}e^{-\delta t}\underbrace{\px[t]{x}\mu_{x+t}}_{f_x(t)}\,dt
+\]
+\begin{intuition}
+RHS ``sums up'' the ``expected present value of death benefit'':
+\[\underbrace{e^{-\delta t}}_{\text{PV of payment}}\times \underbrace{\px[t]{x}\mu_{x+t}\,dt}_{\text{death prob. in }[t,t+dt]}\]
+(\(e^{-\delta(t+dt)}\) and \(e^{-\delta t}\) are ``the same'' in
+``infinitesimal'' sense) in all ``infinitesimal'' time intervals.
+\end{intuition}
+\item Actuarial notation for the APV:
+
+\begin{tikzpicture}
+\node[font=\huge, ForestGreen] (Ax) at (0,0) {\(\Ax*{x}\)};
+\draw[-Latex] (-1,1) -- (0,0.5);
+\node[] () at (-1.5,1.3)  {``bar'' indicates ``continuous''};
+\draw[-Latex] (1.5,1) -- (0.25,-0.1);
+\node[] () at (1.8,1.3) {for (\(x\))};
+\draw[-Latex] (-1.5,-1) -- (-0.35,-0.35);
+\node[text width=3.5cm] () at (-1.8,-2.2) {\underline{A}ssurance (another term for
+``insurance'', which is more commonly used in the UK)};
+\end{tikzpicture}
+
+\item When the sum insured for the insurance becomes \(\$ S\), the p.v.r.v.\
+becomes \(S\cdot Z\). Then, the APV becomes \(\expv{SZ}=S\Ax*{x}\), the second
+moment becomes \(\expv{(SZ)^2}=S^{\color{purple}2}\cdot\Ax*[][2]{x}\), and the
+variance is \(\vari{SZ}=S^{\color{purple}2}\vari{Z}\).
+\begin{warning}
+Do not miss the square for the second moment and variance!
+\end{warning}
+\item To compute \emph{probability} related to the p.v.r.v. in the form
+of \(\prob{Z\le \text{\faIcon{question-circle}}}\), we try to find an
+expression of the form
+``\(T_x\ge\text{\faIcon[regular]{question-circle}}\)''\footnote{The direction
+of inequality is given by ``\(\ge\)'' since, loosely, \(T_x\uparrow\iff
+Z\downarrow\), for a fixed insurance contract.}  that is \emph{equivalent} to
+``\(Z\le \text{\faIcon{question-circle}}\)''. Then, we instead compute the
+probability \(\prob{T_x\ge\text{\faIcon[regular]{question-circle}}}\) (which
+equals \(\prob{Z\le \text{\faIcon{question-circle}}}\)). We have similar
+approaches for other ``forms'' of the probability.
+\begin{note}
+This works generally for all kinds of insurance introduced in
+\cref{sect:life-insurance}.
+\end{note}
+\item Sometimes we are also interested in the \emph{variability} of the
+p.v.r.v.\ \(Z\). To measure this, we calculate the variance \(\vari{Z}\).
+\item Consider first the second moment of \(Z\), which is given by
+\[
+\expv{Z^2}=\expv{e^{-{\color{purple} 2\delta} T_x}}=\Ax*{x}@\;{\color{purple} 2\delta},
+\]
+i.e., the APV evaulated at force of interest \(2\delta\) (Actuarial notation:
+\(\Ax*[][2]{x}\)). Then the variance is
+\[
+\vari{Z}=\Ax*[][2]{x}-(\Ax*{x})^2.
+\]
+\item Summary:
+
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&\(e^{-\delta T_x}\)&\(\displaystyle\int_{0}^{\infty}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt\)
+&\(\Ax*{x}@\;2\delta\)&\(\Ax*[][2]{x}-(\Ax*{x})^2\)\\
+notation&\(Z\)&\(\Ax*{x}\)&\(\Ax*[][2]{x}\)&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+\subsubsection*{Annual Case}
+\item Consider a \emph{discrete} whole life insurance with sum insured
+\faIcon{money-bill-wave} \$1 and life insured (\(x\)). The sum insured \$1 is
+paid \emph{at the end of (policy) year} of death of (\(x\)), i.e., time
+\(K_x+1\).
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\((x)\)};
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {\(K_x\)};
+\fill[] (4.8,0) circle [radius=0.05]
+node[red, above] {\faIcon{skull}}
+node[below] {\(T_x\)};
+\fill[] (6,0) circle [radius=0.05]
+node[ForestGreen, above] {\faIcon{money-bill-wave}}
+node[ForestGreen, above=0.4cm] {\$1}
+node[below] {\(K_x+1\)};
+\node[] () at (11,-1) {Policy year};
+\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt, mirror}] (0,0) -- (2,0)
+node[midway, below=0.7cm]{1};
+\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt, mirror}] (4,0) -- (6,0)
+node[midway, below=0.7cm]{\(K_x\)};
+\end{tikzpicture}
+\item 
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&\(v^{K_x+1}\)&\(\displaystyle\sum_{k=0}^{\infty}v^{k+1}\px[k]{x}\qx{x+k}\)
+&\(\Ax{x}@\;2\delta\)&\(\Ax[][2]{x}-(\Ax{x})^2\)\\
+notation&\(Z\)&\(\Ax{x}\)&\(\Ax[][2]{x}\)&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+
+\begin{rmk}
+\item The actuarial notation \(\Ax{x}\) has no ``bar'' as the insurance is no longer
+continuous.
+\item We can change ``\(v\)'' to ``\(e^{-\delta}\)'' above, where \(\delta\) is the
+equivalent annual force of interest.
+\end{rmk}
+
+\begin{intuition}
+For the APV formula, it sums up the expected present value of death benefit \faIcon{money-bill-wave}:
+\[\underbrace{v^{k+1}}_{\text{PV of payment}}\times \underbrace{\px[k]{x}\qx{x+k}}_{\text{death prob. in }[k,k+1)}\]
+in all ``unit'' time intervals.
+\end{intuition}
+\subsubsection*{\(1/m\)thly Case}
+\item Consider a \emph{discrete} whole life insurance with sum insured
+\faIcon{money-bill-wave} \$1 and life insured (\(x\)). The sum insured \$1 is
+paid \emph{at the end of \(1/m\)th of a (policy) year} of death of (\(x\)).
+\end{enumerate}

@@ -1,0 +1,151 @@
+\section{Introduction to Life Contingencies}
+\subsection{Introduction to Life Insurance Business}
+\begin{enumerate}
+\item Suppose an individual \faIcon{user} (the \defn{policyholder}) wants to buy
+a life insurance policy for himself.  Should the insurance company
+\faIcon{building} accept his application and sells the policy \faIcon{file-alt}
+to him? Often this is decided by performing \emph{underwriting} \faIcon{search}.
+
+\item During the \defn{underwriting} \faIcon{search} process, \faIcon{user} provides some of his
+information to \faIcon{building}, like age, gender, occupation, etc.
+
+\item After \faIcon{search} is finished, there are typically three outcomes:
+\begin{enumerate}
+
+\item accept with standard premium charged (most common)
+
+\item accept with ``higher than standard'' premium charged (this indicates that
+\faIcon{user} has higher risk than usual based on the information provided)
+
+\item reject (the risk level suggested by the information is so high that the
+policyholder is \emph{uninsurable} [e.g., it is ``almost'' sure that he will
+die very soon])
+\end{enumerate}
+
+\item Now suppose \faIcon{building} accepts his application with standard premium
+charged. Then, \faIcon{user} will periodically pay \defn{premiums} \faDollarSign{}
+to \faIcon{building}, in exchange for the life insurance coverage.
+
+\item Note that the \emph{life insured} for this policy is the policyholder
+\faIcon{user} himself. But it is possible that the life insured is someone else
+\faIcon{walking}.
+
+\item If the life insured \faIcon{walking} dies within the term covered by the
+policy, then \faIcon{building} will pay the \defn{sum insured}/\defn{death
+benefit} \faIcon{money-bill-wave} (as specified in the policy
+\faIcon{file-alt}) to the policyholder \faIcon{user}.
+
+\begin{note}
+From this we can observe a potential issue: if the death of \faIcon{walking}
+causes no harm to \faIcon{user} at all, then the policy may \emph{incentivize}
+\faIcon{user} to \textcolor{red}{\emph{kill}} \faIcon{walking}! To deal with this
+problem, the underwriting process would ensure the policy \faIcon{file-alt} is only
+sold to \faIcon{user} that has \defn{insurable interest}, i.e., the death of the
+life insured \faIcon{walking} should make the policyholder \faIcon{user} quite worse
+off.\footnote{Expressing differently, it is of interest to \faIcon{user} when
+\faIcon{walking} is alive --- survival of \faIcon{walking} gives some benefits to
+\faIcon{user}.}
+\end{note}
+
+\item Typically, the life insurance policy would expire immediately after
+the sum insured is paid (if such payment exists), or when such payment is
+impossible to be made (e.g., see \labelcref{it:deferral}).
+
+\item The timing of the life insured's death \faIcon{skull} is very important to
+\faIcon{building}, since:
+\begin{enumerate}
+\item it affects the timing of the death benefit payment
+\faIcon{money-bill-wave}, hence its \emph{present value};
+
+\item it also influences how much premiums \faIcon{dollar-sign} would be paid
+(as the premium payment ceases immediately after the death).
+\end{enumerate}
+Both of them are crucial to the \emph{profitability} \faIcon{piggy-bank} of the
+life insurance business!
+
+\item Both \faIcon{money-bill-wave} and \faIcon{dollar-sign} depend on the
+survival status of the life insured \faIcon{walking}, so we say that they are
+\defn{life contingent} (contingent on the death/survival of \faIcon{walking}).
+Their importance to the profitability of \faIcon{building} motivates the study
+of \emph{life contingencies}.
+\end{enumerate}
+
+\subsection{Traditional Contracts for Life Insurance Business}
+\label{subsect:traditional-contracts}
+\begin{enumerate}
+\item We introduce some traditional contracts here:
+\begin{enumerate}
+\item term life insurance \faIcon{clock}\textbar\faIcon{shield-alt}
+\item whole life insurance \faIcon{infinity}\textbar\faIcon{shield-alt}
+\item endowment insurance \faIcon{clock}\textbar\faIcon{shield-alt}\textbar\faIcon{piggy-bank} and pure endowment \faIcon{piggy-bank}
+\item term life annuity \faIcon{clock}\textbar\faIcon{hand-holding-usd}
+\item whole life annuity \faIcon{infinity}\textbar\faIcon{hand-holding-usd}
+\end{enumerate}
+\begin{note}
+The last two contracts are \emph{life annuity} contracts, and are
+not ``insurance'' contracts. Although \faIcon{building} is called ``life
+insurance'' business, \faIcon{building} offers not only insurance policies, but
+also policies ``related to life'', e.g.\ life annuity.
+\end{note}
+
+\item \defn{Term life insurance} is a life insurance contract
+\faIcon{shield-alt} with a specified term \faIcon{clock}--- death benefit is
+only payable when the life insured dies \emph{within} the term.
+
+\item \defn{Whole life insurance} is a life insurance contract
+\faIcon{shield-alt} with \emph{indefinite} term \faIcon{infinity}, i.e., death
+benefit is always payable when the life insured dies.
+
+\item \defn{Endowment\footnote{Endowment means ``funds invested for the support
+and benefit of a person''. In this context, it refers to the ``savings
+element'' \faIcon{piggy-bank} (to benefit the policyholder \faIcon{user}).}
+insurance} is a term life insurance \faIcon{clock}\textbar\faIcon{shield-alt}
+with an extra survival benefit \faIcon{money-bill-wave} (equal to the death
+benefit) payable if the life insured is still alive at the end of the term
+(this can be seen as a ``savings element'' \faIcon{piggy-bank}).
+
+\begin{note}
+\defn{Pure endowment} is an endowment insurance with the term life insurance
+element taken away --- it only contains a survival benefit payable when the
+life insured is still alive at the end of the term.
+\end{note}
+
+\item \defn{Term life annuity} is a term \faIcon{clock} annuity with periodic
+payments \faIcon{hand-holding-usd} to \faIcon{user} (usually called
+\defn{annuitant} in the context of life annuity), while \faIcon{user} is alive.
+
+\item \defn{Whole life annuity} is a perpetuity with periodic payments
+\faIcon{hand-holding-usd} to the annuitant \faIcon{user} while \faIcon{user} is
+alive.
+
+\item For all the contracts here, premiums \faIcon{dollar-sign} are payable.
+Conventionally (for ``discrete'' case), they are paid \emph{at the
+beginning} of each period, during a time interval specified in the contract.
+
+\item On the other hand, the death/survival benefit is conventionally paid
+\emph{at the end} of the period of death/last period of the term  (for
+``discrete'' case).
+
+\item \label{it:deferral} The contracts can be \defn{deferred}, in the sense
+that the ``coverage'' only starts a specified time length (called the
+\defn{deferral period}) after the purchasing time. For example, for a deferred
+whole life insurance, if the death of life insured \faIcon{skull} occurs during
+the deferral period, then no death benefit is payable (and the death benefit is
+impossible to be made anymore, so the policy would expire).
+
+\item Sometimes it possible for \faIcon{user} to \defn{lapse} or
+\defn{surrender} the policy, i.e., \faIcon{user} can choose to stop paying
+premiums starting at a certain time, and simultaneously the policy would expire
+at that time.  In case of policy lapse/surrender, \faIcon{user} may receive
+some refund (called \defn{cash value} or \defn{surrender value}).
+
+\begin{note}
+Sometimes the term ``lapse'' is used only when there is no such refund, and the
+term ``surrender'' is used only when there is such refund.
+\end{note}
+
+\item For some term contracts, it is \defn{renewable}: the policyholder
+\faIcon{user} can choose to \emph{renew} the contract at the end of the term,
+for a time length specified in the contract, by continuing to pay premiums
+(with possibly different amount from before) to receive a prolonged coverage.
+\end{enumerate}
