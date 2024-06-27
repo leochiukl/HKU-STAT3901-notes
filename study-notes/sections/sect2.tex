@@ -1,7 +1,7 @@
 \section{Survival Distributions}
 \subsection{Future Lifetime Random Variable}
 \begin{enumerate}
-\item A life aged \(x\) (in years) is denoted by \((x)\).
+\item A life aged \(x\) (in years) is denoted by \defn{\((x)\)}.
 
 \begin{note}
 By ``aged \(x\)'', we mean the life's age is \emph{exactly} \(x\):
@@ -257,6 +257,7 @@ lifetime, so that we know whether our choice of ``survival function'' is
 reasonable or not.
 
 \begin{proposition}
+\label{prp:valid-surv}
 A function \(S_x\) defined on \([0,\infty)\) is a valid survival function
 for the future lifetime iff the following hold:
 \begin{enumerate}
@@ -305,7 +306,7 @@ the survival function \(S_0\) (for force of mortality ``modelled'' at age 0).
 But as ``mortality'' is opposite to ``survival'', it appears that we should add
 a negative sign in the definition.
 
-\item \label{it:fom} The \defn{force of mortality} (``modelled'' at age 0, at
+\item \label{it:fom} The \defn{force of mortality (``modelled'' at age 0)} at
 time \(t\)) \defn{\(\mu_t\)} (or \defn{\(\mu_0(t)\)}) is defined as
 \[
 \mu_t=-\frac{S_0'(t)}{S_0(t)}
@@ -329,9 +330,9 @@ node[below right] {\(t+dt\)};
 node[midway, above=0.3cm]{\faIcon{skull}};
 \end{tikzpicture}
  \end{intuition}
-\item Denote by \(f_x(t)\) the pdf of \(T_x\). Then, we have:
+\item Denote by \defn{\(f_x(t)\)} the pdf of \(T_x\). Then, we have:
 \begin{proposition}
-\label{prp:fom-pdf-0}
+\label{prp:mu-pdf-0}
 \[
 \mu_t=\frac{f_0(t)}{S_0(t)}
 \]
@@ -355,7 +356,7 @@ The result follows from noting that
 
 \item Now we would like to extend the concept of force of mortality to the case
 where it can be ``modelled'' at any age \(x\). The definition is analogous: the
-\defn{force of mortality} at time \(t\) (``modelled'' at age \(x\)), denoted by
+\defn{force of mortality (``modelled'' at age \(x\))} at time \(t\), denoted by
 \defn{\(\mu_x(t)\)}, is
 \[
 \mu_x(t)=-\frac{S_x'(t)}{S_x(t)}.
@@ -423,13 +424,14 @@ either meaning without ambiguity.
 
 \item One would then expect the following result holds also:
 \begin{proposition}
+\label{prp:mu-pdf-x}
 \[
 \mu_{x+t}=\frac{f_x(t)}{S_x(t)}
 \]
 for any age \(x\) and \(t>0\).
 \end{proposition}
 \begin{pf}
-Replace ``0'' in the proof of \cref{prp:fom-pdf-0} by \(x\).
+Replace ``0'' in the proof of \cref{prp:mu-pdf-0} by \(x\).
 \end{pf}
 
 \item Recall that for force of interest, we have
@@ -442,7 +444,7 @@ hold for force of mortality, and this is the case:
 Recall that \(S_x(0)=1\).
 \end{note}
 \begin{proposition}
-\label{prp:sx-fom}
+\label{prp:sx-int}
 \[
 S_x(t)=\exp\qty(-\int_{0}^{t}\mu_{x+s}\,ds)
 \]
@@ -475,7 +477,7 @@ integral on both sides and applying fundamental theorem of calculus give the
 desired result.
 \end{pf}
 
-\item \label{it:fom-spec-dist} By \cref{prp:sx-fom}, if we know \(\mu_y\) for
+\item \label{it:fom-spec-dist} By \cref{prp:sx-int}, if we know \(\mu_y\) for
 any \(y\in[x, x+t]\), \(S_x(t)\) is determined. Hence, once \(\mu_y\) is known
 for any \(y\ge x\) (so \(S_x(t)\) is determined for any \(t\ge 0\)), the
 distribution of \(T_x\) is \emph{completely specified}.
@@ -593,7 +595,7 @@ func(\x) = (\x < 50) * (1-x/50) + (\x >= 50) * 0;
 \mu_x=\mu
 \]
 for any age \(x\), where \(\mu>0\) is a constant.
-In this case, by \cref{prp:sx-fom}, the survival function is given by
+In this case, by \cref{prp:sx-int}, the survival function is given by
 \[
 S_x(t)=e^{-\mu t}
 \]
@@ -634,7 +636,7 @@ node[midway, below=0.7cm]{deferment period};
 \item Based on the definitions in \labelcref{it:actuar-pq}, we can readily
 derive the following results:
 \begin{proposition}
-\label{prp:pq-prop}
+\label{prp:act-notation-prop}
 For any age \(x\) and \(t,u\ge 0, n\in\N\),
 \begin{enumerate}
 \item \(\px[t]{x}+\qx[t]{x}=1\).
@@ -739,6 +741,7 @@ in interest theory).
 
 \item The relationship between ``\(q\)'' and ``\(\mu\)'' is given by:
 \begin{proposition}
+\label{prp:qx-int}
 \[
 \qx[t]{x}=\int_{0}^{t}\px[s]{x}\mu_{x+s}\,ds
 \]
@@ -797,6 +800,7 @@ conditions in \labelcref{it:additional-cond}).
 \item Likewise we almost always use the following alternative formula instead
 of the definition:
 \begin{proposition}
+\label{prp:tx-2nd-moment-fmla}
 \[
 \expv{T_x^2}=2\int_{0}^{\infty}t\,\px[t]{x}\,dt.
 \]
@@ -822,7 +826,7 @@ Once we compute the first and second moments of \(T_x\): \(\expv{T_x}\) and
 \]
 
 \item Sometimes we are interested in the future lifetime random variable
-``capped'' to \(n\) years: \(T_x\wedge n\) (i.e., \(\min\{T_x, n\}\)) (e.g., in
+``capped'' to \(n\) years: \defn{\(T_x\wedge n\)} (i.e., \(\min\{T_x, n\}\)) (e.g., in
 the context of endowment insurance; see later sections). The expectation of
 this capped random variable (i.e., \(\expv{T_x\wedge n}\)) is called the
 \defn{term expectation of life}. (Actuarial notation:
@@ -853,7 +857,7 @@ Replace \(T_x\) by \(T_x\wedge n\) in the proof of \cref{prp:eringx-fmla}, and n
 \]
 \end{pf}
 \end{enumerate}
-\subsection{Curtate Future Lifetime}
+\subsection{Curtate Future Lifetime Random Variable}
 \begin{enumerate}
 \item Recall the discrepancy between the meaning of ``age'' here (exact) versus
 the daily life meaning (number of birthdays passed):
@@ -882,19 +886,20 @@ node[below] {4};
 node[midway, below=0.7cm, font=\small]{``aged 1'' in daily life};
 \end{tikzpicture}
 \item To capture the ``daily life meaning'', we introduce the concept of curtate
-future lifetime. The \defn{curtate future lifetime} random variable for (\(x\))
+future lifetime. The \defn{curtate future lifetime random variable} for (\(x\))
 (denoted by \(K_x\)) is the integer part of \(T_x\), i.e., \(\lfloor
 T_x\rfloor\).
 
 \begin{rmk}
 \item ``Curtate'' means ``shortened''. The lifetime expressed in ``daily life
 age'' (curtate future lifetime) is always shorter than (or equal to) the
-``exact'' lifetime here.
+``exact'' future lifetime here.
 \item \(K_x\) is a discrete random variable, while \(T_x\) is a continuous
 random variable.
 \end{rmk}
 \item Here is an important ``bridge'' between \(T_x\) and \(K_x\):
 \begin{proposition}
+\label{prp:tx-kx-connection}
 For any \(k\in\N_0\)\footnote{\(\N_0=\{0,1,2\dotsc\}\).}, \(K_x=k\) iff \(k\le
 T_x<k+1\) (i.e., the events \(\{K_x=k\}\) and \(\{k\le T_x<k+1\}\) are equal).
 \end{proposition}
@@ -910,6 +915,7 @@ easily.
 
 A corollary is the following:
 \begin{corollary}
+\label{cor:kx-tx-ineq-connection}
 For any \(k\in\N_0\), \(K_x\le k\) iff \(T_x<k+1\).
 \end{corollary}
 \begin{pf}
@@ -923,6 +929,7 @@ RHS is \underline{not} \(\qx[k]{x}\).
 
 \item The pmf of \(K_x\) is given by:
 \begin{proposition}
+\label{prp:kx-pmf}
 For any \(k\in\N_0\), \(\prob{K_x=k}=\px[k]{x}\qx{x+k}.\)
 \end{proposition}
 \begin{intuition}
@@ -939,6 +946,7 @@ It suffices to note that \(\prob{K_x=k}=\qx[k|]{x}\)\footnote{Recall that
 notation: \(e_x\))
 \item The following is the ``discrete analogue'' of \cref{prp:eringx-fmla}:
 \begin{proposition}
+\label{prp:ex-fmla}
 \(\displaystyle
 e_x=\sum_{k=1}^{\infty}\px[k]{x}.
 \)
@@ -958,6 +966,7 @@ Using a similar approach as the proof of \cref{prp:eringx-fmla}, we have
 \end{pf}
 \item For the second moment, we have also the following analogous result:
 \begin{proposition}
+\label{prp:kx-2nd-moment-fmla}
 \(\displaystyle\expv{K_x^2}=\sum_{k=1}^{\infty}(2k-1)\,\px[k]{x}\).
 \end{proposition}
 \begin{warning}
@@ -983,6 +992,7 @@ can find the variance of \(K_x\) by
 n}\), where \(n\in\N_0\). (Actuarial notation: \defn{\(e_{\endowxn}\)})
 \item Analogously, we have
 \begin{proposition}
+\label{prp:exn-fmla}
 \[
 e_{\endowxn}=\sum_{k=1}^{n}\px[k]{x}.
 \]
@@ -1004,6 +1014,7 @@ Using a similar approach as the proof of \cref{prp:eringxn-fmla}, we have
 is often best understood by \emph{intuition}.
 \item The recursive formulas are collected in the following:
 \begin{proposition}
+\label{prp:elife-recursion}
 For any age \(x\) and \(n\in\N\),
 \begin{enumerate}
 \item \(\eringx{x}=\eringx{\endowxn}+\px[n]{x}\eringx{x+n}\).
@@ -1178,10 +1189,12 @@ table, e.g.:
 seen as ``dual'' of ``\(\lx{}\)'':
 \begin{center}
 \begin{tabular}{ccc}
+\toprule
 &Survivors&Deaths\\
-\hline
+\midrule
 number\ &\(\mathcal{L}\)&\(\mathcal{D}\)\\
 exp.\ number &\(\lx{}\)&\(\dx{}\)\\
+\bottomrule
 \end{tabular}
 \end{center}
 \item The number of deaths between ages \(x\) and \(x+n\) is
@@ -1208,6 +1221,7 @@ Then similarly we have
 \(\displaystyle\dx[n]{x}=\sum_{j=1}^{\lx{0}}(\px[x]{0}-\px[x+n]{0})=\lx{x}-\lx{x+n}.\)
 \item We can readily deduce the following results:
 \begin{proposition}
+\label{prp:life-table-relationships}
 For any age \(x\) and \(n\in\N\),
 \begin{enumerate}
 \item \(\qx[n]{x}=\dx[n]{x}/\lx{x}\).
@@ -1236,9 +1250,10 @@ This is \underline{not} \(\px[t]{x}=t\px{x}\).
 \end{warning}
 \item \label{it:udd-approach} Under UDD, to compute quantities involving fractional ages and years,
 a general approach is to express them in terms of \(\qx[t]{x}\) where
-\(x\in\N_0\text{ and }t\in[0,1)\), using, e.g., properties in \cref{prp:pq-prop}.
+\(x\in\N_0\text{ and }t\in[0,1)\), using, e.g., properties in \cref{prp:act-notation-prop}.
 \item A special property under UDD is:
 \begin{proposition}
+\label{prp:udd-only-length}
 For any integer age and any \(u,t\ge 0\) such that \(u+t\in[0,1)\),
 \(\qx[u|t]{x}=t\qx{x}\).
 \end{proposition}
@@ -1256,6 +1271,7 @@ matter).
 
 \item Under UDD, the mean and variance of \(T_x\) and \(K_x\) are related in a rather simple way:
 \begin{proposition}
+\label{prp:udd-mean-variance}
 Under UDD, for any integer age \(x\),
 \begin{enumerate}
 \item \(\eringx{x}=e_x+1/2\);
@@ -1285,6 +1301,7 @@ where \(\mu_x^*>0\) depends only on the fixed integer age \(x\).
 \item The following is the key property for constant force of mortality
 assumption:
 \begin{proposition}
+\label{prp:cfm-key-prop}
 \(\px[t]{x}=(\px{x})^t\) for any integer age \(x\) and any \(t\in[0,1)\).
 \end{proposition}
 \begin{pf}
@@ -1399,7 +1416,7 @@ At age 10:
 \node[] () at (1.5,-0.3) {\faIcon{child}};
 \node[] () at (-1,0) {\faIcon{child}};
 \node[] () at (-1.5,-0.5) {\faIcon{child}};
-\node[] () at (0.2,0.5) \faIcon{child}};
+\node[] () at (0.2,0.5) {\faIcon{child}};
 \end{tikzpicture}
 
 The selected lives would have different survival distributions from others.
@@ -1501,6 +1518,7 @@ construct the tables (based on some pre-specified values for ``select''
 survival probabilities, as well as ``ultimate'' life table function:
 \(\lx{x}\)'s):
 \begin{proposition}
+\label{prp:construct-select-table}
 Both \cref{eq:select-table-req1,eq:select-table-req2} hold true iff
 \[
 \lx{[x]+t}=\frac{\lx{x+d}}{\px[d-t]{[x]+t}}
@@ -1516,8 +1534,8 @@ for any \(t\ge d\), where \(d\) is the select period.
 for any \(t\ge d\). After that, \cref{eq:select-table-req1} implies that
 \(\lx{[x]+d}=\lx{x+d}=\lx{[x]+t}\,\px[d-t]{[x]+t}\) for any \(0\le t<d\).
 
-``\(\Leftarrow\)'': For any age \(x\) and any \(t,u\ge 0\),
-firstly \cref{eq:select-table-req2} immediately holds. Next, consider:
+``\(\Leftarrow\)'': Under the assumption, for any age \(x\) and any \(t,u\ge
+0\), firstly \cref{eq:select-table-req2} immediately holds. Next, consider:
 \begin{itemize}
 \item \underline{Case 1}: \(t+u<d\)\\
 We have

@@ -12,6 +12,7 @@
 \usepackage{pgfplots}
 \usepackage{booktabs}
 \usepackage[type={CC},modifier={by-sa},version={4.0}]{doclicense}
+\usepackage{imakeidx}
 \usepackage{tikz}
 
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
@@ -23,10 +24,9 @@
 \setenumerate[1]{label=\thesubsection.\arabic*~, ref=\S \thesubsection.\arabic*}
 
 \newcommand*{\prob}[1]{\mathbb{P}\qty(#1)}
-\newcommand*{\defn}[1]{\textcolor{ForestGreen}{\textbf{#1}}}
+\newcommand*{\defn}[1]{\textcolor{ForestGreen}{\textbf{#1}}\index[def]{#1}}
 \newcommand*{\bu}[1]{\textbf{\underline{#1}}}
 \newcommand*{\eqd}{\overset{d}=}
-\newcommand*{\qedsymb}{\(\blacksquare\)}
 \newcommand*{\ystar}{\textcolor{yellow}{\faIcon{star}}}
 \newcommand*{\expv}[1]{\mathbb{E}\qty[#1]}
 \newcommand*{\indicset}[1]{\mathbf{1}_{\left\{#1\right\}}}
@@ -39,10 +39,28 @@
 \newenvironment{note}{\sffamily\lbrack Note:}{\!\!\rbrack}
 \newenvironment{warning}{\sffamily\lbrack \warn\;\textcolor{red}{Warning}:}{\!\!\rbrack}
 \newenvironment{intuition}{\sffamily\lbrack Intuition \textcolor{yellow!80!black}{\faIcon{lightbulb}}:}{\!\!\rbrack}
-\newenvironment{pf}{\sffamily\underline{Proof}:}{\hfill\qedsymb}
+\newenvironment{pf}{\sffamily\underline{Proof}:}{\qed}
 
 \theoremstyle{definition}
 \newtheorem{proposition}{Proposition}[subsection]
 \renewcommand*\theproposition{\thesubsection.\alph{proposition}}
 \newtheorem{corollary}[proposition]{Corollary}
 \newtheorem{lemma}[proposition]{Lemma}
+
+%For links in index page to link to line
+%https://tex.stackexchange.com/questions/405813/link-to-line-instead-of-page
+\makeatletter
+\AtBeginDocument{
+  \LetLtxMacro\egregs@index\index
+  \RenewDocumentCommand{\index}{o+m}{%
+    \begingroup
+    \phantomsection%
+    \IfValueTF{#1}{%
+      \imki@wrindexentry{#1}{#2|hyperlink{\@currentHref}}{\thepage}%
+    }{%
+      \imki@wrindexentry{\jobname}{#2|hyperlink{\@currentHref}}{\thepage}%
+    }%
+    \endgroup
+  }
+}
+\makeatother

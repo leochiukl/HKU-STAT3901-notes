@@ -37,7 +37,31 @@ discrete in nature. So, sometimes quantities for ``discrete'' contracts in
 practice are approximated through working in continuous time instead, for
 mathematical convenience. (The approximation works better if the measurement
 period for the contract is shorter.)
+
+\item
+\label{it:gen-APV-fmla}
+\ystar An ``intuition-based'' general APV calculation formula for
+insurance/life annuity:
+\[
+\underset{\text{all possible payment times}}{\sum\text{ or }\int}\text{benefit amount}\times\text{discount
+factor}\times\text{prob.\ of triggering payment}.
+\]
+\begin{note}
+For continuous case with ``\(\int\)'', the terms above can be in
+``infinitesimal'' sense (e.g., involving ``\(dt\)''), loosely.
+\end{note}
+
+
+\begin{intuition}
+It ``sums up'' the ``expected present value of benefit payment'':
+\[
+\underbrace{\text{benefit amount}\times\text{discount factor}}_{\text{PV of payment}}
+\times\text{prob.\ of triggering payment}
+\]
+in all time intervals.
+\end{intuition}
 \end{enumerate}
+
 \subsection{Valuating Whole Life Insurance}
 \begin{enumerate}
 \subsubsection*{Continuous Case}
@@ -105,7 +129,9 @@ i.e., the APV evaulated at force of interest \(2\delta\) (Actuarial notation:
 \[
 \vari{Z}=\Ax*[][2]{x}-(\Ax*{x})^2.
 \]
-\item Summary:
+\item
+\label{it:cts-whole-life-fmlas}
+ Summary:
 
 \begin{tabular}{ccccc}
 \toprule
@@ -145,6 +171,7 @@ node[midway, below=0.7cm]{1};
 node[midway, below=0.7cm]{\(K_x\)};
 \end{tikzpicture}
 \item 
+\label{it:annual-whole-life-fmlas}
 \begin{tabular}{ccccc}
 \toprule
 &p.v.r.v.&APV&2nd moment&variance\\
@@ -171,4 +198,62 @@ in all ``unit'' time intervals.
 \item Consider a \emph{discrete} whole life insurance with sum insured
 \faIcon{money-bill-wave} \$1 and life insured (\(x\)). The sum insured \$1 is
 paid \emph{at the end of \(1/m\)th of a (policy) year} of death of (\(x\)).
+\item Since ``\(1/m\)th of a (policy) year'' is involved, it would be more
+convenient to develop a similar concept as the curtate future lifetime random
+variable \(K_x\) but with time unit being \(1/m\)th of a year.
+\item The \defn{\(1/m\)thly curtate future lifetime random variable} (denoted
+by \(K_x^{(m)}\)) is \(T_x\) rounded down to 1/\(m\)th of a year, i.e.,
+\[
+K_x^{(m)}=\frac{1}{m}\lfloor mT_x\rfloor.
+\]
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[above] {(\(x\))}
+node[below] {0};
+\fill[] (1,0) circle [radius=0.05];
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1};
+\fill[] (3,0) circle [radius=0.05];
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2};
+\fill[] (5,0) circle [radius=0.05];
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3};
+\fill[] (7,0) circle [radius=0.05];
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4};
+\draw[thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt, mirror}] (1,0) -- (1.99,0)
+node[midway, below=0.7cm, font=\small] {\(K_x^{(1/2)}=0.5\)};
+\draw[thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt, mirror}] (4,0) -- (4.99,0)
+node[midway, below=0.7cm, font=\small] {\(K_x^{(1/2)}=2\)};
+\draw[thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt, mirror}] (7,0) -- (7.99,0)
+node[midway, below=0.7cm, font=\small] {\(K_x^{(1/2)}=3.5\)};
+\end{tikzpicture}
+\item The random variable \(K_x^{(m)}\) is still discrete, and its pmf is:
+\[
+\prob{K_x^{(m)}=\frac{k}{m}}=\qx[\left.\frac{k}{m}\right|\frac{1}{m}]{x}
+=\px[\frac{k}{m}]{x}\,\qx[\frac{1}{m}]{x+\frac{k}{m}},
+\]
+for any \(k\in\N_0\).
+\item 
+\label{it:1m-whole-life-fmlas}
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&\(v^{\color{brown}K_x^{(m)}+1/m}\)
+&\(\displaystyle\sum_{k=0}^{\infty}v^{\color{brown}\frac{k+1}{m}}\px[\color{brown}\frac{k}{m}]{x}\,\qx[\color{brown}\frac{1}{m}]{x+{\color{brown}\frac{k}{m}}}\)
+&\(\Ax{x}[(m)]@\;2\delta\)&\(\Ax[][2]{x}[(m)]-(\Ax{x}[(m)])^2\)\\
+notation&\(Z\)&\(\Ax{x}[(m)]\)&\(\Ax[][2]{x}[(m)]\)&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+\end{enumerate}
+\subsection{Recursions for APVs}
+\begin{enumerate}
+\item There are two main reasons for considering recursions of APVs here:
+\begin{enumerate}
+\item It provides insight on the relationships of APVs at different ages.
+\item It allows quick computations based on limited amount of information.
+\end{enumerate}
 \end{enumerate}
