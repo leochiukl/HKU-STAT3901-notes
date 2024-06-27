@@ -87,7 +87,7 @@ RHS ``sums up'' the ``expected present value of death benefit'':
 \item Actuarial notation for the APV:
 
 \begin{tikzpicture}
-\node[font=\huge, ForestGreen] (Ax) at (0,0) {\(\Ax*{x}\)};
+\node[font=\huge] (Ax) at (0,0) {\defn{\(\Ax*{x}\)}};
 \draw[-Latex] (-1,1) -- (0,0.5);
 \node[] () at (-1.5,1.3)  {``bar'' indicates ``continuous''};
 \draw[-Latex] (1.5,1) -- (0.25,-0.1);
@@ -97,6 +97,17 @@ RHS ``sums up'' the ``expected present value of death benefit'':
 ``insurance'', which is more commonly used in the UK)};
 \end{tikzpicture}
 
+\item Sometimes we are also interested in the \emph{variability} of the
+p.v.r.v.\ \(Z\). To measure this, we calculate the variance \(\vari{Z}\).
+\item Consider first the second moment of \(Z\), which is given by
+\[
+\expv{Z^2}=\expv{e^{-{\color{purple} 2\delta} T_x}}=\Ax*{x}@\;{\color{purple} 2\delta},
+\]
+i.e., the APV evaulated at force of interest \(2\delta\) (Actuarial notation:
+\defn{\(\Ax*[][2]{x}\)}). Then the variance is
+\[
+\vari{Z}=\Ax*[][2]{x}-(\Ax*{x})^2.
+\]
 \item When the sum insured for the insurance becomes \(\$ S\), the p.v.r.v.\
 becomes \(S\cdot Z\). Then, the APV becomes \(\expv{SZ}=S\Ax*{x}\), the second
 moment becomes \(\expv{(SZ)^2}=S^{\color{purple}2}\cdot\Ax*[][2]{x}\), and the
@@ -118,17 +129,6 @@ approaches for other ``forms'' of the probability.
 This works generally for all kinds of insurance introduced in
 \cref{sect:life-insurance}.
 \end{note}
-\item Sometimes we are also interested in the \emph{variability} of the
-p.v.r.v.\ \(Z\). To measure this, we calculate the variance \(\vari{Z}\).
-\item Consider first the second moment of \(Z\), which is given by
-\[
-\expv{Z^2}=\expv{e^{-{\color{purple} 2\delta} T_x}}=\Ax*{x}@\;{\color{purple} 2\delta},
-\]
-i.e., the APV evaulated at force of interest \(2\delta\) (Actuarial notation:
-\(\Ax*[][2]{x}\)). Then the variance is
-\[
-\vari{Z}=\Ax*[][2]{x}-(\Ax*{x})^2.
-\]
 \item
 \label{it:cts-whole-life-fmlas}
  Summary:
@@ -178,7 +178,7 @@ node[midway, below=0.7cm]{\(K_x\)};
 \midrule
 expression&\(v^{K_x+1}\)&\(\displaystyle\sum_{k=0}^{\infty}v^{k+1}\px[k]{x}\qx{x+k}\)
 &\(\Ax{x}@\;2\delta\)&\(\Ax[][2]{x}-(\Ax{x})^2\)\\
-notation&\(Z\)&\(\Ax{x}\)&\(\Ax[][2]{x}\)&\(\vari{Z}\)\\
+notation&\(Z\)&\defn{\(\Ax{x}\)}&\defn{\(\Ax[][2]{x}\)}&\(\vari{Z}\)\\
 \bottomrule
 \end{tabular}
 
@@ -202,7 +202,7 @@ paid \emph{at the end of \(1/m\)th of a (policy) year} of death of (\(x\)).
 convenient to develop a similar concept as the curtate future lifetime random
 variable \(K_x\) but with time unit being \(1/m\)th of a year.
 \item The \defn{\(1/m\)thly curtate future lifetime random variable} (denoted
-by \(K_x^{(m)}\)) is \(T_x\) rounded down to 1/\(m\)th of a year, i.e.,
+by \defn{\(K_x^{(m)}\)}) is \(T_x\) rounded down to 1/\(m\)th of a year, i.e.,
 \[
 K_x^{(m)}=\frac{1}{m}\lfloor mT_x\rfloor.
 \]
@@ -244,10 +244,254 @@ for any \(k\in\N_0\).
 \midrule
 expression&\(v^{\color{brown}K_x^{(m)}+1/m}\)
 &\(\displaystyle\sum_{k=0}^{\infty}v^{\color{brown}\frac{k+1}{m}}\px[\color{brown}\frac{k}{m}]{x}\,\qx[\color{brown}\frac{1}{m}]{x+{\color{brown}\frac{k}{m}}}\)
-&\(\Ax{x}[(m)]@\;2\delta\)&\(\Ax[][2]{x}[(m)]-(\Ax{x}[(m)])^2\)\\
-notation&\(Z\)&\(\Ax{x}[(m)]\)&\(\Ax[][2]{x}[(m)]\)&\(\vari{Z}\)\\
+&\(\Ax{x}[(m)]@\;2\delta\)&\(\Ax[][2]{x}[(m)]-\qty(\Ax{x}[(m)])^2\)\\
+notation&\(Z\)&\defn{\(\Ax{x}[(m)]\)}&\defn{\(\Ax[][2]{x}[(m)]\)}&\(\vari{Z}\)\\
 \bottomrule
 \end{tabular}
+\end{enumerate}
+\subsection{Valuating (Pure) Endowment, Term Life, Deferred, Variable Benefits
+Insurances}
+\begin{enumerate}
+\item The following shows the relationship between different kinds of insurance
+(in one approach of ``construction''):
+
+\begin{tikzpicture}
+\node[draw, brown] (wl) at (0,0) {whole life};
+\node[draw, brown] (pe) at (5,0) {pure endowment};
+\node[draw, purple] (dl) at (3,-4.2) {deferred contract};
+\node[draw, violet] (tl) at (1,-2) {term life};
+\node[draw, violet] (en) at (4,-2) {endowment};
+\draw[pen colour=orange, thick, decorate,decoration={calligraphic brace, amplitude=10pt, raise=15pt, mirror}] (-1,-2) -- (7,-2)
+node[purple, midway, below=1cm, draw] (vb) {variable benefits (different kinds)};
+\draw[-Latex] (wl) -- (tl);
+\draw[-Latex] (pe) -- (tl);
+\draw[-Latex] (wl) -- (en);
+\draw[-Latex] (pe) -- (en);
+\node[brown] () at (9,0) {basic building blocks};
+\node[violet] () at (9,-2) {``constructed'' contracts};
+\node[purple] () at (9,-3.7) {variants};
+\end{tikzpicture}
+\subsubsection*{Pure Endowment}
+\item Consider an \(n\)-year pure endowment contract with survival benefit \$1,
+i.e., \$1 is payable at time \(n\) if the life insured is alive at that time.
+
+\begin{note}
+\(n\) is usually an integer, but not necessarily. This applies to all
+\(n\)-year contracts.
+\end{note}
+
+\item \label{it:pure-endow-fmlas}
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&\(v^{n}\indicset{T_x>n}\)&\(v^n\px[n]{x}\)
+&\(\Ex[n]{x}@\;2\delta\)&\(\Ex[n][2]{x}-(\Ex[n]{x})^2\)\\
+notation&\(Z\)&\defn{\(\Ex[n]{x}\)} or \defn{\(\Ax{\pureendowxn}\)}
+&\defn{\(\Ex[n][2]{x}\)} or \defn{\(\Ax[][2]{\pureendowxn}\)}
+&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+
+\begin{rmk}
+\item The ``1'' on top of \(\angl{n}\) suggests that the \(n\)-year term is the
+\emph{1st} thing to be ``gone'' (earllier than \(x\) being ``gone'', i.e.,
+dead) for the benefit to be triggered. More details about this kind of notation
+will be discussed in STAT3909.
+\item There are not concepts like ``continuous'' and ``discrete'' for pure
+endowment --- the benefit is always paid (potentially) at time \(n\) for an
+\(n\)-year pure endowment. Conventionally we do \emph{not} write
+``\(\Ax*{x:\itop{\angl{n}}}\)''.
+\end{rmk}
+\item The following provides some ``shortcuts'' for the formulas in
+\labelcref{it:pure-endow-fmlas}:
+\begin{proposition}
+\label{prp:pure-endow-shortcut}
+For any age \(x\) and any \(n\ge 0\),
+\begin{enumerate}
+\item \(\Ex[n][2]{x}=v^n\Ex[n]{x}\);
+\item \(\vari{Z}=v^{2n}\px[n]{x}\,\qx[n]{x}\).
+\end{enumerate}
+\end{proposition}
+\begin{pf}
+Firstly, \(\Ex[n][2]{x}=v^{2n}\px[n]{x}=v^n\Ex[n]{x}\). Next,
+\[\vari{Z}=\Ex[n][2]{x}-(\Ex[n]{x})^2=v^{2n}\px[n]{x}(1-\px[n]{x})
+=v^{2n}\px[n]{x}\,\qx[n]{x}.\]
+\end{pf}
+\subsubsection*{Term Life Insurance}
+\item Consider an \(n\)-year term life insurance with death benefit \(\$1\),
+i.e., \$1 is only payable if the life insured dies within \(n\) years.
+\item \label{it:cont-term-life-fmlas}
+Continuous case:
+
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&\(e^{-\delta T_x}\indicset{T_x\le n}\)&\(\Ax*{x}-\Ex[n]{x}\Ax*{x+n}\)
+or \(\displaystyle\int_{0}^{n}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt\)
+&\(\Ax*{\termxn}@\;2\delta\)&\(\Ax*[][2]{\termxn}-\qty(\Ax*{\termxn})^2\)\\
+notation&\(Z\)&\defn{\(\Ax*{\termxn}\)}
+&\defn{\(\Ax*[][2]{\termxn}\)}
+&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+
+\begin{pf}
+To get the first APV formula, note that \(Z=\underbrace{e^{-\delta T_x}}_{\text{whole life}}-v^ne^{-\delta
+(T_x-n)}\indicset{T_x>n}\), so
+\[
+\expv{Z}=\Ax*{x}+v^n\prob{T_x>n}\expv{\left. e^{-\delta({\color{brown}T_x-n})}\right|{\color{brown}T_x>n}}
+=\Ax*{x}+v^n\px[n]{x}\underbrace{\expv{e^{-\delta({\color{brown}T_{x+n}})}}}_{\Ax*{x+n}}.
+\]
+For the integral APV formula, it follows directly from the expression for p.v.r.v.
+\end{pf}
+
+\item \label{it:annual-term-life-fmlas}
+Annual case:
+
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&\(v^{K_x+1}\indicset{K_x\le n-1}\)&\(\Ax{x}-\Ex[n]{x}\Ax{x+n}\)
+or \(\displaystyle\sum_{k=0}^{n-1}v^{k+1}\px[k]{x}\qx{x+k}\)
+&\(\Ax{\termxn}@\;2\delta\)&\(\Ax[][2]{\termxn}-\qty(\Ax{\termxn})^2\)\\
+notation&\(Z\)&\defn{\(\Ax{\termxn}\)}
+&\defn{\(\Ax[][2]{\termxn}\)}
+&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+
+\begin{pf}
+Similar to the proof for \labelcref{it:cont-term-life-fmlas}.
+\end{pf}
+
+\item \label{it:1m-term-life-fmlas}
+\(1/m\)thly case:
+
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&\(v^{K_x^{(m)}+\frac{1}{m}}\indicset{K_x^{(m)}\le n-\frac{1}{m}}\)
+&\makecell{\(\Ax{x}[(m)]-\Ex[n]{x}\Ax{x+n}[(m)]\)\\
+or \(\displaystyle\sum_{k=0}^{mn-1}v^{\frac{k+1}{m}}\px[\frac{k}{m}]{x}\,\qx{x+\frac{k}{m}}\)}
+&\(\Ax{\termxn}@\;2\delta\)&\(\Ax[][2]{}[(m)]_\termxn-\qty(\Ax{}[(m)]_\termxn)^2\)\\
+notation&\(Z\)&\defn{\(\Ax{}[(m)]_\termxn\)}
+&\defn{\(\Ax[][2]{}[(m)]_\termxn\)}
+&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+
+\begin{pf}
+Similar to the proof for \labelcref{it:cont-term-life-fmlas}.
+\end{pf}
+\subsubsection*{Endowment Insurance}
+\item \label{it:endow-term-plus-pure} A key observation is that \(n\)-year
+endowment insurance is just \(n\)-year term life insurance + \(n\)-year pure
+endowment.
+\item As a result, the p.v.r.v.'s in different cases can be written as:
+
+\begin{tabular}{cc}
+\toprule
+case&p.v.r.v.\\
+\midrule
+continuous&\(e^{-\delta T_x}\indicset{T_x\le n}+e^{-\delta n}\indicset{T_x>n}\)\\
+annual&\(v^{K_x+1}\indicset{K_x\le n-1}+v^n\indicset{K_x\ge n}\)\\
+\(1/m\)thly&\(v^{K_x^{(m)}+\frac{1}{m}}\indicset{K_x^{(m)}\le n-\frac{1}{m}}+v^n\indicset{K_x^{(m)}\ge n}\)\\
+\bottomrule
+\end{tabular}
+
+\begin{note}
+Both events \(\{K_x\ge n\}\) and \(\qty{K_x^{(m)}\ge n}\) have the same probability as
+the event \(\{T_x> n\}\).
+\end{note}
+\item But actually they can be written more compactly as follows:
+
+\begin{tabular}{cc}
+\toprule
+case&p.v.r.v.\\
+\midrule
+continuous&\(e^{-\delta(T_x\wedge n)}\)\\
+annual&\(v^{(K_x+1)\wedge n}\)\\
+\(1/m\)thly&\(v^{\qty(K_x^{(m)}+\frac{1}{m})\wedge n}\)\\
+\bottomrule
+\end{tabular}
+\item \label{it:cont-endow-fmlas}
+Continuous case:
+
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&\(e^{-\delta(T_x\wedge n)}\)&\(\Ax*{\termxn}+\Ex[n]{x}\)
+&\(\Ax*{\endowxn}@\;2\delta\)&\(\Ax*[][2]{\endowxn}-\qty(\Ax*{\endowxn})^2\)\\
+notation&\(Z\)&\defn{\(\Ax*{\endowxn}\)}
+&\defn{\(\Ax*[][2]{\endowxn}\)}
+&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+
+\begin{note}
+When there is not ``1'' on top of either \(x\) or \(\angl{n}\), it indicates
+that a benefit payment is triggered when \emph{any} one of them is ``gone''.
+Again more details will be discussed in STAT3909.
+\end{note}
+
+\item \label{it:annual-endow-fmlas}
+Annual case:
+
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&\(v^{(K_x+1)\wedge n}\)&\(\Ax{\termxn}+\Ex[n]{x}\)
+&\(\Ax{\endowxn}@\;2\delta\)&\(\Ax[][2]{\endowxn}-\qty(\Ax{\endowxn})^2\)\\
+notation&\(Z\)&\defn{\(\Ax{\endowxn}\)}
+&\defn{\(\Ax[][2]{\endowxn}\)}
+&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+
+\item \label{it:1m-endow-fmlas}
+\(1/m\)thly case:
+
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&\(v^{\qty(K_x^{(m)}+\frac{1}{m})\wedge n}\)&\(\Ax{}[(m)]_{\termxn}+\Ex[n]{x}\)
+&\(\Ax{\endowxn}[(m)]@\;2\delta\)&\(\Ax[][2]{\endowxn}[(m)]-\qty(\Ax{\endowxn}[(m)])^2\)\\
+notation&\(Z\)&\defn{\(\Ax{\endowxn}[(m)]\)}
+&\defn{\(\Ax[][2]{\endowxn}[(m)]\)}
+&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+
+\item Due to the property in \labelcref{it:endow-term-plus-pure}, we have an
+alternative method for calculating the \emph{variance} for p.v.r.v. for
+endowment insurance, as follows:
+\begin{proposition}
+\label{prp:endow-var-alt-fmla}
+Write \(Z=Z_1+Z_2\) where \(Z,Z_1,Z_2\) are the p.v.r.v.'s of the \(n\)-year
+endowment, term life, and pure endowment insurances respectively. Then,
+\begin{itemize}
+\item (continuous case) \(\vari{Z}=\vari{Z_1}+\vari{Z_2}-2\Ax*{\termxn}\,\Ex[n]{x}\);
+\item (annual case) \(\vari{Z}=\vari{Z_1}+\vari{Z_2}-2\Ax{\termxn}\,\Ex[n]{x}\);
+\item (\(1/m\)thly case) \(\vari{Z}=\vari{Z_1}+\vari{Z_2}-2\Ax{}[(m)]_{\termxn}\,\Ex[n]{x}\).
+\end{itemize}
+\end{proposition}
+\begin{pf}
+First note that in any situation, one of \(Z_1\) and \(Z_2\) would be 0 (a life
+either dies within or survive for \(n\) years). So, the product \(Z_1Z_2\) is
+always 0, and hence the covariance term
+\[\cov{Z_1,Z_2}=\expv{Z_1Z_2}-\expv{Z_1}\expv{Z_2}=-\expv{Z_1}\expv{Z_2}.\]
+Now the result follows from the formula
+\[
+\vari{Z}=\vari{Z_1}+\vari{Z_2}+2\cov{Z_1,Z_2}.
+\]
+\end{pf}
 \end{enumerate}
 \subsection{Recursions for APVs}
 \begin{enumerate}
