@@ -29,7 +29,7 @@ life annuity \(\rightarrow\) payable at the beginning of period. (\(K_x\) is
 involved mainly.)
 \item Continuous time: insurance \(\rightarrow\) payable ``immediately''; life
 annuity \(\rightarrow\) payable ``continuously'' (\emph{continuous annuity} in
-interest theory). (\(T_x\) is involved mainly.)
+STAT2902). (\(T_x\) is involved mainly.)
 \end{enumerate}
 It turns out that working in continuous time (working with \(T_x\)) is
 mathematically more ``convenient''. However, practical contracts are always
@@ -39,7 +39,7 @@ mathematical convenience. (The approximation works better if the measurement
 period for the contract is shorter.)
 
 \item
-\label{it:gen-APV-fmla}
+\label{it:gen-apv-fmla}
 \ystar An ``intuition-based'' general APV calculation formula for
 insurance/life annuity:
 \[
@@ -62,11 +62,12 @@ in all time intervals.
 \end{intuition}
 \end{enumerate}
 
-\subsection{Valuating Whole Life Insurance}
+\subsection{Whole Life Insurance}
+\label{subsect:whole-life}
 \begin{enumerate}
 \subsubsection*{Continuous Case}
-\item Consider a \emph{continuous} whole life insurance with sum insured \$1
-and life insured (\(x\)). The sum insured \$1 is paid \emph{exactly at} time of
+\item Consider a \emph{continuous} whole life insurance with sum insured 1
+and life insured (\(x\)). The sum insured 1 is paid \emph{exactly at} time of
 death of (\(x\)), i.e., time \(T_x\) (when the life is aged \(x\), it is time
 0).  \item The present value random variable (p.v.r.v.) (present value of the
 benefit payment) is
@@ -108,7 +109,7 @@ i.e., the APV evaulated at force of interest \(2\delta\) (Actuarial notation:
 \[
 \vari{Z}=\Ax*[][2]{x}-(\Ax*{x})^2.
 \]
-\item When the sum insured for the insurance becomes \(\$ S\), the p.v.r.v.\
+\item When the sum insured for the insurance becomes \( S\), the p.v.r.v.\
 becomes \(S\cdot Z\). Then, the APV becomes \(\expv{SZ}=S\Ax*{x}\), the second
 moment becomes \(\expv{(SZ)^2}=S^{\color{purple}2}\cdot\Ax*[][2]{x}\), and the
 variance is \(\vari{SZ}=S^{\color{purple}2}\vari{Z}\).
@@ -144,7 +145,7 @@ notation&\(Z\)&\(\Ax*{x}\)&\(\Ax*[][2]{x}\)&\(\vari{Z}\)\\
 \end{tabular}
 \subsubsection*{Annual Case}
 \item Consider a \emph{discrete} whole life insurance with sum insured
-\faIcon{money-bill-wave} \$1 and life insured (\(x\)). The sum insured \$1 is
+\faIcon{money-bill-wave} 1 and life insured (\(x\)). The sum insured 1 is
 paid \emph{at the end of (policy) year} of death of (\(x\)), i.e., time
 \(K_x+1\).
 
@@ -162,7 +163,7 @@ node[red, above] {\faIcon{skull}}
 node[below] {\(T_x\)};
 \fill[] (6,0) circle [radius=0.05]
 node[ForestGreen, above] {\faIcon{money-bill-wave}}
-node[ForestGreen, above=0.4cm] {\$1}
+node[ForestGreen, above=0.4cm] {1}
 node[below] {\(K_x+1\)};
 \node[] () at (11,-1) {Policy year};
 \draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt, mirror}] (0,0) -- (2,0)
@@ -196,7 +197,7 @@ in all ``unit'' time intervals.
 \end{intuition}
 \subsubsection*{\(1/m\)thly Case}
 \item Consider a \emph{discrete} whole life insurance with sum insured
-\faIcon{money-bill-wave} \$1 and life insured (\(x\)). The sum insured \$1 is
+\faIcon{money-bill-wave} 1 and life insured (\(x\)). The sum insured 1 is
 paid \emph{at the end of \(1/m\)th of a (policy) year} of death of (\(x\)).
 \item Since ``\(1/m\)th of a (policy) year'' is involved, it would be more
 convenient to develop a similar concept as the curtate future lifetime random
@@ -249,8 +250,8 @@ notation&\(Z\)&\defn{\(\Ax{x}[(m)]\)}&\defn{\(\Ax[][2]{x}[(m)]\)}&\(\vari{Z}\)\\
 \bottomrule
 \end{tabular}
 \end{enumerate}
-\subsection{Valuating (Pure) Endowment, Term Life, Deferred, Variable Benefits
-Insurances}
+\subsection{(Pure) Endowment and Term Life Insurances}
+\label{subsect:pe-tl}
 \begin{enumerate}
 \item The following shows the relationship between different kinds of insurance
 (in one approach of ``construction''):
@@ -272,8 +273,8 @@ node[purple, midway, below=1cm, draw] (vb) {variable benefits (different kinds)}
 \node[purple] () at (9,-3.7) {variants};
 \end{tikzpicture}
 \subsubsection*{Pure Endowment}
-\item Consider an \(n\)-year pure endowment contract with survival benefit \$1,
-i.e., \$1 is payable at time \(n\) if the life insured is alive at that time.
+\item Consider an \(n\)-year pure endowment contract with survival benefit 1,
+i.e., 1 is payable at time \(n\) if the life insured is alive at that time.
 
 \begin{note}
 \(n\) is usually an integer, but not necessarily. This applies to all
@@ -295,8 +296,9 @@ notation&\(Z\)&\defn{\(\Ex[n]{x}\)} or \defn{\(\Ax{\pureendowxn}\)}
 
 \begin{rmk}
 \item The ``1'' on top of \(\angl{n}\) suggests that the \(n\)-year term is the
-\emph{1st} thing to be ``gone'' (earllier than \(x\) being ``gone'', i.e.,
-dead) for the benefit to be triggered. More details about this kind of notation
+\emph{1st} thing to be ``gone'' (earllier than \((x)\) being ``gone''/dead) for
+the benefit to be triggered\footnote{In other words, the life insured must be alive at
+time \(n\) to trigger the benefit.}. More details about this kind of notation
 will be discussed in STAT3909.
 \item There are not concepts like ``continuous'' and ``discrete'' for pure
 endowment --- the benefit is always paid (potentially) at time \(n\) for an
@@ -319,9 +321,9 @@ Firstly, \(\Ex[n][2]{x}=v^{2n}\px[n]{x}=v^n\Ex[n]{x}\). Next,
 =v^{2n}\px[n]{x}\,\qx[n]{x}.\]
 \end{pf}
 \subsubsection*{Term Life Insurance}
-\item Consider an \(n\)-year term life insurance with death benefit \(\$1\),
-i.e., \$1 is only payable if the life insured dies within \(n\) years.
-\item \label{it:cont-term-life-fmlas}
+\item Consider an \(n\)-year term life insurance with death benefit \(1\),
+i.e., 1 is only payable if the life insured dies within \(n\) years.
+\item \label{it:cts-term-life-fmlas}
 Continuous case:
 
 \begin{tabular}{ccccc}
@@ -347,6 +349,39 @@ To get the first APV formula, note that \(Z=\underbrace{e^{-\delta T_x}}_{\text{
 For the integral APV formula, it follows directly from the expression for p.v.r.v.
 \end{pf}
 
+\begin{intuition}
+\(\Ex[n]{x}\) is like an \defn{``actuarial discount factor''}:
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\((x)\)};
+\fill[] (3,0) circle [radius=0.05]
+node[below] {\(n\)};
+\draw[very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (3,0)
+node[midway, below=0.7cm]{\(\Ax*{\termxn}\)};
+\draw[pen colour=red, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=25pt}] (3,0) -- (10,0)
+node[red, midway, above=1cm]{\(\Ax*{x+n}\)};
+\draw[pen colour=violet, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (10,0)
+node[violet, pos=0.2, above=0.7cm]{\(\Ax*{x}\)};
+\draw[thick, decorate,decoration={brace, amplitude=5pt, raise=5pt}] (0,1.5) -- (0,2)
+node[midway, left=0.5cm] {take away};
+\draw[-Latex, color=ForestGreen] (3,1) to[bend right] (0,1.6);
+\draw[-Latex, color=ForestGreen] (10,1) to[bend right] (0,1.9);
+\node[] () at (2.5,2) {\(\times\Ex[n]{x}\)};
+\end{tikzpicture}
+\end{intuition}
+
+\begin{note}
+As we shall see in \cref{subsect:defer-var-insurance}, \(\Ex[n]{x}\Ax*{x+n}\)
+is the APV of a continuous \(n\)-year deferred whole life insurance. So this
+formula for finding APV of term life insurance also suggests another formula
+for finding APV of \emph{deferred} whole life insurance, by rearranging the
+terms.
+\end{note}
+
+
 \item \label{it:annual-term-life-fmlas}
 Annual case:
 
@@ -364,7 +399,7 @@ notation&\(Z\)&\defn{\(\Ax{\termxn}\)}
 \end{tabular}
 
 \begin{pf}
-Similar to the proof for \labelcref{it:cont-term-life-fmlas}.
+Similar to the proof for \labelcref{it:cts-term-life-fmlas}.
 \end{pf}
 
 \item \label{it:1m-term-life-fmlas}
@@ -376,16 +411,16 @@ Similar to the proof for \labelcref{it:cont-term-life-fmlas}.
 \midrule
 expression&\(v^{K_x^{(m)}+\frac{1}{m}}\indicset{K_x^{(m)}\le n-\frac{1}{m}}\)
 &\makecell{\(\Ax{x}[(m)]-\Ex[n]{x}\Ax{x+n}[(m)]\)\\
-or \(\displaystyle\sum_{k=0}^{mn-1}v^{\frac{k+1}{m}}\px[\frac{k}{m}]{x}\,\qx{x+\frac{k}{m}}\)}
-&\(\Ax{\termxn}@\;2\delta\)&\(\Ax[][2]{}[(m)]_\termxn-\qty(\Ax{}[(m)]_\termxn)^2\)\\
-notation&\(Z\)&\defn{\(\Ax{}[(m)]_\termxn\)}
-&\defn{\(\Ax[][2]{}[(m)]_\termxn\)}
+or \(\displaystyle\sum_{k=0}^{mn-1}v^{\frac{k+1}{m}}\px[\frac{k}{m}]{x}\,\,\qx[\frac{1}{m}]{x+\frac{k}{m}}\)}
+&\(\Ax{\termxn}@\;2\delta\)&\(\Ax[][2]{}[(m)]{}_{\termxn}-\qty(\Ax{}[(m)]{}_{\termxn})^2\)\\
+notation&\(Z\)&\defn{\(\Ax{}[(m)]{}_{\termxn}\)}
+&\defn{\(\Ax[][2]{}[(m)]{}_{\termxn}\)}
 &\(\vari{Z}\)\\
 \bottomrule
 \end{tabular}
 
 \begin{pf}
-Similar to the proof for \labelcref{it:cont-term-life-fmlas}.
+Similar to the proof for \labelcref{it:cts-term-life-fmlas}.
 \end{pf}
 \subsubsection*{Endowment Insurance}
 \item \label{it:endow-term-plus-pure} A key observation is that \(n\)-year
@@ -418,7 +453,7 @@ annual&\(v^{(K_x+1)\wedge n}\)\\
 \(1/m\)thly&\(v^{\qty(K_x^{(m)}+\frac{1}{m})\wedge n}\)\\
 \bottomrule
 \end{tabular}
-\item \label{it:cont-endow-fmlas}
+\item \label{it:cts-endow-fmlas}
 Continuous case:
 
 \begin{tabular}{ccccc}
@@ -461,7 +496,7 @@ notation&\(Z\)&\defn{\(\Ax{\endowxn}\)}
 \toprule
 &p.v.r.v.&APV&2nd moment&variance\\
 \midrule
-expression&\(v^{\qty(K_x^{(m)}+\frac{1}{m})\wedge n}\)&\(\Ax{}[(m)]_{\termxn}+\Ex[n]{x}\)
+expression&\(v^{\qty(K_x^{(m)}+\frac{1}{m})\wedge n}\)&\(\Ax{}[(m)]{}_{\termxn}+\Ex[n]{x}\)
 &\(\Ax{\endowxn}[(m)]@\;2\delta\)&\(\Ax[][2]{\endowxn}[(m)]-\qty(\Ax{\endowxn}[(m)])^2\)\\
 notation&\(Z\)&\defn{\(\Ax{\endowxn}[(m)]\)}
 &\defn{\(\Ax[][2]{\endowxn}[(m)]\)}
@@ -479,7 +514,7 @@ endowment, term life, and pure endowment insurances respectively. Then,
 \begin{itemize}
 \item (continuous case) \(\vari{Z}=\vari{Z_1}+\vari{Z_2}-2\Ax*{\termxn}\,\Ex[n]{x}\);
 \item (annual case) \(\vari{Z}=\vari{Z_1}+\vari{Z_2}-2\Ax{\termxn}\,\Ex[n]{x}\);
-\item (\(1/m\)thly case) \(\vari{Z}=\vari{Z_1}+\vari{Z_2}-2\Ax{}[(m)]_{\termxn}\,\Ex[n]{x}\).
+\item (\(1/m\)thly case) \(\vari{Z}=\vari{Z_1}+\vari{Z_2}-2\Ax{}[(m)]{}_{\termxn}\,\Ex[n]{x}\).
 \end{itemize}
 \end{proposition}
 \begin{pf}
@@ -493,6 +528,390 @@ Now the result follows from the formula
 \]
 \end{pf}
 \end{enumerate}
+\subsection{Deferred and Variable Benefits Insurances}
+\label{subsect:defer-var-insurance}
+\begin{enumerate}
+\item Here we discuss two kinds of variants for insurance contracts discussed
+in \cref{subsect:whole-life,subsect:pe-tl}: deferred and variable
+benefits contracts.
+\subsubsection*{Deferred Insurances}
+\item There are 3 main types of deferred insurances of interest here:
+\begin{itemize}
+\item deferred whole life
+\item deferred term life
+\item deferred endowment
+\end{itemize}
+\item In general, the APV formulas here can be developed using the ``actuarial
+discount factor'' intuition, as we can simply ``actuarially discount'' the
+coverage for a life aged \(x+u\) back now to get ``deferred coverage'' for the
+same life but aged \(x\).
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\((x)\)};
+\fill[] (3,0) circle [radius=0.05]
+node[below=0.05cm, font=\large] {\(u\)}
+node[above] {\((x+u)\)};
+\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (3,0) -- (10,0)
+node[midway, above=0.7cm]{\(\Ax*{x+u}\)};
+\draw[-Latex, color=ForestGreen] (3,0.6) to[bend right] (0,0.6);
+\draw[-Latex, color=ForestGreen] (10,0.6) to[bend right] (0,0.9);
+\node[] () at (2.5,1.3) {\(\times\Ex[u]{x}\)};
+\draw[-Latex] (3,-0.7) -- (6,0.3);
+\node[] () at (3,-1) {deferred coverage};
+\end{tikzpicture}
+
+But of course, one can also use the general APV formula in \labelcref{it:gen-apv-fmla} to develop them.
+\item For a \(u\)-year deferred whole life insurance, we have:
+\begin{enumerate}
+\item continuous case:
+\label{it:deferred-cts-whole-life-fmlas}
+
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&\(e^{-\delta T_x}\indicset{T_x>u}\)
+&\(\Ex[u]{x}\Ax*{x+u}\) or \(\displaystyle\int_{u}^{\infty}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt\)
+&\(\Ax*[u|]{x}@\;2\delta\)&\(\Ax*[u|][2]{x}-(\Ax*[u|]{x})^2\)\\
+notation&\(Z\)&\defn{\(\Ax*[u|]{x}\)}&\defn{\(\Ax*[u|][2]{x}\)}&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+\item annual case:
+\label{it:deferred-annual-whole-life-fmlas}
+
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&\(v^{K_x+1}\indicset{K_x\ge u}\)
+&\(\Ex[u]{x}\Ax{x+u}\) or \(\displaystyle\sum_{k=u}^{\infty}v^{k+1}\px[k]{x}\qx{x+k}\)
+&\(\Ax[u|]{x}@\;2\delta\)&\(\Ax[u|][2]{x}-(\Ax[u|]{x})^2\)\\
+notation&\(Z\)&\defn{\(\Ax[u|]{x}\)}&\defn{\(\Ax[u|][2]{x}\)}&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+\item \(1/m\)thly case:
+\label{it:deferred-1m-whole-life-fmlas}
+
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&\(v^{K_x^{(m)}+\frac{1}{m}}\indicset{K_x^{(m)}\ge u}\)
+&\(\Ex[u]{x}\Ax{x+u}[(m)]\) or \(\displaystyle\sum_{k=mu}^{\infty}v^{\frac{k+1}{m}}\px[\frac{k}{m}]{x}\,\qx[\frac{1}{m}]{x+\frac{k}{m}}\)
+&\(\Ax[u|]{x}[(m)]@\;2\delta\)&\(\Ax[u|][2]{x}[(m)]-\qty(\Ax[u|]{x}[(m)])^2\)\\
+notation&\(Z\)&\defn{\(\Ax[u|]{x}[(m)]\)}&\defn{\(\Ax[u|][2]{x}[(m)]\)}&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+\end{enumerate}
+
+\item For a \(u\)-year deferred \(n\)-year term life insurance, we have:
+\begin{enumerate}
+\item continuous case:
+\label{it:deferred-cts-term-life-fmlas}
+
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&\(e^{-\delta T_x}\indicset{u<T_x\le u+n}\)
+&\makecell{\(\Ex[u]{x}\Ax*{\itop{(x+u)}:\angl{n}}\)\\ or \(\displaystyle\int_{u}^{u+n}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt\)}
+&\(\Ax*[u|]{\termxn}@\;2\delta\)&\(\Ax*[u|][2]{\termxn}-(\Ax*[u|]{\termxn})^2\)\\
+notation&\(Z\)&\defn{\(\Ax*[u|]{\termxn}\)}&\defn{\(\Ax*[u|][2]{\termxn}\)}&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+\item annual case:
+\label{it:deferred-annual-term-life-fmlas}
+
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&\(v^{K_x+1}\indicset{u\le K_x\le u+n-1}\)
+&\makecell{\(\Ex[u]{x}\Ax{\itop{(x+u)}:\angl{n}}\)\\ or \(\displaystyle\sum_{k=u}^{u+n-1}v^{k+1}\px[k]{x}\qx{x+k}\)}
+&\(\Ax[u|]{\termxn}@\;2\delta\)&\(\Ax[u|][2]{\termxn}-(\Ax[u|]{\termxn})^2\)\\
+notation&\(Z\)&\defn{\(\Ax[u|]{\termxn}\)}&\defn{\(\Ax[u|][2]{\termxn}\)}&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+\item \(1/m\)thly case:
+\label{it:deferred-1m-term-life-fmlas}
+
+\begin{tabular}{ccc}
+\toprule
+&p.v.r.v.&APV\\
+\midrule
+expression&\(v^{K_x^{(m)}+\frac{1}{m}}\indicset{u\le K_x^{(m)}\le u+n+\frac{1}{m}}\)
+&\(\Ex[u]{x}\Ax{}[(m)] {}_{\itop{(x+u)}:\angl{n}}\) or \(\displaystyle\sum_{k=mu}^{mu+mn-1}v^{\frac{k+1}{m}}\px[\frac{k}{m}]{x}\,\qx[\frac{1}{m}]{x+\frac{k}{m}}\)\\
+notation&\(Z\)&\defn{\(\Ax[u|]{}[(m)]{}_{\termxn}\)}\\
+\bottomrule
+\toprule
+&2nd moment&variance\\
+\midrule
+expression&
+\(\Ax[u|]{}[(m)]{}_{\termxn}@\;2\delta\)&\(\Ax[u|][2]{}[(m)]{}_{\termxn}-\qty(\Ax[u|]{}[(m)]{}_{\termxn})^2\)\\
+notation&\defn{\(\Ax[u|][2]{}[(m)]{}_{\termxn}\)}&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+\end{enumerate}
+
+\item For a \(u\)-year deferred \(n\)-year endowment insurance, we have:
+\begin{enumerate}
+\item continuous case:
+\label{it:deferred-cts-endowment-fmlas}
+
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&
+\(e^{-\delta T_x}\indicset{u<T_x\le u+n}+e^{-\delta(u+n)}\indicset{T_x>u+n}\)
+&\(\Ax*[u|]{\termxn}+\Ex[u+n]{x}\)
+&\(\Ax*[u|]{\endowxn}@\;2\delta\)&\(\Ax*[u|][2]{\endowxn}-(\Ax*[u|]{\endowxn})^2\)\\
+notation&\(Z\)&\defn{\(\Ax*[u|]{\endowxn}\)}&\defn{\(\Ax*[u|][2]{\endowxn}\)}&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+\item annual case:
+\label{it:deferred-annual-endowment-fmlas}
+
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&
+\(v^{K_x+1}\indicset{u\le K_x\le u+n-1}+v^{u+n}\indicset{K_x\ge u+n}\)
+&\(\Ax[u|]{\termxn}+\Ex[u+n]{x}\)
+&\(\Ax[u|]{\endowxn}@\;2\delta\)&\(\Ax[u|][2]{\endowxn}-(\Ax[u|]{\endowxn})^2\)\\
+notation&\(Z\)&\defn{\(\Ax[u|]{\endowxn}\)}&\defn{\(\Ax[u|][2]{\endowxn}\)}&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+
+\item \(1/m\)thly case:
+
+\label{it:deferred-1m-endowment-fmlas}
+\begin{tabular}{ccccc}
+\toprule
+&p.v.r.v.&APV&2nd moment&variance\\
+\midrule
+expression&
+\makecell{
+\(
+\begin{aligned}
+&v^{K_x^{(m)}+\frac{1}{m}}\indicset{u\le K_x^{(m)}\le u+n-\frac{1}{m}}\\
+&\quad+v^{u+n}\indicset{K_x^{(m)}\ge u+n}
+\end{aligned}
+\)}
+&\(\Ax[u|]{}[(m)]{}_{\termxn}+\Ex[u+n]{x}\)
+&\(\Ax[u|]{\endowxn}[(m)]@\;2\delta\)&\(\Ax[u|][2]{\endowxn}[(m)]-\qty(\Ax[u|]{\endowxn}[(m)])^2\)\\
+notation&\(Z\)&\defn{\(\Ax[u|]{\endowxn}[(m)]\)}&\defn{\(\Ax[u|][2]{\endowxn}[(m)]\)}&\(\vari{Z}\)\\
+\bottomrule
+\end{tabular}
+\end{enumerate}
+\subsubsection*{Variable Benefits Insurance}
+
+\item Generally, for variable benefits insurances, we use the general APV
+formula in \labelcref{it:gen-apv-fmla}. Here we shall discuss two special cases:
+\begin{itemize}
+\item arithmetically increasing/decreasing insurances
+\item geometrically increasing/decreasing insurances
+\end{itemize}
+\item For arithmetically increasing/decreasing insurances, there are some actuarial
+notations designed for them. To understand them, let us first explore different
+\emph{kinds} of arithmetically increasing/decreasing insurances:
+\begin{enumerate}
+\item increasing annually: death benefits in policy years \(1,2,\dotsc\) are
+\(1, 2,\dotsc\) respectively;
+\item increasing \(1/m\)thly: death benefits in time intervals \([0,1/m),
+[1/m,2/m), \dotsc\) are \(1/m, 2/m,\dotsc\) respectively;
+\item increasing continuously: death benefit to be paid at any time \(t\) is \(t\);
+\item decreasing annually (for \(n\)-year insurance): death benefits in policy
+years \(1,2,\dotsc,n\) are \\\(n, n-1,\dotsc,1\) respectively;
+\item decreasing \(1/m\)thly (for \(n\)-year insurance): death benefits in
+time intervals \\ \([0,1/m),[1/m,2/m),\dotsc,[(mn-1)/m,m]\) are \(n, n-(1/m),\dotsc,1/m\) respectively;
+\item decreasing continuously (for \(n\)-year insurance): death benefit to be paid at time \(t\) is \(n-t\), for any \(t\in[0,n]\).
+\end{enumerate}
+\begin{rmk}
+\item These are understood to be only applicable for the period covered by the
+insurance. There is not death benefit for the period outside insurance
+coverage.
+\item The continuous cases can be seen as limits of the \(1/m\)thly cases as \(m\to\infty\).
+\end{rmk}
+\item The designed actuarial notations are as follows:
+
+\begin{tabular}{c|ccc}
+\toprule
+\diagbox{kind}{insurance}&continuous&\(1/m\)thly&annual\\
+\midrule
+increasing continuously&\defn{\((\bar{I}\Ax*{})\)}&\diagbox[dir=NE]{}{}&\diagbox[dir=NE]{}{}\\
+increasing \(1/m\)thly&\defn{\((I^{(m)}\Ax*{})\)}&\defn{\((I^{(m)}\Ax{}[(m)])\)}&\diagbox[dir=NE]{}{}\\
+increasing annually&\defn{\((I\Ax*{})\)}&\defn{\((I\Ax{}[(m)])\)}&\defn{\((IA)\)}\\
+decreasing continuously&\defn{\((\bar{D}\Ax*{})\)}&\diagbox[dir=NE]{}{}&\diagbox[dir=NE]{}{}\\
+decreasing \(1/m\)thly&\defn{\((D^{(m)}\Ax*{})\)}&\defn{\((D^{(m)}\Ax{}[(m)])\)}&\diagbox[dir=NE]{}{}\\
+decreasing annually&\defn{\((D\Ax*{})\)}&\defn{\((D\Ax{}[(m)])\)}&\defn{\((DA)\)}\\
+\bottomrule
+\end{tabular}
+
+\begin{rmk}
+\item These are only ``cores'' for the notations, and subscripts/superscripts can be
+added on them to represent a variety of insurances (but of course the terms
+must be finite for decreasing insurances).
+\item Here we do not include the case where the benefit varying frequency is
+\emph{higher} than the insurance itself since in such case it is not clear how
+changes in death benefits (strictly) \emph{between} the dying time and the
+death benefit payment
+time (which may exist) should be handled.
+\item The kinds of insurance usually encountered here are the ones where the
+benefit varying and insurance ``frequencies'' are the same
+in the ``main diagonal'' for each of increasing \& decreasing case) --- the APV
+formulas for them are ``nicer'' also.
+\end{rmk}
+\item
+\label{it:as-term-life-fmlas}
+Example: The following gives the APV formulas for arithmetically
+increasing/decreasing \(n\)-year term life insurances, developed by the general
+APV formula in \labelcref{it:gen-apv-fmla}:
+
+\begin{tabular}{cc}
+\toprule
+notation&APV\\
+\midrule
+\(\IA*_{\termxn}\)&
+\(\displaystyle\int_{0}^{1}\px[t]{x}\mu_{x+t}\,dt
++\int_{1}^{2}2\px[t]{x}\mu_{x+t}\,dt
++\dotsb+\int_{n-1}^{n}n\,\px[t]{x}\mu_{x+t}\,dt\)\\
+\(\ImA*_{\termxn}\)&
+\(\displaystyle\int_{0}^{1/m}\frac{1}{m}\px[t]{x}\mu_{x+t}\,dt
++\int_{1/m}^{2/m}\frac{2}{m}\px[t]{x}\mu_{x+t}\,dt
++\dotsb+\int_{(mn-1)/m}^{n}n\,\px[t]{x}\mu_{x+t}\,dt\)\\
+\ystar\(\IbA*_{\termxn}\)&
+\(\displaystyle\int_{0}^{n}t\,\px[t]{x}\mu_{x+t}\,dt\)\\
+\(\DA*_{\termxn}\)&
+\(\displaystyle\int_{0}^{1}n\,\px[t]{x}\mu_{x+t}\,dt
++\int_{1}^{2}(n-1)\px[t]{x}\mu_{x+t}\,dt
++\dotsb+\int_{n-1}^{n}\px[t]{x}\mu_{x+t}\,dt\)\\
+\(\DmA*_{\termxn}\)&
+\(\displaystyle\int_{0}^{1/m}n\,\px[t]{x}\mu_{x+t}\,dt
++\int_{1/m}^{2/m}\qty(n-\frac{1}{m})\px[t]{x}\mu_{x+t}\,dt
++\dotsb+\int_{(mn-1)/m}^{n}\frac{1}{m}\px[t]{x}\mu_{x+t}\,dt\)\\
+\ystar\(\DbA*_{\termxn}\)&
+\(\displaystyle\int_{0}^{n}(n-t)\,\px[t]{x}\mu_{x+t}\,dt\)\\
+\midrule
+\((IA^{(m)})_{\termxn}\)&
+\(\displaystyle\sum_{k=0}^{m-1}v^{\frac{k+1}{m}}\px[\frac{k}{m}]{x}\qx[\frac{1}{m}]{x+\frac{k}{m}}
++\dotsb+\sum_{k=m(n-1)}^{mn-1}nv^{\frac{k+1}{m}}\px[\frac{k}{m}]{x}\qx[\frac{1}{m}]{x+\frac{k}{m}}\)\\
+\ystar\((I^{(m)}A^{(m)})_{\termxn}\)&
+\(\displaystyle
+\sum_{k=0}^{mn-1}\frac{k+1}{m}v^{\frac{k+1}{m}}\px[\frac{k}{m}]{x}\qx[\frac{1}{m}]{x+\frac{k}{m}}\)\\
+\((DA^{(m)})_{\termxn}\)&
+\(\displaystyle\sum_{k=0}^{m-1}nv^{\frac{k+1}{m}}\px[\frac{k}{m}]{x}\qx[\frac{1}{m}]{x+\frac{k}{m}}
++\dotsb+\sum_{k=m(n-1)}^{mn-1}v^{\frac{k+1}{m}}\px[\frac{k}{m}]{x}\qx[\frac{1}{m}]{x+\frac{k}{m}}\)\\
+\ystar\((D^{(m)}A^{(m)})_{\termxn}\)&
+\(\displaystyle
+\sum_{k=0}^{mn-1}\qty(n-\frac{\color{brown}{k}}{m})v^{\frac{k+1}{m}}\px[\frac{k}{m}]{x}\qx[\frac{1}{m}]{x+\frac{k}{m}}\)\\
+\midrule
+\ystar\((IA)_{\termxn}\)&
+\(\displaystyle\sum_{k=0}^{n-1}(k+1)v^{k+1}\px[k]{x}\qx{x+k}\)\\
+\ystar\((DA)_{\termxn}\)&
+\(\displaystyle\sum_{k=0}^{n-1}(n-{\color{brown}k})v^{k+1}\px[k]{x}\qx{x+k}\)\\
+\bottomrule
+\end{tabular}
+\begin{note}
+\ystar{} = benefit varying and insurance ``frequencies'' are the same.
+\end{note}
+
+\item For arithmetically \emph{decreasing} insurances in particular, we have an
+``interesting'' result:
+\begin{proposition}
+\label{prp:arith-decreasing-fmla}
+We have
+\begin{enumerate}
+\item \(\displaystyle\DbA*_{\termxn}=\int_{0}^{n}\Ax*{\itop{x}:\angl{n-t}}\,dt\);\\
+\item \(\displaystyle(D^{(m)}A^{(m)})_{\termxn}=\sum_{k=0}^{mn-1}\Ax{\itop{x}:\angl{n-\frac{k}{m}}}[(m)]\);\\
+\item \(\displaystyle(DA)_{\termxn}=\sum_{k=0}^{n-1}\Ax{\itop{x}:\angl{n-k}}\).
+\end{enumerate}
+\end{proposition}
+\begin{intuition}
+
+\begin{tikzpicture}
+\node[] () at (5.5, 4) {LHS: ``slicing vertically''};
+\node[] () at (1.5,3) {\(\DbA*_{\termxn}\)};
+\draw[pattern={Lines[angle=90, distance=1pt]}] (0,0)  -- (3,0)  -- (0,3) -- cycle;
+\node[] () at (5.5,3) {\((D^{(m)}A^{(m)})_{\termxn}\)};
+\draw[pattern=vertical lines] (4,0)  -- (7,0)  -- (4,3) -- cycle;
+\node[] () at (9.5,3) {\((DA)_{\termxn}\)};
+\draw[pattern={Lines[angle=90, distance=7.5pt]}] (8,0)  -- (11,0)  -- (8,3) -- cycle;
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node[] () at (5.5, 4) {RHS: ``slicing horizontally''};
+\node[] () at (1.5,3) {\(\displaystyle\int_{0}^{n}\Ax*{\itop{x}:\angl{n-t}}\,dt\)};
+\draw[pattern={Lines[distance=1pt]}] (0,0)  -- (3,0)  -- (0,3) -- cycle;
+\node[] () at (5.5,3) {\(\displaystyle\sum_{k=0}^{mn-1}\Ax{\itop{x}:\angl{n-\frac{k}{m}}}\)};
+\draw[pattern=horizontal lines] (4,0)  -- (7,0)  -- (4,3) -- cycle;
+\node[] () at (9.5,3) {\(\displaystyle\sum_{k=0}^{n-1}\Ax{\itop{x}:\angl{n-k}}\)};
+\draw[pattern={Lines[distance=7.5pt]}] (8,0)  -- (11,0)  -- (8,3) -- cycle;
+\end{tikzpicture}
+\end{intuition}
+
+\begin{pf}
+For the continuous case we have
+\[
+\DbA*_{\termxn}=\int_{0}^{n}(n-s)\,\px[s]{x}\mu_{x+s}\,ds
+=\int_{0}^{n}\qty(\int_{0}^{n-s}1\,dt)\,\px[s]{x}\mu_{x+s}\,ds
+=\int_{0}^{n}\underbrace{\qty(\int_{0}^{n-t}\,\px[s]{x}\mu_{x+s}\,ds)}_{\Ax*{\itop{x}:\angl{n-t}}}\,dt.
+\]
+Next, for the \(1/m\)thly case we have
+\begin{align*}
+(D^{(m)}A^{(m)})_{\termxn}
+&=\sum_{j=0}^{mn-1}\qty(n-\frac{j}{m})
+v^{\frac{j+1}{m}}\px[\frac{j}{m}]{x}\qx[\frac{1}{m}]{x+\frac{j}{m}}\\
+&=\sum_{j=0}^{mn-1}\qty(\sum_{k=0}^{n-\frac{j}{m}}1)v^{\frac{j+1}{m}}\px[\frac{j}{m}]{x}\qx[\frac{1}{m}]{x+\frac{j}{m}}\\
+&=\sum_{k=0}^{mn-1}\underbrace{\sum_{j=0}^{n-\frac{k}{m}}v^{\frac{j+1}{m}}\px[\frac{j}{m}]{x}\qx[\frac{1}{m}]{x+\frac{j}{m}}}_{\Ax{\itop{x}:\angl{n-\frac{k}{m}}}}.
+\end{align*}
+The proof for the annual case is similar.
+\end{pf}
+\item For geometrically increasing/decreasing insurances, we focus on the
+annual case (where the benefit varying and insurance ``frequencies'' are the
+same) here: death benefits in policy years \(1,2,3,\dotsc\) are
+\(1,(1+j),(1+j)^2,\dotsc\) respectively, where \(-1<j<1\).
+
+\begin{note}
+For the \(1/m\)thly case where the benefit varying and insurance
+``frequencies'' are still the same, the results here can be easily translated.
+\end{note}
+\item Generally, the APV can be computed by considering the general APV formula
+in \labelcref{it:gen-apv-fmla} and the formula for geometric series. But the
+following gives a shortcut formula:
+\begin{proposition}
+\label{prp:gs-term-life-fmla}
+The APV of an \(n\)-year term life insurance with such geometric
+sequence in the death benefit amounts is given by:
+\[
+\frac{1}{1+j}\Ax{\itop{x}:\angl{n}i^*}.
+\]
+where \(i^*=(i-j)/(1+j)\).
+\end{proposition}
+\begin{pf}
+Note that the APV is
+\[
+\sum_{k=0}^{n-1}(1+j)^kv^{k+1}\px[k]{x}\qx{x+k}
+=\frac{1}{1+j}\sum_{k=0}^{n-1}\qty(\frac{1+i}{1+j})^{-(k+1)}\px[k]{x}\qx{x+k},
+\]
+and that
+\[
+1+i^*=\frac{1+j+i-j}{1+j}=\frac{1+i}{1+j}.
+\]
+\end{pf}
+
+\begin{note}
+For the special case where \(i=j\), we have \(i^*=0\) and hence the APV can be
+simplified to \(\qx[n]{x}/(1+j)\) as the p.v.r.v.\ for an \(n\)-year term life
+insurance issued to \((x)\) with zero interest rate is simply
+\(\indicset{T_x\le n}\).
+\end{note}
+\end{enumerate}
+
 \subsection{Recursions for APVs}
 \begin{enumerate}
 \item There are two main reasons for considering recursions of APVs here:
@@ -500,4 +919,313 @@ Now the result follows from the formula
 \item It provides insight on the relationships of APVs at different ages.
 \item It allows quick computations based on limited amount of information.
 \end{enumerate}
+\item Most recursion formulas can be intuitively understood through ``actuarial
+discounting''.
+\item Recursions for whole life insurance:
+\begin{proposition}
+\label{prp:wl-recursions}
+For any age \(x\) and any \(n\in\N\),
+\begin{enumerate}
+\item \(\Ax*{x}=\Ax*{\termxn}+\Ex[n]{x}\Ax*{x+n}\);
+\item \(\Ax{x}=\Ax{\termxn}+\Ex[n]{x}\Ax{x+n}\);
+\item \(\Ax{x}[(m)]=\Ax{}[(m)]{}_{\itop{x}:\angl{n/m}}+\Ex[n]{x}\Ax{x+n/m}[(m)]\).
+\end{enumerate}
+\end{proposition}
+\begin{intuition}
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\((x)\)};
+\fill[] (3,0) circle [radius=0.05]
+node[below] {\(n\)}; \draw[pen colour=brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (3,0) node[brown, midway, above=0.7cm]{\(\Ax*{\termxn}\)};
+\draw[pen colour=brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=25pt}] (3,0) -- (10,0)
+node[brown, midway, above=1cm]{\(\Ax*{x+n}\)};
+\draw[pen colour=violet, very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (10,0)
+node[violet, midway, below=0.7cm]{\(\Ax*{x}\)};
+\draw[-Latex, color=ForestGreen] (3,1) to[bend right] (0,1.6);
+\draw[-Latex, color=ForestGreen] (10,1) to[bend right] (0,1.9);
+\node[] () at (2.5,2) {\(\times\Ex[n]{x}\)};
+\end{tikzpicture}
+\end{intuition}
+
+\begin{pf}
+The result follows from the proofs in
+\labelcref{it:cts-term-life-fmlas,it:annual-term-life-fmlas,it:1m-term-life-fmlas}.
+\end{pf}
+
+\begin{note}
+As a special case, when \(n=1\), we have \[\Ax{x}=v\qx{x}+v\px{x}\Ax{x+1}\]
+and
+\[
+\Ax{x}=v^{\frac{1}{m}}\qx[\frac{1}{m}]{x}+v^{\frac{1}{m}}\px[\frac{1}{m}]{x}\Ax{x+\frac{1}{m}}.
+\]
+\end{note}
+\item Recursions for term life insurance:
+\begin{proposition}
+\label{prp:tl-recursions}
+For any age \(x\) and any \(n\in\N\),
+\begin{enumerate}
+\item \(\Ax*{\termxn}=\Ax*{\itop{x}:\angl{u}}+\Ex[u]{x}\Ax*{\itop{x+u}:\angl{n-u}}\) (for any \(u\in\N\) with \(u\le n\));
+\item \(\Ax{\termxn}=\Ax{\itop{x}:\angl{u}}+\Ex[u]{x}\Ax{\itop{x+u}:\angl{n-u}}\) (for any \(u\in\N\) with \(u\le n\));
+\item \(\Ax{}[(m)]{}_{\termxn}=\Ax{}[(m)]{}_{\itop{x}:\angl{u/m}}+\Ex[u/m]{x}\Ax{}[(m)]{}_{\itop{(x+u/m)}:\angl{n-u/m}}\) (for any \(u\in\N\) with \(u\le mn\)).
+
+\end{enumerate}
+\end{proposition}
+
+\begin{intuition}
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\((x)\)};
+\fill[] (3,0) circle [radius=0.05]
+node[below] {\(u\)};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {\(n\)};
+\draw[pen colour=brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (3,0)
+node[brown, midway, above=0.7cm]{\(\Ax*{\itop{x}:\angl{u}}\)};
+\draw[pen colour=brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=25pt}] (3,0) -- (8,0)
+node[brown, midway, above=1cm]{\(\Ax*{\itop{x+u}:\angl{n-u}}\)};
+\draw[pen colour=violet, very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (8,0)
+node[violet, midway, below=0.7cm]{\(\Ax*{\termxn}\)};
+\draw[-Latex, color=ForestGreen] (3,1) to[bend right] (0,1.6);
+\draw[-Latex, color=ForestGreen] (8,1) to[bend right] (0,1.9);
+\node[] () at (2.5,2) {\(\times\Ex[u]{x}\)};
+\end{tikzpicture}
+\end{intuition}
+
+\begin{pf}
+Similar to the proof for \cref{prp:wl-recursions}.
+\end{pf}
+
+\item Recursions for endowment insurance:
+\begin{proposition}
+\label{prp:endow-recursions}
+For any age \(x\) and any \(n\in\N\),
+\begin{enumerate}
+\item \(\Ax*{\endowxn}=\Ax*{\itop{x}:\angl{u}}+\Ex[u]{x}\Ax*{x+u:\angl{n-u}}\) (for any \(u\in\N\) such that \(u\le n\));
+\item \(\Ax{\endowxn}=\Ax{\itop{x}:\angl{u}}+\Ex[u]{x}\Ax{x+u:\angl{n-u}}\) (for any \(u\in\N\) such that \(u\le n\));
+\item \(\Ax{}[(m)]{}_{\endowxn}=\Ax{}[(m)]{}_{\itop{x}:\angl{u/m}}+\Ex[u/m]{x}\Ax{(x+u/m):\angl{n-u/m}}[(m)]\) (for any \(u\in\N\) such that \(u\le mn\)).
+\end{enumerate}
+\end{proposition}
+
+\begin{intuition}
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\((x)\)};
+\fill[] (3,0) circle [radius=0.05]
+node[below] {\(u\)};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {\(n\)};
+\draw[pen colour=brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (3,0)
+node[brown, midway, above=0.7cm]{\(\Ax*{\itop{x}:\angl{u}}\)};
+\draw[pen colour=brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=25pt}] (3,0) -- (8,0)
+node[brown, midway, above=1cm]{\(\Ax*{x+u:\angl{n-u}}\)};
+\draw[pen colour=violet, very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (8,0)
+node[violet, midway, below=0.7cm]{\(\Ax*{\endowxn}\)};
+\draw[-Latex, color=ForestGreen] (3,1) to[bend right] (0,1.6);
+\draw[-Latex, color=ForestGreen] (8,1) to[bend right] (0,1.9);
+\node[] () at (2.5,2) {\(\times\Ex[u]{x}\)};
+\end{tikzpicture}
+\end{intuition}
+
+\begin{pf}
+Similar to the proof for \cref{prp:wl-recursions}.
+\end{pf}
+\item Recursions for arithmetically increasing/decreasing insurances \(\IA\)/\(\DA\):
+\begin{proposition}
+\label{prp:annual-arith-recursions}
+We have
+\begin{enumerate}
+\item\label{it:incr-split-first} \(\IA_{\termxn}=v\qx{x}+v\px{x}\qty[\IA_{\itop{x+1}:\angl{n-1}}+\Ax{\itop{x+1}:\angl{n-1}}]\) and
+\(\IA_{x}=v\qx{x}+v\px{x}\qty[\IA_{x+1}+\Ax{x+1}]\);
+\item\label{it:decr-split-first} \(\DA_{\termxn}=nv\qx{x}+v\px{x}\DA_{\itop{x+1}:\angl{n-1}}\);
+\item\label{it:incr-split-horizon} \(\IA_{\termxn}=\Ax{\termxn}+v\px{x}\IA_{\itop{x+1}:\angl{n-1}}\) and
+\(\IA_{x}=\Ax{x}+v\px{x}\IA_{x+1}\).
+\end{enumerate}
+\end{proposition}
+
+\begin{intuition}
+
+\labelcref{it:incr-split-first}:
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1}
+node[above, violet] {\faIcon{money-bill-wave}};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2}
+node[above, magenta] {\faIcon{money-bill-wave}}
+node[above=0.3cm, brown] {\faIcon{money-bill-wave}};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3}
+node[above, magenta] {\faIcon{money-bill-wave}}
+node[above=0.3cm, brown] {\faIcon{money-bill-wave}}
+node[above=0.6cm, brown] {\faIcon{money-bill-wave}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4}
+node[above, magenta] {\faIcon{money-bill-wave}}
+node[above=0.3cm, brown] {\faIcon{money-bill-wave}}
+node[above=0.6cm, brown] {\faIcon{money-bill-wave}}
+node[above=0.9cm, brown] {\faIcon{money-bill-wave}};
+\node[thick, brown] () at (8.7,1) {\(\cdots\)};
+\node[thick, magenta] () at (8.7,0.3) {\(\cdots\)};
+\draw[-Latex, violet] (3,-0.7) -- (2.3,0)
+node[pos=-0.3] {\(v\qx{x}\)};
+\draw[-Latex, magenta] (11,0.3) -- (9,0.3)
+node[pos=-0.45] {\(\Ax{\itop{x+1}:\angl{n-1}}\)};
+\draw[brown, thick, decorate,decoration={mirror, brace, amplitude=5pt, raise=15pt}] (8.5,0.5) -- (8.5,1.5)
+node[midway, right=1cm] {\(\IA_{\itop{x+1}:\angl{n-1}}\)};
+\draw[-Latex, ForestGreen] (3.7,0.2) to[bend right] (0,0.1);
+\draw[-Latex, ForestGreen] (8.2,1.4) to[bend right] (0,0.3);
+\node[] () at (3.5,1.4) {\(\times v\px{x}\)};
+\end{tikzpicture}
+
+
+
+\labelcref{it:decr-split-first}:
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1}
+node[above, violet] {\faIcon{money-bill-wave}}
+node[above=0.4cm, violet] {\(\vdots\)}
+node[above=0.8cm, violet] {\faIcon{money-bill-wave}}
+node[above=1.2cm, violet] {\faIcon{money-bill-wave}}
+node[above=1.6cm, violet] {\faIcon{money-bill-wave}}
+node[above=2cm, violet] {\faIcon{money-bill-wave}}
+;
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2}
+node[above, brown] {\faIcon{money-bill-wave}}
+node[above=0.4cm, brown] {\(\vdots\)}
+node[above=0.8cm, brown] {\faIcon{money-bill-wave}}
+node[above=1.2cm, brown] {\faIcon{money-bill-wave}}
+node[above=1.6cm, brown] {\faIcon{money-bill-wave}}
+;
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3}
+node[above, brown] {\faIcon{money-bill-wave}}
+node[above=0.4cm, brown] {\(\vdots\)}
+node[above=0.8cm, brown] {\faIcon{money-bill-wave}}
+node[above=1.2cm, brown] {\faIcon{money-bill-wave}};
+
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4}
+node[above, brown] {\faIcon{money-bill-wave}}
+node[above=0.4cm, brown] {\(\vdots\)}
+node[above=0.8cm, brown] {\faIcon{money-bill-wave}};
+\node[thick, brown] () at (8.7,1) {\(\cdots\)};
+\draw[-Latex, violet] (3,-0.7) -- (2.3,0)
+node[pos=-0.3] {\(nv\qx{x}\)};
+\draw[brown, thick, decorate,decoration={mirror, brace, amplitude=5pt, raise=15pt}] (8.5,0.2) -- (8.5,2)
+node[midway, right=1cm] {\(\DA_{\itop{x+1}:\angl{n-1}}\)};
+\draw[-Latex, ForestGreen] (3.7,0.2) to[bend right] (0,0.1);
+\draw[-Latex, ForestGreen] (8.2,1.4) to[bend right] (0,0.3);
+\node[brown] () at (3,1.4) {\(\times v\px{x}\)};
+\end{tikzpicture}
+
+\labelcref{it:incr-split-horizon}:
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1}
+node[above, violet] {\faIcon{money-bill-wave}};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2}
+node[above, violet] {\faIcon{money-bill-wave}}
+node[above=0.3cm, brown] {\faIcon{money-bill-wave}};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3}
+node[above, violet] {\faIcon{money-bill-wave}}
+node[above=0.3cm, brown] {\faIcon{money-bill-wave}}
+node[above=0.6cm, brown] {\faIcon{money-bill-wave}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4}
+node[above, violet] {\faIcon{money-bill-wave}}
+node[above=0.3cm, brown] {\faIcon{money-bill-wave}}
+node[above=0.6cm, brown] {\faIcon{money-bill-wave}}
+node[above=0.9cm, brown] {\faIcon{money-bill-wave}};
+\node[thick, brown] () at (8.7,1) {\(\cdots\)};
+\node[thick, violet] () at (8.7,0.3) {\(\cdots\)};
+\draw[-Latex, violet] (11,0.3) -- (9,0.3)
+node[pos=-0.3] {\(\Ax{\termxn}\)};
+\draw[brown, thick, decorate,decoration={mirror, brace, amplitude=5pt, raise=15pt}] (8.5,0.5) -- (8.5,1.5)
+node[midway, right=1cm] {\(\IA_{\itop{x+1}:\angl{n-1}}\)};
+\draw[-Latex, ForestGreen] (3.7,0.5) to[bend right] (0,0.1);
+\draw[-Latex, ForestGreen] (8.2,1.4) to[bend right] (0,0.3);
+\node[brown] () at (3.5,1.4) {\(\times v\px{x}\)};
+\end{tikzpicture}
+\end{intuition}
+
+\begin{pf}
+Exercise. (The intuition already illustrates the key idea in the proof ---
+one just needs to ``split'' the terms appropriately.)
+\end{pf}
+\end{enumerate}
+\subsection{Relating \(\Ax*{}\), \(\Ax{}\) and \(\Ax{}[(m)]\)}
+\begin{enumerate}
+\item In a life table, we often only have the values for ``\(\Ax{}\)'' but not for
+``\(\Ax*{}\)'' and ``\(\Ax{}[(m)]\)''. So, we are interested in the
+relationship between them to see how we can get ``\(\Ax*{}\)'' and ``\(\Ax{}[(m)]\)''
+from ``\(\Ax{}\)''.
+\item It turns out that in order to obtain some ``nice'' relationships between them, we
+need to impose the UDD assumption:
+\begin{proposition}
+\label{prp:udd-relate-axs}
+Under UDD assumption,
+\begin{enumerate}
+\item \(\displaystyle\Ax*{*}=\frac{i}{\delta}\Ax{*}\)
+\item \(\displaystyle\Ax{*}[(m)]=\frac{i}{i^{(m)}}\Ax{*}\)
+\end{enumerate}
+where \(\Ax{*}\) denotes any of \(\Ax{x},\Ax{\termxn}, \Ax[u|]{x}, \Ax[u|]{\termxn}, \IA_x,
+\IA_{\termxn}, \DA_{\termxn}\) (i.e., any whole life/term life with possibly
+deferral or ``arithmetically increasing/decreasing (annual)'' variant).
+\end{proposition}
+\begin{warning}
+\(\Ax{*}\) does \underline{not} include \(\Ax{\endowxn}\). Indeed, under UDD
+assumption we have
+\[
+\Ax*{\endowxn}=\frac{i}{\delta}\Ax{\termxn}+\Ex[n]{x}
+\]
+which can be seen by writing \(\Ax*{\endowxn}=\Ax*{\termxn}+\Ex[n]{x}\)
+(similar for \(\Ax{\endowxn}[(m)]\)).
+\end{warning}
+
+\begin{pf}
+We shall only give some key idea. See \textcite[Section~4.4]{bowers1997actuarial} for more details.
+
+For the continuous case, consider \cref{lma:udd-equiv-def} --- and note that
+\(v^{T_x}=v^{K_x+1}(1+i)^{1-U_x}\) where \[\expv{(1+i)^{1-U_x}}=i/\delta.\]
+
+For the \(1/m\)thly case, consider e.g.,
+\[
+\sum_{j=0}^{\infty}v^{\frac{j+1}{m}}\px[\frac{j}{m}]{x}\qx[\frac{1}{m}]{x+\frac{j}{m}}
+=\sum_{k=0}^{\infty}\sum_{u=0}^{m-1}v^{k+\frac{u+1}{m}}\px[k+\frac{u}{m}]{x}\qty(\frac{1}{m}\qx{x+k+\frac{u}{m}})
+\]
+and note that
+\[
+\sum_{u=0}^{m-1}\frac{1}{m}v^{(u+1)/m}=\frac{i}{i^{(m)}}.
+\]
+\end{pf}
+\end{enumerate}
+\subsection{Incorporating Selection}
+\begin{enumerate}
+\item All previous developments also apply to ``select'' lives (just change
+``\(x\)'' to ``\([x]\)'' in the notations).
 \end{enumerate}

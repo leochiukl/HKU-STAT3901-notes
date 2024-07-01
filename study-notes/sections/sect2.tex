@@ -1,4 +1,5 @@
 \section{Survival Distributions}
+\label{sect:surv-dist}
 \subsection{Future Lifetime Random Variable}
 \begin{enumerate}
 \item A life aged \(x\) (in years) is denoted by \defn{\((x)\)}.
@@ -556,6 +557,7 @@ and the \defn{generalized De Moivre's Law} is defined by
 \node[text width=3cm] () at (9,0.3) {``sudden'' surge in force of mortality near \(\omega\)};
 \end{tikzpicture}
 
+\item \label{it:de-moivre-dist-surv}
 For De Moivre's law, the survival function is given by
 \[
 S_x(t)=\exp\qty(\int_{0}^{t}\mu_{x+s}\,ds)
@@ -590,6 +592,13 @@ func(\x) = (\x < 50) * (1-x/50) + (\x >= 50) * 0;
 \end{tikzpicture}
 \end{note}
 
+\item \label{it:gen-de-moivre-surv}
+For generalized De Moivre's Law, the survival function is
+\[
+S_x(t)=\exp\qty(\alpha\int_{0}^{t}\frac{1}{\omega-x-s}\,ds)
+=\qty(1-\frac{t}{\omega-x})^{\alpha},\quad\text{where }0 \le t<\omega-x.
+\]
+Likewise, we can only have \(S_x(t)=0\) for any \(t\ge\omega-x\).
 \item Lastly, for \defn{constant force of mortality}, as its name suggests, it assumes
 \[
 \mu_x=\mu
@@ -737,7 +746,7 @@ time interval \([t,t+dt]\)''.
 
 \item Intuitively, ``\(q\)'' and ``\(\mu\)'' are respectively describing death
 ``discretely'' and ``continuously'' (analogous to ``\(i\)'' and ``\(\delta\)''
-in interest theory).
+in STAT2902).
 
 \item The relationship between ``\(q\)'' and ``\(\mu\)'' is given by:
 \begin{proposition}
@@ -1273,7 +1282,27 @@ covered (``location'' of the interval \emph{within} the fraction does not
 matter).
 \end{note}
 
-\item Under UDD, the mean and variance of \(T_x\) and \(K_x\) are related in a rather simple way:
+\item Under UDD, the mean and variance of \(T_x\) and \(K_x\) are related in a rather simple way.
+First we shall state a lemma:
+\begin{lemma}
+\label{lma:udd-equiv-def}
+The UDD assumption we state is \emph{equivalent} to
+the following: For any integer age \(x\), writing
+\(T_x=K_x+U_x\), we have:
+\begin{enumerate}
+\item \(K_x\) and \(U_x\) are independent;
+\item \(U_x\sim U[0,1)\) (hence the name ``uniform distribution of deaths'').
+\end{enumerate}
+\end{lemma}
+
+\begin{pf}
+Omitted. (It is non-trivial, but also not too complex. See \textcite[Section~3.3.1]{dickson2019actuarial}.)
+\end{pf}
+
+\begin{note}
+This result is seldom used directly in solving problems.
+\end{note}
+
 \begin{proposition}
 \label{prp:udd-mean-variance}
 Under UDD, for any integer age \(x\),
@@ -1284,19 +1313,8 @@ Under UDD, for any integer age \(x\),
 \end{proposition}
 
 \begin{pf}
-We shall first quote a fact (whose proof is omitted here --- it is non-trivial
-but also not too complex): The UDD assumption we state is \emph{equivalent} to
-the following: For any integer age \(x\), writing
-\(T_x=K_x+U_x\), we have:
-\begin{enumerate}
-\item \(K_x\) and \(U_x\) are independent;
-\item \(U_x\sim U[0,1)\) (hence the name ``uniform distribution of deaths'').
-\end{enumerate}
-\begin{note}
-This fact is seldom used directly in solving problems.
-\end{note}
-Using this fact, the result follows readily as \(\expv{U_x}=1/2\) and
-\(\vari{U_x}=1/12\).
+Using \cref{lma:udd-equiv-def}, the result follows readily as
+\(\expv{U_x}=1/2\) and \(\vari{U_x}=1/12\).
 \end{pf}
 
 \item The \defn{constant force of mortality} assumption is given by: for any
@@ -1491,6 +1509,8 @@ not apply anymore. For example, we do \underline{not} have
 \item constant force of mortality:  assume \(\mu_{[x]+t}=\mu_{[x]}^{*}\).
 \item Balducci assumption:  assume \(\qx[1-t]{[x]+t}=(1-t)\qx{[x]}\).
 \end{enumerate}
+Consequently, we have analogous properties for fractional age assumptions for
+the ``select'' life.
 \end{enumerate}
 
 \subsection{Select Life Tables}
@@ -1544,9 +1564,9 @@ for any \(t\ge d\). After that, \cref{eq:select-table-req1} implies that
 \item \underline{Case 1}: \(t+u<d\)\\
 We have
 \[
-\lx{[x]+t+u}&=\frac{\lx{x+d}}{\px[d-t-u]{[x]+t+u}}
+\lx{[x]+t+u}=\frac{\lx{x+d}}{\px[d-t-u]{[x]+t+u}}
 \quad\text{and}\quad
-\lx{[x]+t}&=\frac{\lx{x+d}}{\px[d-t]{[x]+t}},
+\lx{[x]+t}=\frac{\lx{x+d}}{\px[d-t]{[x]+t}},
 \]
 so
 \[

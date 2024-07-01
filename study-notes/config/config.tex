@@ -3,6 +3,7 @@
 \usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage{makecell}
+\usepackage{diagbox}
 \usepackage{physics}
 \usepackage{fontawesome5}
 \usepackage[svgnames]{xcolor}
@@ -14,18 +15,27 @@
 \usepackage{booktabs}
 \usepackage[type={CC},modifier={by-sa},version={4.0}]{doclicense}
 \usepackage{imakeidx}
+\usepackage[style=apa]{biblatex}
 \usepackage{tikz}
 
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{cleveref}
 
+\addbibresource{bib/references.bib}
+
 \usetikzlibrary{arrows.meta}
-\usetikzlibrary{decorations.pathreplacing, calligraphy}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.shapes}
+\usetikzlibrary{calligraphy}
+\usetikzlibrary{shapes}
+\usetikzlibrary{patterns}
+\usetikzlibrary{patterns.meta}
+\pgfplotsset{compat=1.18}
 
 \setenumerate[1]{label=\thesubsection.\arabic*~, ref=\S \thesubsection.\arabic*}
 
 \newcommand*{\prob}[1]{\mathbb{P}\qty(#1)}
-\newcommand*{\defn}[1]{\textcolor{ForestGreen}{\textbf{#1}}\index[def]{#1}}
+\newcommand*{\defn}[1]{\index[def]{#1}\textcolor{ForestGreen}{\textbf{#1}}}
 \newcommand*{\bu}[1]{\textbf{\underline{#1}}}
 \newcommand*{\eqd}{\overset{d}=}
 \newcommand*{\ystar}{\textcolor{yellow}{\faIcon{star}}}
