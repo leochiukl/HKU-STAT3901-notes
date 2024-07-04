@@ -37,6 +37,40 @@ Recall that we have learned various \emph{annuities-certain} in STAT2902. By
 making their terms to depend on the future lifetime (payments
 \faIcon{hand-holding-usd} are only made when the annuitant \faIcon{user} is
 alive), they become \emph{life annuities}.
+
+\item Like \labelcref{it:insurance-relationship}, the following shows the
+relationship between different kinds of life annuities and pure endowment (in a
+``construction'' approach):
+
+\begin{tikzpicture}
+\node[draw, brown] (wl) at (0,0) {whole life};
+\node[draw, brown] (pe) at (5,0) {pure endowment};
+\node[draw, violet] (dl) at (4,-2) {deferred contracts};
+\node[draw, violet] (cal) at (-3,-3) {certain-and-life};
+\node[draw, gray] (cer) at (-3,-2) {annuity-certain};
+\node[gray] () at (-3,-1.5) {(STAT2902)};
+\node[draw, violet] (tl) at (1,-2) {term life};
+\node[draw, purple] (cmp) at (1.5,-4) {complete};
+\node[draw, purple] (app) at (4.5,-4) {apportionable};
+\draw[thick, decorate,decoration={calligraphic brace, amplitude=10pt, raise=10pt, mirror}] (-1,-3) -- (7,-3)
+node[purple, midway, below=1.5cm, draw] (vb) {variable benefits (different kinds)};
+\draw[-Latex, blue] (wl) -- (tl);
+\draw[-Latex, blue] (pe) -- (tl);
+\draw[-Latex, orange] (wl) -- (dl);
+\draw[-Latex, orange] (tl) -- (dl);
+\draw[-Latex, orange] (pe) to[bend right] (dl);
+\draw[-Latex, magenta] (dl) -- (cal);
+\draw[-Latex, magenta] (cer) -- (cal);
+\node[brown] () at (9,0) {basic building blocks};
+\node[violet] () at (9,-2.5) {``constructed'' contracts};
+\node[purple] () at (9,-4.5) {variants};
+\end{tikzpicture}
+
+\begin{note}
+The complete and apportionable variants are not currently inside SOA exam FAM
+syllabus.
+\end{note}
+
 \end{enumerate}
 \subsection{Whole Life Annuity}
 \begin{enumerate}
@@ -131,13 +165,18 @@ due: \(\displaystyle \frac{1-\Ax{x}}{d}\) or \(\displaystyle\sum_{k=0}^{\infty}v
 immediate: \(\displaystyle\sum_{k=1}^{\infty}v^k\px[k]{x}\)
 }
 &\makecell{due: \(\displaystyle \frac{\Ax[][2]{x}-\qty(\Ax{x})^2}{d^2}\)\\
-immediate: omitted
+immediate: same as due
 }\\
 notation&\(Y\)&
 \makecell{due: \defn{\(\ax**{x}\)}\\
 immediate: \defn{\(\ax{x}\)}}&\(\vari{Y}\)\\
 \bottomrule
 \end{tabular}
+\begin{note}
+The variance for the immediate p.v.r.v.\ equals the one for the due p.v.r.v.\
+since the p.v.r.v.'s just differ by a constant (\(v^{0}=1\)).
+\end{note}
+
 
 \item \label{it:1m-wl-annuity-fmlas}
 \(1/m\)thly case (amount of each payment: \(1/m\); total amount of payments in
@@ -149,9 +188,10 @@ each year:  1):
 \midrule
 expression&
 \makecell{
-due: \(\ax**{\angl{K_x^{(m)}+\frac{1}{m}}}[(m)]\) 
-or \(\displaystyle\sum_{k=0}^{\infty}{\color{brown}\frac{1}{m}}v^{\frac{k}{m}}\indicset{T_x>\frac{k}{m}}\)\\
-immediate: \(\ax{\angl{K_x^{(m)}}}[(m)]\) or \(\displaystyle\sum_{k=1}^{\infty}{\color{brown}\frac{1}{m}}v^{\frac{k}{m}}\indicset{T_x>\frac{k}{m}}\)
+due: \(\ax**{\angl{K_x^{(m)}+\frac{1}{m}}}[(m)]\) or \\
+\(\displaystyle\sum_{k=0}^{\infty}{\color{brown}\frac{1}{m}}v^{\frac{k}{m}}\indicset{T_x>\frac{k}{m}}\)\\
+immediate: \(\ax{\angl{K_x^{(m)}}}[(m)]\) or \\
+\(\displaystyle\sum_{k=1}^{\infty}{\color{brown}\frac{1}{m}}v^{\frac{k}{m}}\indicset{T_x>\frac{k}{m}}\)
 }
 &\makecell{
 due: \(\displaystyle \frac{1-\Ax{x}[(m)]}{d^{(m)}}\) 
@@ -159,7 +199,7 @@ or \(\displaystyle\sum_{k=0}^{\infty}{\color{brown}\frac{1}{m}}v^{\frac{k}{m}}\p
 immediate: \(\displaystyle\sum_{k=1}^{\infty}{\color{brown}\frac{1}{m}}v^{\frac{k}{m}}\px[ \frac{k}{m}]{x}\)
 }
 &\makecell{due: \(\displaystyle \frac{\Ax[][2]{x}[(m)]-\qty(\Ax{x}[(m)])^2}{(d^{(m)})^{2}}\)\\
-immediate: omitted
+immediate: same as due
 }\\
 notation&\(Y\)&
 \makecell{due: \defn{\(\ax**{x}[(m)]\)}\\
@@ -167,9 +207,9 @@ immediate: \defn{\(\ax{x}[(m)]\)}}&\(\vari{Y}\)\\
 \bottomrule
 \end{tabular}
 \item For discrete life annuity-immediate, we often use the following alternative
-formula to compute APV instead:
+formulas to compute APV instead:
 \begin{proposition}
-\label{prp:wl-due-immediate-fmla}
+\label{prp:wl-due-immediate-fmlas}
 For any age \(x\),
 \begin{enumerate}
 \item \(\ax{x}=\ax**{x}-1\);
@@ -189,8 +229,8 @@ for any age \(x\) and \(m\in\N\).
 \begin{intuition}
 As we go from the life annuity on LHS to RHS one by one, all potential payments
 (where some may get ``split'') ``shift'' \emph{earlier} (or do not ``move''),
-so the present value gets higher (or is the same) \emph{always}, regardless of
-when the life dies.
+so the present value gets higher (or at least does not decrease) \emph{always},
+regardless of when the life dies.
 \end{intuition}
 
 Also, \(\ax**{x}[(m)]\) decreases in \(m\) while \(\ax{x}[(m)]\) increases in
@@ -208,7 +248,9 @@ Continuous case (annual payment rate: 1):
 &p.v.r.v.&APV&variance\\
 \midrule
 expression&\(\ax*{\angl{T_x\wedge n}}\) or \(\displaystyle\int_{0}^{n}e^{-\delta t}\indicset{T_x>t}\,dt\)
-&\(\displaystyle \frac{1-\Ax*{\endowxn}}{\delta}\) or \(\displaystyle\int_{0}^{n}e^{-\delta t}\px[t]{x}\,dt\)
+&\makecell{\(\displaystyle \frac{1-\Ax*{\endowxn}}{\delta}\) or 
+\(\displaystyle \ax*{x}-\Ex[n]{x}\ax*{x+n}\)\\
+or \(\displaystyle\int_{0}^{n}e^{-\delta t}\px[t]{x}\,dt\)}
 &\(\displaystyle \frac{\Ax*[][2]{\endowxn}-\qty(\Ax*{\endowxn})^2}{\delta^2}\)\\
 notation&\(Y\)&\defn{\(\ax*{\endowxn}\)}&\(\vari{Y}\)\\
 \bottomrule
@@ -226,8 +268,10 @@ due: \(\ax**{\angl{\qty(K_x+1)\wedge n}}\) or \(\displaystyle\sum_{k=0}^{n-1}v^k
 immediate: \(\ax{\angl{K_x\wedge n}}\) or \(\displaystyle\sum_{k=1}^{n}v^k\indicset{T_x>k}\)
 }
 &\makecell{
-due: \(\displaystyle \frac{1-\Ax{\endowxn}}{d}\) or \(\displaystyle\sum_{k=0}^{n}v^k\px[k]{x}\)\\
-immediate: \(\displaystyle\sum_{k=1}^{n}v^k\px[k]{x}\)
+due: \(\displaystyle \frac{1-\Ax{\endowxn}}{d}\) or \(\ax**{x}-\Ex[n]{x}\ax**{x+n}\) \\
+or \(\displaystyle\sum_{k=0}^{n}v^k\px[k]{x}\)\\
+immediate: \(\displaystyle\sum_{k=1}^{n}v^k\px[k]{x}\) \\
+or \(\ax{x}-\Ex[n]{x}\ax{x+n}\) \\
 }
 &\makecell{due: \(\displaystyle \frac{\Ax[][2]{\endowxn}-\qty(\Ax{\endowxn})^2}{d^2}\)\\
 immediate: omitted
@@ -251,12 +295,14 @@ expression&
 due: \(\ax**{\angl{\qty(K_x^{(m)} + \frac{1}{m})\wedge n}}\) or \\
 \(\displaystyle\sum_{k=0}^{mn-1}{\color{brown}\frac{1}{m}}v^{\frac{k}{m}}\indicset{T_x> \frac{k}{m}}\)\\
 immediate: \(\ax{\angl{K_x^{(m)}\wedge n}}\) or \\
-\(\displaystyle\sum_{k=1}^{n}{\color{brown}\frac{1}{m}}v^{\frac{k}{m}}\indicset{T_x> \frac{k}{m}}\)
+\(\displaystyle\sum_{k=1}^{mn}{\color{brown}\frac{1}{m}}v^{\frac{k}{m}}\indicset{T_x> \frac{k}{m}}\)
 }
 &\makecell{
-due: \(\displaystyle \frac{1-\Ax{\endowxn}[(m)]}{d^{(m)}}\) 
+due: \(\displaystyle \frac{1-\Ax{\endowxn}[(m)]}{d^{(m)}}\)
+or \(\ax**{x}[(m)]-\Ex[n]{x}\ax**{x+n}[(m)]\) \\
 or \(\displaystyle\sum_{k=0}^{mn-1}{\color{brown}\frac{1}{m}}v^{\frac{k}{m}}\px[\frac{k}{m}]{x}\)\\
-immediate: \(\displaystyle\sum_{k=1}^{mn}{\color{brown}\frac{1}{m}}v^{\frac{k}{m}}\px[\frac{k}{m}]{x}\)
+immediate: \(\displaystyle\sum_{k=1}^{mn}{\color{brown}\frac{1}{m}}v^{\frac{k}{m}}\px[\frac{k}{m}]{x}\) \\
+or \(\ax**{x}[(m)]-\Ex[n]{x}\ax**{x+n}[(m)]\) \\
 }
 &\makecell{due: \(\displaystyle \frac{\Ax[][2]{\endowxn}[(m)]-\qty(\Ax{\endowxn}[(m)])^2}{\qty(d^{(m)})^{2}}\)\\
 immediate: omitted
@@ -266,6 +312,29 @@ notation&\(Y\)&
 immediate: \defn{\(\ax{\endowxn}^{(m)}\)}}&\(\vari{Y}\)\\
 \bottomrule
 \end{tabular}
+\item We can similarly use the ``actuarial discounting'' intuition to develop
+the following formula (analogous to the term life insurance case):
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\((x)\)};
+\fill[] (3,0) circle [radius=0.05]
+node[below] {\(n\)};
+\draw[very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (3,0)
+node[midway, below=0.7cm]{\(\Ax*{\termxn}\)};
+\draw[pen colour=red, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=25pt}] (3,0) -- (10,0)
+node[red, midway, above=1cm]{\(\Ax*{x+n}\)};
+\draw[pen colour=violet, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (10,0)
+node[violet, pos=0.2, above=0.7cm]{\(\Ax*{x}\)};
+\draw[pen colour=red, red, thick, decorate,decoration={brace, amplitude=5pt, raise=5pt}] (0,1.5) -- (0,2)
+node[midway, left=0.5cm] {take away};
+\draw[-Latex, color=ForestGreen] (3,1) to[bend right] (0,1.6);
+\draw[-Latex, color=ForestGreen] (10,1) to[bend right] (0,1.9);
+\node[] () at (2.5,2) {\(\times\Ex[n]{x}\)};
+\end{tikzpicture}
+
 \item Again for discrete life annuity-immediate, we usually use an alternative
 formula for calculating APV:
 \begin{proposition}
@@ -277,17 +346,17 @@ For any age \(x\),
 \end{enumerate}
 \end{proposition}
 \begin{pf}
-Similar to the proof for \cref{prp:wl-due-immediate-fmla}.
+Similar to the proof for \cref{prp:wl-due-immediate-fmlas}.
 \end{pf}
 \end{enumerate}
 \subsection{Deferred Life Annuity}
 \begin{enumerate}
-\item Like \cref{subsect:defer-var-insurance}, we have different types of deferred life annuities:
+\item Like \cref{subsect:defer-insurance}, we have different types of deferred life annuities:
 \begin{itemize}
 \item deferred whole life annuity
 \item deferred temporary life annuity
 \end{itemize}
-\item Again like \cref{subsect:defer-var-insurance}, the APV formulas can be
+\item Again like \cref{subsect:defer-insurance}, the APV formulas can be
 developed using the ``actuarial discount factor'' intuition:
 
 \begin{tikzpicture}
@@ -487,10 +556,830 @@ immediate \defn{\(\ax{\overline{x:\angl{n}}}[(m)]\)}
 \end{tabular}
 \end{enumerate}
 
-\subsection{Life Annuity With Variable Payments}
+\subsection{Complete and Apportionable Life Annuities}
+\begin{note}
+This topic is not currently inside SOA exam FAM syllabus.
+\end{note}
 \begin{enumerate}
-\item Like \cref{subsect:defer-var-insurance}, the general APV formula in
-\labelcref{it:gen-apv-fmla} is applicable in the case where the life annuity
-has varying payment amounts.
+\item Consider the following situation:
+
+\begin{tikzpicture}
+\node[brown] () at (-1.5,0) {Life A \faIcon{user}};
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (2,0) circle [radius=0.05] node[below] {1}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (6.3,0) circle [radius=0.05]
+node[red, above] {\faIcon{skull}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4}
+node[above, cross out, draw] {\faIcon{hand-holding-usd}};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node[violet] () at (-1.5,0) {Life B \faIcon{user}};
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (2,0) circle [radius=0.05] 
+node[below] {1}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (7.6,0) circle [radius=0.05]
+node[red, above] {\faIcon{skull}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4}
+node[above, cross out, draw] {\faIcon{hand-holding-usd}};
+\end{tikzpicture}
+
+For both lives A {\color{brown}\faIcon{user}} and B
+{\color{violet}\faIcon{user}}, they do not receive the benefit payment
+\faIcon{hand-holding-usd} at time 4. But life B {\color{violet}\faIcon{user}}
+survives most of the last period, while life A  {\color{brown}\faIcon{user}}
+only survives a little of the last period! So this may cause some
+``unfairness''.
+\begin{note}
+This ``unfairness'' only arises for discrete cases.
+\end{note}
+
+\item To address this issue, the ``complete'' and ``apportionable'' variants
+are developed, for life annuity-immediate and life annuity-due respectively.
+
+\item \label{it:convert-to-stream}
+The common idea in the two variants is to convert the potential
+``discrete'' payments \faIcon{hand-holding-usd} in life annuity-due/immediate
+into \emph{continuous} streams of payments --- the streams would cease upon
+death immediately.
+
+\begin{tikzpicture}
+\node[brown] () at (-1.25,0) {Life A \faIcon{user}};
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (2,0) circle [radius=0.05] 
+node[below] {1}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (6.3,0) circle [radius=0.05]
+node[red, above] {\faIcon{skull}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4}
+node[above, cross out, draw] {\faIcon{hand-holding-usd}};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\draw[-Stealth, line width=1mm, ForestGreen] (-2,0) -- (-0.5,0);
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3};
+\fill[] (6.3,0) circle [radius=0.05]
+node[red, above] {\faIcon{skull}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4};
+\draw[line width=1mm, yellow] (0,0.7) -- (6.3,0.7)
+node[midway, below, yellow!70!black] {stream of \faIcon{hand-holding-usd}};
+\end{tikzpicture}
+
+
+\begin{tikzpicture}
+\node[violet] () at (-1.25,0) {Life B \faIcon{user}};
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (2,0) circle [radius=0.05] 
+node[below] {1}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (7.6,0) circle [radius=0.05]
+node[red, above] {\faIcon{skull}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4}
+node[above, cross out, draw] {\faIcon{hand-holding-usd}};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\draw[-Stealth, line width=1mm, ForestGreen] (-2,0) -- (-0.5,0);
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3};
+\fill[] (7.6,0) circle [radius=0.05]
+node[red, above] {\faIcon{skull}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4};
+\draw[line width=1mm, yellow] (0,0.7) -- (7.6,0.7)
+node[midway, below, yellow!70!black] {stream of \faIcon{hand-holding-usd}};
+\end{tikzpicture}
+
+\item \labelcref{it:convert-to-stream} describes the conceptual framework for
+developing the complete and apportionable variants. In the actual
+implementation, the amount and frequency of the payments payable originally
+(those before the death {\color{red}\faIcon{skull}}) remain unchanged. 
+
+\item The twist is that in the ``last'' time interval (the time interval
+between the original final payment and the scheduled next payment), the
+annuitant's account may receive (pay) an additional amount of money from (to)
+the insurer at the time of death {\color{red}\faIcon{skull}}, for the
+``complete'' (``apportionable'') variant, where the amount is the value of the
+``residual payment stream'' \tikz \draw[line width=1mm, yellow] (0,0) --
+(0.5,0); accumulated to the time of death {\color{red}\faIcon{skull}}:
+
+\begin{tikzpicture}
+\node[] () at (5,2) {``complete'' (immediate)};
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[above] {\faIcon{hand-holding-usd}}
+node[below] {1};
+\fill[] (4,0) circle [radius=0.05]
+node[above] {\faIcon{hand-holding-usd}}
+node[below] {2};
+\fill[] (6,0) circle [radius=0.05]
+node[above] {\faIcon{hand-holding-usd}}
+node[below] {3};
+\fill[] (7,0) circle [radius=0.05]
+node[red, above] {\faIcon{skull}};
+\fill[] (8,0) circle [radius=0.05]
+node[above, cross out, draw] {\faIcon{hand-holding-usd}}
+node[below] {4};
+\draw[line width=1mm, yellow] (6,0.7) -- (7,0.7);
+\draw[->, ForestGreen] (6,0.7) to[bend left] (7,0.7);
+\node[orange] () at (7,1.1) {\faIcon{hand-holding-usd}};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node[] () at (5,2) {``apportionable'' (due)};
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[above] {\faIcon{hand-holding-usd}}
+node[below] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[above] {\faIcon{hand-holding-usd}}
+node[below] {1};
+\fill[] (4,0) circle [radius=0.05]
+node[above] {\faIcon{hand-holding-usd}}
+node[below] {2};
+\fill[] (6,0) circle [radius=0.05]
+node[above] {\faIcon{hand-holding-usd}}
+node[below] {3};
+\fill[] (7,0) circle [radius=0.05]
+node[red, above] {\faIcon{skull}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4};
+\draw[line width=1mm, yellow] (7,0.7) -- (8,0.7);
+\draw[->, ForestGreen] (8,0.7) to[bend right] (7,0.7);
+\draw[->, red, line width=0.3mm] (7,0.9) -- (7,1.3)
+node[pos=1.6] {\faIcon{dollar-sign}};
+%\node[orange] () at (7,1.1) {\faIcon{hand-holding-usd}};
+\draw[-Latex] (8.5,1.5) -- (7.2,1)
+node[pos=-0.7, font=\small] {amount ``not entitled''};
+\draw[-Latex] (7,-0.7) -- (6.2,0.2)
+node[pos=-0.3, font=\small] {for \emph{whole} period};
+\end{tikzpicture}
+
+\item To preserve the ``worth'' of the original payments
+\faIcon{hand-holding-usd} (both monetary and time values), in each (\(1/m\)th
+of) period we require the ``present value'' (at the beginning time) of the
+(single) ``discrete'' payment \faIcon{hand-holding-usd} to be the same as the
+(whole) payment stream (in the framework) in that period:
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2}
+node[above, gray!50!white] {\faIcon{hand-holding-usd}};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3}
+node[above] {\faIcon{hand-holding-usd}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4};
+\draw[line width=1mm, yellow] (0,0.7) -- (2,0.7)
+node[midway, above, yellow!70!black] {stream};
+\draw[line width=1mm, yellow!20!white] (2,0.7) -- (4,0.7);
+\draw[line width=1mm, yellow] (4,0.7) -- (6,0.7)
+node[midway, above, yellow!70!black] {stream};
+\draw[-Latex, ForestGreen] (1.2,0.6) to[bend left] (0,0.3);
+\draw[-Latex, ForestGreen] (2,0.2) to[bend left] (0,0.2);
+\node[font=\small, ForestGreen] () at (-0.3,0.2) {\faIcon{equals}};
+\draw[-Latex, orange] (5.2,0.6) to[bend left] (4,0.3);
+\draw[-Latex, orange] (6,0.2) to[bend left] (4,0.2);
+\node[font=\small, orange] () at (3.7,0.2) {\faIcon{equals}};
+\end{tikzpicture}
+
+Then, the original payments \faIcon{hand-holding-usd} together with the
+additional amount at time of death would have the same present value as the
+payment stream, regardless of when the annuitant dies. So we can (conveniently)
+carry out the calculations of APV and other related quantities in the
+continuous framework.
+
+\item Now we consider the general setting (\(1/m\)thly). In each \(1/m\)th of
+period (year), there is a single payment \faIcon{hand-holding-usd} of \(1/m\)
+(at the beginning or the end of the interval, depending on whether the life
+annuity is due or immediate). We then want to find the amount \(k\) such that
+the ``present value'' of the stream with annual rate \(k\) equals the ``present
+value'' of the single payment \faIcon{hand-holding-usd}.
+
+\item \label{it:complete-1m-annuity-fmlas}
+For \defn{complete \(1/m\)thly life annuity-immediate}, we have
+\[
+k\ax*{\angl{1/m}}=(1/m)(1+i)^{-1/m}
+\implies
+k=\frac{1/m}{\sx*{\angl{1/m}}}
+=\frac{1}{m}\frac{\delta}{(1+i)^{1/m}-1}
+=\frac{\delta}{i^{(m)}}.
+\]
+After getting this amount, we can obtain the following\footnote{Here we just
+include whole life and \(n\)-year temporary life as they are more often
+considered in this context. But in principle similar developments can be done
+for other kinds of life annuities.}:
+\begin{enumerate}
+\item whole life:
+
+\begin{tabular}{cccc}
+\toprule
+&p.v.r.v.&APV&variance\\
+\midrule
+expression&\(\displaystyle \frac{\delta}{i^{(m)}}\ax*{\angl{T_x}}\)
+&\(\displaystyle \frac{\delta}{i^{(m)}}\ax*{x}\)
+&\(\displaystyle \qty(\frac{\delta}{i^{(m)}})^2\times\)(\(\vari{Y}\) in \labelcref{it:cts-wl-annuity-fmlas})\\
+notation&\(Y\)&\defn{\(\aringx{x}[(m)]\)}&\(\vari{Y}\)\\
+\bottomrule
+\end{tabular}
+
+\item \(n\)-year temporary life:
+
+\begin{tabular}{cccc}
+\toprule
+&p.v.r.v.&APV&variance\\
+\midrule
+expression&\(\displaystyle \frac{\delta}{i^{(m)}}\ax*{\angl{T_x\wedge n}}\)
+&\(\displaystyle \frac{\delta}{i^{(m)}}\ax*{\endowxn}\)
+&\(\displaystyle \qty(\frac{\delta}{i^{(m)}})^2\times\)(\(\vari{Y}\) in \labelcref{it:cts-tmp-annuity-fmlas})\\
+notation&\(Y\)&\defn{\(\aringx{\endowxn}[(m)]\)}&\(\vari{Y}\)\\
+\bottomrule
+\end{tabular}
+\end{enumerate}
+\begin{note}
+Since the APV (whole life/temporary life) is just a constant times a previously
+discussed ``standard'' APV notation, many previous results hold analogously for
+the ``complete'' APV notation.  (It is similar for the apportionable case; see
+below.)
+\end{note}
+
+\item \label{it:apportionable-1m-annuity-fmlas}
+For \defn{apportionable \(1/m\)thly life annuity-due}, we have
+\[
+k\ax*{\angl{1/m}}=1/m
+\implies
+k=\frac{1/m}{\ax*{\angl{1/m}}}
+=\frac{1}{m}\frac{\delta}{1-(1+i)^{-1/m}}
+=\frac{\delta}{d^{(m)}}.
+\]
+After getting this amount, we can obtain the following:
+\begin{enumerate}
+\item whole life:
+
+\begin{tabular}{cccc}
+\toprule
+&p.v.r.v.&APV&variance\\
+\midrule
+expression&\(\displaystyle \frac{\delta}{d^{(m)}}\ax*{\angl{T_x}}\)
+&\(\displaystyle \frac{\delta}{d^{(m)}}\ax*{x}\)
+&\(\displaystyle \qty(\frac{\delta}{d^{(m)}})^2\times\)(\(\vari{Y}\) in \labelcref{it:cts-wl-annuity-fmlas})\\
+notation&\(Y\)&\defn{\(\ax**{x}[\{m\}]\)}&\(\vari{Y}\)\\
+\bottomrule
+\end{tabular}
+
+\item \(n\)-year temporary life:
+
+\begin{tabular}{cccc}
+\toprule
+&p.v.r.v.&APV&variance\\
+\midrule
+expression&\(\displaystyle \frac{\delta}{d^{(m)}}\ax*{\angl{T_x\wedge n}}\)
+&\(\displaystyle \frac{\delta}{d^{(m)}}\ax*{\endowxn}\)
+&\(\displaystyle \qty(\frac{\delta}{d^{(m)}})^2\times\)(\(\vari{Y}\) in \labelcref{it:cts-tmp-annuity-fmlas})\\
+notation&\(Y\)&\defn{\(\ax**{\endowxn}[\{m\}]\)}&\(\vari{Y}\)\\
+\bottomrule
+\end{tabular}
 \end{enumerate}
 
+\begin{mnemonic}
+``\(i^{(m)}\)'' for complete life annuity-\underline{i}mmediate, and
+``\(d^{(m)}\)'' for apportionable life annuity-\underline{d}ue.
+\end{mnemonic}
+\end{enumerate}
+
+\subsection{Life Annuity With Variable Payments}
+\begin{enumerate}
+\item Like \cref{subsect:vb-insurance}, the general APV formula in
+\labelcref{it:gen-apv-fmla} is applicable in the case where the life annuity
+has varying payment amounts. \begin{note}
+For the continuous case, the ``benefit amount'' part in the general formula
+would involve ``\(dt\)'' --- the benefit paid in an ``infinitesimal'' time interval
+is ``infinitesimal'' for the continuous life annuity case.
+\end{note}
+\item Again we shall discuss two special cases:
+\begin{itemize}
+\item arithmetically increasing/decreasing life annuities
+\item geometrically increasing/decreasing life annuities
+\end{itemize}
+
+\item Likewise, for arithmetically increasing/decreasing life annuities, there
+are some actuarial notations designed for them. The kinds are similar to
+\labelcref{it:vb-insurance-kinds} (with the same definition, but for benefit
+payment \faIcon{hand-holding-usd} rather than death benefit
+\faIcon{money-bill-wave}):
+\begin{enumerate}
+\item increasing annually
+\item increasing \(1/m\)thly
+\item increasing continuously
+\item decreasing annually
+\item decreasing \(1/m\)thly
+\item decreasing continuously
+\end{enumerate}
+
+\begin{note}
+For life annuity-immediate (-due), the payment amount ``for'' each period
+refers to the amount for the payment at the end (beginning) of that period.
+E.g.,
+\begin{itemize}
+\item annually increasing annual life annuity-immediate
+(payment amounts for policy years 1,2,3,... are 1,2,3,...):
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0};
+\fill[] (1,0) circle [radius=0.05];
+\fill[] (2,0) circle [radius=0.05]
+node[above, brown] {\faIcon{hand-holding-usd}: 1}
+node[below] {1};
+\fill[] (3,0) circle [radius=0.05];
+\fill[] (4,0) circle [radius=0.05]
+node[above, brown] {\faIcon{hand-holding-usd}: 2}
+node[below] {2};
+\fill[] (5,0) circle [radius=0.05];
+\fill[] (6,0) circle [radius=0.05]
+node[above, brown] {\faIcon{hand-holding-usd}: 3}
+node[below] {3};
+\fill[] (7,0) circle [radius=0.05]
+node[above=0.2cm, brown, font=\large] {...};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4};
+\end{tikzpicture}
+
+\item annually increasing annual life annuity-due
+(payment amounts for policy years 1,2,3,... are 1,2,3,...):
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[above, brown] {\faIcon{hand-holding-usd}: 1}
+node[below] {0};
+\fill[] (1,0) circle [radius=0.05];
+\fill[] (2,0) circle [radius=0.05]
+node[above, brown] {\faIcon{hand-holding-usd}: 2}
+node[below] {1};
+\fill[] (3,0) circle [radius=0.05]
+;
+\fill[] (4,0) circle [radius=0.05]
+node[above, brown] {\faIcon{hand-holding-usd}: 3}
+node[below] {2};
+\fill[] (5,0) circle [radius=0.05]
+node[above=0.2cm, brown, font=\large] {...};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3};
+\fill[] (7,0) circle [radius=0.05];
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4};
+\end{tikzpicture}
+\end{itemize}
+\end{note}
+
+\item The designed actuarial notations for life annuity are analogous to
+\labelcref{it:arith-vb-insurance-notations}: Continuous: \(\Ax*{}\to\ax*{}\);
+annual: \(\Ax{}\to\ax**{}\text{ or }\ax{}\) (due/immediate resp.); \(1/m\)thly:
+\(\Ax{}[(m)]\to\ax**{}[(m)]\text{ or }\ax{}[(m)]\) (due/immediate resp.).
+
+\item \label{it:as-tmp-annuity-fmlas}
+We can develop APV formulas for arithmetically increasing/decreasing
+\(n\)-year temporary life annuities like \labelcref{it:as-term-life-fmlas},
+using the general APV formula in \labelcref{it:gen-apv-fmla}:
+\begin{itemize}
+\item continuous life annuity: \(\px[t]{x}\mu_{x+t}\text{ \faIcon{arrow-alt-circle-right} }\px[t]{x}\);
+\item annual life annuity: \((k+1)v^{k+1}\px[k]{x}\qx{x+k}\text{
+\faIcon{arrow-alt-circle-right} }(k+1)v^{k}\px[k]{x}\text{ or
+}(k+1)v^{k+1}\px[k+1]{x}\) (due/immediate resp.) (similar for others);
+\item \(1/m\)thly life annuity: \(\displaystyle
+\frac{k+1}{m}v^{\frac{k+1}{m}}\px[\frac{k}{m}]{x}\qx{x+\frac{k}{m}} \text{
+\faIcon{arrow-alt-circle-right} }
+\frac{k+1}{m}v^{\frac{k}{m}}\px[\frac{k}{m}]{x}\text{ or }
+\frac{k+1}{m}v^{\frac{k+1}{m}}\px[\frac{k+1}{m}]{x}\) (due/immediate resp.)
+(similar for others).
+\end{itemize}
+Example: We have
+\[
+(\bar{I}\ax*{})_{\endowxn}=\int_{0}^{n}{\color{brown}t}{\color{violet}e^{-\delta
+t}}{\color{magenta}\px[t]{x}}\,{\color{brown}dt}
+\]
+(\({\color{brown}t\,dt}\): ``benefit payment''; \({\color{violet}e^{-\delta
+t}}\): ``discount factor''; \({\color{magenta}\px[t]{x}}\): ``prob.\ of
+triggering payment'', for every ``infinitesimal'' time interval \([t,t+dt]\))
+
+\item Like \labelcref{it:geo-vb-insurance-intro}, for geometrically
+increasing/decreasing life annuities, we shall focus on the annual case (where
+the benefit varying and life annuity ``frequencies'' are the same) here:
+benefit payments for policy years \(1,2,3,\dotsc\) are
+\(1,(1+j),(1+j)^2,\dotsc\) respectively, where \(-1<j<1\). Again one can use
+the general APV formula in \labelcref{it:gen-apv-fmla} in general.
+
+\item The following is a shortcut formula of computing the APV for an
+\(n\)-year temporary life annuity:
+\begin{proposition}
+\label{prp:gs-tmp-annuity-fmla}
+The APV of an \(n\)-year temporary life annuity (annual case) with such
+geometric sequence in the benefit payments is given by:
+\[
+\begin{cases}
+\ax**{x:\angl{n}i^{*}}&\text{(due)}; \\
+\displaystyle 
+\frac{1}{1+j}\ax{x:\angl{n}i^{*}}&\text{(immediate)}
+\end{cases}
+\]
+where \(i^*=(i-j)/(1+j)\).
+\end{proposition}
+\begin{pf}
+For the ``due'' case, note that the APV is
+\[
+\sum_{k=0}^{n-1}(1+j)^{k}v^k\px[k]{x}
+=\sum_{k=0}^{n-1}\qty(\frac{1+i}{1+j})^{-k}\px[k]{x}.
+\]
+For the ``immediate'' case, note that the APV is
+\[
+\sum_{k=0}^{n-1}(1+j)^{k}v^{k+1}\px[k+1]{x}
+=\frac{1}{1+j}\sum_{k=0}^{n-1}\qty(\frac{1+i}{1+j})^{-(k+1)}\px[k+1]{x}.
+\]
+Also recall that
+\[
+1+i^*=\frac{1+j+i-j}{1+j}=\frac{1+i}{1+j}.
+\]
+\end{pf}
+
+\begin{note}
+Special case: If \(i=j\) (then \(i^{*}=0\)), for the ``due'' case the APV is
+\[
+\sum_{k=0}^{n-1}\px[k]{x}
+=1+e_{x:\angl{n-1}}
+\]
+by \cref{prp:exn-fmla}. If we further replace \(n\)-year temporary life
+annuity by whole life annuity (i.e., let \(n\to\infty\)), then the APV
+becomes \(1+e_x\).
+\end{note}
+\end{enumerate}
+\subsection{Recursions for APVs}
+\begin{enumerate}
+\item Again, most recursion formulas here can be intuitively understood through
+``actuarial discounting''.
+\item Due to the ``conceptual similarity'' of insurance and life annuity
+(general APV formula in \labelcref{it:gen-apv-fmla} is applicable to both), the
+recursion formulas for life annuity have a similar ``form'' as the ones for
+life insurance.
+\item Recursions for whole life annuity:
+\begin{proposition}
+\label{prp:wl-annuity-recursions}
+For any age \(x\) and any \(n\in\N\),
+\begin{enumerate}
+\item \(\ax*{x}=\ax*{\endowxn}+\Ex[n]{x}\ax*{x+n}\);
+\item \(\ax**{x}=\ax**{\endowxn}+\Ex[n]{x}\ax**{x+n}\) (due) and
+\(\ax{x}=\ax{\endowxn}+\Ex[n]{x}\ax{x+n}\) (immediate);
+\item \(\ax**{x}[(m)]=\ax**{x:\angl{n/m}}[(m)]+\Ex[n/m]{x}\ax**{x+n/m}[(m)]\) (due) and
+\(\ax{x}[(m)]=\ax{x:\angl{n/m}}[(m)]+\Ex[n/m]{x}\ax{x+n/m}[(m)]\) (immediate).
+\end{enumerate}
+\end{proposition}
+\begin{intuition}
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\((x)\)};
+\fill[] (3,0) circle [radius=0.05]
+node[below] {\(n\)}; \draw[pen colour=brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (3,0) node[brown, midway, above=0.7cm]{\(\ax*{\endowxn}\)};
+\draw[pen colour=brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=25pt}] (3,0) -- (10,0)
+node[brown, midway, above=1cm]{\(\ax*{x+n}\)};
+\draw[pen colour=violet, very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (10,0)
+node[violet, midway, below=0.7cm]{\(\ax*{x}\)};
+\draw[-Latex, color=ForestGreen] (3,1) to[bend right] (0,1.6);
+\draw[-Latex, color=ForestGreen] (10,1) to[bend right] (0,1.9);
+\node[] () at (2.5,2) {\(\times\Ex[n]{x}\)};
+\end{tikzpicture}
+\end{intuition}
+
+\begin{pf}
+Similar to the proofs in
+\labelcref{it:cts-term-life-fmlas,it:annual-term-life-fmlas,it:1m-term-life-fmlas}.
+\end{pf}
+
+\begin{note}
+Special case: when \(n=1\), we have:
+\begin{itemize}
+\item \(\displaystyle \ax**{x}=1+v\px{x}\ax**{x+1}\) (due) and 
+\(\displaystyle \ax{x}=v\px{x}+v\px{x}\ax{x+1}\) (immediate);
+\item \(\displaystyle \ax**{x}[(m)]=\frac{1}{m}+v^{\frac{1}{m}}\px[\frac{1}{m}]{x}\ax**{x+\frac{1}{m}}[(m)]\) (due)
+and \(\displaystyle
+\ax{x}[(m)]=\frac{1}{m}v^{\frac{1}{m}}\px[\frac{1}{m}]{x}+v^{\frac{1}{m}}\px[\frac{1}{m}]{x}\ax{x+\frac{1}{m}}[(m)]\) 
+(immediate).
+\end{itemize}
+\end{note}
+
+\item Recursions for temporary life annuity:
+\begin{proposition}
+\label{prp:tmp-annuity-recursions}
+For any age \(x\) and any \(n\in\N\),
+\begin{enumerate}
+\item \(\ax*{\endowxn}=\ax*{x:\angl{u}}+\Ex[u]{x}\ax*{x+u:\angl{n-u}}\) (for any \(u\in\N\) with \(u\le n\));
+\item \(\ax**{\endowxn}=\ax**{x:\angl{u}}+\Ex[u]{x}\ax**{x+u:\angl{n-u}}\) (due) and
+\(\ax{\endowxn}=\ax{x:\angl{u}}+\Ex[u]{x}\ax{x+u:\angl{n-u}}\) (for any \(u\in\N\) with \(u\le n\)) (immediate);
+\item \(\ax**{\endowxn}[(m)]=\ax**{x:\angl{u/m}}[(m)]+\Ex[u/m]{x}\ax**{(x+u/m):\angl{n-u/m}}[(m)]\) (due) and \\
+\(\ax{\endowxn}[(m)]=\ax{x:\angl{u/m}}[(m)]+\Ex[u/m]{x}\ax{(x+u/m):\angl{n-u/m}}[(m)]\) (immediate)
+(for any \(u\in\N\) with \(u\le mn\)).
+\end{enumerate}
+\end{proposition}
+\begin{intuition}
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\((x)\)};
+\fill[] (3,0) circle [radius=0.05]
+node[below] {\(u\)};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {\(n\)};
+\draw[pen colour=brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (3,0)
+node[brown, midway, above=0.7cm]{\(\ax*{x:\angl{u}}\)};
+\draw[pen colour=brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=25pt}] (3,0) -- (8,0)
+node[brown, midway, above=1cm]{\(\ax*{x+u:\angl{n-u}}\)};
+\draw[pen colour=violet, very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (8,0)
+node[violet, midway, below=0.7cm]{\(\ax*{\endowxn}\)};
+\draw[-Latex, color=ForestGreen] (3,1) to[bend right] (0,1.6);
+\draw[-Latex, color=ForestGreen] (8,1) to[bend right] (0,1.9);
+\node[] () at (2.5,2) {\(\times\Ex[u]{x}\)};
+\end{tikzpicture}
+\end{intuition}
+
+\begin{pf}
+Similar to the proof for \cref{prp:wl-annuity-recursions}.
+\end{pf}
+
+\item Recursions for arithmetically increasing/decreasing life annuities
+\(\Ia**\)/\(\Da**\):
+\begin{proposition}
+\label{prp:annual-arith-annuity-recursions}
+We have
+\begin{enumerate}
+\item\label{it:incr-split-first-annuity}
+\(\Ia**_{\endowxn}=1+v\px{x}\qty[\Ia**_{x+1:\angl{n-1}}+\ax**{x+1:\angl{n-1}}]\)
+and
+\(\Ia**_{x}=1+v\px{x}\qty[\Ia**_{x+1}+\ax**{x+1}]\);
+\item\label{it:decr-split-first-annuity} \(\Da**_{\endowxn}=n+v\px{x}\Da**_{x+1:\angl{n-1}}\);
+\item\label{it:incr-split-horizon} 
+\(\Ia**_{\endowxn}=\ax**{\endowxn}+v\px{x}\Ia**_{x+1:\angl{n-1}}\) and
+\(\Ia**_{x}=\ax**{x}+v\px{x}\Ia**_{x+1}\).
+\end{enumerate}
+\end{proposition}
+
+\begin{intuition}
+
+\labelcref{it:incr-split-first-annuity}:
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above, violet] {\faIcon{hand-holding-usd}};
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1}
+node[above, magenta] {\faIcon{hand-holding-usd}}
+node[above=0.3cm, brown] {\faIcon{hand-holding-usd}};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2}
+node[above, magenta] {\faIcon{hand-holding-usd}}
+node[above=0.3cm, brown] {\faIcon{hand-holding-usd}}
+node[above=0.6cm, brown] {\faIcon{hand-holding-usd}};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3}
+node[above, magenta] {\faIcon{hand-holding-usd}}
+node[above=0.3cm, brown] {\faIcon{hand-holding-usd}}
+node[above=0.6cm, brown] {\faIcon{hand-holding-usd}}
+node[above=0.9cm, brown] {\faIcon{hand-holding-usd}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4};
+\node[thick, brown] () at (7,1) {\(\cdots\)};
+\node[thick, magenta] () at (7,0.3) {\(\cdots\)};
+\draw[-Latex, violet] (1,-0.7) -- (0.3,0)
+node[pos=-0.3] {1};
+\draw[-Latex, magenta] (9,0.3) -- (7.5,0.3)
+node[pos=-0.6] {\(\ax**{x+1:\angl{n-1}}\)};
+\draw[brown, thick, decorate,decoration={mirror, brace, amplitude=5pt, raise=15pt}] (7.5,0.5) -- (7.5,1.5)
+node[midway, right=1cm] {\(\Ia**_{x+1:\angl{n-1}}\)};
+\draw[-Latex, ForestGreen] (1.7,0.2) to[bend right] (0,0.1);
+\draw[-Latex, ForestGreen] (6.2,1.4) to[bend right] (0,0.3);
+\node[] () at (1.5,1.8) {\(\times v\px{x}\)};
+\end{tikzpicture}
+
+\labelcref{it:decr-split-first-annuity}:
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above, violet] {\faIcon{money-bill-wave}}
+node[above=0.4cm, violet] {\(\vdots\)}
+node[above=0.8cm, violet] {\faIcon{money-bill-wave}}
+node[above=1.2cm, violet] {\faIcon{money-bill-wave}}
+node[above=1.6cm, violet] {\faIcon{money-bill-wave}}
+node[above=2cm, violet] {\faIcon{money-bill-wave}}
+;
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1}
+node[above, brown] {\faIcon{money-bill-wave}}
+node[above=0.4cm, brown] {\(\vdots\)}
+node[above=0.8cm, brown] {\faIcon{money-bill-wave}}
+node[above=1.2cm, brown] {\faIcon{money-bill-wave}}
+node[above=1.6cm, brown] {\faIcon{money-bill-wave}}
+;
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2}
+node[above, brown] {\faIcon{money-bill-wave}}
+node[above=0.4cm, brown] {\(\vdots\)}
+node[above=0.8cm, brown] {\faIcon{money-bill-wave}}
+node[above=1.2cm, brown] {\faIcon{money-bill-wave}};
+;
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3}
+node[above, brown] {\faIcon{money-bill-wave}}
+node[above=0.4cm, brown] {\(\vdots\)}
+node[above=0.8cm, brown] {\faIcon{money-bill-wave}}
+;
+
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4}
+;
+\node[thick, brown] () at (6.7,1) {\(\cdots\)};
+\draw[-Latex, violet] (1,-0.7) -- (0.3,0)
+node[pos=-0.3] {\(n\)};
+\draw[brown, thick, decorate,decoration={mirror, brace, amplitude=5pt, raise=15pt}] (6.5,0.2) -- (6.5,2)
+node[midway, right=1cm] {\(\DA_{x+1:\angl{n-1}}\)};
+\draw[-Latex, ForestGreen] (1.7,0.2) to[bend right] (0,0.1);
+\draw[-Latex, ForestGreen] (6.2,1.4) to[bend right] (0,0.3);
+\node[brown] () at (1,1.6) {\(\times v\px{x}\)};
+\end{tikzpicture}
+
+\labelcref{it:incr-split-horizon}:
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above, violet] {\faIcon{hand-holding-usd}};
+;
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1}
+node[above, violet] {\faIcon{hand-holding-usd}}
+node[above=0.3cm, brown] {\faIcon{hand-holding-usd}};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2}
+node[above, violet] {\faIcon{hand-holding-usd}}
+node[above=0.3cm, brown] {\faIcon{hand-holding-usd}}
+node[above=0.6cm, brown] {\faIcon{hand-holding-usd}};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3}
+node[above, violet] {\faIcon{hand-holding-usd}}
+node[above=0.3cm, brown] {\faIcon{hand-holding-usd}}
+node[above=0.6cm, brown] {\faIcon{hand-holding-usd}}
+node[above=0.9cm, brown] {\faIcon{hand-holding-usd}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4};
+\node[thick, brown] () at (7,1) {\(\cdots\)};
+\node[thick, violet] () at (7,0.3) {\(\cdots\)};
+\draw[-Latex, violet] (9,0.3) -- (7.5,0.3)
+node[pos=-0.3] {\(\ax**{\endowxn}\)};
+\draw[brown, thick, decorate,decoration={mirror, brace, amplitude=5pt, raise=15pt}] (7.5,0.5) -- (7.5,1.5)
+node[midway, right=1cm] {\(\Ia**_{x+1:\angl{n-1}}\)};
+\draw[-Latex, ForestGreen] (1.7,0.5) to[bend right] (0,0.1);
+\draw[-Latex, ForestGreen] (6.2,1.4) to[bend right] (0,0.3);
+\node[brown] () at (1.5,1.8) {\(\times v\px{x}\)};
+\end{tikzpicture}
+\end{intuition}
+
+\begin{pf}
+Exercise. (The intuition already illustrates the key idea in the proof ---
+one just needs to ``split'' the terms appropriately.)
+\end{pf}
+\end{enumerate}
+\subsection{Relating \(\ax*{}\), \(\ax**{}\) and \(\ax**{}[(m)]\)}
+\begin{enumerate}
+\item In a life table, we often only have the values for
+``\(\ax**{}\)''\footnote{Usually, ``due'' quantities, instead of ``immediate''
+quantities, are given in a life table as they are more frequently used.} but
+not for ``\(\ax*{}\)'' and ``\(\ax**{}[(m)]\)''. So, again we are interested in
+the relationship between them to see how we can get ``\(\ax*{}\)'' and
+``\(\ax**{}[(m)]\)'' from ``\(\ax**{}\)''.
+\item To get a nice relationship, again we need to impose UDD assumption (so
+that \cref{prp:udd-relate-insurance-apvs} can be utilized):
+\begin{proposition}
+\label{prp:udd-relate-annuity-apvs}
+Under UDD assumption, we have
+\begin{enumerate}
+\item \(\ax**{x}[(m)]=\alpha(m)\ax**{x}{\color{purple}-}\beta(m)\)
+where \(\displaystyle \alpha(m)=\frac{id}{i^{(m)}d^{(m)}}\) and \(\displaystyle \beta(m)=\frac{i-i^{(m)}}{i^{(m)}d^{(m)}}\);
+\item \(\displaystyle \ax*{x}=\frac{id}{\delta^2}\ax**{x}{\color{purple}-}\frac{i-\delta}{\delta^2}\).
+\end{enumerate}
+\end{proposition}
+\begin{pf}
+It suffices to prove the \(1/m\)thly case since the continuous case can simply
+be obtained from the \(1/m\)thly case by letting \(m\to\infty\) (note that
+\(\lim_{m\to \infty}i^{(m)}=\lim_{m\to \infty}d^{(m)}=\delta\)).
+
+Now consider:
+\[
+\ax**{x}[(m)]
+=\frac{1-\Ax{x}[(m)]}{d^{(m)}}
+=\frac{1-\qty(i/i^{(m)})\Ax{x}}{d^{(m)}}
+=\frac{i^{(m)}-i(1-d\ax**{x})}{i^{(m)}d^{(m)}}
+=\alpha(m)\ax**{x}-\beta(m).
+\]
+\end{pf}
+
+\begin{rmk}
+\item The result for \(1/m\)thly case is more often used.
+\item Sometimes values of \(\alpha(m)\) and \(\beta(m)\) for different \(m\) (at some
+interest rate \(i\)) are given also in a life table, for convenience.
+\item This result is only for \emph{whole life} annuity, unlike
+\cref{prp:udd-relate-insurance-apvs}. But we can still get APVs for temporary
+life and deferred life annuities easily, by expressing them in terms of APVs of
+whole life annuities. For example:
+\begin{itemize}
+\item \(n\)-year temporary life:
+\[\ax**{\endowxn}[(m)]=\ax**{x}-\Ex[n]{x}\ax**{x+n}
+=\alpha(m)\ax**{x}-\beta(m)-\Ex[n]{x}(\alpha(m)\ax**{x+n}-\beta(m))
+=\alpha(m)\ax**{\endowxn}{\color{purple}-}\beta(m)(1-\Ex[n]{x}).
+\]
+\item deferred whole life:
+\[\ax**[u|]{x}[(m)]=\Ex[u]{x}\ax**{x+u}
+=\Ex[u]{x}\qty[\alpha(m)\ax**{x+u}-\beta(m)]
+=\alpha(m)\ax**[u|]{x}{\color{purple}-}\beta(m)\Ex[u]{x}.
+\]
+\end{itemize}
+\end{rmk}
+\end{enumerate}
+\subsection{Incorporating Selection}
+\begin{enumerate}
+\item Again, all previous developments also apply to ``select'' lives (just change
+``\(x\)'' to ``\([x]\)'' in the notations).
+\end{enumerate}

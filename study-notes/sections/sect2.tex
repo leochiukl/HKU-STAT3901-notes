@@ -791,7 +791,7 @@ following simpler formula instead:
 \begin{pf}
 Since \(T_x\) is nonnegative, we have
 \[
-T_x=\int_{0}^{T_x}1\,dt+\int_{T_x}^{\infty}0\,dt
+T_x=\int_{0}^{T_x}1\,dt
 =\int_{0}^{\infty}\indicset{t<T_x}\,dt.
 \]
 \begin{note}
@@ -801,10 +801,10 @@ T_x=\int_{0}^{T_x}1\,dt+\int_{T_x}^{\infty}0\,dt
 It then follows that
 \[
 \expv{T_x}=\expv{\int_{0}^{\infty}\indicset{t<T_x}\,dt}
-=\int_{0}^{\infty}\expv{\indicset{T_x>t}}
-=\int_{0}^{\infty}\prob{T_x>t},
+=\int_{0}^{\infty}\expv{\indicset{T_x>t}}\,dt
+=\int_{0}^{\infty}\prob{T_x>t}\,dt,
 \]
-as desired.
+as desired. (The second equality holds by Fubini's theorem.)
 \end{pf}
 
 \item To find the \emph{variance} of \(T_x\), we need to compute the second
@@ -1252,7 +1252,8 @@ involving \emph{fractional} ages and years (e.g. \(\px[0.5]{50.2},
 The three most common \emph{fractional age assumptions} are: \begin{enumerate}
 \item uniform distribution of deaths (UDD) (the most common one);
 \item constant force of mortality
-\item Balducci assumption (not very common; not inside SOA Exam FAM syllabus)
+\item Balducci assumption (not very common; not currently inside SOA Exam FAM
+syllabus)
 \end{enumerate}
 
 \item The \defn{uniform distribution of deaths} (UDD) assumption is given by: for

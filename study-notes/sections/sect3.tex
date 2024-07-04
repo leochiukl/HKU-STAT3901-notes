@@ -31,12 +31,13 @@ involved mainly.)
 annuity \(\rightarrow\) payable ``continuously'' (\emph{continuous annuity} in
 STAT2902). (\(T_x\) is involved mainly.)
 \end{enumerate}
-It turns out that working in continuous time (working with \(T_x\)) is
+
+\item It turns out that working in continuous time (working with \(T_x\)) is
 mathematically more ``convenient''. However, practical contracts are always
-discrete in nature. So, sometimes quantities for ``discrete'' contracts in
-practice are approximated through working in continuous time instead, for
-mathematical convenience. (The approximation works better if the measurement
-period for the contract is shorter.)
+discrete in nature. So, sometimes quantities for a practical ``discrete''
+contract are \emph{approximated} through working in continuous time instead.
+(The approximation works ``better'' if the contract's measurement period is
+shorter.)
 
 \item
 \label{it:gen-apv-fmla}
@@ -60,6 +61,31 @@ It ``sums up'' the ``expected present value of benefit payment'':
 \]
 in all time intervals.
 \end{intuition}
+\item \label{it:insurance-relationship}
+The following shows the relationship between different kinds of insurance
+(in an approach of ``construction''):
+
+\begin{tikzpicture}
+\node[draw, brown] (wl) at (0,0) {whole life};
+\node[draw, brown] (pe) at (5,0) {pure endowment};
+\node[draw, violet] (dl) at (2.5,-3) {deferred contracts};
+\node[draw, violet] (tl) at (1,-2) {term life};
+\node[draw, violet] (en) at (4,-2) {endowment};
+\draw[thick, decorate,decoration={calligraphic brace, amplitude=10pt, raise=10pt, mirror}] (-1,-3) -- (7,-3)
+node[purple, midway, below=1cm, draw] (vb) {variable benefits (different kinds)};
+\draw[-Latex, blue] (wl) -- (tl);
+\draw[-Latex, blue] (pe) -- (tl);
+\draw[-Latex, ForestGreen] (tl) -- (en);
+\draw[-Latex, ForestGreen] (pe) -- (en);
+\draw[-Latex, orange] (wl) -- (dl);
+\draw[-Latex, orange] (tl) -- (dl);
+\draw[-Latex, orange] (en) -- (dl);
+\draw[-Latex, orange] (pe) to[bend right] (dl);
+\node[brown] () at (9,0) {basic building blocks};
+\node[violet] () at (9,-2.5) {``constructed'' contracts};
+\node[purple] () at (9,-4.3) {variant};
+\end{tikzpicture}
+\subsubsection*{Pure Endowment}
 \end{enumerate}
 
 \subsection{Whole Life Insurance}
@@ -253,26 +279,6 @@ notation&\(Z\)&\defn{\(\Ax{x}[(m)]\)}&\defn{\(\Ax[][2]{x}[(m)]\)}&\(\vari{Z}\)\\
 \subsection{(Pure) Endowment and Term Life Insurances}
 \label{subsect:pe-tl}
 \begin{enumerate}
-\item The following shows the relationship between different kinds of insurance
-(in one approach of ``construction''):
-
-\begin{tikzpicture}
-\node[draw, brown] (wl) at (0,0) {whole life};
-\node[draw, brown] (pe) at (5,0) {pure endowment};
-\node[draw, purple] (dl) at (3,-4.2) {deferred contract};
-\node[draw, violet] (tl) at (1,-2) {term life};
-\node[draw, violet] (en) at (4,-2) {endowment};
-\draw[pen colour=orange, thick, decorate,decoration={calligraphic brace, amplitude=10pt, raise=15pt, mirror}] (-1,-2) -- (7,-2)
-node[purple, midway, below=1cm, draw] (vb) {variable benefits (different kinds)};
-\draw[-Latex] (wl) -- (tl);
-\draw[-Latex] (pe) -- (tl);
-\draw[-Latex] (wl) -- (en);
-\draw[-Latex] (pe) -- (en);
-\node[brown] () at (9,0) {basic building blocks};
-\node[violet] () at (9,-2) {``constructed'' contracts};
-\node[purple] () at (9,-3.7) {variants};
-\end{tikzpicture}
-\subsubsection*{Pure Endowment}
 \item Consider an \(n\)-year pure endowment contract with survival benefit 1,
 i.e., 1 is payable at time \(n\) if the life insured is alive at that time.
 
@@ -365,7 +371,7 @@ node[midway, below=0.7cm]{\(\Ax*{\termxn}\)};
 node[red, midway, above=1cm]{\(\Ax*{x+n}\)};
 \draw[pen colour=violet, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (10,0)
 node[violet, pos=0.2, above=0.7cm]{\(\Ax*{x}\)};
-\draw[thick, decorate,decoration={brace, amplitude=5pt, raise=5pt}] (0,1.5) -- (0,2)
+\draw[pen colour=red, red, thick, decorate,decoration={brace, amplitude=5pt, raise=5pt}] (0,1.5) -- (0,2)
 node[midway, left=0.5cm] {take away};
 \draw[-Latex, color=ForestGreen] (3,1) to[bend right] (0,1.6);
 \draw[-Latex, color=ForestGreen] (10,1) to[bend right] (0,1.9);
@@ -374,7 +380,7 @@ node[midway, left=0.5cm] {take away};
 \end{intuition}
 
 \begin{note}
-As we shall see in \cref{subsect:defer-var-insurance}, \(\Ex[n]{x}\Ax*{x+n}\)
+As we shall see in \cref{subsect:defer-insurance}, \(\Ex[n]{x}\Ax*{x+n}\)
 is the APV of a continuous \(n\)-year deferred whole life insurance. So this
 formula for finding APV of term life insurance also suggests another formula
 for finding APV of \emph{deferred} whole life insurance, by rearranging the
@@ -528,13 +534,9 @@ Now the result follows from the formula
 \]
 \end{pf}
 \end{enumerate}
-\subsection{Deferred and Variable Benefits Insurances}
-\label{subsect:defer-var-insurance}
+\subsection{Deferred Life Insurance}
+\label{subsect:defer-insurance}
 \begin{enumerate}
-\item Here we discuss two kinds of variants for insurance contracts discussed
-in \cref{subsect:whole-life,subsect:pe-tl}: deferred and variable
-benefits contracts.
-\subsubsection*{Deferred Insurances}
 \item There are 3 main types of deferred insurances of interest here:
 \begin{itemize}
 \item deferred whole life
@@ -708,28 +710,143 @@ notation&\(Z\)&\defn{\(\Ax[u|]{\endowxn}[(m)]\)}&\defn{\(\Ax[u|][2]{\endowxn}[(m
 \bottomrule
 \end{tabular}
 \end{enumerate}
-\subsubsection*{Variable Benefits Insurance}
-
-\item Generally, for variable benefits insurances, we use the general APV
-formula in \labelcref{it:gen-apv-fmla}. Here we shall discuss two special cases:
+\subsection{Life Insurance With Variable Benefits}
+\label{subsect:vb-insurance}
+\item Generally, for insurances with variable benefits, we use the general APV
+formula in \labelcref{it:gen-apv-fmla}. Here we shall discuss two special
+cases:
 \begin{itemize}
 \item arithmetically increasing/decreasing insurances
 \item geometrically increasing/decreasing insurances
 \end{itemize}
-\item For arithmetically increasing/decreasing insurances, there are some actuarial
+\item \label{it:vb-insurance-kinds}
+For arithmetically increasing/decreasing insurances, there are some actuarial
 notations designed for them. To understand them, let us first explore different
 \emph{kinds} of arithmetically increasing/decreasing insurances:
 \begin{enumerate}
 \item increasing annually: death benefits in policy years \(1,2,\dotsc\) are
 \(1, 2,\dotsc\) respectively;
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[above] {(\(x\))}
+node[below] {0};
+\fill[] (1,0) circle [radius=0.05];
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1};
+\fill[] (3,0) circle [radius=0.05];
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2};
+\fill[] (5,0) circle [radius=0.05];
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3};
+\fill[] (7,0) circle [radius=0.05];
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4};
+\draw[brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (1.9,0)
+node[midway, above=0.7cm, font=\small] {\faIcon{money-bill-wave}: \(1\)};
+\draw[brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (2,0) -- (3.9,0)
+node[midway, above=0.7cm, font=\small] {\faIcon{money-bill-wave}: \(2\)};
+\node[font=\large] () at (5,0.8) {...};
+\end{tikzpicture}
 \item increasing \(1/m\)thly: death benefits in time intervals \([0,1/m),
 [1/m,2/m), \dotsc\) are \(1/m, 2/m,\dotsc\) respectively;
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[above] {(\(x\))}
+node[below] {0};
+\fill[] (1,0) circle [radius=0.05];
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1};
+\fill[] (3,0) circle [radius=0.05];
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2};
+\fill[] (5,0) circle [radius=0.05];
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3};
+\fill[] (7,0) circle [radius=0.05];
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4};
+\draw[brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (0.9,0)
+node[midway, above=0.7cm, font=\small] {\faIcon{money-bill-wave}: \(\frac{1}{2}\)};
+\draw[brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (1,0) -- (1.9,0)
+node[midway, above=0.7cm, font=\small] {\faIcon{money-bill-wave}: \(1\)};
+\node[font=\large] () at (3,0.8) {...};
+\end{tikzpicture}
 \item increasing continuously: death benefit to be paid at any time \(t\) is \(t\);
+
+\begin{tikzpicture}[scale=0.7]
+\begin{axis}[domain=0:10, ylabel={\color{brown}\faIcon{money-bill-wave}}, xlabel=Time, ylabel style={rotate=90}]
+\addplot[brown, thick]{x};
+\end{axis}
+\end{tikzpicture}
+
 \item decreasing annually (for \(n\)-year insurance): death benefits in policy
 years \(1,2,\dotsc,n\) are \\\(n, n-1,\dotsc,1\) respectively;
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[above] {(\(x\))}
+node[below] {0};
+\fill[] (1,0) circle [radius=0.05];
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1};
+\fill[] (3,0) circle [radius=0.05];
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2};
+\fill[] (5,0) circle [radius=0.05];
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3};
+\fill[] (7,0) circle [radius=0.05];
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4};
+\draw[brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (1.9,0)
+node[midway, above=0.7cm, font=\small] {\faIcon{money-bill-wave}: \(4\)};
+\draw[brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (2,0) -- (3.9,0)
+node[midway, above=0.7cm, font=\small] {\faIcon{money-bill-wave}: \(3\)};
+\node[font=\large] () at (5,0.8) {...};
+\draw[brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (6,0) -- (7.9,0)
+node[midway, above=0.7cm, font=\small] {\faIcon{money-bill-wave}: \(1\)};
+\end{tikzpicture}
 \item decreasing \(1/m\)thly (for \(n\)-year insurance): death benefits in
 time intervals \\ \([0,1/m),[1/m,2/m),\dotsc,[(mn-1)/m,m]\) are \(n, n-(1/m),\dotsc,1/m\) respectively;
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[above] {(\(x\))}
+node[below] {0};
+\fill[] (1,0) circle [radius=0.05];
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1};
+\fill[] (3,0) circle [radius=0.05];
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2};
+\fill[] (5,0) circle [radius=0.05];
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3};
+\fill[] (7,0) circle [radius=0.05];
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4};
+\draw[brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (0.9,0)
+node[midway, above=0.7cm, font=\small] {\faIcon{money-bill-wave}: \(4\)};
+\draw[brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (1,0) -- (1.9,0)
+node[midway, above=0.7cm, font=\small] {\faIcon{money-bill-wave}: \(3.5\)};
+\node[font=\large] () at (4,0.8) {...};
+\draw[brown, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (7,0) -- (7.9,0)
+node[midway, above=0.7cm, font=\small] {\faIcon{money-bill-wave}: \(1\)};
+\end{tikzpicture}
 \item decreasing continuously (for \(n\)-year insurance): death benefit to be paid at time \(t\) is \(n-t\), for any \(t\in[0,n]\).
+
+\begin{tikzpicture}[scale=0.7]
+\begin{axis}[domain=0:10, ylabel={\color{brown}\faIcon{money-bill-wave}}, xlabel=Time, ylabel style={rotate=90}]
+\addplot[brown, thick]{10-x};
+\end{axis}
+\end{tikzpicture}
 \end{enumerate}
 \begin{rmk}
 \item These are understood to be only applicable for the period covered by the
@@ -737,7 +854,8 @@ insurance. There is not death benefit for the period outside insurance
 coverage.
 \item The continuous cases can be seen as limits of the \(1/m\)thly cases as \(m\to\infty\).
 \end{rmk}
-\item The designed actuarial notations are as follows:
+\item \label{it:arith-vb-insurance-notations}
+The designed actuarial notations are as follows:
 
 \begin{tabular}{c|ccc}
 \toprule
@@ -757,13 +875,12 @@ decreasing annually&\defn{\((D\Ax*{})\)}&\defn{\((D\Ax{}[(m)])\)}&\defn{\((DA)\)
 added on them to represent a variety of insurances (but of course the terms
 must be finite for decreasing insurances).
 \item Here we do not include the case where the benefit varying frequency is
-\emph{higher} than the insurance itself since in such case it is not clear how
-changes in death benefits (strictly) \emph{between} the dying time and the
-death benefit payment
-time (which may exist) should be handled.
+\emph{higher} than the insurance itself since in such case it may not be very
+clear how changes in death benefits (strictly) \emph{between} the dying time
+and the death benefit payment time (which may exist) should be handled.
 \item The kinds of insurance usually encountered here are the ones where the
-benefit varying and insurance ``frequencies'' are the same
-in the ``main diagonal'' for each of increasing \& decreasing case) --- the APV
+benefit varying and insurance ``frequencies'' are the same (located at the
+``main diagonal'' for each of increasing \& decreasing case) --- the APV
 formulas for them are ``nicer'' also.
 \end{rmk}
 \item
@@ -777,25 +894,25 @@ APV formula in \labelcref{it:gen-apv-fmla}:
 notation&APV\\
 \midrule
 \(\IA*_{\termxn}\)&
-\(\displaystyle\int_{0}^{1}\px[t]{x}\mu_{x+t}\,dt
-+\int_{1}^{2}2\px[t]{x}\mu_{x+t}\,dt
-+\dotsb+\int_{n-1}^{n}n\,\px[t]{x}\mu_{x+t}\,dt\)\\
+\(\displaystyle\int_{0}^{1}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt
++\int_{1}^{2}2e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt
++\dotsb+\int_{n-1}^{n}ne^{-\delta t}\,\px[t]{x}\mu_{x+t}\,dt\)\\
 \(\ImA*_{\termxn}\)&
-\(\displaystyle\int_{0}^{1/m}\frac{1}{m}\px[t]{x}\mu_{x+t}\,dt
-+\int_{1/m}^{2/m}\frac{2}{m}\px[t]{x}\mu_{x+t}\,dt
-+\dotsb+\int_{(mn-1)/m}^{n}n\,\px[t]{x}\mu_{x+t}\,dt\)\\
+\(\displaystyle\int_{0}^{1/m}\frac{1}{m}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt
++\int_{1/m}^{2/m}\frac{2}{m}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt
++\dotsb+\int_{(mn-1)/m}^{n}ne^{-\delta t}\,\px[t]{x}\mu_{x+t}\,dt\)\\
 \ystar\(\IbA*_{\termxn}\)&
-\(\displaystyle\int_{0}^{n}t\,\px[t]{x}\mu_{x+t}\,dt\)\\
+\(\displaystyle\int_{0}^{n}te^{-\delta t}\,\px[t]{x}\mu_{x+t}\,dt\)\\
 \(\DA*_{\termxn}\)&
-\(\displaystyle\int_{0}^{1}n\,\px[t]{x}\mu_{x+t}\,dt
-+\int_{1}^{2}(n-1)\px[t]{x}\mu_{x+t}\,dt
-+\dotsb+\int_{n-1}^{n}\px[t]{x}\mu_{x+t}\,dt\)\\
+\(\displaystyle\int_{0}^{1}ne^{-\delta t}\,\px[t]{x}\mu_{x+t}\,dt
++\int_{1}^{2}(n-1)e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt
++\dotsb+\int_{n-1}^{n}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt\)\\
 \(\DmA*_{\termxn}\)&
-\(\displaystyle\int_{0}^{1/m}n\,\px[t]{x}\mu_{x+t}\,dt
-+\int_{1/m}^{2/m}\qty(n-\frac{1}{m})\px[t]{x}\mu_{x+t}\,dt
-+\dotsb+\int_{(mn-1)/m}^{n}\frac{1}{m}\px[t]{x}\mu_{x+t}\,dt\)\\
+\(\displaystyle\int_{0}^{1/m}ne^{-\delta t}\,\px[t]{x}\mu_{x+t}\,dt
++\int_{1/m}^{2/m}\qty(n-\frac{1}{m})e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt
++\dotsb+\int_{(mn-1)/m}^{n}\frac{1}{m}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt\)\\
 \ystar\(\DbA*_{\termxn}\)&
-\(\displaystyle\int_{0}^{n}(n-t)\,\px[t]{x}\mu_{x+t}\,dt\)\\
+\(\displaystyle\int_{0}^{n}(n-t)e^{-\delta t}\,\px[t]{x}\mu_{x+t}\,dt\)\\
 \midrule
 \((IA^{(m)})_{\termxn}\)&
 \(\displaystyle\sum_{k=0}^{m-1}v^{\frac{k+1}{m}}\px[\frac{k}{m}]{x}\qx[\frac{1}{m}]{x+\frac{k}{m}}
@@ -871,7 +988,8 @@ v^{\frac{j+1}{m}}\px[\frac{j}{m}]{x}\qx[\frac{1}{m}]{x+\frac{j}{m}}\\
 \end{align*}
 The proof for the annual case is similar.
 \end{pf}
-\item For geometrically increasing/decreasing insurances, we focus on the
+\item \label{it:geo-vb-insurance-intro}
+For geometrically increasing/decreasing insurances, we focus on the
 annual case (where the benefit varying and insurance ``frequencies'' are the
 same) here: death benefits in policy years \(1,2,3,\dotsc\) are
 \(1,(1+j),(1+j)^2,\dotsc\) respectively, where \(-1<j<1\).
@@ -885,7 +1003,7 @@ in \labelcref{it:gen-apv-fmla} and the formula for geometric series. But the
 following gives a shortcut formula:
 \begin{proposition}
 \label{prp:gs-term-life-fmla}
-The APV of an \(n\)-year term life insurance with such geometric
+The APV of an \(n\)-year term life insurance (annual case) with such geometric
 sequence in the death benefit amounts is given by:
 \[
 \frac{1}{1+j}\Ax{\itop{x}:\angl{n}i^*}.
@@ -956,11 +1074,11 @@ The result follows from the proofs in
 \end{pf}
 
 \begin{note}
-As a special case, when \(n=1\), we have \[\Ax{x}=v\qx{x}+v\px{x}\Ax{x+1}\]
-and
-\[
-\Ax{x}=v^{\frac{1}{m}}\qx[\frac{1}{m}]{x}+v^{\frac{1}{m}}\px[\frac{1}{m}]{x}\Ax{x+\frac{1}{m}}.
-\]
+As a special case, when \(n=1\), we have:
+\begin{itemize}
+\item \(\displaystyle \Ax{x}=v\qx{x}+v\px{x}\Ax{x+1}\);
+\item \(\displaystyle \Ax{x}[(m)]=v^{\frac{1}{m}}\qx[\frac{1}{m}]{x}+v^{\frac{1}{m}}\px[\frac{1}{m}]{x}\Ax{x+\frac{1}{m}}[(m)]\).
+\end{itemize}
 \end{note}
 \item Recursions for term life insurance:
 \begin{proposition}
@@ -1184,18 +1302,19 @@ one just needs to ``split'' the terms appropriately.)
 ``\(\Ax*{}\)'' and ``\(\Ax{}[(m)]\)''. So, we are interested in the
 relationship between them to see how we can get ``\(\Ax*{}\)'' and ``\(\Ax{}[(m)]\)''
 from ``\(\Ax{}\)''.
-\item It turns out that in order to obtain some ``nice'' relationships between them, we
+\item It turns out that in order to obtain a ``nice'' relationship between them, we
 need to impose the UDD assumption:
 \begin{proposition}
-\label{prp:udd-relate-axs}
+\label{prp:udd-relate-insurance-apvs}
 Under UDD assumption,
 \begin{enumerate}
 \item \(\displaystyle\Ax*{*}=\frac{i}{\delta}\Ax{*}\)
 \item \(\displaystyle\Ax{*}[(m)]=\frac{i}{i^{(m)}}\Ax{*}\)
 \end{enumerate}
 where \(\Ax{*}\) denotes any of \(\Ax{x},\Ax{\termxn}, \Ax[u|]{x}, \Ax[u|]{\termxn}, \IA_x,
-\IA_{\termxn}, \DA_{\termxn}\) (i.e., any whole life/term life with possibly
-deferral or ``arithmetically increasing/decreasing (annual)'' variant).
+\IA_{\termxn}, \DA_{\termxn}\) (i.e., any whole life/term life insurance with
+possibly deferral or ``arithmetically increasing/decreasing (annual)''
+variant).
 \end{proposition}
 \begin{warning}
 \(\Ax{*}\) does \underline{not} include \(\Ax{\endowxn}\). Indeed, under UDD
@@ -1208,7 +1327,8 @@ which can be seen by writing \(\Ax*{\endowxn}=\Ax*{\termxn}+\Ex[n]{x}\)
 \end{warning}
 
 \begin{pf}
-We shall only give some key idea. See \textcite[Section~4.4]{bowers1997actuarial} for more details.
+We shall only give some key idea here. See
+\textcite[Section~4.4]{bowers1997actuarial} for more details.
 
 For the continuous case, consider \cref{lma:udd-equiv-def} --- and note that
 \(v^{T_x}=v^{K_x+1}(1+i)^{1-U_x}\) where \[\expv{(1+i)^{1-U_x}}=i/\delta.\]

@@ -30,6 +30,7 @@
 \usetikzlibrary{shapes}
 \usetikzlibrary{patterns}
 \usetikzlibrary{patterns.meta}
+
 \pgfplotsset{compat=1.18}
 
 \setenumerate[1]{label=\thesubsection.\arabic*~, ref=\S \thesubsection.\arabic*}
@@ -49,6 +50,7 @@
 
 \newenvironment{rmk}{\sffamily \underline{Remarks}:\begin{itemize}}{\end{itemize}}
 \newenvironment{note}{\sffamily\lbrack Note:}{\!\!\rbrack}
+\newenvironment{mnemonic}{\sffamily\lbrack Mnemonic {\color{pink!90!black}\faIcon{brain}}:}{\!\!\rbrack}
 \newenvironment{warning}{\sffamily\lbrack \warn\;\textcolor{red}{Warning}:}{\!\!\rbrack}
 \newenvironment{intuition}{\sffamily\lbrack Intuition \textcolor{yellow!80!black}{\faIcon{lightbulb}}:}{\!\!\rbrack}
 \newenvironment{pf}{\sffamily\underline{Proof}:}{\qed}
