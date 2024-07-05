@@ -136,7 +136,7 @@ assumption that for any age \(x\),
 (T_0-x|T_0>x)\eqd T_x.
 \]
 
-\begin{rmk}
+\begin{remark}
 \item The assumption may be understood more intuitively as stating that, for any age
 \(x\), (i) \(T_0\) and \(T_x\) have the same ``underlying life''; and (ii)
 there is no ``external'' information between age 0 and age \(x\).
@@ -144,7 +144,7 @@ there is no ``external'' information between age 0 and age \(x\).
 \[
 \prob{T_x\le t}=\prob{T_0\le x+t|T_0>x}.
 \]
-\end{rmk}
+\end{remark}
 \item Having the assumption in \labelcref{it:key-assum}, we can derive the
 following results:
 \begin{proposition}
@@ -283,12 +283,12 @@ conditions on \(S_x\):
 \item \(\lim_{t\to \infty}tS_x(t)=0\).
 \item \(\lim_{t\to \infty}t^2S_x(t)=0\).
 \end{enumerate}
-\begin{rmk}
+\begin{remark}
 \item The latter two conditions are mainly useful for ensuring the existence of mean
 and variance of \(T_x\).
 \item For survival functions introduced here, they all satisfy these conditions
 as well as the properties in \labelcref{it:valid-surv}.
-\end{rmk}
+\end{remark}
 \end{enumerate}
 \subsection{Force of Mortality}
 \begin{enumerate}
@@ -308,7 +308,7 @@ But as ``mortality'' is opposite to ``survival'', it appears that we should add
 a negative sign in the definition.
 
 \item \label{it:fom} The \defn{force of mortality (``modelled'' at age 0)} at
-time \(t\)) \defn{\(\mu_t\)} (or \defn{\(\mu_0(t)\)}) is defined as
+time \(t\), denoted by \defn{\(\mu_t\)} (or \defn{\(\mu_0(t)\)}), is defined as
 \[
 \mu_t=-\frac{S_0'(t)}{S_0(t)}
 \]
@@ -622,7 +622,7 @@ related to ``survival'') and ``\(q\)'' (probability related to ``death'').
 \item \defn{\(\qx[t]{x}\)}: \(F_x(t)\)
 \item \defn{\(\qx[u|t]{x}\)}: \(\prob{u<T_x\le u+t}=S_x(u)-S_x(u+t)\)
 \end{itemize}
-\begin{rmk}
+\begin{remark}
 \item ``\(t\)'' can be dropped from the notation if \(t=1\), for simplicity.
 \item For ``\(u|t\)'', \(u\) is the length of deferment period, and \(t\) is
 the length of period following the deferment.
@@ -640,7 +640,7 @@ node[midway, above=0.7cm]{die (\(\qx[u|t]{x}\))};
 \draw[very thick, decorate,decoration={calligraphic brace, mirror,  amplitude=5pt, raise=12pt}] (0,0) -- (3,0)
 node[midway, below=0.7cm]{deferment period};
 \end{tikzpicture}
-\end{rmk}
+\end{remark}
 
 \item Based on the definitions in \labelcref{it:actuar-pq}, we can readily
 derive the following results:
@@ -768,12 +768,12 @@ intervals within the interval \([0,t]\).
 \item The \defn{complete expectation of life} is \(\expv{T_x}\). (Actuarial
 notation: \defn{\(\eringx{x}\)})
 
-\begin{rmk}
+\begin{remark}
 \item ``Complete'' is in the sense that the ``complete'' (``whole'') lifetime is
 considered in the calculation (and not, say, just the integer part of
 lifetime).
 \item By the conditions in \labelcref{it:additional-cond}, \(\eringx{x}\) exists.
-\end{rmk}
+\end{remark}
 
 \item By definition, we have
 \[
@@ -903,13 +903,13 @@ future lifetime. The \defn{curtate future lifetime random variable} for (\(x\))
 (denoted by \(K_x\)) is the integer part of \(T_x\), i.e., \(\lfloor
 T_x\rfloor\).
 
-\begin{rmk}
+\begin{remark}
 \item ``Curtate'' means ``shortened''. The lifetime expressed in ``daily life
 age'' (curtate future lifetime) is always shorter than (or equal to) the
 ``exact'' future lifetime here.
 \item \(K_x\) is a discrete random variable, while \(T_x\) is a continuous
 random variable.
-\end{rmk}
+\end{remark}
 \item Here is an important ``bridge'' between \(T_x\) and \(K_x\):
 \begin{proposition}
 \label{prp:tx-kx-connection}

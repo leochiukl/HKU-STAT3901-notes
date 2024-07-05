@@ -22,9 +22,10 @@ policyholder is \emph{uninsurable} [e.g., it is ``almost'' sure that he will
 die very soon]).
 \end{enumerate}
 
-\item Now suppose \faIcon{building} accepts his application with standard premium
-charged. Then, \faIcon{user} will periodically pay \defn{premiums} \faIcon{dollar-sign}
-to \faIcon{building}, in exchange for the life insurance coverage.
+\item \label{it:charge-premiums} Now suppose \faIcon{building} accepts his
+application with standard premium charged. Then, \faIcon{user} will
+periodically pay \defn{premiums} \faIcon{dollar-sign} to \faIcon{building}, in
+exchange for the life insurance coverage.
 
 \item Note that the \emph{life insured} for this policy is the policyholder
 \faIcon{user} himself. But it is possible that the life insured is someone else
@@ -130,13 +131,18 @@ afterward as long as \faIcon{user} is alive.
 \faIcon{hand-holding-usd} to the annuitant \faIcon{user} while \faIcon{user} is
 alive.
 
-\item For all the contracts here, premiums \faIcon{dollar-sign} are payable.
-Conventionally (for ``discrete'' case), they are paid \emph{at the
-beginning} of each period, during a time interval specified in the contract.
-
-\item On the other hand, the death/survival benefit is conventionally paid
-\emph{at the end} of the period of death/last period of the term  (for
+\item \label{it:prem-ben-conventions}
+For all the contracts here, premiums \faIcon{dollar-sign} are payable.
+Conventionally (for ``discrete'' case), they are paid \emph{at the beginning}
+of each period, during a time interval specified in the contract.  On the other
+hand, the death (survival) benefit for the insurance is conventionally paid
+\emph{at the end} of the period of death (last period of the term resp.) (for
 ``discrete'' case).
+
+\begin{note}
+Unless otherwise specified, the measurement period (i.e., time unit for
+``periods'') is years.
+\end{note}
 
 \item \label{it:deferral} The contracts can be \defn{deferred}, in the sense
 that the ``coverage'' only starts a specified time length (called the

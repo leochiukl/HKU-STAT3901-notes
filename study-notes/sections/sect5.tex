@@ -1,0 +1,287 @@
+\section{Premiums}
+\label{sect:premiums}
+\begin{enumerate}
+\item As mentioned in \labelcref{it:charge-premiums}, premiums
+\faIcon{dollar-sign} are charged for providing a life insurance
+\faIcon{file-alt} (same for life annuity).
+
+\item Typically premiums \faIcon{dollar-sign} are \emph{series} of \emph{level}
+payments made at equal interval, as long as the policyholder \faIcon{user} is
+alive (possibly with a maximum number of payments to be made).  Hence, the
+premiums can actually be seen as a \emph{life annuity}
+\faIcon{hand-holding-usd} (but payments are given to the insurer
+\faIcon{building}, not to the policyholder \faIcon{user}).
+
+\item Due to the importance of premiums \faIcon{dollar-sign} to the insurer's
+profitability \faIcon{piggy-bank}, charging suitable amounts of premiums
+\faIcon{dollar-sign} is crucial. If the amounts of premiums
+\faIcon{dollar-sign} are too low, \faIcon{building} can go bankrupt easily; but
+if the amounts are too high, \faIcon{building} would be not ``competitive
+enough'' and perhaps lose a lot of clients \faIcon{users}. Hence, the insurer
+\faIcon{building} (more specifically, \emph{actuarial pricing team}) needs to
+consider many factors when determining the premiums.
+
+\item A way to determine the premiums (called a \defn{premium principle}) is
+the \emph{equivalence principle}, which is quite ``simple'' and makes the
+calculations mathematically convenient. Based on the equivalence principle, the
+amounts of (level) premiums are set such that the APV of premiums equals the
+APV of the benefits (and expenses, if considered). In other words, the expected
+\emph{present value of future loss at issue} \faIcon{fire-alt}
+\footnote{``Future loss'' here means future ``net'' cash outflows from the
+\emph{insurer}'s \faIcon{building} perspective.} is zero.
+
+\begin{note}
+But of course, in the actual practice, determining premiums is far from just
+merely following a ``premium principle'' --- it is much more complex. To learn
+more, consider having an actuarial internship in pricing team
+\faIcon[regular]{smile}.
+\end{note}
+
+
+\item The present value of future loss at issue \faIcon{fire-alt} (which is a life
+contingent random variable) serves as an important basis for determining
+premiums \faIcon{dollar-sign} and assessing the insurer's profitability
+\faIcon{piggy-bank}.
+\end{enumerate}
+\subsection{Present Value of Future Loss at Issue}
+\begin{enumerate}
+\item \defn{Present value of future loss at issue}, from the insurer's \faIcon{building}
+perspective, can be expressed as
+\begin{align*}
+&\text{PV of ``future'' benefits \faIcon{money-bill-wave} outgo} \\
+&\quad+ \text{PV of ``future'' expenses \faIcon{file-invoice-dollar} (if considered)}\\
+&\quad- \text{PV of ``future'' premium incomes \faIcon{dollar-sign}}
+\end{align*}
+(which is a random variable).
+
+\begin{warning}
+One should be careful that, \emph{conventionally}, ``future'' \emph{insurance}
+benefits and the related expenses do \underline{not} include the ones at time
+0, while ``future'' premiums and premium-related expenses \underline{do}
+include the ones at time 0.\footnote{This applies similarly in a more general
+situation (see \cref{sect:policy-values}) where ``future'' is taken with
+respect a time \(t\) (just replace ``time 0'' by ``time \(t\)'' here in such
+case).}
+
+But for \emph{life annuity} benefit payments and the related expenses,
+there is not a standard convention, so more specifications are needed in case
+they appear in this context.  (Fortunately it is rather uncommon to encounter
+such situation. Often we are interested in finding premiums for insurance
+policies.)
+\end{warning}
+
+\item When the expenses \faIcon{file-invoice-dollar} are considered, the
+present value of future loss at issue is known as \defn{gross loss at issue}.
+Otherwise it is known as \defn{net loss at issue}.
+\item The gross (net) loss at issue is denoted by \defn{\(L_0^g\)}
+(\defn{\(L_0^n\)} resp.).
+
+\begin{remark}
+\item If there is no risk of ambiguity or one would like to refer to either of gross
+and net losses at issue at the same time, one may drop the superscript and just
+write \defn{\(L_0\)}.
+\item The ``0'' indicates the present value is at time 0.
+\end{remark}
+
+\item Three common types of expenses \faIcon{file-invoice-dollar}:
+\begin{enumerate}
+\item \defn{initial expenses}: expenses incurred initially (at time of policy
+issue, i.e., time 0);
+\item \defn{renewal expenses}: expenses incurred each time a premium
+\faIcon{dollar-sign} (or a life annuity benefit payment
+\faIcon{hand-holding-usd}) is paid (except the first one, if it is paid at time
+0);
+\item \defn{termination expenses} (or \defn{settlement expenses}): expenses
+incurred when a policy terminates \faIcon{hourglass-end} (e.g., death
+benefit/endowment survival benefit is paid).
+\end{enumerate}
+
+\item Two commonly seen terminologies (for life insurance):
+\begin{itemize}
+\item \defn{fully discrete}: both death benefit and premiums are made at
+discrete time points, where the timing follows the convention in
+\labelcref{it:prem-ben-conventions};
+
+\item \defn{fully continuous}: death benefit is payable at the moment of death
+and premiums are payable continuously.
+\end{itemize}
+
+\item For the \defn{equivalence principle},
+\begin{itemize}
+\item the \defn{net premium} (i.e., premium set without considering expenses)
+is set such that \(\expv{L_0^n}=0\), i.e.,
+\[
+\text{APV of ``future'' benefits \faIcon{money-bill-wave} outgo} = \text{APV of
+``future'' premium incomes \faIcon{dollar-sign}}; 
+\]
+
+\item the \defn{gross premium} (i.e., premium set with expenses considered) is
+set such that \(\expv{L_0^g}=0\), i.e.,
+\[
+\text{APV of ``future'' benefits \faIcon{money-bill-wave} outgo}
++ \text{APV of ``future'' expenses \faIcon{file-invoice-dollar}}
+=\text{APV of ``future'' premium incomes \faIcon{dollar-sign}}.
+\]
+\end{itemize}
+\end{enumerate}
+
+\subsection{Actuarial Notations}
+\begin{enumerate}
+\item \label{it:net-annual-prem-notations}
+Some actuarial notations are designed for amounts of \emph{net} annual premiums
+(determined via equivalence principle) for \emph{fully discrete} ``standard''
+policies (i.e., survival/death benefit is of amount 1):
+ \begin{enumerate}
+\item whole life insurance \faIcon{infinity}\textbar\faIcon{shield-alt}:
+\defn{\(\Px{x}\)};
+\item term life insurance \faIcon{clock}\textbar\faIcon{shield-alt}: \defn{\(\Px{\:\termxn}\)};
+\item endowment insurance \faIcon{clock}\textbar\faIcon{shield-alt}\textbar\faIcon{donate}: \defn{\(\Px{\endowxn}\)};
+\item pure endowment \faIcon{donate}: \defn{\(\Px{\pureendowxn}\)}.
+\end{enumerate}
+
+\item \label{it:net-prem-fmlas}
+By equivalence principle and some results in \cref{sect:life-annuity}, we can
+easily get:
+\begin{enumerate}
+\item \(\Px{x}=\Ax{x}/\ax**{x}=(d\Ax{x})/(1-\Ax{x})=1/\ax**{x}-d\);
+\item \(\Px{\:\termxn}=\Ax{\termxn}/\ax**{\endowxn}\);
+\item \(\Px{\endowxn}=\Ax{\endowxn}/\ax**{\endowxn}=(d\Ax{\endowxn})/(1-\Ax{\endowxn})=1/\ax**{\endowxn}-d\);
+\item \(\Px{\pureendowxn}=\Ax{\pureendowxn}/\ax**{\endowxn}\).
+\end{enumerate}
+
+\begin{remark}
+\item By changing \(\Ax{}\to\Ax*{}\), \(\ax**{}\to\ax*{}\) and \(d\to\delta\) in the
+formulas above, we can obtain the formulas for the respective \emph{fully
+continuous} policies. (But there are not specific actuarial notations designed
+for fully continuous policies.)
+\item To get the net premiums when the survival/death benefit is of amount
+\(S\), multiply the corresponding notation by \(S\) (since the APV of ``future''
+benefits \faIcon{money-bill-wave} outgo would just be \(S\) times greater).
+\end{remark}
+
+\item Apart from the annual net premium case, there are also actuarial
+notations for the \(1/m\)thly net premium case (while the insurance benefits
+are still in the annual case). To get the \emph{total amount} of premiums in each
+year, we just need to add the superscript ``\((m)\)'' on each notation
+introduced in \labelcref{it:net-annual-prem-notations}.
+
+\begin{warning}
+This means the amount of \emph{each} premium payment (at the beginning of
+each \(1/m\)th of a year) is given by the corresponding notation \emph{divided
+by} \(m\).
+\end{warning}
+
+For obtaining formulas analogous to \labelcref{it:net-prem-fmlas} in this case,
+we change \(\ax**{}\to\ax**{}[(m)]\) and \(d\to d^{(m)}\).
+\end{enumerate}
+\subsection{Probability and Variance Calculations for \(L_0\)}
+\begin{enumerate}
+\item To calculate probabilities and variances for \(L_0\), generally the
+first step is to write down an expression for \(L_0\).
+
+\item \label{it:wl-gross-loss-expr}
+For example, for a whole life insurance with sum insured
+\(S\), termination expense \(E\), initial and renewal expenses \(e\) (each),
+and annual (level) gross premiums \(G\) (each), the gross loss at issue is
+\[
+L_0^g=(S+E)v^{K_x+1}-(G-e)\ax**{\angl{K_x+1}},
+\]
+or
+\[
+L_0^g=(S+E)Z-(G-e)Y,
+\]
+where \(Z\) and \(Y\) are the p.v.r.v's for annual whole life insurance and
+annual whole life annuity-due (with benefits being 1 [each]) respectively.
+
+\item With the expression of \(L_0^g\), we can easily derive a formula for
+\(\vari{L_0^g}\): 
+\begin{proposition}
+\label{prp:wl-gross-loss-var-fmla}
+For the whole life insurance with setting described in
+\labelcref{it:wl-gross-loss-expr}, we have
+\[
+\vari{L_0^g}=\qty(S+E+\frac{G-e}{d})(\Ax[][2]{x}-\Ax{x}^2)
+\]
+\end{proposition}
+\begin{pf}
+Since \(Y=(1-Z)/d\), we can actually express \(L_0^g\) as:
+\[
+L_0^g=\qty(S+E+\frac{G-e}{d})Z-\frac{G-e}{d}.
+\]
+The result then follows.
+\end{pf}
+
+\item By removing all expenses in the setting in \labelcref{it:wl-gross-loss-expr}
+and changing the annual gross premiums \(G\) (each) to the annual net premiums
+\(SP_x\) (each) (determined via equivalence principle), we can derive the
+following expression for net loss at issue:
+\[
+L_0^n=SZ-S\Px{x}Y.
+\]
+We can then derive a formula for \(\vari{L_0^n}\):
+\begin{proposition}
+\label{prp:wl-net-loss-var-fmla}
+For the whole insurance with the setting here, we have
+\[
+\vari{L_0^n}=\qty(\frac{S}{1-\Ax{x}})^{2}(\Ax[][2]{x}-\Ax{x}^2).
+\]
+\end{proposition}
+\begin{pf}
+Note that
+\[
+L_0^n=\qty(S+\frac{S\Px{x}}{d})Z-\frac{S\Px{x}}{d}
+=S\qty(1+\frac{\Ax{x}}{1-\Ax{x}})Z-\frac{S\Px{x}}{d}
+=\frac{S}{1-\Ax{x}}Z-\frac{S\Px{x}}{d}.
+\]
+\end{pf}
+\item Using similar arguments, one can adapt
+\cref{prp:wl-gross-loss-var-fmla,prp:wl-net-loss-var-fmla} for:
+\begin{itemize}
+\item endowment insurance (change \(\Ax{x}\to\Ax{\endowxn}\) and \(\Ax[][2]{x}\to\Ax[][2]{\endowxn}\));
+\item fully continuous case (change \(\Ax{}\to\Ax*{}\) and \(d\to\delta\)).
+\end{itemize}
+\begin{note}
+This is possible mainly because under each of these cases, we have a similar
+relationship between the p.v.r.v.'s \(Z\) and \(Y\), and a similar expression
+for \(\Px{x}\). So, the proofs can go through with only a little change.
+\end{note}
+\item \label{it:first-principle-cal-var}
+An alternative method for calculating variance is the so-called \emph{first
+principle} approach, which is sometimes useful for \emph{short-term} fully
+discrete policies. The steps are as follows:
+\begin{enumerate}
+\item Identify all possible values of \(L_0\) with associated probabilities.
+\begin{note}
+A typical approach to find the associated probabilities is to ``convert'' each
+event \(\qty{L_0=j}\) to another event \(\qty{K_x=k}\) which has \emph{the same
+probability}. (Finding the probability for the latter event is simple.)
+\end{note}
+\item Calculate the first and second moments of \(L_0\):
+\begin{itemize}
+\item \(\displaystyle \expv{L_0}=\sum_{}^{}\text{value}\times\text{probability}\) (which is 0 if equivalence principle is used);
+\item \(\displaystyle \expv{L_0^2}=\sum_{}^{}\text{value}^2\times\text{probability}\).
+\end{itemize}
+\item Calculate the variance
+\[
+\vari{L_0}=\expv{L_0^2}-\expv{L_0}^2.
+\]
+\end{enumerate}
+\item \label{it:cal-loss-prob}
+Now for calculating probabilities for \(L_0\), we often also use the
+``conversion'' approach suggested above: ``converting'' the event of interest
+in terms of \(L_0\) to another event in terms of \(K_x\) or \(T_x\) which has
+the same probability.
+
+\item \label{it:approx-loss-prob}
+Another approach is to \emph{approximate} the probabilities for \(L_0\)
+through \emph{normal approximation}. If \(L_0\) is loss at issue for a ``large
+block'' of independent policies (i.e., a sum of independent losses at issue for
+``many'' policies), then \(L_0\overset{\text{approx}}{\sim} N(\expv{L_0},\vari{L_0})\).
+
+\item Then for the normal approximation, we treat \(L_0\) as such a normally
+distributed random variable, and finding the approximated probabilities by
+standardization, i.e., ``converting'' to the event of interest involving
+\(L_0\) to another event involving \(\displaystyle \frac{L_0-\expv{L_0}}{\sqrt{\vari{L_0}}}\sim
+N(0,1)\) which has the same probability.
+\end{enumerate}
+

@@ -95,8 +95,10 @@ node[purple, midway, below=1cm, draw] (vb) {variable benefits (different kinds)}
 \item Consider a \emph{continuous} whole life insurance with sum insured 1
 and life insured (\(x\)). The sum insured 1 is paid \emph{exactly at} time of
 death of (\(x\)), i.e., time \(T_x\) (when the life is aged \(x\), it is time
-0).  \item The present value random variable (p.v.r.v.) (present value of the
-benefit payment) is
+0).
+
+\item The \defn{present value random variable} (p.v.r.v.) (i.e., present value
+of benefits \faIcon{money-bill-wave} outgo) of the policy is
 \[
 Z=v^{T_x}=e^{-\delta T_x}.
 \]
@@ -209,12 +211,12 @@ notation&\(Z\)&\defn{\(\Ax{x}\)}&\defn{\(\Ax[][2]{x}\)}&\(\vari{Z}\)\\
 \bottomrule
 \end{tabular}
 
-\begin{rmk}
+\begin{remark}
 \item The actuarial notation \(\Ax{x}\) has no ``bar'' as the insurance is no longer
 continuous.
 \item We can change ``\(v\)'' to ``\(e^{-\delta}\)'' above, where \(\delta\) is the
 equivalent annual force of interest.
-\end{rmk}
+\end{remark}
 
 \begin{intuition}
 For the APV formula, it sums up the expected present value of death benefit \faIcon{money-bill-wave}:
@@ -300,7 +302,7 @@ notation&\(Z\)&\defn{\(\Ex[n]{x}\)} or \defn{\(\Ax{\pureendowxn}\)}
 \bottomrule
 \end{tabular}
 
-\begin{rmk}
+\begin{remark}
 \item The ``1'' on top of \(\angl{n}\) suggests that the \(n\)-year term is the
 \emph{1st} thing to be ``gone'' (earllier than \((x)\) being ``gone''/dead) for
 the benefit to be triggered\footnote{In other words, the life insured must be alive at
@@ -310,7 +312,7 @@ will be discussed in STAT3909.
 endowment --- the benefit is always paid (potentially) at time \(n\) for an
 \(n\)-year pure endowment. Conventionally we do \emph{not} write
 ``\(\Ax*{x:\itop{\angl{n}}}\)''.
-\end{rmk}
+\end{remark}
 \item The following provides some ``shortcuts'' for the formulas in
 \labelcref{it:pure-endow-fmlas}:
 \begin{proposition}
@@ -848,12 +850,12 @@ node[midway, above=0.7cm, font=\small] {\faIcon{money-bill-wave}: \(1\)};
 \end{axis}
 \end{tikzpicture}
 \end{enumerate}
-\begin{rmk}
+\begin{remark}
 \item These are understood to be only applicable for the period covered by the
 insurance. There is not death benefit for the period outside insurance
 coverage.
 \item The continuous cases can be seen as limits of the \(1/m\)thly cases as \(m\to\infty\).
-\end{rmk}
+\end{remark}
 \item \label{it:arith-vb-insurance-notations}
 The designed actuarial notations are as follows:
 
@@ -870,7 +872,7 @@ decreasing annually&\defn{\((D\Ax*{})\)}&\defn{\((D\Ax{}[(m)])\)}&\defn{\((DA)\)
 \bottomrule
 \end{tabular}
 
-\begin{rmk}
+\begin{remark}
 \item These are only ``cores'' for the notations, and subscripts/superscripts can be
 added on them to represent a variety of insurances (but of course the terms
 must be finite for decreasing insurances).
@@ -882,7 +884,7 @@ and the death benefit payment time (which may exist) should be handled.
 benefit varying and insurance ``frequencies'' are the same (located at the
 ``main diagonal'' for each of increasing \& decreasing case) --- the APV
 formulas for them are ``nicer'' also.
-\end{rmk}
+\end{remark}
 \item
 \label{it:as-term-life-fmlas}
 Example: The following gives the APV formulas for arithmetically
