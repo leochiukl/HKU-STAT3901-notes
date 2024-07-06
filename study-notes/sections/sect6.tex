@@ -1,2 +1,641 @@
 \section{Policy Values}
 \label{sect:policy-values}
+\begin{enumerate}
+\item After a life insurance policy \faIcon{file-alt} is sold, the insurance
+company \faIcon{building} is not going to completely ignore it. Indeed, to
+ensure that \faIcon{building} ``puts aside'' (or \emph{reserves}) sufficient
+money \faIcon{coins} for paying the potential future benefits and expenses,
+\faIcon{building} should monitor \faIcon{stethoscope} the sold policies
+\faIcon{file-alt} periodically. (In practice, this is often required by
+regulators \faIcon{balance-scale} to make sure \faIcon{building} has a good
+``financial health'' \faIcon{notes-medical}.)
+
+\item To monitor the ``status''  of the policies sold, the insurer
+\faIcon{building} (more specifically, \emph{actuarial valuation team}) would
+periodically carry out \emph{valuation} on those policies (based on the most
+``updated'' information \faIcon{info}). A fundamental quantity of interest is
+how much money \faIcon{coins} the insurer \faIcon{building} needs to reserve
+for a given policy, at a specified time point.
+
+\item Here we shall discuss a relatively ``simple'' framework for determining
+such reserve, which revolves around the concept of \emph{policy value}.
+
+\begin{note}
+Again, the process is much more sophisticated in the actual practice, and
+readers may consider having an actuarial internship in valuation team to learn
+more about it \faIcon[regular]{smile}.
+\end{note}
+\end{enumerate}
+
+\subsection{Present Value of Future Loss at Time \(t\)}
+\begin{enumerate}
+\item To define policy value, we need to first introduce \defn{present value of
+future loss at time \(t\)}, which has a definition analogous to the present
+value of future loss at issue (indeed this is a generalization to it):
+\begin{align*}
+&\text{``PV'' of ``future'' benefits \faIcon{money-bill-wave} outgo @ time \(t\)}  \\
+&\quad+ \text{``PV'' of ``future'' expenses \faIcon{file-invoice-dollar} (if considered) @ time \(t\)}\\
+&\quad- \text{``PV'' of ``future'' premium incomes \faIcon{dollar-sign} @ time \(t\)},
+\end{align*}
+and it is only defined when the policy is \emph{in force} (i.e., is not
+terminated) at time \(t\).
+
+\begin{remark}
+\item Here the ``in force'' condition is added since it does not make much
+sense to talk about ``future'' benefits/expenses/premium incomes when they
+\emph{do not even exist} (``no future'' for a terminated policy)!
+\item We shall assume here that no policy lapse is possible. So the ``in
+force'' condition is equivalent to the life insured \faIcon{user} is still
+alive at time \(t\) (\(T_x>t\)).
+
+\item ``PV'' @ time \(t\) means present value with time \(t\) (instead of time
+0) treated as ``present''. More specifically, we convert ``\(T_x\)'' in the
+expression for loss at issue (in \labelcref{it:pv-future-loss-at-issue}) to
+``\(T_x-t\)'' (the ``future lifetime'' is taken with respect to time \(t\)) to
+get the expression here.
+
+\item Since the expression here is only defined when \(T_x>t\), it is natural
+to identify its distribution as the \emph{conditional distribution} of the
+expression involving \(T_x-t\) \emph{given} \(T_x>t\) (which is assumed to be
+the same as the \emph{unconditional} distribution of \(T_{x+t}\)). So, we can
+replace ``\(T_x-t\)'' in the expression by \(T_{x+t}\) (and drop the extra
+condition) without affecting the distribution.
+
+\item As we are almost always only interested in studying the
+\emph{distribution} of the expression, writing the expression in terms of
+either ``\(T_x-t\)'' (with the condition) or ``\(T_{x+t}\)'' (with the
+condition dropped) is fine. \ystar Here, we shall write the expression in terms of
+\(T_{x+t}\) (with the condition dropped) for ``simplicity''. (Note that this
+means the curtate lifetime random variables (``\(K\)'') would also have
+subscript ``\(x+t\)''.)
+\end{remark}
+
+\item Likewise, when the expenses \faIcon{file-invoice-dollar} are considered, the
+present value of future loss at time \(t\) is known as \defn{gross loss at time
+\(t\)}.  Otherwise it is known as \defn{net loss at time \(t\)}.
+
+\item The gross (net) loss at time \(t\) is denoted by \defn{\(L_t^g\)}
+(\defn{\(L_t^n\)} resp.).
+
+\begin{remark}
+\item Again, if there is no risk of ambiguity or one would like to refer to
+either of gross and net losses at time \(t\) simultaneously, one may drop the
+superscript and just write \defn{\(L_t\)}.
+
+\item The ``\(t\)'' indicates the present value is at time \(t\).
+\end{remark}
+
+\item The \defn{net premium policy value at time \(t\)} and \defn{gross premium
+policy value at time \(t\)}, denoted by \defn{\(\Vx[t]{}[n]\)}
+and \defn{\(\Vx[t]{}[g]\)} respectively, are given by (when the policy is in
+force at time \(t\))
+\[
+\Vx[t]{}[n]=\expv{L_t^n}\quad\text{and}\quad\Vx[t]{}[g]=\expv{L_t^g},
+\]
+that is,
+\begin{align*}
+\Vx[t]{}[n]
+&=\text{``APV'' of ``future'' benefits \faIcon{money-bill-wave} outgo @ time \(t\)}\\
+&\quad-\text{``APV'' of ``future'' premium incomes \faIcon{dollar-sign} @ time \(t\)},
+\end{align*}
+and
+\begin{align*}
+\Vx[t]{}[g]
+&=\text{``APV'' of ``future'' benefits \faIcon{money-bill-wave} outgo @ time \(t\)} \\
+&\quad+ \text{``APV'' of ``future'' expenses \faIcon{file-invoice-dollar} @ time \(t\)} \\
+&\quad-\text{``APV'' of ``future'' premium incomes \faIcon{dollar-sign} @ time \(t\)}.
+\end{align*}
+
+\begin{intuition}
+The definition is ``similar'' to the definition for ``ordinary'' value. Value
+of a ``nonrandom'' project at time \(t\) may be defined as the present
+value\footnote{The interest rate used is ``risk-free rate''.} of present/future
+(nonrandom) net cash (in)flows at time \(t\) . This is also the amount of
+\faIcon{coins} received when the project is ``fairly sold'' at time \(t\)
+(intuitively, this is its ``worth'' at time \(t\)).
+
+On the other hand, the policy value at time \(t\) is the \emph{actuarial}
+present value of ``future'' cash \emph{outflows} (from the insurer's
+\faIcon{building} perspective). It may be understood intuitively (and
+informally) as ``amount of \faIcon{coins} \emph{paid} (by \faIcon{building})
+when the policy \faIcon{file-alt} is `fairly transferred' to another party
+\faIcon[regular]{handshake}''. As a ``simple'' framework for reserving, this
+amount \faIcon{coins} may be treated as the amount of reserve held at time
+\(t\).
+\end{intuition}
+
+\begin{remark}
+\item If there is no risk of ambiguity or one would like to refer to either of gross
+and net premium policy values at time \(t\) simultaneously, one may drop the
+superscript and just write \defn{\(\Vx[t]{}\)}.
+
+\item For an \(n\)-year term policy, technically  \(\Vx[n]{}\) is
+\emph{undefined} by definition (as the policy terminates precisely at time
+\(n\)). But still it is common to use the notation \(\Vx[n]{}\) to refer to the
+\emph{limit} \(\lim_{t\to n^{-}}\Vx[t]{}\) (the value approached as \(t<n\)
+gets closer and closer to \(n\)).
+\end{remark}
+
+\item \label{it:pv-boundary-values}
+Boundary values of \(\Vx[t]{}\):
+\begin{itemize}
+\item \(\Vx[0]{}[n]=0\) if net premium is determined via equivalence principle;
+\item \(\Vx[0]{}[g]=0\) if (i) gross premium is determined via equivalence
+principle, and (ii) policy value basis and premium basis are the same;
+\begin{note}
+\defn{Basis}
+means a set of assumptions. This means the sets of assumptions used for
+calculating policy value and premium are the same.
+\end{note}
+\item \[
+\Vx[n]{}
+=\begin{cases}
+0&\text{for \(n\)-year term life insurance}; \\
+S&\text{for \(n\)-year endowment insurance},
+\end{cases}
+\]
+where \(S\) is the sum insured (amount of death/survival benefit).
+\end{itemize}
+\begin{note}
+The boundary values are useful for \emph{recursions} (see
+\cref{subsect:pv-annual-recursion}).
+\end{note}
+\end{enumerate}
+\subsection{Calculations of Policy Values and Variances of \(L_t\)}
+\begin{enumerate}
+\item We shall again consider the whole life insurance in
+\labelcref{it:wl-gross-loss-expr}. The gross loss at time \(t\) is
+\[
+L_t^g=(S+E)v^{K_{x+t}+1}-(G-e)\ax**{\angl{K_{x+t}+1}}.
+\]
+or
+\[
+L_t^g=(S+E)Z-(G-e)Y,
+\]
+where \(Z\) and \(Y\) are the p.v.r.v's for annual whole life insurance and
+annual whole life annuity-due (with benefits being 1 [each]) issued to
+\((x+t)\) respectively.
+
+\item \label{it:wl-gross-pv-fmla}
+With the expression of \(L_t^g\), we readily get the following formula
+for \(\Vx[t]{}[g]\):
+\[
+\Vx[t]{}[g]=(S+E)\Ax{x+t}-(G-e)\ax**{x+t}.
+\]
+
+\item Likewise we can get the expression for net loss at time \(t\) by removing
+all expenses (the annual net premiums are \(S\Px{x}\) each, determined by
+equivalence principle):
+\[
+L_t^n=SZ-SP_xY=SZ-\frac{S\Ax{x}}{\ax**{x}}Y.
+\]
+
+\item
+We can then obtain the following formulas for \(\Vx[t]{}[n]\):
+\begin{proposition}
+\label{prp:wl-net-pv-fmlas}
+For the whole life insurance with setting described in
+\labelcref{it:wl-gross-loss-expr}, we have
+\[
+\Vx[t]{}[n]=S\qty(1-\frac{\ax**{x+t}}{\ax**{x}})
+=S\qty(\frac{\Ax{x+t}-\Ax{x}}{1-\Ax{x}}).
+\]
+\end{proposition}
+\begin{pf}
+Firstly, we have
+\[
+\Vx[t]{}[n]=S\Ax{x+t}-S\Px{x}\ax**{x+t}
+=S\qty[1-d\ax**{x+t}-\qty(\frac{1}{\ax**{x}}-d)\ax**{x+t}]
+=S\qty(1-\frac{\ax**{x+t}}{\ax**{x}}).
+\]
+Next, we have
+\[
+\Vx[t]{}[n]
+=S\Ax{x+t}-S\Px{x}\ax**{x+t}
+=S\qty[\frac{\Ax{x+t}(1-\Ax{x})}{1-\Ax{x}}-\frac{d\Ax{x}}{1-\Ax{x}}\cdot\frac{1-\Ax{x+t}}{d}]
+=S\qty(\frac{\Ax{x+t}-\Ax{x}}{1-\Ax{x}}).
+\]
+\end{pf}
+
+\item \label{it:loss-at-t-var-fmlas}
+For the variance formulas, using similar arguments as the proofs for
+\cref{prp:wl-gross-loss-var-fmla,prp:wl-net-loss-var-fmla}, we get:
+\begin{itemize}
+\item \(\displaystyle\vari{L_t^g}=\qty(S+E+\frac{G-e}{d})^{2}(\Ax[][2]{{\color{purple}x+t}}-\Ax{{\color{purple}x+t}}^2)\);
+
+\item \(\displaystyle \vari{L_t^n}=\qty(\frac{S}{1-\Ax{x}})^{2}(\Ax[][2]{{\color{purple}x+t}}-\Ax{{\color{purple}x+t}}^2)\).
+\end{itemize}
+
+
+\item Using similar arguments, we can again adapt \cref{prp:wl-net-pv-fmlas} and
+formulas in \labelcref{it:loss-at-t-var-fmlas} for
+\begin{itemize}
+\item endowment insurance: change 
+\begin{itemize}
+\item \(\Ax{x}\to\Ax{\endowxn}\) and \(\ax**{x}\to\ax**{\endowxn}\);
+
+\item \(\Ax{x+t}\to\Ax{x+t:\angl{n-t}}\) and \(\ax**{x+t}\to\ax**{x+t:\angl{n-t}}\);
+
+\item \(\Ax[][2]{x+t}\to \Ax[][2]{x+t:\angl{n-t}}\);
+\end{itemize}
+
+\item \(1/m\)thly case (for both insurance and premiums): change
+\(\ax**{}\to\ax**{}[(m)]\), \(\Ax{}\to\Ax{}[(m)]\), and \(d\to d^{(m)}\);
+\item fully continuous case: change
+\(\ax**{}\to\ax*{}\), \(\Ax{}\to\Ax*{}\), and \(d\to \delta\).
+\end{itemize}
+\end{enumerate}
+\subsection{Annual Recursion}
+\label{subsect:pv-annual-recursion}
+\begin{enumerate}
+\item Again there are two main reasons for studying recursions of policy values here:
+\begin{enumerate}
+\item It provides insight on how the policy values change over time.
+\item It allows quick computations based on limited amount of information.
+\end{enumerate}
+
+\item To intuitively understand recursions for policy values, it would be
+helpful to regard policy value at time \(t\) as the amount of reserve
+\faIcon{coins} held at time \(t\) (i.e., work in the ``simple'' framework for
+reserving).
+
+\item Here we shall focus on \emph{annual} recursion. For other kinds of
+recursions and further topics about it, see STAT3909.
+
+\item \label{it:pv-annual-recursion}
+\ystar An ``intuition-based'' annual recursion formula for policy values
+(insurance) is as follows (where \(t\in\N_0\)):
+\begin{align*}
+&(\Vx[t]{}+{\color{brown}\text{premium \faIcon{dollar-sign}}}
+-{\color{violet}\text{initial/renewal expense \faIcon{hourglass-start}/\faIcon{redo}}})
+({\color{blue}1+i})\\
+&\quad=\Vx[t+1]{}\,({\color{ForestGreen}\text{survival prob.}})+({\color{orange}\text{death benefit \faIcon{money-bill-wave}}}
++\text{{\color{violet}termination expense \faIcon{hourglass-end}}})({\color{red}\text{death prob.}}).
+\end{align*}
+\begin{center}
+\begin{tikzpicture}
+\draw[] (0,0) rectangle (2,1);
+\node[] () at (1, 1.4) {\(\Vx[t]{}\)};
+\node[] () at (0.3,0.7) {\faIcon{coins}};
+\node[] () at (0.7,0.7) {\faIcon{coins}};
+\node[] () at (1.1,0.7) {\faIcon{coins}};
+\node[] () at (1.5,0.7) {\faIcon{coins}};
+\node[brown] () at (0.3,0.3) {\faIcon{dollar-sign}};
+\node[brown] () at (0.7,0.3) {\faIcon{dollar-sign}};
+\node[draw=red, cross out] () at (1.1,0.3) {\faIcon{coins}};
+\draw[-Latex, violet] (1.1,0.2) to[bend right] (1.5,-0.5);
+\node[violet, font=\small] () at (1.5,-0.7) {expense \faIcon{hourglass-start}/\faIcon{redo}};
+\draw[-Latex] (2,0.5) -- (4,1.3)
+node[midway, above=0.2cm, ForestGreen, font=\small] {survive};
+\draw[-Latex] (2,0.5) -- (4,-0.3)
+node[midway, below=0.2cm, red, font=\small] {die};
+\draw[] (4,0.7) rectangle (6,1.7);
+\draw[] (4,0.3) rectangle (6,-0.7);
+\node[] () at (5, 2.2) {\(\Vx[t+1]{}\)};
+\draw[red] (4.2,0.1) -- (5.8,-0.5);
+\draw[red] (4.2,-0.5) -- (5.8,0.1);
+\node[] () at (4.3,1.4) {\faIcon{coins}};
+\node[] () at (4.7,1.4) {\faIcon{coins}};
+\node[] () at (5.1,1.4) {\faIcon{coins}};
+\node[] () at (5.5,1.4) {\faIcon{coins}};
+\node[brown] () at (4.3,1) {\faIcon{coins}};
+\node[brown] () at (4.7,1) {\faIcon{coins}};
+\node[blue] () at (5.2,1) {\faIcon{money-bill}};
+\draw[-Latex, red] (5,-0.4) to[bend right] (5,-1.2);
+\node[orange] () at (4.3,-1.5) {\faIcon{coins}};
+\node[orange] () at (4.7,-1.5) {\faIcon{coins}};
+\node[orange] () at (5.1,-1.5) {\faIcon{coins}};
+\node[orange] () at (5.5,-1.5) {\faIcon{coins}};
+\node[orange] () at (5.9,-1.5) {\faIcon{coins}};
+\node[violet] () at (4.3,-1.9) {\faIcon{coins}};
+\node[violet] () at (4.8,-1.9) {\faIcon{money-bill}};
+\draw[orange, ->, thick] (7.4,-1.5) -- (6.6,-1.5)
+node[pos=-1.8] {death benefit \faIcon{money-bill-wave}};
+\draw[violet, ->, thick] (7,-1.9) -- (6.2,-1.9)
+node[pos=-1.2] {expense \faIcon{hourglass-end}};
+\draw[-Latex, blue] (1,2.5) to[bend left] (4.5,2.5);
+\node[blue] () at (2.75,2.4) {accumulate};
+\end{tikzpicture}
+\end{center}
+
+\begin{pf}
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below=0.1cm] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[below=0.1cm] {1};
+\fill[] (4,0) circle [radius=0.05]
+node[below=0.1cm] {\(t=2\)};
+\fill[] (6,0) circle [radius=0.05]
+node[below=0.1cm] {3};
+\fill[] (8,0) circle [radius=0.05]
+node[below=0.1cm] {4};
+\draw[->, brown, line width=0.3mm, opacity=0.2] (-0.05,-1.2) -- (-0.05,-1.6)
+node[pos=2] {\faIcon{dollar-sign}};
+\draw[->, violet, line width=0.3mm, opacity=0.2] (0.05,-1.6) -- (0.05,-1.2)
+node[pos=2] {\faIcon{hourglass-start}};
+\draw[->, brown, line width=0.3mm, opacity=0.2] (1.95,-1.2) -- (1.95,-1.6)
+node[pos=2] {\faIcon{dollar-sign}};
+\draw[->, violet, line width=0.3mm, opacity=0.2] (2.05,-1.6) -- (2.05,-1.2)
+node[pos=2] {\faIcon{redo}};
+\draw[->, brown, line width=0.3mm] (3.95,-1.2) -- (3.95,-1.6)
+node[pos=2] {\faIcon{dollar-sign}};
+\draw[->, violet, line width=0.3mm] (4.05,-1.6) -- (4.05,-1.2)
+node[pos=2] {\faIcon{redo}};
+\draw[->, brown, line width=0.3mm] (5.95,-1.2) -- (5.95,-1.6)
+node[pos=2] {\faIcon{dollar-sign}};
+\draw[->, violet, line width=0.3mm] (6.05,-1.6) -- (6.05,-1.2)
+node[pos=2] {\faIcon{redo}};
+\draw[->, brown, line width=0.3mm] (7.95,-1.2) -- (7.95,-1.6)
+node[pos=2] {\faIcon{dollar-sign}};
+\draw[->, violet, line width=0.3mm] (8.05,-1.6) -- (8.05,-1.2)
+node[pos=2] {\faIcon{redo}};
+
+
+\draw[->, orange, line width=0.3mm, opacity=0.2] (-0.05,1.2) -- (-0.05,1.6)
+node[pos=2] {\faIcon{money-bill-wave}};
+\draw[->, violet, line width=0.3mm, opacity=0.2] (0.05,1.2) -- (0.05,1.6)
+node[pos=2] {\faIcon{hourglass-end}};
+\draw[->, orange, line width=0.3mm, opacity=0.2] (1.95,1.2) -- (1.95,1.6)
+node[pos=2] {\faIcon{money-bill-wave}};
+\draw[->, violet, line width=0.3mm, opacity=0.2] (2.05,1.2) -- (2.05,1.6)
+node[pos=2] {\faIcon{hourglass-end}};
+\draw[->, orange, line width=0.3mm, opacity=0.2] (3.95,1.2) -- (3.95,1.6)
+node[pos=2] {\faIcon{money-bill-wave}};
+\draw[->, violet, line width=0.3mm, opacity=0.2] (4.05,1.2) -- (4.05,1.6)
+node[pos=2] {\faIcon{hourglass-end}};
+\draw[->, orange, line width=0.3mm] (5.95,1.2) -- (5.95,1.6)
+node[pos=2] {\faIcon{money-bill-wave}};
+\draw[->, violet, line width=0.3mm] (6.05,1.2) -- (6.05,1.6)
+node[pos=2] {\faIcon{hourglass-end}};
+\draw[->, orange, line width=0.3mm] (7.95,1.2) -- (7.95,1.6)
+node[pos=2] {\faIcon{money-bill-wave}};
+\draw[->, violet, line width=0.3mm] (8.05,1.2) -- (8.05,1.6)
+node[pos=2] {\faIcon{hourglass-end}};
+
+\draw[dashed, ForestGreen] (8,2.5) -- (4.5,-2.5);
+\draw[dashed, ForestGreen] (8,2.5) -- (10,2.5);
+\draw[dashed, ForestGreen] (4.5,-2.5) -- (10,-2.5);
+\draw[-Latex, ForestGreen] (6.8,0.3) to[bend right] (4,1);
+\node[] () at (5,3) {(actuarial discounting)};
+\node[ForestGreen] () at (2,0.9) {\(v\,(\text{survival prob.})\Vx[t+1]{}\;\)};
+\draw[dashed, magenta] (3.7,-0.5) rectangle (4.3,-2.5)
+node[below] {\(\text{\faIcon{redo}}-\text{\faIcon{dollar-sign}}\)};
+\draw[dashed, teal] (5.7,1) rectangle (6.3,2.5);
+\draw[-Latex, teal] (5.7,0.8) to[bend left] (4,0.5);
+\node[teal, font=\small] () at (2,0.4) {\(v(\text{death prob.})(\text{\faIcon{money-bill-wave}}+\text{\faIcon{hourglass-end}})\)};
+\end{tikzpicture}
+
+\begin{note}
+We treat cash outflow as positive and cash inflow as negative, since we are
+dealing with \emph{losses} for policy values (so we consider net cash
+\emph{out}flows).
+\end{note}
+
+The figure above illustrates the key idea in the proof (``splitting'' the cash
+flows appropriately). Using this idea, we get:
+\[
+\Vx[t]{}={\color{magenta}\text{\faIcon{redo}}-\text{\faIcon{dollar-sign}}}
++{\color{teal}v(\text{death prob.})(\text{\faIcon{money-bill-wave}}+\text{\faIcon{hourglass-end}})}
++{\color{ForestGreen}v(\text{survival prob.})\,\Vx[t+1]{}}.
+\]
+When \(t=0\), ``\faIcon{redo}'' is replaced by ``\faIcon{hourglass-start}''. So
+the result follows, by rearranging the terms.
+\end{pf}
+\end{enumerate}
+\subsection{Retrospective Policy Value}
+\begin{note}
+This topic is not inside SOA exam FAM syllabus currently.
+\end{note}
+\begin{enumerate}
+\item Recall that the policy value at time \(t\) is defined as the actuarial
+present value of future loss at time \(t\). Sometimes this policy value is
+called \defn{prospective policy value} since the definition is inherently
+forward looking and prospective.
+
+\item Now we are interested in studying another approach for determining policy
+value: \emph{retrospective approach}. Loosely, it calculates the
+\emph{retrospective policy value}, which is the ``actuarial accumulated value''
+of past gain.
+
+\begin{note}
+The retrospective policy value is kind of a ``dual'' of the prospective policy value:
+\begin{itemize}
+\item actuarial accumulated value \faIcon{arrows-alt-h} actuarial present value;
+
+\item past \faIcon{arrows-alt-h} future;
+
+\item gain \faIcon{arrows-alt-h} loss.
+\end{itemize}
+\end{note}
+
+\item Before proceeding further, we should define what ``actuarial accumulated
+value'' is. Recall that actuarial present value can be obtained through
+actuarial discounting (``multiply \(\Ex[n]{x}\)'' to actuarially discount back
+\(n\) years).
+
+Following the same spirit, actuarial accumulated value is defined such that an
+analogous ``actuarial accumulation'' works. The \defn{actuarial accumulated
+value} (AAV) of a cash flow \faIcon{money-bill-wave} (for \faIcon{user} aged
+\(x\) at time 0), at time \(n\), is
+\[
+\text{APV of \faIcon{money-bill-wave} (at time 0)}\times\frac{1}{\Ex[n]{x}}.
+\]
+\begin{center}
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\((x)\)};
+\fill[] (3,0) circle [radius=0.05]
+node[above=0.3cm] {\faIcon{money-bill-wave}};
+\fill[] (5,0) circle [radius=0.05]
+node[below] {\(n\)};
+\draw[-Latex, ForestGreen] (2.8,0.8) to[bend right] (0,0.7);
+\node[ForestGreen] () at (1.4,1.5) {actuarial discounting};
+\draw[-Latex, ForestGreen] (0,-0.5) to[bend right] (5,-0.5);
+\node[ForestGreen] () at (2.5,-1.7) {actuarial accumulation \(\qty(\times\frac{1}{\Ex[n]{x}})\)};
+\end{tikzpicture}
+\end{center}
+
+\item It is natural to regard the pale cash flows below as ``past'' cash flows
+(serving as ``dual'' for ``future'' cash flows):
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below=0.1cm] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[below=0.1cm] {1};
+\fill[] (4,0) circle [radius=0.05]
+node[below=0.1cm] {\(t=2\)};
+\fill[] (6,0) circle [radius=0.05]
+node[below=0.1cm] {3};
+\fill[] (8,0) circle [radius=0.05]
+node[below=0.1cm] {4};
+\draw[->, brown, line width=0.3mm, opacity=0.2] (-0.05,-1.2) -- (-0.05,-1.6)
+node[pos=2] {\faIcon{dollar-sign}};
+\draw[->, violet, line width=0.3mm, opacity=0.2] (0.05,-1.6) -- (0.05,-1.2)
+node[pos=2] {\faIcon{hourglass-start}};
+\draw[->, brown, line width=0.3mm, opacity=0.2] (1.95,-1.2) -- (1.95,-1.6)
+node[pos=2] {\faIcon{dollar-sign}};
+\draw[->, violet, line width=0.3mm, opacity=0.2] (2.05,-1.6) -- (2.05,-1.2)
+node[pos=2] {\faIcon{redo}};
+\draw[->, brown, line width=0.3mm] (3.95,-1.2) -- (3.95,-1.6)
+node[pos=2] {\faIcon{dollar-sign}};
+\draw[->, violet, line width=0.3mm] (4.05,-1.6) -- (4.05,-1.2)
+node[pos=2] {\faIcon{redo}};
+\draw[->, brown, line width=0.3mm] (5.95,-1.2) -- (5.95,-1.6)
+node[pos=2] {\faIcon{dollar-sign}};
+\draw[->, violet, line width=0.3mm] (6.05,-1.6) -- (6.05,-1.2)
+node[pos=2] {\faIcon{redo}};
+\draw[->, brown, line width=0.3mm] (7.95,-1.2) -- (7.95,-1.6)
+node[pos=2] {\faIcon{dollar-sign}};
+\draw[->, violet, line width=0.3mm] (8.05,-1.6) -- (8.05,-1.2)
+node[pos=2] {\faIcon{redo}};
+
+
+\draw[->, orange, line width=0.3mm, opacity=0.2] (-0.05,1.2) -- (-0.05,1.6)
+node[pos=2] {\faIcon{money-bill-wave}};
+\draw[->, violet, line width=0.3mm, opacity=0.2] (0.05,1.2) -- (0.05,1.6)
+node[pos=2] {\faIcon{hourglass-end}};
+\draw[->, orange, line width=0.3mm, opacity=0.2] (1.95,1.2) -- (1.95,1.6)
+node[pos=2] {\faIcon{money-bill-wave}};
+\draw[->, violet, line width=0.3mm, opacity=0.2] (2.05,1.2) -- (2.05,1.6)
+node[pos=2] {\faIcon{hourglass-end}};
+\draw[->, orange, line width=0.3mm, opacity=0.2] (3.95,1.2) -- (3.95,1.6)
+node[pos=2] {\faIcon{money-bill-wave}};
+\draw[->, violet, line width=0.3mm, opacity=0.2] (4.05,1.2) -- (4.05,1.6)
+node[pos=2] {\faIcon{hourglass-end}};
+\draw[->, orange, line width=0.3mm] (5.95,1.2) -- (5.95,1.6)
+node[pos=2] {\faIcon{money-bill-wave}};
+\draw[->, violet, line width=0.3mm] (6.05,1.2) -- (6.05,1.6)
+node[pos=2] {\faIcon{hourglass-end}};
+\draw[->, orange, line width=0.3mm] (7.95,1.2) -- (7.95,1.6)
+node[pos=2] {\faIcon{money-bill-wave}};
+\draw[->, violet, line width=0.3mm] (8.05,1.2) -- (8.05,1.6)
+node[pos=2] {\faIcon{hourglass-end}};
+
+\draw[dashed, ForestGreen] (-0.5,2.5) -- (-0.5,-2.5);
+\draw[dashed, ForestGreen] (-0.5,-2.5) -- (2,-2.5);
+\draw[dashed, ForestGreen] (-0.5,2.5) -- (5,2.5);
+\draw[dashed, ForestGreen] (5,2.5) -- (2,-2.5);
+\draw[-Latex, ForestGreen] (2,-3) -- (1,-0.5)
+node[pos=-0.2]{``past'' cash flows};
+\end{tikzpicture}
+
+For ``past'' \emph{gain}, we should treat cash inflow as positive and cash
+outflow as negative. It is negative of ``past'' loss.
+
+\item Fix any time \(t\in\N_0\). Let \(L_{0,t}\) be the present value of the
+``past'' loss (at time 0). Then the \defn{retrospective policy value} at time
+\(t\), denoted by
+\(\Vx[t]{}[R]\), is given by
+\[
+\Vx[t]{}[R]=\frac{-\expv{L_{0,t}}}{\Ex[t]{x}}
+\]
+(AAV of the ``past'' gain).
+
+\item Naturally we would like to know when the prospective and retrospective
+policy values at the same time point would coincide. (We are more interested in
+studying retrospective policy values in such case.) The following result
+suggests sufficient conditions for that:
+\begin{proposition}
+\label{prp:pro-retro-pv-equal}
+Let \(\Vx[t]{}[P]\) and \(\Vx[t]{}[R]\) be the prospective and retrospective
+policy values at time \(t\) respectively. Then, we have
+\(\Vx[t]{}[P]=\Vx[t]{}[R]\) if
+\begin{enumerate}
+\item the premiums are determined by equivalence principle;
+
+\item premium, prospective policy value, and retrospective policy value bases are the same.
+\end{enumerate}
+\end{proposition}
+\begin{pf}
+Assume the two conditions hold. Firstly, by equivalence principle we have
+\(\Vx[0]{}[P]=0\). Now, as the bases are the same, we have
+\[
+\underbrace{\Vx[0]{}[P]}_{0}={\color{blue}\expv{L_{0,t}}}
++{\color{ForestGreen}\Ex[t]{x}}\,{\color{magenta}\Vx[t]{}[P]}
+\]
+by ``splitting'' the cash flows into ``past'' and ``future'' portions, and
+``actuarial discounting''.
+
+\begin{center}
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below=0.1cm] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[below=0.1cm] {1};
+\fill[] (4,0) circle [radius=0.05]
+node[below=0.1cm] {\(t=2\)};
+\fill[] (6,0) circle [radius=0.05]
+node[below=0.1cm] {3};
+\fill[] (8,0) circle [radius=0.05]
+node[below=0.1cm] {4};
+\draw[->, brown, line width=0.3mm, opacity=0.2] (-0.05,-1.2) -- (-0.05,-1.6)
+node[pos=2] {\faIcon{dollar-sign}};
+\draw[->, violet, line width=0.3mm, opacity=0.2] (0.05,-1.6) -- (0.05,-1.2)
+node[pos=2] {\faIcon{hourglass-start}};
+\draw[->, brown, line width=0.3mm, opacity=0.2] (1.95,-1.2) -- (1.95,-1.6)
+node[pos=2] {\faIcon{dollar-sign}};
+\draw[->, violet, line width=0.3mm, opacity=0.2] (2.05,-1.6) -- (2.05,-1.2)
+node[pos=2] {\faIcon{redo}};
+\draw[->, brown, line width=0.3mm] (3.95,-1.2) -- (3.95,-1.6)
+node[pos=2] {\faIcon{dollar-sign}};
+\draw[->, violet, line width=0.3mm] (4.05,-1.6) -- (4.05,-1.2)
+node[pos=2] {\faIcon{redo}};
+\draw[->, brown, line width=0.3mm] (5.95,-1.2) -- (5.95,-1.6)
+node[pos=2] {\faIcon{dollar-sign}};
+\draw[->, violet, line width=0.3mm] (6.05,-1.6) -- (6.05,-1.2)
+node[pos=2] {\faIcon{redo}};
+\draw[->, brown, line width=0.3mm] (7.95,-1.2) -- (7.95,-1.6)
+node[pos=2] {\faIcon{dollar-sign}};
+\draw[->, violet, line width=0.3mm] (8.05,-1.6) -- (8.05,-1.2)
+node[pos=2] {\faIcon{redo}};
+
+
+\draw[->, orange, line width=0.3mm, opacity=0.2] (-0.05,1.2) -- (-0.05,1.6)
+node[pos=2] {\faIcon{money-bill-wave}};
+\draw[->, violet, line width=0.3mm, opacity=0.2] (0.05,1.2) -- (0.05,1.6)
+node[pos=2] {\faIcon{hourglass-end}};
+\draw[->, orange, line width=0.3mm, opacity=0.2] (1.95,1.2) -- (1.95,1.6)
+node[pos=2] {\faIcon{money-bill-wave}};
+\draw[->, violet, line width=0.3mm, opacity=0.2] (2.05,1.2) -- (2.05,1.6)
+node[pos=2] {\faIcon{hourglass-end}};
+\draw[->, orange, line width=0.3mm, opacity=0.2] (3.95,1.2) -- (3.95,1.6)
+node[pos=2] {\faIcon{money-bill-wave}};
+\draw[->, violet, line width=0.3mm, opacity=0.2] (4.05,1.2) -- (4.05,1.6)
+node[pos=2] {\faIcon{hourglass-end}};
+\draw[->, orange, line width=0.3mm] (5.95,1.2) -- (5.95,1.6)
+node[pos=2] {\faIcon{money-bill-wave}};
+\draw[->, violet, line width=0.3mm] (6.05,1.2) -- (6.05,1.6)
+node[pos=2] {\faIcon{hourglass-end}};
+\draw[->, orange, line width=0.3mm] (7.95,1.2) -- (7.95,1.6)
+node[pos=2] {\faIcon{money-bill-wave}};
+\draw[->, violet, line width=0.3mm] (8.05,1.2) -- (8.05,1.6)
+node[pos=2] {\faIcon{hourglass-end}};
+
+\draw[dashed, blue] (-0.5,2.5) -- (-0.5,-2.5);
+\draw[dashed, blue] (-0.5,-2.5) -- (2,-2.5);
+\draw[dashed, blue] (-0.5,2.5) -- (5,2.5);
+\draw[dashed, blue] (5,2.5) -- (2,-2.5);
+\draw[-Latex, blue] (0,-3) -- (1,-0.5)
+node[pos=-0.2]{APV @ time 0: \(\expv{L_{0,t}}\)};
+
+\draw[dashed, magenta] (5.5,2.5) -- (2.5,-2.5);
+\draw[dashed, magenta] (5.5,2.5) -- (10,2.5);
+\draw[dashed, magenta] (2.5,-2.5) -- (10,-2.5);
+\draw[-Latex, magenta] (6,-3) -- (5,-0.5)
+node[pos=-0.2]{APV @ time \(t\): \(\Vx[t]{}[P]\)};
+\draw[-Latex, ForestGreen] (4.8,0.3) to[bend right] (0,0.3);
+\node[ForestGreen] () at (2.4,0.5) {\(\times\Ex[t]{x}\)};
+\end{tikzpicture}
+\end{center}
+The result then follows by rearranging the terms.
+\end{pf}
+\end{enumerate}
+

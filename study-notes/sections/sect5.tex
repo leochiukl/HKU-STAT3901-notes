@@ -12,6 +12,34 @@ premiums can actually be seen as a \emph{life annuity}
 \faIcon{hand-holding-usd} (but payments are given to the insurer
 \faIcon{building}, not to the policyholder \faIcon{user}).
 
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3};
+\fill[] (7,0) circle [radius=0.05]
+node[above] {\faIcon{skull}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4};
+\draw[->, red, line width=0.3mm] (0,-0.2) -- (0,0.2)
+node[pos=1.6] {\faIcon{dollar-sign}};
+\draw[->, red, line width=0.3mm] (2,-0.2) -- (2,0.2)
+node[pos=1.6] {\faIcon{dollar-sign}};
+\draw[->, red, line width=0.3mm] (4,-0.2) -- (4,0.2)
+node[pos=1.6] {\faIcon{dollar-sign}};
+\draw[->, red, line width=0.3mm] (6,-0.2) -- (6,0.2)
+node[pos=1.6] {\faIcon{dollar-sign}};
+\draw[pen colour=violet!30!white, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=20pt}] (0,0) -- (10,0)
+node[midway, above=1cm, violet!80!white] {insurance};
+\draw[->, ForestGreen, line width=0.3mm] (8,0.2) -- (8,-0.2)
+node[pos=1.8] {\faIcon{money-bill-wave}};
+\end{tikzpicture}
+
 \item Due to the importance of premiums \faIcon{dollar-sign} to the insurer's
 profitability \faIcon{piggy-bank}, charging suitable amounts of premiums
 \faIcon{dollar-sign} is crucial. If the amounts of premiums
@@ -45,7 +73,8 @@ premiums \faIcon{dollar-sign} and assessing the insurer's profitability
 \end{enumerate}
 \subsection{Present Value of Future Loss at Issue}
 \begin{enumerate}
-\item \defn{Present value of future loss at issue}, from the insurer's \faIcon{building}
+\item \label{it:pv-future-loss-at-issue}
+\defn{Present value of future loss at issue}, from the insurer's \faIcon{building}
 perspective, can be expressed as
 \begin{align*}
 &\text{PV of ``future'' benefits \faIcon{money-bill-wave} outgo} \\
@@ -73,28 +102,62 @@ policies.)
 \item When the expenses \faIcon{file-invoice-dollar} are considered, the
 present value of future loss at issue is known as \defn{gross loss at issue}.
 Otherwise it is known as \defn{net loss at issue}.
+
 \item The gross (net) loss at issue is denoted by \defn{\(L_0^g\)}
 (\defn{\(L_0^n\)} resp.).
 
 \begin{remark}
 \item If there is no risk of ambiguity or one would like to refer to either of gross
-and net losses at issue at the same time, one may drop the superscript and just
+and net losses at issue simultaneously, one may drop the superscript and just
 write \defn{\(L_0\)}.
 \item The ``0'' indicates the present value is at time 0.
 \end{remark}
 
 \item Three common types of expenses \faIcon{file-invoice-dollar}:
 \begin{enumerate}
-\item \defn{initial expenses}: expenses incurred initially (at time of policy
+\item \defn{initial expenses} \faIcon{hourglass-start}: expenses incurred initially (at time of policy
 issue, i.e., time 0);
-\item \defn{renewal expenses}: expenses incurred each time a premium
+\item \defn{renewal expenses} \faIcon{redo}: expenses incurred each time a premium
 \faIcon{dollar-sign} (or a life annuity benefit payment
 \faIcon{hand-holding-usd}) is paid (except the first one, if it is paid at time
 0);
-\item \defn{termination expenses} (or \defn{settlement expenses}): expenses
-incurred when a policy terminates \faIcon{hourglass-end} (e.g., death
-benefit/endowment survival benefit is paid).
+\item \defn{termination expenses} (or \defn{settlement expenses})
+\faIcon{hourglass-end}: expenses incurred when a policy terminates
+\faIcon{hourglass-end} (e.g., death benefit/endowment survival benefit is
+paid).
 \end{enumerate}
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3};
+\fill[] (7,0) circle [radius=0.05]
+node[above] {\faIcon{skull}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4};
+\draw[->, red, line width=0.3mm] (0,-0.2) -- (0,0.2)
+node[pos=1.6] {\faIcon{dollar-sign}}
+node[pos=2.6] {\faIcon{hourglass-start}};
+\draw[->, red, line width=0.3mm] (2,-0.2) -- (2,0.2)
+node[pos=1.6] {\faIcon{dollar-sign}}
+node[pos=2.6] {\faIcon{redo}};
+\draw[->, red, line width=0.3mm] (4,-0.2) -- (4,0.2)
+node[pos=1.6] {\faIcon{dollar-sign}}
+node[pos=2.6] {\faIcon{redo}};
+\draw[->, red, line width=0.3mm] (6,-0.2) -- (6,0.2)
+node[pos=1.6] {\faIcon{dollar-sign}}
+node[pos=2.6] {\faIcon{redo}};
+\draw[->, ForestGreen, line width=0.3mm] (7.95,0.2) -- (7.95,-0.2)
+node[pos=1.8] {\faIcon{money-bill-wave}};
+\draw[->, red, line width=0.3mm] (8.05,-0.2) -- (8.05,0.2)
+node[pos=1.6] {\faIcon{hourglass-end}};
+\end{tikzpicture}
 
 \item Two commonly seen terminologies (for life insurance):
 \begin{itemize}
@@ -102,8 +165,54 @@ benefit/endowment survival benefit is paid).
 discrete time points, where the timing follows the convention in
 \labelcref{it:prem-ben-conventions};
 
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3};
+\fill[] (7,0) circle [radius=0.05]
+node[above] {\faIcon{skull}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4};
+\draw[->, red, line width=0.3mm] (0,-0.2) -- (0,0.2)
+node[pos=1.6] {\faIcon{dollar-sign}};
+\draw[->, red, line width=0.3mm] (2,-0.2) -- (2,0.2)
+node[pos=1.6] {\faIcon{dollar-sign}};
+\draw[->, red, line width=0.3mm] (4,-0.2) -- (4,0.2)
+node[pos=1.6] {\faIcon{dollar-sign}};
+\draw[->, red, line width=0.3mm] (6,-0.2) -- (6,0.2)
+node[pos=1.6] {\faIcon{dollar-sign}};
+\draw[->, ForestGreen, line width=0.3mm] (8,0.2) -- (8,-0.2)
+node[pos=1.8] {\faIcon{money-bill-wave}};
+\end{tikzpicture}
+
 \item \defn{fully continuous}: death benefit is payable at the moment of death
-and premiums are payable continuously.
+and premiums are payable continuously (and so do the associated expenses).
+
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3};
+\fill[] (7,0) circle [radius=0.05]
+node[above] {\faIcon{skull}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4};
+\draw[line width=1mm, red] (0,0.7) -- (7,0.7)
+node[midway, above] {\faIcon{dollar-sign}};
+\draw[->, ForestGreen, line width=0.3mm] (7,0.2) -- (7,-0.2)
+node[pos=1.8] {\faIcon{money-bill-wave}};
+\end{tikzpicture}
 \end{itemize}
 
 \item For the \defn{equivalence principle},
@@ -123,6 +232,13 @@ set such that \(\expv{L_0^g}=0\), i.e.,
 =\text{APV of ``future'' premium incomes \faIcon{dollar-sign}}.
 \]
 \end{itemize}
+\begin{note}
+Sometimes for \emph{net premium}, its \emph{definition} also states that it is
+determined via equivalence principle, e.g., \textcite{dickson2019actuarial}. In
+such case, there is no need to specify whether equivalence principle is used or
+not for \emph{net premium}. (For gross premium, one still needs to specify
+whether equivalence principle is used.)
+\end{note}
 \end{enumerate}
 
 \subsection{Actuarial Notations}
@@ -200,7 +316,7 @@ annual whole life annuity-due (with benefits being 1 [each]) respectively.
 For the whole life insurance with setting described in
 \labelcref{it:wl-gross-loss-expr}, we have
 \[
-\vari{L_0^g}=\qty(S+E+\frac{G-e}{d})(\Ax[][2]{x}-\Ax{x}^2)
+\vari{L_0^g}=\qty(S+E+\frac{G-e}{d})^{2}(\Ax[][2]{x}-\Ax{x}^2)
 \]
 \end{proposition}
 \begin{pf}
@@ -235,20 +351,22 @@ L_0^n=\qty(S+\frac{S\Px{x}}{d})Z-\frac{S\Px{x}}{d}
 \]
 \end{pf}
 \item Using similar arguments, one can adapt
-\cref{prp:wl-gross-loss-var-fmla,prp:wl-net-loss-var-fmla} for:
+\cref{prp:wl-gross-loss-var-fmla,prp:wl-net-loss-var-fmla} for
 \begin{itemize}
-\item endowment insurance (change \(\Ax{x}\to\Ax{\endowxn}\) and \(\Ax[][2]{x}\to\Ax[][2]{\endowxn}\));
-\item fully continuous case (change \(\Ax{}\to\Ax*{}\) and \(d\to\delta\)).
+\item endowment insurance: change \(\Ax{x}\to\Ax{\endowxn}\) and \(\Ax[][2]{x}\to\Ax[][2]{\endowxn}\);
+\item \(1/m\)thly case (for both insurance and premiums): change
+\(\Ax{}\to\Ax{}[(m)]\) and \(d\to d^{(m)}\);
+\item fully continuous case: change \(\Ax{}\to\Ax*{}\) and \(d\to\delta\).
 \end{itemize}
 \begin{note}
 This is possible mainly because under each of these cases, we have a similar
 relationship between the p.v.r.v.'s \(Z\) and \(Y\), and a similar expression
-for \(\Px{x}\). So, the proofs can go through with only a little change.
+for ``\(\Px{}\;\)''. So, the proofs can go through with only a little change.
 \end{note}
 \item \label{it:first-principle-cal-var}
 An alternative method for calculating variance is the so-called \emph{first
 principle} approach, which is sometimes useful for \emph{short-term} fully
-discrete policies. The steps are as follows:
+discrete insurance policies. The steps are as follows:
 \begin{enumerate}
 \item Identify all possible values of \(L_0\) with associated probabilities.
 \begin{note}
@@ -256,9 +374,11 @@ A typical approach to find the associated probabilities is to ``convert'' each
 event \(\qty{L_0=j}\) to another event \(\qty{K_x=k}\) which has \emph{the same
 probability}. (Finding the probability for the latter event is simple.)
 \end{note}
-\item Calculate the first and second moments of \(L_0\):
+\item Calculate the first and second (raw) moments of \(L_0\):
 \begin{itemize}
-\item \(\displaystyle \expv{L_0}=\sum_{}^{}\text{value}\times\text{probability}\) (which is 0 if equivalence principle is used);
+\item \(\displaystyle
+\expv{L_0}=\sum_{}^{}\text{value}\times\text{probability}\) (which is always 0
+if equivalence principle is used);
 \item \(\displaystyle \expv{L_0^2}=\sum_{}^{}\text{value}^2\times\text{probability}\).
 \end{itemize}
 \item Calculate the variance
@@ -278,10 +398,11 @@ through \emph{normal approximation}. If \(L_0\) is loss at issue for a ``large
 block'' of independent policies (i.e., a sum of independent losses at issue for
 ``many'' policies), then \(L_0\overset{\text{approx}}{\sim} N(\expv{L_0},\vari{L_0})\).
 
-\item Then for the normal approximation, we treat \(L_0\) as such a normally
-distributed random variable, and finding the approximated probabilities by
-standardization, i.e., ``converting'' to the event of interest involving
-\(L_0\) to another event involving \(\displaystyle \frac{L_0-\expv{L_0}}{\sqrt{\vari{L_0}}}\sim
-N(0,1)\) which has the same probability.
+\item Then for the normal approximation, we \emph{treat} \(L_0\) as such a
+normally distributed random variable, and finding the approximated
+probabilities by standardization, i.e., ``converting'' to the event of interest
+involving \(L_0\) to another event involving \(\displaystyle
+\frac{L_0-\expv{L_0}}{\sqrt{\vari{L_0}}}\overset{\text{this situation}}{\sim} N(0,1)\)
+which has the same probability.
 \end{enumerate}
 

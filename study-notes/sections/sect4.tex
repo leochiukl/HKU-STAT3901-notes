@@ -67,8 +67,8 @@ node[purple, midway, below=1.5cm, draw] (vb) {variable benefits (different kinds
 \end{tikzpicture}
 
 \begin{note}
-The complete and apportionable variants are not currently inside SOA exam FAM
-syllabus.
+The complete and apportionable variants are not inside SOA exam FAM syllabus
+currently.
 \end{note}
 
 \end{enumerate}
@@ -768,7 +768,6 @@ node[below] {4};
 \draw[->, ForestGreen] (8,0.7) to[bend right] (7,0.7);
 \draw[->, red, line width=0.3mm] (7,0.9) -- (7,1.3)
 node[pos=1.6] {\faIcon{dollar-sign}};
-%\node[orange] () at (7,1.1) {\faIcon{hand-holding-usd}};
 \draw[-Latex] (8.5,1.5) -- (7.2,1)
 node[pos=-0.7, font=\small] {amount ``not entitled''};
 \draw[-Latex] (7,-0.7) -- (6.2,0.2)
@@ -1187,7 +1186,7 @@ We have
 and
 \(\Ia**_{x}=1+v\px{x}\qty[\Ia**_{x+1}+\ax**{x+1}]\);
 \item\label{it:decr-split-first-annuity} \(\Da**_{\endowxn}=n+v\px{x}\Da**_{x+1:\angl{n-1}}\);
-\item\label{it:incr-split-horizon} 
+\item\label{it:incr-split-horizon-annuity}
 \(\Ia**_{\endowxn}=\ax**{\endowxn}+v\px{x}\Ia**_{x+1:\angl{n-1}}\) and
 \(\Ia**_{x}=\ax**{x}+v\px{x}\Ia**_{x+1}\).
 \end{enumerate}
@@ -1280,7 +1279,7 @@ node[midway, right=1cm] {\(\DA_{x+1:\angl{n-1}}\)};
 \node[brown] () at (1,1.6) {\(\times v\px{x}\)};
 \end{tikzpicture}
 
-\labelcref{it:incr-split-horizon}:
+\labelcref{it:incr-split-horizon-annuity}:
 
 \begin{tikzpicture}
 \draw[-Latex] (0,0) -- (10,0) node[right]{Time};
