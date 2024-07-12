@@ -310,7 +310,7 @@ a negative sign in the definition.
 \item \label{it:fom} The \defn{force of mortality (``modelled'' at age 0)} at
 time \(t\), denoted by \defn{\(\mu_t\)} (or \defn{\(\mu_0(t)\)}), is defined as
 \[
-\mu_t=-\frac{S_0'(t)}{S_0(t)}
+\mu_t=-\frac{S_0'(t)}{S_0(t)}.
 \]
 \begin{intuition}
 We can express this as \(dS_0(t)=-S_0(t)\mu_tdt\), and \(S_0(t)\mu_tdt\) may be
@@ -356,7 +356,7 @@ The result follows from noting that
 \end{pf}
 
 \item Now we would like to extend the concept of force of mortality to the case
-where it can be ``modelled'' at any age \(x\). The definition is analogous: the
+where it can be ``modelled'' at any age \(x\). The definition is analogous: The
 \defn{force of mortality (``modelled'' at age \(x\))} at time \(t\), denoted by
 \defn{\(\mu_x(t)\)}, is
 \[
@@ -368,7 +368,7 @@ where it can be ``modelled'' at any age \(x\). The definition is analogous: the
 \fill[] (0,0) circle [radius=0.05]
 node[below] {0};
 \fill[] (3,0) circle [radius=0.05]
-node[below=0.05] {\(x\)};
+node[below=0.05cm] {\(x\)};
 \fill[] (7,0) circle [radius=0.05]
 node[below left] {\(x+t\)};
 \fill[] (7.1,0) circle [radius=0.05]
@@ -389,7 +389,7 @@ The latter one is to be regarded as the force of mortality at time \(x+t\)
 \fill[] (0,0) circle [radius=0.05]
 node[below] {0};
 \fill[] (3,0) circle [radius=0.05]
-node[below=0.05] {\(x\)};
+node[below=0.05cm] {\(x\)};
 \fill[] (7,0) circle [radius=0.05]
 node[below left] {\(x+t\)};
 \fill[] (7.1,0) circle [radius=0.05]
@@ -520,13 +520,13 @@ different time. There are some typical specifications of force of mortality
 	\end{axis}
 \node[draw] () at (3,5) {\(A=0.005, B=0.0003, C=1.05\)};
 \draw[fill] (0.6,0.6) circle [radius=0.05];
-\draw[color=red, thick, decorate,decoration={mirror, brace, amplitude=5pt}] (0.6, 0.6) -- (0.6,0);
-\draw[color=red, thick, decorate,decoration={mirror, brace, amplitude=5pt}] (4.6, 0.6) -- (4.6,0);
-\draw[color=red, thick, decorate,decoration={mirror, brace, amplitude=5pt}] (5.6, 0.6) -- (5.6,0);
+\draw[color=red, thick, decorate,decoration={mirror, brace, amplitude=5pt}] (0.6, 0.5) -- (0.6,0);
+\draw[color=red, thick, decorate,decoration={mirror, brace, amplitude=5pt}] (4.6, 0.5) -- (4.6,0);
+\draw[color=red, thick, decorate,decoration={mirror, brace, amplitude=5pt}] (5.6, 0.5) -- (5.6,0);
 \draw[fill] (4.6,1.7) circle [radius=0.05];
 \draw[fill] (5.6,3.15) circle [radius=0.05];
-\draw[color=brown, thick, decorate,decoration={brace, amplitude=5pt}] (4.6, 0.6) -- (4.6,1.7);
-\draw[color=brown, thick, decorate,decoration={brace, amplitude=5pt}] (5.6, 0.6) -- (5.6,3.15);
+\draw[color=brown, thick, decorate,decoration={brace, amplitude=5pt}] (4.6, 0.5) -- (4.6,1.7);
+\draw[color=brown, thick, decorate,decoration={brace, amplitude=5pt}] (5.6, 0.5) -- (5.6,3.15);
 \draw[-Latex] (8,-1) -- (0.6, 0.3);
 \draw[-Latex] (8,-1) -- (4.6, 0.3);
 \draw[-Latex] (8,-1) -- (5.6, 0.3);
@@ -839,11 +839,11 @@ Once we compute the first and second moments of \(T_x\): \(\expv{T_x}\) and
 \]
 
 \item Sometimes we are interested in the future lifetime random variable
-``capped'' to \(n\) years: \defn{\(T_x\wedge n\)} (i.e., \(\min\{T_x, n\}\)) (e.g., in
-the context of endowment insurance; see later sections). The expectation of
-this capped random variable (i.e., \(\expv{T_x\wedge n}\)) is called the
-\defn{term expectation of life}. (Actuarial notation:
-\defn{\(\eringx{\endowxn}\)})
+``capped'' to \(n\) years: \(T_x\,\text{\defn{\(\wedge\)}}\, n\) (i.e.,
+\(\min\{T_x, n\}\)) (e.g., in the context of endowment insurance; see later
+sections). The expectation of this capped random variable (i.e.,
+\(\expv{T_x\wedge n}\)) is called the \defn{term expectation of life}.
+(Actuarial notation: \defn{\(\eringx{\endowxn}\)})
 
 \begin{note}
 The notation ``\(\endowxn\)'' is used when the ``capped'' future lifetime

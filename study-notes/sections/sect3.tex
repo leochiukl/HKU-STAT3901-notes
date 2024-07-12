@@ -1329,13 +1329,14 @@ which can be seen by writing \(\Ax*{\endowxn}=\Ax*{\termxn}+\Ex[n]{x}\)
 \end{warning}
 
 \begin{pf}
-We shall only give some key idea here. See
-\textcite[Section~4.4]{bowers1997actuarial} for more details.
+We shall only give some key idea and concentrate on whole life insurance
+here. See \textcite[Section~4.4]{bowers1997actuarial} for more details.
 
 For the continuous case, consider \cref{lma:udd-equiv-def}, and note that
-\(v^{T_x}=v^{K_x+1}(1+i)^{1-U_x}\) where \[\expv{(1+i)^{1-U_x}}=i/\delta.\]
+\(v^{T_x}=v^{K_x+1}(1+i)^{1-U_x}\). It can be shown by integration that
+\[\expv{(1+i)^{1-U_x}}=i/\delta.\]
 
-For the \(1/m\)thly case, consider e.g.,
+For the \(1/m\)thly case, consider
 \[
 \sum_{j=0}^{\infty}v^{\frac{j+1}{m}}\px[\frac{j}{m}]{x}\qx[\frac{1}{m}]{x+\frac{j}{m}}
 =\sum_{k=0}^{\infty}\sum_{u=0}^{m-1}v^{k+\frac{u+1}{m}}\px[k+\frac{u}{m}]{x}\qty(\frac{1}{m}\qx{x+k+\frac{u}{m}})
@@ -1348,7 +1349,7 @@ For the \(1/m\)thly case, consider e.g.,
 \]
 \end{intuition}
 
-and note that
+By considering \(\ax{\angl{1}}[(m)]\), we have
 \[
 \sum_{u=0}^{m-1}\frac{1}{m}v^{\frac{u+1}{m}}=\frac{i}{i^{(m)}}.
 \]

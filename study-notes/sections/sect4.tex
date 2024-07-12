@@ -1275,8 +1275,8 @@ node[pos=-0.3] {\(n\)};
 \draw[brown, thick, decorate,decoration={mirror, brace, amplitude=5pt, raise=15pt}] (6.5,0.2) -- (6.5,2)
 node[midway, right=1cm] {\(\DA_{x+1:\angl{n-1}}\)};
 \draw[-Latex, ForestGreen] (1.7,0.2) to[bend right] (0,0.1);
-\draw[-Latex, ForestGreen] (6.2,1.4) to[bend right] (0,0.3);
-\node[brown] () at (1,1.6) {\(\times v\px{x}\)};
+\draw[-Latex, ForestGreen] (6.2,1.4) ..controls (3,3) and (2,3).. (0,0.3);
+\node[brown] () at (1,2.2) {\(\times v\px{x}\)};
 \end{tikzpicture}
 
 \labelcref{it:incr-split-horizon-annuity}:

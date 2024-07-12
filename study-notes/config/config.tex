@@ -31,6 +31,7 @@
 \usetikzlibrary{shapes}
 \usetikzlibrary{patterns}
 \usetikzlibrary{patterns.meta}
+\usetikzlibrary{external}
 
 \pgfplotsset{compat=1.18}
 
@@ -81,3 +82,6 @@
   }
 }
 \makeatother
+
+\makeindex[name=def, title=Concepts and Terminologies]
+\tikzexternalize[prefix=figures/]
