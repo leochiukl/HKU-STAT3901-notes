@@ -97,7 +97,7 @@ Continuous case (annual payment rate: 1):
 expression&\(\ax*{\angl{T_x}}\) or \(\displaystyle\int_{0}^{\infty}e^{-\delta t}\indicset{T_x>t}\,dt\)
 &\(\displaystyle \frac{1-\Ax*{x}}{\delta}\) or \(\displaystyle\int_{0}^{\infty}e^{-\delta t}\px[t]{x}\,dt\)
 &\(\displaystyle \frac{\Ax*[][2]{x}-\qty(\Ax*{x})^2}{\delta^2}\)\\
-notation&\(Y\)&\defn{\(\ax*{x}\)}&\(\vari{Y}\)\\
+notation&\(Y\)&\(\ax*{x}\)&\(\vari{Y}\)\\
 \bottomrule
 \end{tabular}
 
@@ -168,8 +168,8 @@ immediate: \(\displaystyle\sum_{k=1}^{\infty}v^k\px[k]{x}\)
 immediate: same as due
 }\\
 notation&\(Y\)&
-\makecell{due: \defn{\(\ax**{x}\)}\\
-immediate: \defn{\(\ax{x}\)}}&\(\vari{Y}\)\\
+\makecell{due: \(\ax**{x}\)\\
+immediate: \(\ax{x}\)}&\(\vari{Y}\)\\
 \bottomrule
 \end{tabular}
 \begin{note}
@@ -202,8 +202,8 @@ immediate: \(\displaystyle\sum_{k=1}^{\infty}{\color{brown}\frac{1}{m}}v^{\frac{
 immediate: same as due
 }\\
 notation&\(Y\)&
-\makecell{due: \defn{\(\ax**{x}[(m)]\)}\\
-immediate: \defn{\(\ax{x}[(m)]\)}}&\(\vari{Y}\)\\
+\makecell{due: \(\ax**{x}[(m)]\)\\
+immediate: \(\ax{x}[(m)]\)}&\(\vari{Y}\)\\
 \bottomrule
 \end{tabular}
 \item For discrete life annuity-immediate, we often use the following alternative
@@ -252,7 +252,7 @@ expression&\(\ax*{\angl{T_x\wedge n}}\) or \(\displaystyle\int_{0}^{n}e^{-\delta
 \(\displaystyle \ax*{x}-\Ex[n]{x}\ax*{x+n}\)\\
 or \(\displaystyle\int_{0}^{n}e^{-\delta t}\px[t]{x}\,dt\)}
 &\(\displaystyle \frac{\Ax*[][2]{\endowxn}-\qty(\Ax*{\endowxn})^2}{\delta^2}\)\\
-notation&\(Y\)&\defn{\(\ax*{\endowxn}\)}&\(\vari{Y}\)\\
+notation&\(Y\)&\(\ax*{\endowxn}\)&\(\vari{Y}\)\\
 \bottomrule
 \end{tabular}
 \item \label{it:ann-tmp-annuity-fmlas}
@@ -277,8 +277,8 @@ or \(\ax{x}-\Ex[n]{x}\ax{x+n}\) \\
 immediate: omitted
 }\\
 notation&\(Y\)&
-\makecell{due: \defn{\(\ax**{\endowxn}\)}\\
-immediate: \defn{\(\ax{\endowxn}\)}}&\(\vari{Y}\)\\
+\makecell{due: \(\ax**{\endowxn}\)\\
+immediate: \(\ax{\endowxn}\)}&\(\vari{Y}\)\\
 \bottomrule
 \end{tabular}
 
@@ -308,8 +308,8 @@ or \(\ax**{x}[(m)]-\Ex[n]{x}\ax**{x+n}[(m)]\) \\
 immediate: omitted
 }\\
 notation&\(Y\)&
-\makecell{due: \defn{\(\ax**{\endowxn}^{(m)}\)}\\
-immediate: \defn{\(\ax{\endowxn}^{(m)}\)}}&\(\vari{Y}\)\\
+\makecell{due: \(\ax**{\endowxn}^{(m)}\)\\
+immediate: \(\ax{\endowxn}^{(m)}\)}&\(\vari{Y}\)\\
 \bottomrule
 \end{tabular}
 \item We can similarly use the ``actuarial discounting'' intuition to develop
@@ -391,7 +391,7 @@ expression&\(\ax*[u|]{\angl{T_x-u}}\indicset{T_x>u}\) or \(\displaystyle\int_{u}
 &\makecell{\(\ax*{x}-\ax*{x:\angl{u}}\) or 
 \(\Ex[u]{x}\ax*{x+u}\)\\
 or \(\displaystyle\int_{u}^{\infty}e^{-\delta t}\px[t]{x}\,dt\)} \\
-notation&\(Y\)&\defn{\(\ax*[u|]{x}\)}\\
+notation&\(Y\)&\(\ax*[u|]{x}\)\\
 \bottomrule
 \end{tabular}
 
@@ -423,8 +423,8 @@ or \(\displaystyle\sum_{k=u+1}^{\infty}v^k\px[k]{x}\)
 }\\
 notation&\(Y\)&
 \makecell{
-due: \defn{\(\ax**[u|]{x}\)}\\
-immediate: \defn{\(\ax[u|]{x}\)}\\
+due: \(\ax**[u|]{x}\)\\
+immediate: \(\ax[u|]{x}\)\\
 }
 \\
 \bottomrule
@@ -455,8 +455,8 @@ or \(\displaystyle\sum_{k=u+1}^{\infty}\frac{1}{m}v^{\frac{k}{m}}\px[\frac{k}{m}
 }\\
 notation&\(Y\)&
 \makecell{
-due: \defn{\(\ax**[u|]{x}[(m)]\)}\\
-immediate: \defn{\(\ax[u|]{x}[(m)]\)}\\
+due: \(\ax**[u|]{x}[(m)]\)\\
+immediate: \(\ax[u|]{x}[(m)]\)\\
 }
 \\
 \bottomrule
@@ -498,7 +498,7 @@ Continuous case (annual payment rate: 1):
 \midrule
 expression&\(Y\) in \labelcref{it:cts-defer-wl-annuity-fmlas} + \(\ax*{\angl{n}}\)
 &\(\ax*{\angl{n}}+\ax*[n|]{x}\)\\
-notation&\(Y\)&\defn{\(\ax*{\overline{x:\angl{n}}}\)}\\
+notation&\(Y\)&\(\ax*{\overline{x:\angl{n}}}\)\\
 \bottomrule
 \end{tabular}
 
@@ -525,8 +525,8 @@ due: \(\ax**{\angl{n}}+\ax**[n|]{x}\)\\
 immediate: \(\ax{\angl{n}}+\ax[n|]{x}\)}\\
 notation&\(Y\)&
 \makecell{
-due: \defn{\(\ax**{\overline{x:\angl{n}}}\)}\\
-immediate \defn{\(\ax{\overline{x:\angl{n}}}\)}
+due: \(\ax**{\overline{x:\angl{n}}}\)\\
+immediate \(\ax{\overline{x:\angl{n}}}\)
 }\\
 \bottomrule
 \end{tabular}
@@ -549,8 +549,8 @@ due: \(\ax**{\angl{n}}[(m)]+\ax**[n|]{x}[(m)]\)\\
 immediate: \(\ax{\angl{n}}[(m)]+\ax[n|]{x}[(m)]\)}\\
 notation&\(Y\)&
 \makecell{
-due: \defn{\(\ax**{\overline{x:\angl{n}}}[(m)]\)}\\
-immediate \defn{\(\ax{\overline{x:\angl{n}}}[(m)]\)}
+due: \(\ax**{\overline{x:\angl{n}}}[(m)]\)\\
+immediate \(\ax{\overline{x:\angl{n}}}[(m)]\)
 }\\
 \bottomrule
 \end{tabular}
@@ -844,7 +844,7 @@ for other kinds of life annuities.}:
 expression&\(\displaystyle \frac{\delta}{i^{(m)}}\ax*{\angl{T_x}}\)
 &\(\displaystyle \frac{\delta}{i^{(m)}}\ax*{x}\)
 &\(\displaystyle \qty(\frac{\delta}{i^{(m)}})^2\times\)(\(\vari{Y}\) in \labelcref{it:cts-wl-annuity-fmlas})\\
-notation&\(Y\)&\defn{\(\aringx{x}[(m)]\)}&\(\vari{Y}\)\\
+notation&\(Y\)&\(\aringx{x}[(m)]\)&\(\vari{Y}\)\\
 \bottomrule
 \end{tabular}
 
@@ -857,7 +857,7 @@ notation&\(Y\)&\defn{\(\aringx{x}[(m)]\)}&\(\vari{Y}\)\\
 expression&\(\displaystyle \frac{\delta}{i^{(m)}}\ax*{\angl{T_x\wedge n}}\)
 &\(\displaystyle \frac{\delta}{i^{(m)}}\ax*{\endowxn}\)
 &\(\displaystyle \qty(\frac{\delta}{i^{(m)}})^2\times\)(\(\vari{Y}\) in \labelcref{it:cts-tmp-annuity-fmlas})\\
-notation&\(Y\)&\defn{\(\aringx{\endowxn}[(m)]\)}&\(\vari{Y}\)\\
+notation&\(Y\)&\(\aringx{\endowxn}[(m)]\)&\(\vari{Y}\)\\
 \bottomrule
 \end{tabular}
 \end{enumerate}
@@ -888,7 +888,7 @@ After getting this amount, we can obtain the following:
 expression&\(\displaystyle \frac{\delta}{d^{(m)}}\ax*{\angl{T_x}}\)
 &\(\displaystyle \frac{\delta}{d^{(m)}}\ax*{x}\)
 &\(\displaystyle \qty(\frac{\delta}{d^{(m)}})^2\times\)(\(\vari{Y}\) in \labelcref{it:cts-wl-annuity-fmlas})\\
-notation&\(Y\)&\defn{\(\ax**{x}[\{m\}]\)}&\(\vari{Y}\)\\
+notation&\(Y\)&\(\ax**{x}[\{m\}]\)&\(\vari{Y}\)\\
 \bottomrule
 \end{tabular}
 
@@ -901,7 +901,7 @@ notation&\(Y\)&\defn{\(\ax**{x}[\{m\}]\)}&\(\vari{Y}\)\\
 expression&\(\displaystyle \frac{\delta}{d^{(m)}}\ax*{\angl{T_x\wedge n}}\)
 &\(\displaystyle \frac{\delta}{d^{(m)}}\ax*{\endowxn}\)
 &\(\displaystyle \qty(\frac{\delta}{d^{(m)}})^2\times\)(\(\vari{Y}\) in \labelcref{it:cts-tmp-annuity-fmlas})\\
-notation&\(Y\)&\defn{\(\ax**{\endowxn}[\{m\}]\)}&\(\vari{Y}\)\\
+notation&\(Y\)&\(\ax**{\endowxn}[\{m\}]\)&\(\vari{Y}\)\\
 \bottomrule
 \end{tabular}
 \end{enumerate}

@@ -2,7 +2,7 @@
 \label{sect:surv-dist}
 \subsection{Future Lifetime Random Variable}
 \begin{enumerate}
-\item A life aged \(x\) (in years) is denoted by \defn{\((x)\)}.
+\item A life aged \(x\) (in years) is denoted by \((x)\).
 
 \begin{note}
 By ``aged \(x\)'', we mean the life's age is \emph{exactly} \(x\):
@@ -36,7 +36,7 @@ number of birthdays passed, which is \emph{different} from our meaning.
 \end{note}
 
 \item \defn{Future life time random variable} for \((x)\) is a continuous
-random variable \defn{\(T_x\)} with support \([0,\infty)\).
+random variable \(T_x\) with support \([0,\infty)\).
 \begin{note}
 This means a life aged \(x\) cannot live forever, and the life ``almost never''
 die exactly at age \(x\) (i.e., with probability 0).
@@ -64,11 +64,11 @@ node[midway, above=0.7cm]{\(T_x\) (years)};
 \node[] () at (8,-1) {age at death: \(x+T_x\)};
 \end{tikzpicture}
 
-\item The cdf of \(T_x\) (denoted by \defn{\(F_x(t)\)}) is
+\item The cdf of \(T_x\) (denoted by \(F_x(t)\)) is
 \(F_x(t)=\prob{T_x\le t}\), which gives the probability that \((x)\) dies
 within \(t\) years.
 
-\item The survival function of \(T_x\) (denoted by \defn{\(S_x(t)\)}) is
+\item The survival function of \(T_x\) (denoted by \(S_x(t)\)) is
 \(S_x(t)=\prob{T_x>t}\), which gives the probability that \((x)\) survives for
 more than \(t\) years.
 
@@ -308,7 +308,7 @@ But as ``mortality'' is opposite to ``survival'', it appears that we should add
 a negative sign in the definition.
 
 \item \label{it:fom} The \defn{force of mortality (``modelled'' at age 0)} at
-time \(t\), denoted by \defn{\(\mu_t\)} (or \defn{\(\mu_0(t)\)}), is defined as
+time \(t\), denoted by \(\mu_t\) (or \(\mu_0(t)\)), is defined as
 \[
 \mu_t=-\frac{S_0'(t)}{S_0(t)}.
 \]
@@ -331,7 +331,7 @@ node[below right] {\(t+dt\)};
 node[midway, above=0.3cm]{\faIcon{skull}};
 \end{tikzpicture}
  \end{intuition}
-\item Denote by \defn{\(f_x(t)\)} the pdf of \(T_x\). Then, we have:
+\item Denote by \(f_x(t)\) the pdf of \(T_x\). Then, we have:
 \begin{proposition}
 \label{prp:mu-pdf-0}
 \[
@@ -358,7 +358,7 @@ The result follows from noting that
 \item Now we would like to extend the concept of force of mortality to the case
 where it can be ``modelled'' at any age \(x\). The definition is analogous: The
 \defn{force of mortality (``modelled'' at age \(x\))} at time \(t\), denoted by
-\defn{\(\mu_x(t)\)}, is
+\(\mu_x(t)\), is
 \[
 \mu_x(t)=-\frac{S_x'(t)}{S_x(t)}.
 \]
@@ -618,9 +618,9 @@ for any \(t\ge 0\), so the future lifetime random variable
 related to ``survival'') and ``\(q\)'' (probability related to ``death'').
 \item \label{it:actuar-pq} A list of actuarial notations:
 \begin{itemize}
-\item \defn{\(\px[t]{x}\)}: \(S_x(t)\)
-\item \defn{\(\qx[t]{x}\)}: \(F_x(t)\)
-\item \defn{\(\qx[u|t]{x}\)}: \(\prob{u<T_x\le u+t}=S_x(u)-S_x(u+t)\)
+\item \(\px[t]{x}\): \(S_x(t)\)
+\item \(\qx[t]{x}\): \(F_x(t)\)
+\item \(\qx[u|t]{x}\): \(\prob{u<T_x\le u+t}=S_x(u)-S_x(u+t)\)
 \end{itemize}
 \begin{remark}
 \item ``\(t\)'' can be dropped from the notation if \(t=1\), for simplicity.
@@ -766,7 +766,7 @@ intervals within the interval \([0,t]\).
 \subsection{Mean and Variance of \(T_x\)}
 \begin{enumerate}
 \item The \defn{complete expectation of life} is \(\expv{T_x}\). (Actuarial
-notation: \defn{\(\eringx{x}\)})
+notation: \(\eringx{x}\))
 
 \begin{remark}
 \item ``Complete'' is in the sense that the ``complete'' (``whole'') lifetime is
@@ -795,7 +795,7 @@ T_x=\int_{0}^{T_x}1\,dt
 =\int_{0}^{\infty}\indicset{t<T_x}\,dt.
 \]
 \begin{note}
-\defn{\(\indicset{\cdot}\)} denotes the indicator function.
+\(\indicset{\cdot}\) denotes the indicator function.
 \end{note}
 
 It then follows that
@@ -839,11 +839,11 @@ Once we compute the first and second moments of \(T_x\): \(\expv{T_x}\) and
 \]
 
 \item Sometimes we are interested in the future lifetime random variable
-``capped'' to \(n\) years: \(T_x\,\text{\defn{\(\wedge\)}}\, n\) (i.e.,
+``capped'' to \(n\) years: \(T_x\wedge n\) (i.e.,
 \(\min\{T_x, n\}\)) (e.g., in the context of endowment insurance; see later
 sections). The expectation of this capped random variable (i.e.,
 \(\expv{T_x\wedge n}\)) is called the \defn{term expectation of life}.
-(Actuarial notation: \defn{\(\eringx{\endowxn}\)})
+(Actuarial notation: \(\eringx{\endowxn}\))
 
 \begin{note}
 The notation ``\(\endowxn\)'' is used when the ``capped'' future lifetime
@@ -1002,7 +1002,7 @@ can find the variance of \(K_x\) by
 \vari{K_x}=\expv{K_x^2}-e_x^2.
 \]
 \item Likewise the \defn{term curtate expectation of life} is \(\expv{K_x\wedge
-n}\), where \(n\in\N_0\). (Actuarial notation: \defn{\(e_{\endowxn}\)})
+n}\), where \(n\in\N_0\). (Actuarial notation: \(e_{\endowxn}\))
 \item Analogously, we have
 \begin{proposition}
 \label{prp:exn-fmla}
@@ -1132,7 +1132,7 @@ common choice is 10000.
 \node[] () at (0.2,0.5) {\faIcon{baby}};
 \end{tikzpicture}
 
-\item Let \defn{\(\Lx{x}\)} be the number of survivors to age \(x\)
+\item Let \(\Lx{x}\) be the number of survivors to age \(x\)
 (which is a random variable). To determine \(\Lx{x}\), we shall use an
 \emph{indicator} approach.
 
@@ -1165,7 +1165,7 @@ I_{j,x}=\begin{cases}
 Then, we have \(\displaystyle\mathcal{L}_{x}=\sum_{j=1}^{\lx{0}}I_{j,x}\).
 \item For any age \(x\), the quantity of most interest is the \emph{expected}
 number of survivors to age \(x\): \(\expv{\Lx{x}}\) (Actuarial notation:
-\defn{\(\lx{x}\)}).
+\(\lx{x}\)).
 \item We shall assume that every newborn has the same lifetime distribution.
 Then, without any ambiguity we can write the probability of any newborn
 surviving to age \(x\) by \(\px[x]{0}\). Thus, we have
@@ -1211,7 +1211,7 @@ exp.\ number &\(\lx{}\)&\(\dx{}\)\\
 \end{tabular}
 \end{center}
 \item The number of deaths between ages \(x\) and \(x+n\) is
-\defn{\(\Dx[n]{x}\)} (a random variables).
+\(\Dx[n]{x}\) (a random variables).
 \begin{note}
 ``between'' here can be understood in either non-strict or strict sense --- it
 does not affect the probability as the lifetime random variable is continuous.
