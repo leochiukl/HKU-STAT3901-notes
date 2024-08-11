@@ -35,7 +35,7 @@ From here we can see that ``age'' in daily life language actually refers to
 number of birthdays passed, which is \emph{different} from our meaning.
 \end{note}
 
-\item \defn{Future life time random variable} for \((x)\) is a continuous
+\item \defn{Future lifetime random variable} for \((x)\) is a continuous
 random variable \(T_x\) with support \([0,\infty)\).
 \begin{note}
 This means a life aged \(x\) cannot live forever, and the life ``almost never''
@@ -643,7 +643,7 @@ node[midway, below=0.7cm]{deferment period};
 \end{remark}
 
 \item Based on the definitions in \labelcref{it:actuar-pq}, we can readily
-derive the following results:
+derive the following formulas:
 \begin{proposition}
 \label{prp:act-notation-prop}
 For any age \(x\) and \(t,u\ge 0, n\in\N\),
@@ -1252,8 +1252,8 @@ involving \emph{fractional} ages and years (e.g. \(\px[0.5]{50.2},
 The three most common \emph{fractional age assumptions} are: \begin{enumerate}
 \item uniform distribution of deaths (UDD) (the most common one);
 \item constant force of mortality
-\item Balducci assumption (not very common; not currently inside SOA Exam FAM
-syllabus)
+\item Balducci assumption (not very common; not inside SOA Exam FAM
+syllabus currently)
 \end{enumerate}
 
 \item The \defn{uniform distribution of deaths} (UDD) assumption is given by: for
@@ -1296,13 +1296,13 @@ the following: For any integer age \(x\), writing
 \end{enumerate}
 \end{lemma}
 
-\begin{pf}
-Omitted. (It is non-trivial, but also not too complex. See \textcite[Section~3.3.1]{dickson2019actuarial}.)
-\end{pf}
-
 \begin{note}
 This result is seldom used directly in solving problems.
 \end{note}
+
+\begin{pf}
+Omitted. (It is non-trivial, but also not too complex. See \textcite[Section~3.3.1]{dickson2019actuarial}.)
+\end{pf}
 
 \begin{proposition}
 \label{prp:udd-mean-variance}
@@ -1344,8 +1344,9 @@ of mortality assumption is to express the quantities to be computed in terms of
 =-\frac{(\px{x})^t\ln\px{x}}{(\px{x})^t}
 =-\ln\px{x}.
 \]
-This shows how we calculate the constant force of mortality based on life table
-(recall \(\px{x}=\lx{x+1}/\lx{x}\)).
+This also shows how we calculate the constant force of mortality based on life
+table (recall \(\px{x}=\lx{x+1}/\lx{x}\)).
+
 \item The \defn{Balducci assumption} is given by: for any integer age \(x\) and
 any \(t\in [0,1)\), assume that \(\qx[1-t]{x+t}=(1-t)\qx{x}\). \begin{note}
 It is like the ``tail'' version of UDD.
@@ -1422,9 +1423,9 @@ in the model).
 \node[] () at (-1.5,-0.5) {\faIcon{baby}};
 \node[] () at (0.2,0.5) {\faIcon{baby}};
 \draw[] (7,-2) ellipse [x radius=2, y radius=1];
-\draw[-Latex, brown] (1,0.5) to[bend left] node[above=0.2]{select at age 4} (6,-1.5);
+\draw[-Latex, brown] (1,0.5) to[bend left] node[above=0.2cm]{select at age 4} (6,-1.5);
 \node[brown] () at (6,-1.8) {\faIcon{user}};
-\draw[-Latex, brown] (1,-0.5) to[bend right] node[below=0.3]{select at age 8} (7,-2.2);
+\draw[-Latex, brown] (1,-0.5) to[bend right] node[below=0.3cm]{select at age 8} (7,-2.2);
 \node[brown] () at (7.2,-1.8) {\faIcon{user}};
 \node[] () at (7,-0.5) {group};
 \end{tikzpicture}
