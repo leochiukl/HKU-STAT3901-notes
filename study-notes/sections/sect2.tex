@@ -1265,12 +1265,10 @@ This is \underline{not} \(\px[t]{x}=t\px{x}\).
 \item \label{it:udd-approach} Under UDD, to compute quantities involving fractional ages and years,
 a general approach is to express them in terms of \(\qx[t]{x}\) where
 \(x\in\N_0\text{ and }t\in[0,1)\), using, e.g., properties in \cref{prp:act-notation-prop}.
-\item A special property under UDD is:
-\begin{proposition}
-\label{prp:udd-only-length}
-For any integer age and any \(u,t\ge 0\) such that \(u+t\in[0,1)\),
+\item Here we highlight two properties under UDD:
+\begin{enumerate}
+\item \label{it:udd-only-length} For any integer age \(x\) and any \(u,t\ge 0\) such that \(u+t\in[0,1)\),
 \(\qx[u|t]{x}=t\qx{x}\).
-\end{proposition}
 
 \begin{pf}
 Note that \(\qx[u|t]{x}=\qx[u+t]{x}-\qx[u]{x}=(u+t)\qx{x}-u\qx{x}=t\qx{x}\).
@@ -1282,6 +1280,23 @@ the ``\(q\)'' probability depends only on the \emph{length} of the time interval
 covered (``location'' of the interval \emph{within} the fraction does not
 matter).
 \end{note}
+
+\item \label{it:udd-fom-fmla}
+For any integer age \(x\) and any \(t\in[0,1)\), \(\displaystyle
+\mu_{x+t}=\frac{q_x}{1-tq_x}\).
+
+\begin{pf}
+Note that
+\[
+\mu_{x+t}=\frac{f_x(t)}{\px[t]{x}}
+=\frac{\displaystyle \dv{}{t}\qx[t]{x}}{1-\qx[t]{x}}
+=\frac{\displaystyle \dv{}{t}tq_x}{1-tq_x}
+=\frac{q_x}{1-tq_x}.
+\]
+\end{pf}
+\end{enumerate}
+
+
 
 \item Under UDD, the mean and variance of \(T_x\) and \(K_x\) are related in a rather simple way.
 First we shall state a lemma:
