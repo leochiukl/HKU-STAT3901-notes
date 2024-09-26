@@ -264,7 +264,7 @@ for the future lifetime iff the following hold:
 \begin{enumerate}
 \item[(S1)] \(S_x(0)=1\);
 \item[(S2)] \(\lim_{t\to \infty}S_x(t)=0\);
-\item[(S3)] \(S_x(t)\) is a nondecreasing function of \(t\).
+\item[(S3)] \(S_x(t)\) is a nonincreasing/decreasing function of \(t\).
 \end{enumerate}
 \end{proposition}
 
@@ -921,8 +921,8 @@ Inspect the picture above.
 \end{intuition}
 
 \begin{pf}
-``\(\Rightarrow\)'' follows from the definition of floor function
-\(\lfloor\cdot\rfloor\). ``\(\Leftarrow\)'' can be proved by contrapositive
+``\(\Leftarrow\)'' follows from the definition of floor function
+\(\lfloor\cdot\rfloor\). ``\(\Rightarrow\)'' can be proved by contrapositive
 easily.
 \end{pf}
 
@@ -1124,12 +1124,12 @@ common choice is 10000.
 \begin{tikzpicture}
 \draw[] (0,0) ellipse [x radius=3, y radius=1];
 \node[] () at (0,0) {\faIcon{skull}};
-\node[] () at (1,0.5) {\faIcon{baby}};
+\node[] () at (1,0.5) {\faIcon{user}};
 \node[] () at (1,-0.5) {\faIcon{skull}};
-\node[] () at (1.5,-0.3) {\faIcon{baby}};
-\node[] () at (-1,0) {\faIcon{baby}};
-\node[] () at (-1.5,-0.5) {\faIcon{baby}};
-\node[] () at (0.2,0.5) {\faIcon{baby}};
+\node[] () at (1.5,-0.3) {\faIcon{user}};
+\node[] () at (-1,0) {\faIcon{user}};
+\node[] () at (-1.5,-0.5) {\faIcon{user}};
+\node[] () at (0.2,0.5) {\faIcon{user}};
 \end{tikzpicture}
 
 \item Let \(\Lx{x}\) be the number of survivors to age \(x\)
@@ -1148,12 +1148,12 @@ I_{j,x}=\begin{cases}
 \begin{tikzpicture}
 \draw[] (0,0) ellipse [x radius=3, y radius=1];
 \node[] (l3) at (0,0) {\faIcon{skull}};
-\node[] () at (1,0.5) {\faIcon{baby}};
+\node[] () at (1,0.5) {\faIcon{user}};
 \node[] () at (1,-0.5) {\faIcon{skull}};
-\node[] () at (1.5,-0.3) {\faIcon{baby}};
-\node[] (l2) at (-1,0) {\faIcon{baby}};
-\node[] (l1) at (-1.5,-0.5) {\faIcon{baby}};
-\node[] () at (0.2,0.5) {\faIcon{baby}};
+\node[] () at (1.5,-0.3) {\faIcon{user}};
+\node[] (l2) at (-1,0) {\faIcon{user}};
+\node[] (l1) at (-1.5,-0.5) {\faIcon{user}};
+\node[] () at (0.2,0.5) {\faIcon{user}};
 \draw[-Latex, blue] (-3, -1.5) -- (l1.south west);
 \node[] () at (-3.5,-1.8) {\(I_{1,x}=1\)};
 \draw[-Latex, blue] (-4, 0) -- (l2.west);

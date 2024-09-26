@@ -558,7 +558,7 @@ immediate \(\ax{\overline{x:\angl{n}}}[(m)]\)
 
 \subsection{Complete and Apportionable Life Annuities}
 \begin{note}
-This topic is not currently inside SOA exam FAM syllabus.
+This topic is not inside SOA exam FAM syllabus currently.
 \end{note}
 \begin{enumerate}
 \item Consider the following situation:
@@ -776,9 +776,9 @@ node[pos=-0.3, font=\small] {for \emph{whole} period};
 
 \item To preserve the ``worth'' of the original payments
 \faIcon{hand-holding-usd} (both monetary and time values), in each (\(1/m\)th
-of) period we require the ``present value'' (at the beginning time) of the
-(single) ``discrete'' payment \faIcon{hand-holding-usd} to be the same as the
-(whole) payment stream (in the framework) in that period:
+of) period we require the ``present value'' (at the beginning of period) of the
+``discrete'' payment \faIcon{hand-holding-usd} to be the same as the whole
+payment stream (in the framework) in that period:
 
 \begin{tikzpicture}
 \draw[-Latex] (0,0) -- (10,0) node[right]{Time};
@@ -789,7 +789,7 @@ node[below] {1}
 node[above] {\faIcon{hand-holding-usd}};
 \fill[] (4,0) circle [radius=0.05]
 node[below] {2}
-node[above, gray!50!white] {\faIcon{hand-holding-usd}};
+node[above, gray!20!white] {\faIcon{hand-holding-usd}};
 \fill[] (6,0) circle [radius=0.05]
 node[below] {3}
 node[above] {\faIcon{hand-holding-usd}};
@@ -800,12 +800,14 @@ node[midway, above, yellow!70!black] {stream};
 \draw[line width=1mm, yellow!20!white] (2,0.7) -- (4,0.7);
 \draw[line width=1mm, yellow] (4,0.7) -- (6,0.7)
 node[midway, above, yellow!70!black] {stream};
-\draw[-Latex, ForestGreen] (1.2,0.6) to[bend left] (0,0.3);
+\draw[-Latex, ForestGreen] (1.2,0.7) to[bend right] (0,0.3);
 \draw[-Latex, ForestGreen] (2,0.2) to[bend left] (0,0.2);
-\node[font=\small, ForestGreen] () at (-0.3,0.2) {\faIcon{equals}};
-\draw[-Latex, orange] (5.2,0.6) to[bend left] (4,0.3);
+\draw[magenta, very thick, decorate,decoration={mirror, brace, amplitude=5pt}] (0,0.4) -- (0,0.1)
+node[midway, left=0.2cm, font=\small] {\faIcon{equals}};
+\draw[-Latex, orange] (5.2,0.6) to[bend right] (4,0.3);
 \draw[-Latex, orange] (6,0.2) to[bend left] (4,0.2);
-\node[font=\small, orange] () at (3.7,0.2) {\faIcon{equals}};
+\draw[magenta, very thick, decorate,decoration={mirror, brace, amplitude=5pt}] (4,0.4) -- (4,0.1)
+node[midway, left=0.2cm, font=\small] {\faIcon{equals}};
 \end{tikzpicture}
 
 Then, the original payments \faIcon{hand-holding-usd} together with the
@@ -1027,7 +1029,7 @@ t}}{\color{magenta}\px[t]{x}}\,{\color{brown}dt}
 \]
 (\({\color{brown}t\,dt}\): ``benefit payment''; \({\color{violet}e^{-\delta
 t}}\): ``discount factor''; \({\color{magenta}\px[t]{x}}\): ``prob.\ of
-triggering payment'', for every ``infinitesimal'' time interval \([t,t+dt]\))
+triggering payment'', for every ``infinitesimal'' time interval \([t,t+dt]\)).
 
 \item Like \labelcref{it:geo-vb-insurance-intro}, for geometrically
 increasing/decreasing life annuities, we shall focus on the annual case (where
