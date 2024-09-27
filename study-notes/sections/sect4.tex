@@ -94,8 +94,8 @@ Continuous case (annual payment rate: 1):
 \toprule
 &p.v.r.v.&APV&variance\\
 \midrule
-expression&\(\ax*{\angl{T_x}}\) or \(\displaystyle\int_{0}^{\infty}e^{-\delta t}\indicset{T_x>t}\,dt\)
-&\(\displaystyle \frac{1-\Ax*{x}}{\delta}\) or \(\displaystyle\int_{0}^{\infty}e^{-\delta t}\px[t]{x}\,dt\)
+expression&\(\ax*{\angl{T_x}}\) or \(\displaystyle\int_{0}^{\infty}e^{-\delta t}\indicset{T_x>t}\dd{t}\)
+&\(\displaystyle \frac{1-\Ax*{x}}{\delta}\) or \(\displaystyle\int_{0}^{\infty}e^{-\delta t}\px[t]{x}\dd{t}\)
 &\(\displaystyle \frac{\Ax*[][2]{x}-\qty(\Ax*{x})^2}{\delta^2}\)\\
 notation&\(Y\)&\(\ax*{x}\)&\(\vari{Y}\)\\
 \bottomrule
@@ -108,20 +108,20 @@ of interest.
 
 \begin{intuition}
 For the p.v.r.v.\ expression \(\displaystyle\int_{0}^{\infty}e^{-\delta
-t}\indicset{T_x>t}\,dt\), it can be understood intuitively as ``sum'' of
+t}\indicset{T_x>t}\dd{t}\), it can be understood intuitively as ``sum'' of
 pure endowment with ``infinitesimal'' survival benefit
-\faIcon{hand-holding-usd} ``\(dt\)''. Based on this
+\faIcon{hand-holding-usd} ``\(\dd{t}\)''. Based on this
 understanding, the APV formula \(\displaystyle\int_{0}^{\infty}e^{-\delta
-t}\indicset{T_x>t}\,dt\) is ``summing up'' the expected present value of
+t}\indicset{T_x>t}\dd{t}\) is ``summing up'' the expected present value of
 \faIcon{hand-holding-usd} every \(t\)-year ``infinitesimal'' pure endowment:
 \[
-\underbrace{dte^{-\delta t}}_{\text{PV of payment}}\times\underbrace{\px[t]{x}}_{\text{prob.\ of surviving at time \(t\)}}.
+\underbrace{\dd{t}e^{-\delta t}}_{\text{PV of payment}}\times\underbrace{\px[t]{x}}_{\text{prob.\ of surviving at time \(t\)}}.
 \]
 \end{intuition}
 
 \begin{note}
-Note that \(\displaystyle \int_{0}^{\infty}e^{-\delta t}\indicset{T_x>t}\,dt
-=\int_{0}^{T_x}e^{-\delta t}\,dt
+Note that \(\displaystyle \int_{0}^{\infty}e^{-\delta t}\indicset{T_x>t}\dd{t}
+=\int_{0}^{T_x}e^{-\delta t}\dd{t}
 =\ax*{\angl{T_x}}\), so both p.v.r.v.\ expressions are indeed equivalent.
 \end{note}
 
@@ -135,9 +135,9 @@ To get the first APV formula, note that
 \]
 For the second APV formula, note that
 \[
-\expv{\int_{0}^{\infty}e^{-\delta t}\indicset{T_x>t}\,dt}
-=\int_{0}^{\infty}\expv{e^{-\delta t}\indicset{T_x>t}}\,dt
-=\int_{0}^{\infty}e^{-\delta t}\px[t]{x}\,dt
+\expv{\int_{0}^{\infty}e^{-\delta t}\indicset{T_x>t}\dd{t}}
+=\int_{0}^{\infty}\expv{e^{-\delta t}\indicset{T_x>t}}\dd{t}
+=\int_{0}^{\infty}e^{-\delta t}\px[t]{x}\dd{t}
 \]
 where the first equality follows from Fubini's theorem.
 
@@ -247,10 +247,10 @@ Continuous case (annual payment rate: 1):
 \toprule
 &p.v.r.v.&APV&variance\\
 \midrule
-expression&\(\ax*{\angl{T_x\wedge n}}\) or \(\displaystyle\int_{0}^{n}e^{-\delta t}\indicset{T_x>t}\,dt\)
+expression&\(\ax*{\angl{T_x\wedge n}}\) or \(\displaystyle\int_{0}^{n}e^{-\delta t}\indicset{T_x>t}\dd{t}\)
 &\makecell{\(\displaystyle \frac{1-\Ax*{\endowxn}}{\delta}\) or 
 \(\displaystyle \ax*{x}-\Ex[n]{x}\ax*{x+n}\)\\
-or \(\displaystyle\int_{0}^{n}e^{-\delta t}\px[t]{x}\,dt\)}
+or \(\displaystyle\int_{0}^{n}e^{-\delta t}\px[t]{x}\dd{t}\)}
 &\(\displaystyle \frac{\Ax*[][2]{\endowxn}-\qty(\Ax*{\endowxn})^2}{\delta^2}\)\\
 notation&\(Y\)&\(\ax*{\endowxn}\)&\(\vari{Y}\)\\
 \bottomrule
@@ -387,10 +387,10 @@ Continuous case (annual payment rate: 1):
 \toprule
 &p.v.r.v.&APV \\
 \midrule
-expression&\(\ax*[u|]{\angl{T_x-u}}\indicset{T_x>u}\) or \(\displaystyle\int_{u}^{\infty}e^{-\delta t}\indicset{T_x>t}\,dt\)
+expression&\(\ax*[u|]{\angl{T_x-u}}\indicset{T_x>u}\) or \(\displaystyle\int_{u}^{\infty}e^{-\delta t}\indicset{T_x>t}\dd{t}\)
 &\makecell{\(\ax*{x}-\ax*{x:\angl{u}}\) or 
 \(\Ex[u]{x}\ax*{x+u}\)\\
-or \(\displaystyle\int_{u}^{\infty}e^{-\delta t}\px[t]{x}\,dt\)} \\
+or \(\displaystyle\int_{u}^{\infty}e^{-\delta t}\px[t]{x}\dd{t}\)} \\
 notation&\(Y\)&\(\ax*[u|]{x}\)\\
 \bottomrule
 \end{tabular}
@@ -920,7 +920,7 @@ notation&\(Y\)&\(\ax**{\endowxn}[\{m\}]\)&\(\vari{Y}\)\\
 \labelcref{it:gen-apv-fmla} is applicable in the case where the life annuity
 has varying payment amounts. \begin{note}
 For the continuous case, the ``benefit amount'' part in the general formula
-would involve ``\(dt\)'' --- the benefit paid in an ``infinitesimal'' time interval
+would involve ``\(\dd{t}\)'' --- the benefit paid in an ``infinitesimal'' time interval
 is ``infinitesimal'' for the continuous life annuity case.
 \end{note}
 \item Again we shall discuss two special cases:
@@ -1025,11 +1025,11 @@ using the general APV formula in \labelcref{it:gen-apv-fmla}:
 Example: We have
 \[
 (\bar{I}\ax*{})_{\endowxn}=\int_{0}^{n}{\color{brown}t}{\color{violet}e^{-\delta
-t}}{\color{magenta}\px[t]{x}}\,{\color{brown}dt}
+t}}{\color{magenta}\px[t]{x}}{\color{brown}\dd{t}}
 \]
-(\({\color{brown}t\,dt}\): ``benefit payment''; \({\color{violet}e^{-\delta
+(\({\color{brown}t\dd{t}}\): ``benefit payment''; \({\color{violet}e^{-\delta
 t}}\): ``discount factor''; \({\color{magenta}\px[t]{x}}\): ``prob.\ of
-triggering payment'', for every ``infinitesimal'' time interval \([t,t+dt]\)).
+triggering payment'', for every ``infinitesimal'' time interval \([t,t+\dd{t}]\)).
 
 \item Like \labelcref{it:geo-vb-insurance-intro}, for geometrically
 increasing/decreasing life annuities, we shall focus on the annual case (where

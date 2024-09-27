@@ -295,11 +295,11 @@ as well as the properties in \labelcref{it:valid-surv}.
 \item Recall that the \emph{force of interest} at time \(t\) (\(\delta_t\)) can
 be seen as ``relative'' rate of change of amount function \(A(\cdot)\):
 \[
-dA(t)=A(t)\delta_tdt,\quad\text{or}\quad
+dA(t)=A(t)\delta_t\dd{t},\quad\text{or}\quad
 \delta_t=\frac{A'(t)}{A(t)},
 \]
-where \(A(t)\delta_tdt\) may be understood intuitively as ``interest earned in
-\([t,t+dt]\)''.
+where \(A(t)\delta_t\dd{t}\) may be understood intuitively as ``interest earned in
+\([t,t+\dd{t}]\)''.
 
 \item Since force of mortality is also a ``force'', one may expect it is also
 defined as relative rate of change of some function. A natural choice may be
@@ -313,9 +313,9 @@ time \(t\), denoted by \(\mu_t\) (or \(\mu_0(t)\)), is defined as
 \mu_t=-\frac{S_0'(t)}{S_0(t)}.
 \]
 \begin{intuition}
-We can express this as \(dS_0(t)=-S_0(t)\mu_tdt\), and \(S_0(t)\mu_tdt\) may be
-intuitively understood as ``drop in survival probability in \([t,t+dt]\)'' or
-``probability of death in \([t,t+dt]\)''.
+We can express this as \(\dd{S_0(t)}=-S_0(t)\mu_t\dd{t}\), and \(S_0(t)\mu_t\dd{t}\) may be
+intuitively understood as ``drop in survival probability in \([t,t+\dd{t}]\)'' or
+``probability of death in \([t,t+\dd{t}]\)''.
 
 \begin{tikzpicture}
 \draw[-Latex] (0,0) -- (10,0) node[right]{Age};
@@ -324,7 +324,7 @@ node[below] {0};
 \fill[] (3,0) circle [radius=0.05]
 node[below left] {\(t\)};
 \fill[] (3.1,0) circle [radius=0.05]
-node[below right] {\(t+dt\)};
+node[below right] {\(t+\dd{t}\)};
 \draw[-Latex] (0,0.2) to[bend left] (3,0.2);
 \node[] () at (1.5, 1) {lives for \(t\) years};
 \draw[color=red,decorate,decoration={brace, amplitude=5pt}] (3, 0.2) -- (3.1,0.2)
@@ -342,14 +342,14 @@ for any \(t>0\).
 
 \begin{note}
 This explains why the intuition in \labelcref{it:fom} works: because
-\(S_0(t)\mu_tdt=f_0(t)dt\).
+\(S_0(t)\mu_t\dd{t}=f_0(t)\dd{t}\).
 \end{note}
 
 \begin{pf}
 The result follows from noting that
 \[
--\frac{d}{dt}S_0(t)
-=-\frac{d}{dt}(1-F_0(t))
+-\dv{}{t}S_0(t)
+=-\dv{}{t}(1-F_0(t))
 =-(-f_0(t))
 =f_0(t).
 \]
@@ -372,7 +372,7 @@ node[below=0.05cm] {\(x\)};
 \fill[] (7,0) circle [radius=0.05]
 node[below left] {\(x+t\)};
 \fill[] (7.1,0) circle [radius=0.05]
-node[below right] {\(x+t+dt\)};
+node[below right] {\(x+t+\dd{t}\)};
 \draw[-Latex] (3,0.2) to[bend left] (7,0.2);
 \node[] () at (5, 1) {lives for \(t\) years};
 \draw[color=red,decorate,decoration={brace, amplitude=5pt}] (7, 0.2) -- (7.1,0.2)
@@ -393,7 +393,7 @@ node[below=0.05cm] {\(x\)};
 \fill[] (7,0) circle [radius=0.05]
 node[below left] {\(x+t\)};
 \fill[] (7.1,0) circle [radius=0.05]
-node[below right] {\(x+t+dt\)};
+node[below right] {\(x+t+\dd{t}\)};
 \draw[-Latex] (0,0.2) to[bend left] (7,0.2);
 \node[] () at (3.5, 1.5) {lives for \(x+t\) years};
 \draw[color=red,decorate,decoration={brace, amplitude=5pt}] (7, 0.2) -- (7.1,0.2)
@@ -406,10 +406,10 @@ Fortunately, this is the case:
 \begin{pf}
 Firstly,
 \[
-\frac{d}{dt}S_x(t)
-=\frac{d}{dt}\frac{S_0(x+t)}{S_0(x)}
-=\frac{1}{S_0(x)}\frac{d}{dt}S_0(\underbrace{x+t}_{u})
-=\frac{S_0'(u)}{S_0(x)}\underbrace{\frac{du}{dt}}_{1},
+\dv{}{t}S_x(t)
+=\dv{}{t}\frac{S_0(x+t)}{S_0(x)}
+=\frac{1}{S_0(x)}\dv{}{t}S_0(\underbrace{x+t}_{u})
+=\frac{S_0'(u)}{S_0(x)}\underbrace{\dv{u}{t}}_{1},
 \]
 and
 \[S_x(t)=\frac{S_0(u)}{S_0(x)}.\]
@@ -473,7 +473,7 @@ S_x(t)=\exp\qty(-\int_{0}^{t}\mu_{x+s}\,ds).
 \end{intuition}
 
 \begin{pf}
-Note that \(\displaystyle\mu_{x}(s)=\frac{d}{ds}\ln S_x(s)\). Then, taking
+Note that \(\displaystyle\mu_{x}(s)=\dv{}{s}\ln S_x(s)\). Then, taking
 integral on both sides and applying fundamental theorem of calculus give the
 desired result.
 \end{pf}
@@ -736,10 +736,10 @@ dies within the coming \(t\) years.
 \end{intuition}
 \item \(f_x(t)=\px[t]{x}\mu_{x+t}\).
 \begin{intuition}
-Similar to the intuition in \labelcref{it:fom}, \(\px[t]{x}\mu_{x+t}dt\) may be
-interpreted ``probability of death in time interval \([t,t+dt]\)''. On the
-other hand, \(f_x(t)dt\) may also be understood as ``probability of death in
-time interval \([t,t+dt]\)''.
+Similar to the intuition in \labelcref{it:fom}, \(\px[t]{x}\mu_{x+t}\dd{t}\) may be
+interpreted ``probability of death in time interval \([t,t+\dd{t}]\)''. On the
+other hand, \(f_x(t)\dd{t}\) may also be understood as ``probability of death in
+time interval \([t,t+\dd{t}]\)''.
 \end{intuition}
 \end{enumerate}
 \end{proposition}
@@ -777,22 +777,22 @@ lifetime).
 
 \item By definition, we have
 \[
-\eringx{x}=\int_{0}^{\infty}t\,\px[t]{x}\mu_{x+t}\,dt.
+\eringx{x}=\int_{0}^{\infty}t\,\px[t]{x}\mu_{x+t}\\dd{t}.
 \]
 However, this is a bit complicated to evaluate and we almost always use the
 following simpler formula instead:
 \begin{proposition}
 \label{prp:eringx-fmla}
 \[
-\eringx{x}=\int_0^{\infty}\px[t]{x}\,dt.
+\eringx{x}=\int_0^{\infty}\px[t]{x}\\dd{t}.
 \]
 \end{proposition}
 
 \begin{pf}
 Since \(T_x\) is nonnegative, we have
 \[
-T_x=\int_{0}^{T_x}1\,dt
-=\int_{0}^{\infty}\indicset{t<T_x}\,dt.
+T_x=\int_{0}^{T_x}1\\dd{t}
+=\int_{0}^{\infty}\indicset{t<T_x}\\dd{t}.
 \]
 \begin{note}
 \(\indicset{\cdot}\) denotes the indicator function.
@@ -800,9 +800,9 @@ T_x=\int_{0}^{T_x}1\,dt
 
 It then follows that
 \[
-\expv{T_x}=\expv{\int_{0}^{\infty}\indicset{t<T_x}\,dt}
-=\int_{0}^{\infty}\expv{\indicset{T_x>t}}\,dt
-=\int_{0}^{\infty}\prob{T_x>t}\,dt,
+\expv{T_x}=\expv{\int_{0}^{\infty}\indicset{t<T_x}\\dd{t}}
+=\int_{0}^{\infty}\expv{\indicset{T_x>t}}\\dd{t}
+=\int_{0}^{\infty}\prob{T_x>t}\\dd{t},
 \]
 as desired. (The second equality holds by Fubini's theorem.)
 \end{pf}
@@ -815,18 +815,18 @@ of the definition:
 \begin{proposition}
 \label{prp:tx-2nd-moment-fmla}
 \[
-\expv{T_x^2}=2\int_{0}^{\infty}t\,\px[t]{x}\,dt.
+\expv{T_x^2}=2\int_{0}^{\infty}t\,\px[t]{x}\\dd{t}.
 \]
 \end{proposition}
 \begin{pf}
 By definition, we have:
 \[
-\expv{T_x^2}=\int_{0}^{\infty}t^2\px[t]{x}\mu_{x+t}\,dt
-=-\int_{0}^{\infty}t^2\frac{d}{dt}\px[t]{x}\,dt.
+\expv{T_x^2}=\int_{0}^{\infty}t^2\px[t]{x}\mu_{x+t}\\dd{t}
+=-\int_{0}^{\infty}t^2\dv{}{t}\px[t]{x}\\dd{t}.
 \]
 Integrating it by parts gives
 \[
-\underbrace{-[t^2\px[t]{x}]_0^{\infty}}_{0}-\int_{0}^{\infty}2t\px[t]{x}\,dt
+\underbrace{-[t^2\px[t]{x}]_0^{\infty}}_{0}-\int_{0}^{\infty}2t\px[t]{x}\\dd{t}
 \]
 where the first term is zero due to the conditions in
 \labelcref{it:additional-cond}.
@@ -858,15 +858,15 @@ details will be explained in STAT3909).
 \begin{proposition}
 \label{prp:eringxn-fmla}
 \[
-\eringx{\endowxn}=\int_{0}^{n}\px[t]{x}\,dt.
+\eringx{\endowxn}=\int_{0}^{n}\px[t]{x}\\dd{t}.
 \]
 \end{proposition}
 \begin{pf}
 Replace \(T_x\) by \(T_x\wedge n\) in the proof of \cref{prp:eringx-fmla}, and note that
 \[
-\expv{\int_{0}^{\infty}\indicset{t<T_x\wedge n}\,dt}
-=\expv{\int_{0}^{\infty}\indicset{t<T_x}\indicset{t<n}\,dt}
-=\expv{\int_{0}^{n}\indicset{t<T_x}\,dt}.
+\expv{\int_{0}^{\infty}\indicset{t<T_x\wedge n}\\dd{t}}
+=\expv{\int_{0}^{\infty}\indicset{t<T_x}\indicset{t<n}\\dd{t}}
+=\expv{\int_{0}^{n}\indicset{t<T_x}\\dd{t}}.
 \]
 \end{pf}
 \end{enumerate}
@@ -1054,9 +1054,9 @@ node[midway, above=0.7cm]{\(\eringx{x+n}\)};
 \begin{pf}
 Note that
 \[
-\int_{0}^{\infty}\px[t]{x}\,dt
-=\int_{0}^{n}\px[t]{x}\,dt
-+\underbrace{\int_{n}^{\infty}\px[t]{x}\,dt}_{\px[n]{x}\int_{0}^{\infty}\px[t]{x+n}\,dt}
+\int_{0}^{\infty}\px[t]{x}\\dd{t}
+=\int_{0}^{n}\px[t]{x}\\dd{t}
++\underbrace{\int_{n}^{\infty}\px[t]{x}\\dd{t}}_{\px[n]{x}\int_{0}^{\infty}\px[t]{x+n}\\dd{t}}
 =\eringx{\endowxn}+\px[n]{x}\eringx{x+n}.
 \]
 \end{pf}
@@ -1193,9 +1193,9 @@ Typically \(\lx{x}\) for different ages \(x\) are given in a life table, and
 hence this result is useful for computing various probabilities based on life
 table, e.g.:
 \begin{enumerate}
-\item \(\px[t]{x}=\frac{\lx{x+t}}{\lx{x}}\)
-\item \(\qx[t]{x}=1-\frac{\lx{x+t}}{\lx{x}}\)
-\item \(\qx[u|t]{x}=\frac{\lx{x+u}-\lx{x+u+t}}{\lx{x}}\)
+\item \(\displaystyle \px[t]{x}=\frac{\lx{x+t}}{\lx{x}}\)
+\item \(\displaystyle \qx[t]{x}=1-\frac{\lx{x+t}}{\lx{x}}\)
+\item \(\displaystyle \qx[u|t]{x}=\frac{\lx{x+u}-\lx{x+u+t}}{\lx{x}}\)
 \end{enumerate}
 
 \item A life table sometimes also provides values for ``\(d\)'', which can be
@@ -1289,8 +1289,8 @@ For any integer age \(x\) and any \(t\in[0,1)\), \(\displaystyle
 Note that
 \[
 \mu_{x+t}=\frac{f_x(t)}{\px[t]{x}}
-=\frac{\displaystyle \dv{}{t}\qx[t]{x}}{1-\qx[t]{x}}
-=\frac{\displaystyle \dv{}{t}tq_x}{1-tq_x}
+=\frac{\dv{}{t}\qx[t]{x}}{1-\qx[t]{x}}
+=\frac{\dv{}{t}tq_x}{1-tq_x}
 =\frac{q_x}{1-tq_x}.
 \]
 \end{pf}
@@ -1354,8 +1354,8 @@ We have
 of mortality assumption is to express the quantities to be computed in terms of
 \(\px[t]{x}\) where \(x\in\N_0\) and \(t\in[0,1)\). For example,
 \[\mu_x^*=\mu_{x+t}
-=-\frac{1}{\px[t]{x}}\frac{d}{dt}\px[t]{x}
-=-\frac{1}{(\px{x})^t}\frac{d}{dt}(\px{x})^t
+=-\frac{1}{\px[t]{x}}\dv{}{t}\px[t]{x}
+=-\frac{1}{(\px{x})^t}\dv{}{t}(\px{x})^t
 =-\frac{(\px{x})^t\ln\px{x}}{(\px{x})^t}
 =-\ln\px{x}.
 \]
@@ -1510,7 +1510,7 @@ This assumption makes sense since we are considering time periods \emph{after}
 selection, so there should not be \emph{new} ``external'' information in those
 periods (the ``external'' information from selection has already been
 incorporated).
-\item As a result, previous formulas is ``modelled''/``started'' at age \(x\)
+\item As a result, previous formulas ``modelled''/``started'' at age \(x\)
 can be readily adapted (change ``\(x\)'' to ``\([x]\)'') for the ``select''
 life.
 \begin{warning}

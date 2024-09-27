@@ -51,7 +51,7 @@ factor}\times\text{prob.\ of triggering payment}.
 \]
 \begin{note}
 For continuous case with ``\(\int\)'', the terms above can be in
-``infinitesimal'' sense (e.g., involving ``\(dt\)''), loosely.
+``infinitesimal'' sense (e.g., involving ``\(\dd{t}\)''), loosely.
 \end{note}
 
 
@@ -106,12 +106,13 @@ Z=v^{T_x}=e^{-\delta T_x}.
 where \(\delta\) is the annual force of interest equivalent to the annual rate
 \(i\). The APV is:
 \[
-\expv{Z}=\expv{e^{-\delta T_x}}=\int_{0}^{\infty}e^{-\delta t}\underbrace{\px[t]{x}\mu_{x+t}}_{f_x(t)}\,dt
+\expv{Z}=\expv{e^{-\delta T_x}}=\int_{0}^{\infty}e^{-\delta t}\underbrace{\px[t]{x}\mu_{x+t}}_{f_x(t)}\dd{t}
 \]
 \begin{intuition}
 RHS ``sums up'' the ``expected present value of death benefit'':
-\[\underbrace{e^{-\delta t}}_{\text{PV of payment}}\times \underbrace{\px[t]{x}\mu_{x+t}\,dt}_{\text{death prob. in }[t,t+dt]}\]
-(\(e^{-\delta(t+dt)}\) and \(e^{-\delta t}\) are ``the same'' in
+\[\underbrace{e^{-\delta t}}_{\text{PV of payment}}\times
+\underbrace{\px[t]{x}\mu_{x+t}\dd{t}}_{\text{death prob.\ in }[t,t+\dd{t}]}\]
+(\(e^{-\delta(t+\dd{t})}\) and \(e^{-\delta t}\) are ``the same'' in
 ``infinitesimal'' sense) in all ``infinitesimal'' time intervals.
 \end{intuition}
 \item Actuarial notation for the APV:
@@ -167,7 +168,7 @@ This works generally for all kinds of insurance introduced in
 \toprule
 &p.v.r.v.&APV&2nd moment&variance\\
 \midrule
-expression&\(e^{-\delta T_x}\)&\(\displaystyle\int_{0}^{\infty}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt\)
+expression&\(e^{-\delta T_x}\)&\(\displaystyle\int_{0}^{\infty}e^{-\delta t}\px[t]{x}\mu_{x+t}\dd{t}\)
 &\(\Ax*{x}@\;2\delta\)&\(\Ax*[][2]{x}-(\Ax*{x})^2\)\\
 notation&\(Z\)&\(\Ax*{x}\)&\(\Ax*[][2]{x}\)&\(\vari{Z}\)\\
 \bottomrule
@@ -340,7 +341,7 @@ Continuous case:
 &p.v.r.v.&APV&2nd moment&variance\\
 \midrule
 expression&\(e^{-\delta T_x}\indicset{T_x\le n}\)&\(\Ax*{x}-\Ex[n]{x}\Ax*{x+n}\)
-or \(\displaystyle\int_{0}^{n}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt\)
+or \(\displaystyle\int_{0}^{n}e^{-\delta t}\px[t]{x}\mu_{x+t}\dd{t}\)
 &\(\Ax*{\termxn}@\;2\delta\)&\(\Ax*[][2]{\termxn}-\qty(\Ax*{\termxn})^2\)\\
 notation&\(Z\)&\(\Ax*{\termxn}\)
 &\(\Ax*[][2]{\termxn}\)
@@ -579,7 +580,7 @@ But of course, one can also use the general APV formula in \labelcref{it:gen-apv
 &p.v.r.v.&APV&2nd moment&variance\\
 \midrule
 expression&\(e^{-\delta T_x}\indicset{T_x>u}\)
-&\(\Ex[u]{x}\Ax*{x+u}\) or \(\displaystyle\int_{u}^{\infty}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt\)
+&\(\Ex[u]{x}\Ax*{x+u}\) or \(\displaystyle\int_{u}^{\infty}e^{-\delta t}\px[t]{x}\mu_{x+t}\dd{t}\)
 &\(\Ax*[u|]{x}@\;2\delta\)&\(\Ax*[u|][2]{x}-(\Ax*[u|]{x})^2\)\\
 notation&\(Z\)&\(\Ax*[u|]{x}\)&\(\Ax*[u|][2]{x}\)&\(\vari{Z}\)\\
 \bottomrule
@@ -623,7 +624,7 @@ notation&\(Z\)&\(\Ax[u|]{x}[(m)]\)&\(\Ax[u|][2]{x}[(m)]\)&\(\vari{Z}\)\\
 &p.v.r.v.&APV&2nd moment&variance\\
 \midrule
 expression&\(e^{-\delta T_x}\indicset{u<T_x\le u+n}\)
-&\makecell{\(\Ex[u]{x}\Ax*{\itop{(x+u)}:\angl{n}}\)\\ or \(\displaystyle\int_{u}^{u+n}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt\)}
+&\makecell{\(\Ex[u]{x}\Ax*{\itop{(x+u)}:\angl{n}}\)\\ or \(\displaystyle\int_{u}^{u+n}e^{-\delta t}\px[t]{x}\mu_{x+t}\dd{t}\)}
 &\(\Ax*[u|]{\termxn}@\;2\delta\)&\(\Ax*[u|][2]{\termxn}-(\Ax*[u|]{\termxn})^2\)\\
 notation&\(Z\)&\(\Ax*[u|]{\termxn}\)&\(\Ax*[u|][2]{\termxn}\)&\(\vari{Z}\)\\
 \bottomrule
@@ -898,25 +899,25 @@ APV formula in \labelcref{it:gen-apv-fmla}:
 notation&APV\\
 \midrule
 \(\IA*_{\termxn}\)&
-\(\displaystyle\int_{0}^{1}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt
-+\int_{1}^{2}2e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt
-+\dotsb+\int_{n-1}^{n}ne^{-\delta t}\,\px[t]{x}\mu_{x+t}\,dt\)\\
+\(\displaystyle\int_{0}^{1}e^{-\delta t}\px[t]{x}\mu_{x+t}\dd{t}
++\int_{1}^{2}2e^{-\delta t}\px[t]{x}\mu_{x+t}\dd{t}
++\dotsb+\int_{n-1}^{n}ne^{-\delta t}\,\px[t]{x}\mu_{x+t}\dd{t}\)\\
 \(\ImA*_{\termxn}\)&
-\(\displaystyle\int_{0}^{1/m}\frac{1}{m}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt
-+\int_{1/m}^{2/m}\frac{2}{m}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt
-+\dotsb+\int_{(mn-1)/m}^{n}ne^{-\delta t}\,\px[t]{x}\mu_{x+t}\,dt\)\\
+\(\displaystyle\int_{0}^{1/m}\frac{1}{m}e^{-\delta t}\px[t]{x}\mu_{x+t}\dd{t}
++\int_{1/m}^{2/m}\frac{2}{m}e^{-\delta t}\px[t]{x}\mu_{x+t}\dd{t}
++\dotsb+\int_{(mn-1)/m}^{n}ne^{-\delta t}\,\px[t]{x}\mu_{x+t}\dd{t}\)\\
 \ystar\(\IbA*_{\termxn}\)&
-\(\displaystyle\int_{0}^{n}te^{-\delta t}\,\px[t]{x}\mu_{x+t}\,dt\)\\
+\(\displaystyle\int_{0}^{n}te^{-\delta t}\,\px[t]{x}\mu_{x+t}\dd{t}\)\\
 \(\DA*_{\termxn}\)&
-\(\displaystyle\int_{0}^{1}ne^{-\delta t}\,\px[t]{x}\mu_{x+t}\,dt
-+\int_{1}^{2}(n-1)e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt
-+\dotsb+\int_{n-1}^{n}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt\)\\
+\(\displaystyle\int_{0}^{1}ne^{-\delta t}\,\px[t]{x}\mu_{x+t}\dd{t}
++\int_{1}^{2}(n-1)e^{-\delta t}\px[t]{x}\mu_{x+t}\dd{t}
++\dotsb+\int_{n-1}^{n}e^{-\delta t}\px[t]{x}\mu_{x+t}\dd{t}\)\\
 \(\DmA*_{\termxn}\)&
-\(\displaystyle\int_{0}^{1/m}ne^{-\delta t}\,\px[t]{x}\mu_{x+t}\,dt
-+\int_{1/m}^{2/m}\qty(n-\frac{1}{m})e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt
-+\dotsb+\int_{(mn-1)/m}^{n}\frac{1}{m}e^{-\delta t}\px[t]{x}\mu_{x+t}\,dt\)\\
+\(\displaystyle\int_{0}^{1/m}ne^{-\delta t}\,\px[t]{x}\mu_{x+t}\dd{t}
++\int_{1/m}^{2/m}\qty(n-\frac{1}{m})e^{-\delta t}\px[t]{x}\mu_{x+t}\dd{t}
++\dotsb+\int_{(mn-1)/m}^{n}\frac{1}{m}e^{-\delta t}\px[t]{x}\mu_{x+t}\dd{t}\)\\
 \ystar\(\DbA*_{\termxn}\)&
-\(\displaystyle\int_{0}^{n}(n-t)e^{-\delta t}\,\px[t]{x}\mu_{x+t}\,dt\)\\
+\(\displaystyle\int_{0}^{n}(n-t)e^{-\delta t}\,\px[t]{x}\mu_{x+t}\dd{t}\)\\
 \midrule
 \((IA^{(m)})_{\termxn}\)&
 \(\displaystyle\sum_{k=0}^{m-1}v^{\frac{k+1}{m}}\px[\frac{k}{m}]{x}\qx[\frac{1}{m}]{x+\frac{k}{m}}
@@ -947,7 +948,7 @@ notation&APV\\
 \label{prp:arith-decreasing-fmla}
 We have
 \begin{enumerate}
-\item \(\displaystyle\DbA*_{\termxn}=\int_{0}^{n}\Ax*{\itop{x}:\angl{n-t}}\,dt\);\\
+\item \(\displaystyle\DbA*_{\termxn}=\int_{0}^{n}\Ax*{\itop{x}:\angl{n-t}}\dd{t}\);\\
 \item \(\displaystyle(D^{(m)}A^{(m)})_{\termxn}=\sum_{k=0}^{mn-1}\Ax{\itop{x}:\angl{n-\frac{k}{m}}}[(m)]\);\\
 \item \(\displaystyle(DA)_{\termxn}=\sum_{k=0}^{n-1}\Ax{\itop{x}:\angl{n-k}}\).
 \end{enumerate}
@@ -966,7 +967,7 @@ We have
 
 \begin{tikzpicture}
 \node[] () at (5.5, 4) {RHS: ``slicing horizontally''};
-\node[] () at (1.5,3) {\(\displaystyle\int_{0}^{n}\Ax*{\itop{x}:\angl{n-t}}\,dt\)};
+\node[] () at (1.5,3) {\(\displaystyle\int_{0}^{n}\Ax*{\itop{x}:\angl{n-t}}\dd{t}\)};
 \draw[pattern={Lines[distance=1pt]}] (0,0)  -- (3,0)  -- (0,3) -- cycle;
 \node[] () at (5.5,3) {\(\displaystyle\sum_{k=0}^{mn-1}\Ax{\itop{x}:\angl{n-\frac{k}{m}}}\)};
 \draw[pattern=horizontal lines] (4,0)  -- (7,0)  -- (4,3) -- cycle;
@@ -978,9 +979,9 @@ We have
 \begin{pf}
 For the continuous case we have
 \[
-\DbA*_{\termxn}=\int_{0}^{n}(n-s)\,\px[s]{x}\mu_{x+s}\,ds
-=\int_{0}^{n}\qty(\int_{0}^{n-s}1\,dt)\,\px[s]{x}\mu_{x+s}\,ds
-=\int_{0}^{n}\underbrace{\qty(\int_{0}^{n-t}\,\px[s]{x}\mu_{x+s}\,ds)}_{\Ax*{\itop{x}:\angl{n-t}}}\,dt.
+\DbA*_{\termxn}=\int_{0}^{n}(n-s)\,\px[s]{x}\mu_{x+s}\dd{s}
+=\int_{0}^{n}\qty(\int_{0}^{n-s}1\dd{t})\,\px[s]{x}\mu_{x+s}\dd{s}
+=\int_{0}^{n}\underbrace{\qty(\int_{0}^{n-t}\,\px[s]{x}\mu_{x+s}\dd{s})}_{\Ax*{\itop{x}:\angl{n-t}}}\dd{t}.
 \]
 Next, for the \(1/m\)thly case we have
 \begin{align*}
