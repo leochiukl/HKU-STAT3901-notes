@@ -349,7 +349,7 @@ This explains why the intuition in \labelcref{it:fom} works: because
 The result follows from noting that
 \[
 -\dv{}{t}S_0(t)
-=-\dv{}{t}(1-F_0(t))
+=-\dv{}{t}{(1-F_0(t))}
 =-(-f_0(t))
 =f_0(t).
 \]
@@ -777,22 +777,22 @@ lifetime).
 
 \item By definition, we have
 \[
-\eringx{x}=\int_{0}^{\infty}t\,\px[t]{x}\mu_{x+t}\\dd{t}.
+\eringx{x}=\int_{0}^{\infty}t\,\px[t]{x}\mu_{x+t}\dd{t}.
 \]
 However, this is a bit complicated to evaluate and we almost always use the
 following simpler formula instead:
 \begin{proposition}
 \label{prp:eringx-fmla}
 \[
-\eringx{x}=\int_0^{\infty}\px[t]{x}\\dd{t}.
+\eringx{x}=\int_0^{\infty}\px[t]{x}\dd{t}.
 \]
 \end{proposition}
 
 \begin{pf}
 Since \(T_x\) is nonnegative, we have
 \[
-T_x=\int_{0}^{T_x}1\\dd{t}
-=\int_{0}^{\infty}\indicset{t<T_x}\\dd{t}.
+T_x=\int_{0}^{T_x}1\dd{t}
+=\int_{0}^{\infty}\indicset{t<T_x}\dd{t}.
 \]
 \begin{note}
 \(\indicset{\cdot}\) denotes the indicator function.
@@ -800,9 +800,9 @@ T_x=\int_{0}^{T_x}1\\dd{t}
 
 It then follows that
 \[
-\expv{T_x}=\expv{\int_{0}^{\infty}\indicset{t<T_x}\\dd{t}}
-=\int_{0}^{\infty}\expv{\indicset{T_x>t}}\\dd{t}
-=\int_{0}^{\infty}\prob{T_x>t}\\dd{t},
+\expv{T_x}=\expv{\int_{0}^{\infty}\indicset{t<T_x}\dd{t}}
+=\int_{0}^{\infty}\expv{\indicset{T_x>t}}\dd{t}
+=\int_{0}^{\infty}\prob{T_x>t}\dd{t},
 \]
 as desired. (The second equality holds by Fubini's theorem.)
 \end{pf}
@@ -815,18 +815,18 @@ of the definition:
 \begin{proposition}
 \label{prp:tx-2nd-moment-fmla}
 \[
-\expv{T_x^2}=2\int_{0}^{\infty}t\,\px[t]{x}\\dd{t}.
+\expv{T_x^2}=2\int_{0}^{\infty}t\,\px[t]{x}\dd{t}.
 \]
 \end{proposition}
 \begin{pf}
 By definition, we have:
 \[
-\expv{T_x^2}=\int_{0}^{\infty}t^2\px[t]{x}\mu_{x+t}\\dd{t}
-=-\int_{0}^{\infty}t^2\dv{}{t}\px[t]{x}\\dd{t}.
+\expv{T_x^2}=\int_{0}^{\infty}t^2\px[t]{x}\mu_{x+t}\dd{t}
+=-\int_{0}^{\infty}t^2\dv{}{t}\px[t]{x}\dd{t}.
 \]
 Integrating it by parts gives
 \[
-\underbrace{-[t^2\px[t]{x}]_0^{\infty}}_{0}-\int_{0}^{\infty}2t\px[t]{x}\\dd{t}
+\underbrace{-[t^2\px[t]{x}]_0^{\infty}}_{0}-\int_{0}^{\infty}2t\px[t]{x}\dd{t}
 \]
 where the first term is zero due to the conditions in
 \labelcref{it:additional-cond}.
@@ -858,15 +858,15 @@ details will be explained in STAT3909).
 \begin{proposition}
 \label{prp:eringxn-fmla}
 \[
-\eringx{\endowxn}=\int_{0}^{n}\px[t]{x}\\dd{t}.
+\eringx{\endowxn}=\int_{0}^{n}\px[t]{x}\dd{t}.
 \]
 \end{proposition}
 \begin{pf}
 Replace \(T_x\) by \(T_x\wedge n\) in the proof of \cref{prp:eringx-fmla}, and note that
 \[
-\expv{\int_{0}^{\infty}\indicset{t<T_x\wedge n}\\dd{t}}
-=\expv{\int_{0}^{\infty}\indicset{t<T_x}\indicset{t<n}\\dd{t}}
-=\expv{\int_{0}^{n}\indicset{t<T_x}\\dd{t}}.
+\expv{\int_{0}^{\infty}\indicset{t<T_x\wedge n}\dd{t}}
+=\expv{\int_{0}^{\infty}\indicset{t<T_x}\indicset{t<n}\dd{t}}
+=\expv{\int_{0}^{n}\indicset{t<T_x}\dd{t}}.
 \]
 \end{pf}
 \end{enumerate}
@@ -971,11 +971,15 @@ The sum starts at \(k=1\), \underline{not} \(k=0\).
 \begin{pf}
 Using a similar approach as the proof of \cref{prp:eringx-fmla}, we have
 \[
-\expv{K_x}=\expv{\sum_{j=0}^{\infty}\indicset{j<K_x}}
-=\sum_{j=0}^{\infty}\prob{K_x>j}
-=\sum_{j=0}^{\infty}\prob{T_x\ge j+1}
+\expv{K_x}=\expv{\sum_{k=1}^{K_x}1}
+=\expv{\sum_{k=1}^{\infty}\indicset{k\le K_x}}
+=\sum_{k=1}^{\infty}\prob{K_x\ge k}
+=\sum_{k=1}^{\infty}\prob{T_x\ge k}
 =\sum_{k=1}^{\infty}\px[k]{x}.
 \]
+\begin{note}
+When \(K_x=0\), we define \(\sum_{k=1}^{K_x}1=0\).
+\end{note}
 \end{pf}
 \item For the second moment, we have also the following analogous result:
 \begin{proposition}
@@ -1054,9 +1058,9 @@ node[midway, above=0.7cm]{\(\eringx{x+n}\)};
 \begin{pf}
 Note that
 \[
-\int_{0}^{\infty}\px[t]{x}\\dd{t}
-=\int_{0}^{n}\px[t]{x}\\dd{t}
-+\underbrace{\int_{n}^{\infty}\px[t]{x}\\dd{t}}_{\px[n]{x}\int_{0}^{\infty}\px[t]{x+n}\\dd{t}}
+\int_{0}^{\infty}\px[t]{x}\dd{t}
+=\int_{0}^{n}\px[t]{x}\dd{t}
++\underbrace{\int_{n}^{\infty}\px[t]{x}\dd{t}}_{\px[n]{x}\int_{0}^{\infty}\px[t]{x+n}\dd{t}}
 =\eringx{\endowxn}+\px[n]{x}\eringx{x+n}.
 \]
 \end{pf}
