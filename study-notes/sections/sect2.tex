@@ -1,1043 +1,342 @@
-\section{Survival Distributions}
-\label{sect:surv-dist}
-\subsection{Future Lifetime Random Variable}
+\section{Life Insurance}
+\label{sect:life-insurance}
 \begin{enumerate}
-\item A life aged \(x\) (in years) is denoted by \((x)\).
+\item As mentioned at the beginning of \Cref{sect:surv-models}, a motivation
+for studying survival model is that the lifetime of the insured life impacts
+greatly the present value of the benefit payment, hence the loss for the
+insurer. After studying survival models in \Cref{sect:surv-models} and the
+probabilistic behaviours of lifetime in various models, let us investigate how
+the present value of the benefit payment would behave in
+\Cref{sect:life-insurance}. Such present value is called the \defn{present
+value random variable} (PVRV). It is a random variable since it is a function
+of the lifetime, which is a random variable.
 
-\begin{note}
-By ``aged \(x\)'', we mean the life's age is \emph{exactly} \(x\):
-
-\begin{tikzpicture}
-\draw[-Latex] (0,0) -- (10,0) node[right]{Age};
-\fill[] (0,0) circle [radius=0.05]
-node[above] {\faIcon{baby}}
-node[below] {0};
-\fill[] (2,0) circle [radius=0.05]
-node[above] {\faIcon{birthday-cake}}
-node[below] {1};
-\fill[] (4,0) circle [radius=0.05]
-node[above] {\faIcon{birthday-cake}}
-node[below] {2};
-\fill[] (6,0) circle [radius=0.05]
-node[above] {\faIcon{birthday-cake}}
-node[below] {3};
-\fill[] (8,0) circle [radius=0.05]
-node[above] {\faIcon{birthday-cake}}
-node[below] {4};
-\draw[-Latex] (1,1) node[above]{(0.5)} -- (1,0.2);
-\draw[-Latex] (2.5,1) node[above]{(1.25)} -- (2.5,0.2);
-\draw[-Latex] (5.5,1) node[above]{(2.75)} -- (5.5,0.2);
-\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt, mirror}] (2.1,0) -- (3.8,0)
-node[midway, below=0.7cm, font=\small]{``aged 1'' in daily life};
-\end{tikzpicture}
-
-From here we can see that ``age'' in daily life language actually refers to
-number of birthdays passed, which is \emph{different} from our meaning.
-\end{note}
-
-\item \defn{Future lifetime random variable} for \((x)\) is a continuous
-random variable \(T_x\) with support \([0,\infty)\).
-\begin{note}
-This means a life aged \(x\) cannot live forever, and the life ``almost never''
-die exactly at age \(x\) (i.e., with probability 0).
-\end{note}
-
-\begin{tikzpicture}
-\draw[-Latex] (0,0) -- (10,0) node[right]{Age};
-\fill[] (0,0) circle [radius=0.05]
-node[below] {0};
-\fill[] (2,0) circle [radius=0.05]
-node[below] {1};
-\fill[] (4,0) circle [radius=0.05]
-node[below] {2};
-\fill[] (6,0) circle [radius=0.05]
-node[below] {3};
-\fill[] (8,0) circle [radius=0.05]
-node[below] {4};
-\fill[] (3.5,0) circle [radius=0.05]
-node[below=0.05, font=\large] {\(x\)};
-\node[] (life) at (3.5,0.3) {\faIcon{user}};
-\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (3.5,0) -- (9,0)
-node[midway, above=0.7cm]{\(T_x\) (years)};
-\node[red] (die) at (9, 0.3) {\faIcon{skull}};
-\draw[-Latex] (8,-0.7) -- (die.south);
-\node[] () at (8,-1) {age at death: \(x+T_x\)};
-\end{tikzpicture}
-
-\item The cdf of \(T_x\) (denoted by \(F_x(t)\)) is
-\(F_x(t)=\prob{T_x\le t}\), which gives the probability that \((x)\) dies
-within \(t\) years.
-
-\item The survival function of \(T_x\) (denoted by \(S_x(t)\)) is
-\(S_x(t)=\prob{T_x>t}\), which gives the probability that \((x)\) survives for
-more than \(t\) years.
-
-\item \label{it:key-assum} We would like to investigate the relationship between
-distributions of \(T_0\) and \(T_x\) for the same ``underlying life'':
-
-\begin{tikzpicture}
-\draw[-Latex] (0,0) -- (10,0) node[right]{Age};
-\fill[] (0,0) circle [radius=0.05]
-node[above] (age0) {\faIcon{baby}}
-node[below] {0};
-\fill[] (2,0) circle [radius=0.05]
-node[below] {1};
-\fill[] (4,0) circle [radius=0.05]
-node[below] {2};
-\fill[] (6,0) circle [radius=0.05]
-node[below] {3};
-\fill[] (8,0) circle [radius=0.05]
-node[below] {4};
-\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (9,0)
-node[midway, above=0.7cm]{\(T_0\)};
-\end{tikzpicture}
-
-\begin{tikzpicture}
-\draw[-Latex] (0,0) -- (10,0) node[right]{Age};
-\fill[] (0,0) circle [radius=0.05]
-node[below] {0};
-\fill[] (2,0) circle [radius=0.05]
-node[below] {1};
-\fill[] (4,0) circle [radius=0.05] node[below] {2};
-\fill[] (6,0) circle [radius=0.05]
-node[below] {3};
-\fill[] (8,0) circle [radius=0.05]
-node[below] {4};
-\fill[] (3.5,0) circle [radius=0.05]
-node[below=0.05, font=\large] {\(x\)};
-\node[] (life) at (3.5,0.3) {\faIcon{user}};
-\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (3.5,0) -- (9,0)
-node[midway, above=0.7cm]{\(T_x\)};
-\end{tikzpicture}
-
-\begin{note}
-\faIcon{baby} and \faIcon{user} are the same life, but at different ages.
-\end{note}
-
-An ``internal'' information given implicitly is that \faIcon{baby}
-survives to age \(x\) (since \((x)\) \emph{exists}!), i.e., the future lifetime
-of \faIcon{baby} (\(T_0\)) is greater than \(x\).
-
-Given this information, one may naturally expect \(T_0-x\) and \(T_x\) to have
-the same distribution, as they appear to describe the same thing (how long
-\faIcon{user} will live for). But a rather subtle difference between them is
-the \emph{modelling time} of the distribution: the distribution of \(T_0-x\) is
-to be modelled at age 0, while the distribution of \(T_x\) is to be modelled at
-age \(x\).
-
-With the absence of ``external'' information between age 0 and age \(x\), such
-expectation is reasonable. However, if there is some relevant ``external''
-information during the time interval (e.g., discovery of cancer cure), they
-can have different distributions.
-
-Nonetheless, to enrich the study of life contingencies, we shall impose the
-assumption that for any age \(x\),
-\[
-(T_0-x|T_0>x)\eqd T_x.
-\]
-
-\begin{remark}
-\item The assumption may be understood more intuitively as stating that, for any age
-\(x\), (i) \(T_0\) and \(T_x\) have the same ``underlying life''; and (ii)
-there is no ``external'' information between age 0 and age \(x\).
-\item Expressing the assumption in terms of cdf, we have:
-\[
-\prob{T_x\le t}=\prob{T_0\le x+t|T_0>x}.
-\]
-\end{remark}
-\item Having the assumption in \labelcref{it:key-assum}, we can derive the
-following results:
-\begin{proposition}
-\label{prp:chain-surv}
-\(S_0(x+t)=S_0(x)S_x(t)\) for any age \(x\) and \(t\ge 0\).
-\end{proposition}
-
-\begin{intuition}
-LHS means ``(0) lives for \(x+t\) years'', and RHS means ``(0) lives for \(x\)
-years (becoming (\(x\))), and then lives for \(t\) more years'', so LHS and RHS
-``should'' be the same.\footnote{Generally, this kind of ``intuition'' is very helpful in the study of
-life contingencies.}
-
-\begin{tikzpicture}
-\draw[-Latex] (0,0) -- (10,0) node[right]{Age};
-\fill[] (0,0) circle [radius=0.05]
-node[below] {0};
-\fill[] (3,0) circle [radius=0.05]
-node[below=0.05, font=\large] {\(x\)};
-\fill[] (7,0) circle [radius=0.05]
-node[below=0.05, font=\large] {\(x+t\)};
-\draw[-Latex] (0,0.2) to[bend left] (3,0.2);
-\draw[-Latex] (3,0.2) to[bend left] (7,0.2);
-\node[] () at (1.5, 1) {lives for \(x\) years};
-\node[] () at (5, 1) {lives for \(t\) more years};
-\draw[-Latex] (0,-0.5) to[bend right] (7,-0.5);
-\node[] () at (3.5, -1) {lives for \(x+t\) years};
-\end{tikzpicture}
-\end{intuition}
-
-\begin{note}
-This ``and-then'' intuition is ``justified'' because of the assumption in
-\labelcref{it:key-assum}.
-\end{note}
-
-\begin{pf}
-Note that
-\[
-\prob{T_0\le x+t|T_0>x}=\frac{\prob{x<T_0\le x+t}}{\prob{T_0>x}}
-=\frac{S_0(x)-S_0(x+t)}{S_0(x)}
-=1-\frac{S_0(x+t)}{S_0(x)},
-\]
-and
-\[
-\prob{T_x\le t}=1-S_x(t).
-\]
-So, we have
-\[
-\prob{T_x\le t}=\prob{T_0\le x+t|T_0>x}
-\implies 
-S_x(t)=\frac{S_0(x+t)}{S_0(x)},
-\]
-as desired.
-\end{pf}
-
-\begin{proposition}
-\label{prp:gen-chain-surv}
-\(S_x(t+u)=S_x(t)S_{x+t}(u)\) for any age \(x\) and any \(t,u\ge 0\).
-\end{proposition}
-
-\begin{intuition}
-LHS means ``(\(x\)) lives for \(t+u\) years'', and RHS means ``(\(x\)) lives
-for \(t\) years, and then lives for \(u\) more years'', so LHS and RHS
-``should'' be the same.
-
-\begin{tikzpicture}
-\draw[-Latex] (0,0) -- (10,0) node[right]{Age};
-\fill[] (0,0) circle [radius=0.05]
-node[below] {0};
-\fill[] (1,0) circle [radius=0.05]
-node[below=0.05, font=\large] {\(x\)};
-\fill[] (4,0) circle [radius=0.05]
-node[below=0.05, font=\large] {\(x+t\)};
-\fill[] (8,0) circle [radius=0.05]
-node[below=0.05, font=\large] {\(x+t+u\)};
-\draw[-Latex] (1,0.2) to[bend left] (4,0.2);
-\draw[-Latex] (4,0.2) to[bend left] (8,0.2);
-\node[] () at (2.5, 1) {lives for \(t\) years};
-\node[] () at (6, 1) {lives for \(u\) more years};
-\draw[-Latex] (1,-0.5) to[bend right] (8,-0.5);
-\node[] () at (4.5, -1) {lives for \(t+u\) years};
-\end{tikzpicture}
-\end{intuition}
-
-\begin{pf}
-Applying the result in \cref{prp:chain-surv} to LHS and RHS gives
-respectively
-\[
-\frac{S_0(x+t+u)}{S_0(x)}\text{ and }
-\frac{S_0(x+t)}{S_0(x)}\cdot\frac{S_0(x+t+u)}{S_0(x+t)}
-\]
-which are clearly identical.
-\end{pf}
-
-\begin{note}
-From here we can deduce that
-\[
-\prob{T_x>t+u}=\prob{T_x>t}\prob{T_{x+t}>u}
-\implies
-\prob{T_x>t+u|T_x>t}=\prob{T_{x+t}>u},
-\]
-which implies \((T_x-t|T_x>t)\eqd T_{x+t}\), a ``generalization'' to our
-assumption in \labelcref{it:key-assum}.
-\end{note}
-
-\item \label{it:valid-surv} To model the distribution of future lifetime, we often specify a
-\emph{survival function} (which can completely determine a probability
-distribution). Thus, we are interested in studying what conditions on a
-function are needed for it to qualify as a survival function for the future
-lifetime, so that we know whether our choice of ``survival function'' is
-reasonable or not.
-
-\begin{proposition}
-\label{prp:valid-surv}
-A function \(S_x\) defined on \([0,\infty)\) is a valid survival function
-for the future lifetime iff the following hold:
-\begin{enumerate}
-\item[(S1)] \(S_x(0)=1\);
-\item[(S2)] \(\lim_{t\to \infty}S_x(t)=0\);
-\item[(S3)] \(S_x(t)\) is a nonincreasing/decreasing function of \(t\).
-\end{enumerate}
-\end{proposition}
-
-\begin{intuition}
-(S1) reflects that a life aged \(x\) cannot be dead at age \(x\). (S2) means
-that all lives eventually die. (S3) respects the monotonicity property of
-probability.
-\end{intuition}
-
-\item \label{it:additional-cond}
-For mathematical convenience, we shall impose the following additional
-conditions on \(S_x\):
-\begin{enumerate}
-\item \(S_x(t)\) is differentiable at any \(t>0\) (except possibly at some
-``edge'' points)
-\item \(\lim_{t\to \infty}tS_x(t)=0\).
-\item \(\lim_{t\to \infty}t^2S_x(t)=0\).
-\end{enumerate}
-\begin{remark}
-\item The latter two conditions are mainly useful for ensuring the existence of mean
-and variance of \(T_x\).
-\item For survival functions introduced here, they all satisfy these conditions
-as well as the properties in \labelcref{it:valid-surv}.
-\end{remark}
-\end{enumerate}
-\subsection{Force of Mortality}
-\begin{enumerate}
-\item Recall that the \emph{force of interest} at time \(t\) (\(\delta_t\)) can
-be seen as ``relative'' rate of change of amount function \(A(\cdot)\):
-\[
-dA(t)=A(t)\delta_t\dd{t},\quad\text{or}\quad
-\delta_t=\frac{A'(t)}{A(t)},
-\]
-where \(A(t)\delta_t\dd{t}\) may be understood intuitively as ``interest earned in
-\([t,t+\dd{t}]\)''.
-
-\item Since force of mortality is also a ``force'', one may expect it is also
-defined as relative rate of change of some function. A natural choice may be
-the survival function \(S_0\) (for force of mortality ``modelled'' at age 0).
-But as ``mortality'' is opposite to ``survival'', it appears that we should add
-a negative sign in the definition.
-
-\item \label{it:fom} The \defn{force of mortality (``modelled'' at age 0)} at
-time \(t\), denoted by \(\mu_t\) (or \(\mu_0(t)\)), is defined as
-\[
-\mu_t=-\frac{S_0'(t)}{S_0(t)}.
-\]
-\begin{intuition}
-We can express this as \(\dd{S_0(t)}=-S_0(t)\mu_t\dd{t}\), and \(S_0(t)\mu_t\dd{t}\) may be
-intuitively understood as ``drop in survival probability in \([t,t+\dd{t}]\)'' or
-``probability of death in \([t,t+\dd{t}]\)''.
-
-\begin{tikzpicture}
-\draw[-Latex] (0,0) -- (10,0) node[right]{Age};
-\fill[] (0,0) circle [radius=0.05]
-node[below] {0};
-\fill[] (3,0) circle [radius=0.05]
-node[below left] {\(t\)};
-\fill[] (3.1,0) circle [radius=0.05]
-node[below right] {\(t+\dd{t}\)};
-\draw[-Latex] (0,0.2) to[bend left] (3,0.2);
-\node[] () at (1.5, 1) {lives for \(t\) years};
-\draw[color=red,decorate,decoration={brace, amplitude=5pt}] (3, 0.2) -- (3.1,0.2)
-node[midway, above=0.3cm]{\faIcon{skull}};
-\end{tikzpicture}
- \end{intuition}
-\item Denote by \(f_x(t)\) the pdf of \(T_x\). Then, we have:
-\begin{proposition}
-\label{prp:mu-pdf-0}
-\[
-\mu_t=\frac{f_0(t)}{S_0(t)}
-\]
-for any \(t>0\).
-\end{proposition}
-
-\begin{note}
-This explains why the intuition in \labelcref{it:fom} works: because
-\(S_0(t)\mu_t\dd{t}=f_0(t)\dd{t}\).
-\end{note}
-
-\begin{pf}
-The result follows from noting that
-\[
--\dv{}{t}S_0(t)
-=-\dv{}{t}{(1-F_0(t))}
-=-(-f_0(t))
-=f_0(t).
-\]
-\end{pf}
-
-\item Now we would like to extend the concept of force of mortality to the case
-where it can be ``modelled'' at any age \(x\). The definition is analogous: The
-\defn{force of mortality (``modelled'' at age \(x\))} at time \(t\), denoted by
-\(\mu_x(t)\), is
-\[
-\mu_x(t)=-\frac{S_x'(t)}{S_x(t)}.
-\]
-
-\begin{tikzpicture}
-\draw[-Latex] (0,0) -- (10,0) node[right]{Age};
-\fill[] (0,0) circle [radius=0.05]
-node[below] {0};
-\fill[] (3,0) circle [radius=0.05]
-node[below=0.05cm] {\(x\)};
-\fill[] (7,0) circle [radius=0.05]
-node[below left] {\(x+t\)};
-\fill[] (7.1,0) circle [radius=0.05]
-node[below right] {\(x+t+\dd{t}\)};
-\draw[-Latex] (3,0.2) to[bend left] (7,0.2);
-\node[] () at (5, 1) {lives for \(t\) years};
-\draw[color=red,decorate,decoration={brace, amplitude=5pt}] (7, 0.2) -- (7.1,0.2)
-node[midway, above=0.3cm]{\faIcon{skull}};
-\end{tikzpicture}
-
-A natural question arised is whether \(\mu_x(t)=\mu_{x+t}\) or not.
-\begin{note}
-The latter one is to be regarded as the force of mortality at time \(x+t\)
-(``modelled'' at age 0) here:
-
-\begin{tikzpicture}
-\draw[-Latex] (0,0) -- (10,0) node[right]{Age};
-\fill[] (0,0) circle [radius=0.05]
-node[below] {0};
-\fill[] (3,0) circle [radius=0.05]
-node[below=0.05cm] {\(x\)};
-\fill[] (7,0) circle [radius=0.05]
-node[below left] {\(x+t\)};
-\fill[] (7.1,0) circle [radius=0.05]
-node[below right] {\(x+t+\dd{t}\)};
-\draw[-Latex] (0,0.2) to[bend left] (7,0.2);
-\node[] () at (3.5, 1.5) {lives for \(x+t\) years};
-\draw[color=red,decorate,decoration={brace, amplitude=5pt}] (7, 0.2) -- (7.1,0.2)
-node[midway, above=0.3cm]{\faIcon{skull}};
-\end{tikzpicture}
-\end{note}
-
-Fortunately, this is the case:
-
-\begin{pf}
-Firstly,
-\[
-\dv{}{t}S_x(t)
-=\dv{}{t}\frac{S_0(x+t)}{S_0(x)}
-=\frac{1}{S_0(x)}\dv{}{t}S_0(\underbrace{x+t}_{u})
-=\frac{S_0'(u)}{S_0(x)}\underbrace{\dv{u}{t}}_{1},
-\]
-and
-\[S_x(t)=\frac{S_0(u)}{S_0(x)}.\]
-So,
-\[
-\mu_x(t)=-\frac{S_0'(u)/S_0(x)}{S_0(u)/S_0(x)}
-=-\frac{S_0'(u)}{S_0(u)}=\mu_u=\mu_{x+t}.
-\]
-\end{pf}
-
-In view of this, we can simply use the notation ``\(\mu_{x+t}\)'' to stand for
-either meaning without ambiguity.
-
-\item One would then expect the following result holds also:
-\begin{proposition}
-\label{prp:mu-pdf-x}
-\[
-\mu_{x+t}=\frac{f_x(t)}{S_x(t)}
-\]
-for any age \(x\) and \(t>0\).
-\end{proposition}
-\begin{pf}
-Replace ``0'' in the proof of \cref{prp:mu-pdf-0} by \(x\).
-\end{pf}
-
-\item Recall that for force of interest, we have
-\[
-A(t)=A(0)\exp\qty(\int_{0}^{t}\delta_s\,ds).
-\]
-As force of mortality is defined similarly, we may anticipate similar results
-hold for force of mortality, and this is the case:
-\begin{note}
-Recall that \(S_x(0)=1\).
-\end{note}
-\begin{proposition}
-\label{prp:sx-int}
-\[
-S_x(t)=\exp\qty(-\int_{0}^{t}\mu_{x+s}\,ds)
-\]
-for any age \(x\) and \(t>0\).
-\end{proposition}
-
-\begin{intuition}
-Firstly, since force of mortality is defined similarly as force of interest, we
-have analogously \(S_x(t)=e^{{\color{red}-}\mu t}\) if the force of mortality is
-\emph{constant} (\(\mu_x(t)=\mu_{x+t}=\mu\) for any \(t>0\)). Then, when
-\(h>0\) is small, we would have
-\[
-S_x(s+h)\approx S_x(s)e^{-\mu_{x+s} h}
-\]
-(during a ``small'' time interval \([s, s+h]\), the force of mortality is
-``approximately'' constant). Thus,
-\[
-S_x(t)=\frac{S_x(h)}{S_x(0)}\frac{S_x(2h)}{S_x(h)}\frac{S_x(3h)}{S_x(2h)}\cdots\frac{S_x(t)}{S_x(t-h)}
-\approx \exp\qty[-(\mu_{x}h+\mu_{x+h} h+\mu_{x+2h} h+\dotsb+\mu_{x+t-h}h)],
-\]
-and loosely, as \(h\to 0^+\), we have
-\[
-S_x(t)=\exp\qty(-\int_{0}^{t}\mu_{x+s}\,ds).
-\]
-\end{intuition}
-
-\begin{pf}
-Note that \(\displaystyle\mu_{x}(s)=\dv{}{s}\ln S_x(s)\). Then, taking
-integral on both sides and applying fundamental theorem of calculus give the
-desired result.
-\end{pf}
-
-\item \label{it:fom-spec-dist} By \cref{prp:sx-int}, if we know \(\mu_y\) for
-any \(y\in[x, x+t]\), \(S_x(t)\) is determined. Hence, once \(\mu_y\) is known
-for any \(y\ge x\) (so \(S_x(t)\) is determined for any \(t\ge 0\)), the
-distribution of \(T_x\) is \emph{completely specified}.
-
-\item In view of \labelcref{it:fom-spec-dist}, an alternative way to model the
-distribution of future lifetime is to specify the force of mortality at
-different time. There are some typical specifications of force of mortality
-(which completely determine the future lifetime's distribution), called
-\defn{mortality laws} (they govern the ``behaviour'' of mortality).
-
-\item Here we discuss some mortality laws:
-\begin{enumerate}
-\item Gompertz
-\item Makeham
-\item (Generalized) De Movire
-\item Constant Force of Mortality
 \end{enumerate}
 
-\item \defn{Gompertz's Law} is defined by
-\[
-\mu_x=Bc^x,\quad \text{where }B>0, c>1.
-\]
-
-\begin{tikzpicture}
-	\begin{axis}[domain=0:100, xlabel=\(x\), ylabel=\(\mu_x\), scaled y ticks=false, /pgf/number format/fixed]
-		\addplot[blue] {0.0003*1.05^x};
-	\end{axis}
-\node[draw] () at (3,4) {\(B=0.0003, C=1.05\)};
-\end{tikzpicture}
-
-\item \defn{Makeham's Law} (genealization to Gompertz's law) is defined by
-\[
-\mu_x=A+Bc^x,\quad \text{where }A,B>0, c>1.
-\]
-
-\begin{tikzpicture}
-	\begin{axis}[domain=0:100, xlabel=\(x\), ylabel=\(\mu_x\), scaled y ticks=false, /pgf/number format/fixed, ymin=0]
-		\addplot[blue] {0.005+0.0003*1.05^x};
-	\end{axis}
-\node[draw] () at (3,5) {\(A=0.005, B=0.0003, C=1.05\)};
-\draw[fill] (0.6,0.6) circle [radius=0.05];
-\draw[color=red, thick, decorate,decoration={mirror, brace, amplitude=5pt}] (0.6, 0.5) -- (0.6,0);
-\draw[color=red, thick, decorate,decoration={mirror, brace, amplitude=5pt}] (4.6, 0.5) -- (4.6,0);
-\draw[color=red, thick, decorate,decoration={mirror, brace, amplitude=5pt}] (5.6, 0.5) -- (5.6,0);
-\draw[fill] (4.6,1.7) circle [radius=0.05];
-\draw[fill] (5.6,3.15) circle [radius=0.05];
-\draw[color=brown, thick, decorate,decoration={brace, amplitude=5pt}] (4.6, 0.5) -- (4.6,1.7);
-\draw[color=brown, thick, decorate,decoration={brace, amplitude=5pt}] (5.6, 0.5) -- (5.6,3.15);
-\draw[-Latex] (8,-1) -- (0.6, 0.3);
-\draw[-Latex] (8,-1) -- (4.6, 0.3);
-\draw[-Latex] (8,-1) -- (5.6, 0.3);
-\node[] () at (8.5,-1.3) {``accidental'' force of mortality};
-\draw[-Latex] (8,3) -- (4.6, 1.3);
-\draw[-Latex] (8,3) -- (5.6, 2);
-\node[] () at (9,3.3) {``natural'' force of mortality};
-\end{tikzpicture}
-
-The constant \(A\) reflects the risk of \emph{accidental death}, which is
-supposed to be constant for any age.
-
-\item \defn{De Moivre's Law} is defined by
-\[
-\mu_x=\frac{1}{\omega-x}, \quad\text{where }0\le x<\omega
-\]
-and the \defn{generalized De Moivre's Law} is defined by
-\[
-\mu_x=\frac{\alpha}{\omega-x}, \quad\text{where }0\le x<\omega, \alpha>0.
-\]
-
-\begin{tikzpicture}
-	\begin{axis}[domain=0:99, xlabel=\(x\), ylabel=\(\mu_x\), scaled y ticks=false, /pgf/number format/fixed, samples=100]
-	\addplot[blue] {1/(100-x)};
-	\end{axis}
-\node[draw] () at (3,3) {\(\alpha=1,\omega=100\)};
-\draw[-Latex, red] (8,1) -- (6.5,2);
-\node[text width=3cm] () at (9,0.3) {``sudden'' surge in force of mortality near \(\omega\)};
-\end{tikzpicture}
-
-\item \label{it:de-moivre-dist-surv}
-For De Moivre's law, the survival function is given by
-\[
-S_x(t)=\exp\qty(\int_{0}^{t}\mu_{x+s}\,ds)
-=1-\frac{t}{\omega-x},\quad\text{where }0 \le t<\omega-x.
-\]
-Note that \(\lim_{t\to \omega-x}S_x(t)=0\), which suggests that as the age of a
-life appraoches \(\omega\), his surviving probability approaches 0, so
-\(\omega\) can be seen as a ``limiting age''.
-
-To ensure the survival function to be valid (i.e., satisfies the properties
-mentioned in \labelcref{it:valid-surv}), we can only set \(S_x(t)=0\) for any
-\(t\ge \omega-x\). This implies that under De Moivre's Law, the future lifetime
-random variable \(T_x\sim U[0,\omega-x]\).
-
-\begin{note}
-The survival function \(S_x(t)\) is not differentiable at the
-``edge'' point \(t=\omega-x\).
-
-\begin{tikzpicture}
-[
-declare function={
-func(\x) = (\x < 50) * (1-x/50) + (\x >= 50) * 0;
-}
-]
-\begin{axis}[domain=0:75, xlabel=\(t\), ylabel=\(S_{50}(t)\)]
-\addplot[blue]{func(x)};
-\end{axis}
-\node[draw] () at (5,3) {\(\alpha=1,\omega=100\)};
-\node[] () at (8.5,3) {not differentiable};
-\draw[-Latex] (8,2.5) -- (4.5,0.7);
-\draw[fill, red] (4.4,0.48) circle [radius=0.05];
-\end{tikzpicture}
-\end{note}
-
-\item \label{it:gen-de-moivre-surv}
-For generalized De Moivre's Law, the survival function is
-\[
-S_x(t)=\exp\qty(\alpha\int_{0}^{t}\frac{1}{\omega-x-s}\,ds)
-=\qty(1-\frac{t}{\omega-x})^{\alpha},\quad\text{where }0 \le t<\omega-x.
-\]
-Likewise, we can only have \(S_x(t)=0\) for any \(t\ge\omega-x\).
-\item Lastly, for \defn{constant force of mortality}, as its name suggests, it assumes
-\[
-\mu_x=\mu
-\]
-for any age \(x\), where \(\mu>0\) is a constant.
-In this case, by \cref{prp:sx-int}, the survival function is given by
-\[
-S_x(t)=e^{-\mu t}
-\]
-for any \(t\ge 0\), so the future lifetime random variable
-\(T_x\sim\mathrm{Exp}(\mu)\) (for any age \(x\)).
-\end{enumerate}
-\subsection{Actuarial Notations}
+\subsection{Basic Insurance Coverages}
+\label{subsect:basic-insurance}
 \begin{enumerate}
-\item Here we introduce actuarial notations for concepts discussed before.
-\item Two main kinds of actuarial notations here: ``\(p\)'' (probability
-related to ``survival'') and ``\(q\)'' (probability related to ``death'').
-\item \label{it:actuar-pq} A list of actuarial notations:
+\item Let us start with studying some basic kinds of insurance coverages: (i)
+whole life insurance, (ii) term life insurance, (iii) pure endowment, (iv)
+endowment insurance, and (v) deferred whole life insurance. They will serve as
+our basic building blocks for all the discussions in
+\Cref{sect:life-insurance}. To guide our discussions here, for each kind of
+insurance coverage, we shall explore it in the following three aspects:
+\begin{enumerate}[label={(\arabic*)}]
+\item \emph{Definition:} meaning of the insurance coverage
+\item \emph{Key formulas:} formulas for some key probabilistic quantities of PVRV
+\item \emph{Recursive formulas:} formulas used for recursions (to be discussed
+after studying the first two aspects for all five kinds of basic insurance
+coverages)
+\end{enumerate}
+For convenience, henceforth we shall assume that the amount of benefit payment
+is always \(1\), unless otherwise specified. If the actual benefit amount is
+not \(1\), then we can just multiply the PVRV by the actual benefit amount and
+adjust the formulas accordingly. Throughout, we shall consider the case where
+the insurance coverage is purchased when the life insured is aged \(x\), so we
+are interested in the present value at age \(x\).
+
+\item \textbf{\defn{Whole life insurance}.}
+\begin{enumerate}[label={(\arabic*)}]
+\item \emph{Definition:} A death benefit (DB) is paid upon the death \faIcon{skull}
+of the life insured (lifetime coverage: payable regardless of when the insured
+life dies).
+
+
+For all kinds of insurance coverages in \Cref{subsect:basic-insurance}, they
+can be broadly classified into two types: (i) discrete and (ii) continuous:
 \begin{itemize}
-\item \(\px[t]{x}\): \(S_x(t)\)
-\item \(\qx[t]{x}\): \(F_x(t)\)
-\item \(\qx[u|t]{x}\): \(\prob{u<T_x\le u+t}=S_x(u)-S_x(u+t)\)
+\item \emph{Discrete:} The benefit payment is paid \emph{at the end of the year} of death.
+\item \emph{Continuous:} The benefit payment is paid \emph{at the moment} of death.
 \end{itemize}
-\begin{remark}
-\item ``\(t\)'' can be dropped from the notation if \(t=1\), for simplicity.
-\item For ``\(u|t\)'', \(u\) is the length of deferment period, and \(t\) is
-the length of period following the deferment.
+More specifically, if we start counting time at the age \(x\) of the life
+insured:
+\begin{itemize}
+\item The end of the year of death is at time \(K_x+1\).
+\item The moment of death is at time \(T_x\).
+\end{itemize}
+\begin{center}
 \begin{tikzpicture}
 \draw[-Latex] (0,0) -- (10,0) node[right]{Time};
 \fill[] (0,0) circle [radius=0.05]
 node[below] {0}
 node[above] {\((x)\)};
-\fill[] (3,0) circle [radius=0.05]
-node[below] {\(u\)};
-\fill[] (5,0) circle [radius=0.05]
-node[below] {\(u+t\)};
-\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=10pt}] (3,0) -- (5,0)
-node[midway, above=0.7cm]{die (\(\qx[u|t]{x}\))};
-\draw[very thick, decorate,decoration={calligraphic brace, mirror,  amplitude=5pt, raise=12pt}] (0,0) -- (3,0)
-node[midway, below=0.7cm]{deferment period};
-\end{tikzpicture}
-\end{remark}
-
-\item Based on the definitions in \labelcref{it:actuar-pq}, we can readily
-derive the following formulas:
-\begin{proposition}
-\label{prp:act-notation-prop}
-For any age \(x\) and \(t,u\ge 0, n\in\N\),
-\begin{enumerate}
-\item \(\px[t]{x}+\qx[t]{x}=1\).
-\begin{intuition}
-(\(x\)) either dies within or survive for \(t\) years.
-\end{intuition}
-\item \(\px[t+u]{x}=\px[t]{x}\,\px[u]{x+t}\),
-\begin{note}
-This is just \cref{prp:gen-chain-surv} expressed in actuarial notations.\
-\end{note}\\
-and
-\(\px[n]{x}=\px{x}\px{x+1}\cdots\px{x+n-1}\).
-\begin{note}
-This can be obtained by applying the former result repetitively.
-\end{note}
-\item \(\qx[u|t]{x}=\px[u]{x}-\px[u+t]{x}\).
-\begin{intuition}
-
-\begin{tikzpicture}
-\node[] () at (-2,0) {(LHS)};
-\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
-\fill[] (0,0) circle [radius=0.05]
-node[below] {0}
-node[above] {\((x)\)};
-\fill[] (3,0) circle [radius=0.05]
-node[below] {\(u\)};
-\fill[] (5,0) circle [radius=0.05]
-node[below] {\(u+t\)};
-\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=10pt}] (3,0) -- (5,0)
-node[midway, above=0.7cm]{die};
-\end{tikzpicture}
-
-\begin{tikzpicture}
-\node[] () at (-2,0) {(RHS)};
-\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
-\fill[] (0,0) circle [radius=0.05]
-node[below] {0}
-node[above] {\((x)\)};
-\fill[] (3,0) circle [radius=0.05]
-node[below] {\(u\)};
-\fill[] (5,0) circle [radius=0.05]
-node[below] {\(u+t\)};
-\draw[very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=10pt}] (3,0) -- (10,0)
-node[midway, below=0.7cm]{die somewhere};
-\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=10pt}] (5,0) -- (10,0)
-node[midway, above=0.7cm]{but not die here};
-\end{tikzpicture}
-
-\end{intuition}
-\item \(\qx[u|t]{x}=\qx[u+t]{x}-\qx[u]{x}\).
-\begin{intuition}
-
-\begin{tikzpicture}
-\node[] () at (-2,0) {(LHS)};
-\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
-\fill[] (0,0) circle [radius=0.05]
-node[below] {0}
-node[above] {\((x)\)};
-\fill[] (3,0) circle [radius=0.05]
-node[below] {\(u\)};
-\fill[] (5,0) circle [radius=0.05]
-node[below] {\(u+t\)};
-\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=10pt}] (3,0) -- (5,0)
-node[midway, above=0.7cm]{die};
-\end{tikzpicture}
-
-\begin{tikzpicture}
-\node[] () at (-2,0) {(RHS)};
-\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
-\fill[] (0,0) circle [radius=0.05]
-node[below] {0}
-node[above] {\((x)\)};
-\fill[] (3,0) circle [radius=0.05]
-node[below] {\(u\)};
-\fill[] (5,0) circle [radius=0.05]
-node[below] {\(u+t\)};
-\draw[very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=12pt}] (0,0) -- (5,0)
-node[midway, below=0.7cm]{die somewhere};
-\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (3,0)
-node[midway, above=0.7cm]{but not die here};
-\end{tikzpicture}
-
-\end{intuition}
-\item \(\qx[u|t]{x}=\px[u]{x}\,\qx[t]{x+u}\).
-\begin{intuition}
-Dies in time interval \([u, u+t]\) = First survives for \(u\) years, \emph{and then}
-dies within the coming \(t\) years.
-\end{intuition}
-\item \(f_x(t)=\px[t]{x}\mu_{x+t}\).
-\begin{intuition}
-Similar to the intuition in \labelcref{it:fom}, \(\px[t]{x}\mu_{x+t}\dd{t}\) may be
-interpreted ``probability of death in time interval \([t,t+\dd{t}]\)''. On the
-other hand, \(f_x(t)\dd{t}\) may also be understood as ``probability of death in
-time interval \([t,t+\dd{t}]\)''.
-\end{intuition}
-\end{enumerate}
-\end{proposition}
-
-\item Intuitively, ``\(q\)'' and ``\(\mu\)'' are respectively describing death
-``discretely'' and ``continuously'' (analogous to ``\(i\)'' and ``\(\delta\)''
-in STAT2902).
-
-\item The relationship between ``\(q\)'' and ``\(\mu\)'' is given by:
-\begin{proposition}
-\label{prp:qx-int}
-\[
-\qx[t]{x}=\int_{0}^{t}\px[s]{x}\mu_{x+s}\,ds
-\]
-for any age \(x\) and \(t\ge 0\).
-
-\begin{intuition}
-RHS ``sums up'' the ``probabilities of death'' in all ``infinitesimal'' time
-intervals within the interval \([0,t]\).
-\end{intuition}
-\end{proposition}
-\end{enumerate}
-
-\subsection{Mean and Variance of \(T_x\)}
-\begin{enumerate}
-\item The \defn{complete expectation of life} is \(\expv{T_x}\). (Actuarial
-notation: \(\eringx{x}\))
-
-\begin{remark}
-\item ``Complete'' is in the sense that the ``complete'' (``whole'') lifetime is
-considered in the calculation (and not, say, just the integer part of
-lifetime).
-\item By the conditions in \labelcref{it:additional-cond}, \(\eringx{x}\) exists.
-\end{remark}
-
-\item By definition, we have
-\[
-\eringx{x}=\int_{0}^{\infty}t\,\px[t]{x}\mu_{x+t}\dd{t}.
-\]
-However, this is a bit complicated to evaluate and we almost always use the
-following simpler formula instead:
-\begin{proposition}
-\label{prp:eringx-fmla}
-\[
-\eringx{x}=\int_0^{\infty}\px[t]{x}\dd{t}.
-\]
-\end{proposition}
-
-\begin{pf}
-Since \(T_x\) is nonnegative, we have
-\[
-T_x=\int_{0}^{T_x}1\dd{t}
-=\int_{0}^{\infty}\indicset{t<T_x}\dd{t}.
-\]
-\begin{note}
-\(\indicset{\cdot}\) denotes the indicator function.
-\end{note}
-
-It then follows that
-\[
-\expv{T_x}=\expv{\int_{0}^{\infty}\indicset{t<T_x}\dd{t}}
-=\int_{0}^{\infty}\expv{\indicset{T_x>t}}\dd{t}
-=\int_{0}^{\infty}\prob{T_x>t}\dd{t},
-\]
-as desired. (The second equality holds by Fubini's theorem.)
-\end{pf}
-
-\item To find the \emph{variance} of \(T_x\), we need to compute the second
-moment of \(T_x\): \(\expv{T_x^2}\) (again its existence is guaranteed by the
-conditions in \labelcref{it:additional-cond}).
-\item Likewise we almost always use the following alternative formula instead
-of the definition:
-\begin{proposition}
-\label{prp:tx-2nd-moment-fmla}
-\[
-\expv{T_x^2}=2\int_{0}^{\infty}t\,\px[t]{x}\dd{t}.
-\]
-\end{proposition}
-\begin{pf}
-By definition, we have:
-\[
-\expv{T_x^2}=\int_{0}^{\infty}t^2\px[t]{x}\mu_{x+t}\dd{t}
-=-\int_{0}^{\infty}t^2\dv{}{t}\px[t]{x}\dd{t}.
-\]
-Integrating it by parts gives
-\[
-\underbrace{-[t^2\px[t]{x}]_0^{\infty}}_{0}-\int_{0}^{\infty}2t\px[t]{x}\dd{t}
-\]
-where the first term is zero due to the conditions in
-\labelcref{it:additional-cond}.
-\end{pf}
-
-Once we compute the first and second moments of \(T_x\): \(\expv{T_x}\) and
-\(\expv{T_x^2}\), we can find the variance of \(T_x\) by
-\[
-\vari{T_x}=\expv{T_x^2}-\qty(\expv{T_x})^2.
-\]
-
-\item Sometimes we are interested in the future lifetime random variable
-``capped'' to \(n\) years: \(T_x\wedge n\) (i.e.,
-\(\min\{T_x, n\}\)) (e.g., in the context of endowment insurance; see later
-sections). The expectation of this capped random variable (i.e.,
-\(\expv{T_x\wedge n}\)) is called the \defn{term expectation of life}.
-(Actuarial notation: \(\eringx{\endowxn}\))
-
-\begin{note}
-The notation ``\(\endowxn\)'' is used when the ``capped'' future lifetime
-random variable \(T_x\wedge n\) is involved. Abusing the notation a bit, we may
-actually write \(T_x\wedge n\) as ``\(T_{\endowxn}\)'', and regard the latter
-as ``another future lifetime random variable'' where ``standard'' actuarial
-notations apply (this will be useful in some later sections here, and more
-details will be explained in STAT3909).
-\end{note}
-
-\item Similarly we have the following formula for \(\eringx{\endowxn}\):
-\begin{proposition}
-\label{prp:eringxn-fmla}
-\[
-\eringx{\endowxn}=\int_{0}^{n}\px[t]{x}\dd{t}.
-\]
-\end{proposition}
-\begin{pf}
-Replace \(T_x\) by \(T_x\wedge n\) in the proof of \cref{prp:eringx-fmla}, and note that
-\[
-\expv{\int_{0}^{\infty}\indicset{t<T_x\wedge n}\dd{t}}
-=\expv{\int_{0}^{\infty}\indicset{t<T_x}\indicset{t<n}\dd{t}}
-=\expv{\int_{0}^{n}\indicset{t<T_x}\dd{t}}.
-\]
-\end{pf}
-\end{enumerate}
-\subsection{Curtate Future Lifetime Random Variable}
-\begin{enumerate}
-\item Recall the discrepancy between the meaning of ``age'' here (exact) versus
-the daily life meaning (number of birthdays passed):
-
-\begin{tikzpicture}
-\draw[-Latex] (0,0) -- (10,0) node[right]{Age};
-\fill[] (0,0) circle [radius=0.05]
-node[above] {\faIcon{baby}}
-node[below] {0};
 \fill[] (2,0) circle [radius=0.05]
-node[above] {\faIcon{birthday-cake}}
 node[below] {1};
+\node[] () at (3,-0.3) {\(\cdots\)};
 \fill[] (4,0) circle [radius=0.05]
-node[above] {\faIcon{birthday-cake}}
-node[below] {2};
+node[below] {\(K_x\)};
+\fill[] (4.8,0) circle [radius=0.05]
+node[red, above] {\faIcon{skull}}
+node[below] {\(T_x\)};
 \fill[] (6,0) circle [radius=0.05]
-node[above] {\faIcon{birthday-cake}}
-node[below] {3};
-\fill[] (8,0) circle [radius=0.05]
-node[above] {\faIcon{birthday-cake}}
-node[below] {4};
-\draw[-Latex] (1,1) node[above]{(0.5)} -- (1,0.2);
-\draw[-Latex] (2.5,1) node[above]{(1.25)} -- (2.5,0.2);
-\draw[-Latex] (5.5,1) node[above]{(2.75)} -- (5.5,0.2);
-\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt, mirror}] (2.1,0) -- (3.8,0)
-node[midway, below=0.7cm, font=\small]{``aged 1'' in daily life};
+node[below] {\(K_x+1\)};
+\node[] () at (4.8,1) {\faIcon{money-bill-wave}};
+\node[] () at (10,1) {(continuous)};
+\node[] () at (6,1.5) {\faIcon{money-bill-wave}};
+\node[] () at (10,1.5) {(discrete)};
 \end{tikzpicture}
-\item To capture the ``daily life meaning'', we introduce the concept of curtate
-future lifetime. The \defn{curtate future lifetime random variable} for (\(x\))
-(denoted by \(K_x\)) is the integer part of \(T_x\), i.e., \(\lfloor
-T_x\rfloor\).
-
+\end{center}
+\item \emph{Key formulas:}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+&Discrete&Continuous \\
+\midrule
+PVRV&\(v^{K_x+1}\)&\(v^{T_x}\) \\
+EPV (mean of PVRV)&\(\displaystyle \Ax{x}=\sum_{k=0}^{\infty}\vc{v^{k+1}}\mgc{\px[k]{x}\qx[]{x+k}}\)&
+\(\displaystyle \Ax*{x}=\int_{0}^{\infty}\vc{e^{-\delta t}}\mgc{\px[t]{x}\mu_{x+t}\dd{t}}\)
+\\
+Second moment&\(\displaystyle \Ax[][2]{x}=\sum_{k=0}^{\infty}\vc{v^{\blc{2}(k+1)}}\mgc{\px[k]{x}\qx[]{x+k}}\)&\(
+\displaystyle \Ax*[][2]{x}=\int_{0}^{\infty}\vc{e^{-\blc{2}\delta t}}\mgc{\px[t]{x}\mu_{x+t}\dd{t}}
+\) \\
+Variance&\(\Ax[][2]{x}-\Ax{x}^{2}\)&\(\Ax*[][2]{x}-\Ax*{x}^{2}\) \\
+\bottomrule
+\end{tabular}
+\end{center}
 \begin{remark}
-\item ``Curtate'' means ``shortened''. The lifetime expressed in ``daily life
-age'' (curtate future lifetime) is always shorter than (or equal to) the
-``exact'' future lifetime here.
-\item \(K_x\) is a discrete random variable, while \(T_x\) is a continuous
-random variable.
+\item The second moment is actually just the EPV evaluated at double force of
+interest, i.e., \(\delta\to 2\delta\) or \(v\to v^2\).
+\item EPV stands for \defn{expected present value}. Sometimes the term
+``\defn{actuarial present value}'' (APV) is used instead.
 \end{remark}
-\item Here is an important ``bridge'' between \(T_x\) and \(K_x\):
-\begin{proposition}
-\label{prp:tx-kx-connection}
-For any \(k\in\N_0\)\footnote{\(\N_0=\{0,1,2\dotsc\}\).}, \(K_x=k\) iff \(k\le
-T_x<k+1\) (i.e., the events \(\{K_x=k\}\) and \(\{k\le T_x<k+1\}\) are equal).
-\end{proposition}
-\begin{intuition}
-Inspect the picture above.
-\end{intuition}
-
-\begin{pf}
-``\(\Leftarrow\)'' follows from the definition of floor function
-\(\lfloor\cdot\rfloor\). ``\(\Rightarrow\)'' can be proved by contrapositive
-easily.
-\end{pf}
-
-A corollary is the following:
-\begin{corollary}
-\label{cor:kx-tx-ineq-connection}
-For any \(k\in\N_0\), \(K_x\le k\) iff \(T_x<k+1\).
-\end{corollary}
-\begin{pf}
-The result follows from noting that \(\displaystyle\{K_x\le k\}=\bigcup_{n=1}^k\{K_x=n\}\).
-\end{pf}
-
-So we have \(\prob{K_x\le k}=\qx[k+1]{x}\).
-\begin{warning}
-RHS is \underline{not} \(\qx[k]{x}\).
-\end{warning}
-
-\item The pmf of \(K_x\) is given by:
-\begin{proposition}
-\label{prp:kx-pmf}
-For any \(k\in\N_0\), \(\prob{K_x=k}=\px[k]{x}\qx{x+k}.\)
-\end{proposition}
-\begin{intuition}
-\(K_x=k\) means (\(x\)) dies in the time interval \([k,k+1)\), i.e., (\(x\))
-survives for \(k\) years and then dies in the coming year.
-\end{intuition}
-
-\begin{pf}
-It suffices to note that \(\prob{K_x=k}=\qx[k|]{x}\)\footnote{Recall that
-\(\qx[k|]{x}=\qx[k|1]{x}\)}.
-\end{pf}
-
-\item The \defn{curtate expectation of life} is \(\expv{K_x}\). (Actuarial
-notation: \(e_x\))
-\item The following is the ``discrete analogue'' of \cref{prp:eringx-fmla}:
-\begin{proposition}
-\label{prp:ex-fmla}
-\(\displaystyle
-e_x=\sum_{k=1}^{\infty}\px[k]{x}.
-\)
-\end{proposition}
-\begin{warning}
-The sum starts at \(k=1\), \underline{not} \(k=0\).
-\end{warning}
-
-\begin{pf}
-Using a similar approach as the proof of \cref{prp:eringx-fmla}, we have
-\[
-\expv{K_x}=\expv{\sum_{k=1}^{K_x}1}
-=\expv{\sum_{k=1}^{\infty}\indicset{k\le K_x}}
-=\sum_{k=1}^{\infty}\prob{K_x\ge k}
-=\sum_{k=1}^{\infty}\prob{T_x\ge k}
-=\sum_{k=1}^{\infty}\px[k]{x}.
-\]
-\begin{note}
-When \(K_x=0\), we define \(\sum_{k=1}^{K_x}1=0\).
-\end{note}
-\end{pf}
-\item For the second moment, we have also the following analogous result:
-\begin{proposition}
-\label{prp:kx-2nd-moment-fmla}
-\(\displaystyle\expv{K_x^2}=\sum_{k=1}^{\infty}(2k-1)\,\px[k]{x}\).
-\end{proposition}
-\begin{warning}
-The sum starts at \(k=1\), \underline{not} \(k=0\).
-\end{warning}
-
-\begin{pf}
-Note that
-\begin{align*}
-\expv{K_x^2}
-&=\sum_{k=0}^{\infty}k^2(\px[k]{x}-\px[k+1]{x})\\
-&=(\px[1]{x}-\px[2]{x})+4(\px[2]{x}-\px[3]{x})+9(\px[3]{x}-\px[4]{x})+\dotsb\\
-&=\px[1]{x}+3\,\px[2]{x}+5\,\px[3]{x}+\dotsb.
-\end{align*}
-\end{pf}
-
-After computing the first and second moments: \(e_x\) and \(\expv{K_x^2}\), we
-can find the variance of \(K_x\) by
-\[
-\vari{K_x}=\expv{K_x^2}-e_x^2.
-\]
-\item Likewise the \defn{term curtate expectation of life} is \(\expv{K_x\wedge
-n}\), where \(n\in\N_0\). (Actuarial notation: \(e_{\endowxn}\))
-\item Analogously, we have
-\begin{proposition}
-\label{prp:exn-fmla}
-\[
-e_{\endowxn}=\sum_{k=1}^{n}\px[k]{x}.
-\]
-\end{proposition}
-\begin{pf}
-Using a similar approach as the proof of \cref{prp:eringxn-fmla}, we have
-\[
-\expv{K_x\wedge n}
-=\expv{\sum_{j=0}^{\infty}\indicset{j<K_x \wedge n}}
-=\sum_{j=0}^{n-1}\prob{K_x>j}
-=\sum_{j=0}^{n-1}\prob{T_x\ge j+1}
-=\sum_{k=1}^{n}\px[k]{x}.
-\]
-\end{pf}
 \end{enumerate}
-\subsection{Recursions for Expectations of Life}
-\begin{enumerate}
-\item \emph{Recursion} is a very important concept in life contingencies, and
-is often best understood by \emph{intuition}.
-\item The recursive formulas are collected in the following:
-\begin{proposition}
-\label{prp:elife-recursion}
-For any age \(x\) and \(n\in\N\),
-\begin{enumerate}
-\item \(\eringx{x}=\eringx{\endowxn}+\px[n]{x}\eringx{x+n}\).
+\item \label{it:gen-epv-fmla} \ystar{} \textbf{Important note.} Here we can
+observe that the EPV formulas take a similar ``form'' for both discrete and
+continuous cases: Both are ``summing'' products of terms. Generally speaking,
+we have the following formula for calculating EPV:
+\[
+\text{EPV}=\underset{\text{all possible payment times}}{\sum\text{ or }\int}\brc{\text{benefit amount}}\times\vc{\text{discount factor}}\times\mgc{\text{prob.\ of triggering payment}}.
+\]
+For example, in the continuous case above:
+\begin{itemize}
+\item ``All possible payment times'' start at time 0 with no end, thus we have
+``\(\int_{0}^{\infty}\)''.
+\item \brc{Benefit amount} is \(1\), so we do not see it in the formula.
+\item \vc{Discount factor} is \vc{\(v^t\)} at time \(t\).
+\item \mgc{Probability of triggering payment} at time \(t\) is loosely
+\[\text{probability that \(T_x\in [t, t+\dd{t}]\)}=\underbrace{\mgc{\px[t]{x}}}_{\text{survive \(t\) yrs.}}\times 
+\underbrace{\mgc{\mu_{x+t}\dd{t}}}_{\text{die in the subsequent \(\dd{t}\) yrs. (instantaneously)}}.\]
+\end{itemize}
 
-\begin{intuition}
+Once you understand how this formula works, there is no need to ``memorize''
+the EPV formula for every single kind of insurance product
+\faIcon[regular]{thumbs-up}.  In fact, this formula is still applicable for
+\emph{life annuities} (to be discussed in \Cref{sect:life-annuity}) and even in
+STAT3909!
 
+\item \textbf{\defn{Term life insurance}.}
+\begin{enumerate}[label={(\arabic*)}]
+\item \emph{Definition:} A DB is paid upon the death of the life insured,
+provided that the death occurs within the policy term, say \(n\) years.
+
+\item \emph{Key formulas:}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+&Discrete&Continuous \\
+\midrule
+PVRV&\(\begin{cases}
+v^{K_x+1}&\text{if \(K_x=0,1,\dotsc,n-1\)}, \\
+0&\text{if \(K_x=n,n+1,\dotsc\)}
+\end{cases}
+\)&\(
+\begin{cases}
+v^{T_x}&\text{if \(T_x\le n\)}, \\
+0&\text{if \(T_x>n\)}
+\end{cases}
+\) \\
+EPV&\(\displaystyle \Ax{\termxn}=\sum_{k=0}^{n-1}\vc{v^{k+1}}\mgc{\px[k]{x}\qx[]{x+k}}\)&
+\(\displaystyle \Ax*{\termxn}=\int_{0}^{n}\vc{e^{-\delta t}}\mgc{\px[t]{x}\mu_{x+t}\dd{t}}\)
+\\
+Second moment&\(\displaystyle \Ax[][2]{\termxn}=\sum_{k=0}^{n-1}\vc{v^{\blc{2}(k+1)}}\mgc{\px[k]{x}\qx[]{x+k}}\)&\(
+\displaystyle \Ax*[][2]{\termxn}=\int_{0}^{n}\vc{e^{-\blc{2}\delta t}}\mgc{\px[t]{x}\mu_{x+t}\dd{t}}
+\) \\
+Variance&\(\Ax[][2]{\termxn}-(\Ax{\termxn})^{2}\)&\(\Ax*[][2]{\termxn}-(\Ax*{\termxn})^{2}\) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{note}
+The ``\(1\)'' on top of \(x\) suggests that the life aged \(x\) is the
+\underline{1}st thing to be ``gone'' (dead \faIcon{skull}), earlier than the
+elapse of the \(n\)-year term, for the benefit to be triggered. More details
+about this kind of notation will be discussed in STAT3909.
+\end{note}
+\end{enumerate}
+\item \textbf{\defn{Pure endowment}.}
+\begin{enumerate}[label={(\arabic*)}]
+\item \emph{Definition:} A \emph{survival benefit} is paid at the end of the
+policy term (say \(n\) years) if the life insured is still alive \faIcon{child}
+at that time.
+
+\begin{note}
+There is no distinction of ``continuous'' and ``discrete'' for pure endowment,
+because the only possible payment time is always precisely at the end of the
+policy term.
+\end{note}
+
+\item \emph{Key formulas:}
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+&Formula\\
+\midrule
+PVRV&\(\begin{cases}
+0&\text{if \(T_x<n\)}, \\
+v^n&\text{if \(T_x\ge n\)}
+\end{cases}
+\) \\
+\midrule
+EPV&\(\displaystyle \Ax{\pureendowxn}=\Ex[n]{x}=\vc{v^{n}}\mgc{\px[n]{x}}\)\\
+\midrule
+Second moment&\(\displaystyle \Ax[][2]{\pureendowxn}=\Ex[n][2]{x}=\vc{v^{2n}}\px[n]{x}=v^{n}\Ex[n]{x}\) \\
+\midrule
+Variance&\(\Ex[n][2]{x}-(\Ex[n]{x})^{2}=v^{2n}\times \px[n]{x}\times \qx[n]{x}\) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{remark}
+\item The ``\(1\)'' on top of \(\angl{n}\) suggests that the \(n\)-year term is the
+\underline{1}st thing to be ``gone'' (elapsed), earlier than death
+\faIcon{skull} of the life aged \(x\), for the benefit to be triggered. Again,
+more details about this kind of notation will be discussed in STAT3909.
+\item The notation for EPV is \underline{not} ``\(\Ax*{\pureendowxn}\)''!
+\end{remark}
+\end{enumerate}
+\item \textbf{\defn{Endowment insurance}.}
+\begin{enumerate}[label={(\arabic*)}]
+\item \emph{Definition:} A combination of a term life insurance and a pure
+endowment of the same term (say \(n\)-year).
+
+\begin{note}
+In general, unless otherwise specified, we shall assume that the term life
+insurance and pure endowment have the same benefit amount. If they have
+different benefit amounts, then such insurance is said to be a
+\underline{special} endowment insurance.
+\end{note}
+\item \emph{Key formulas:}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+&Discrete&Continuous \\
+\midrule
+PVRV&\(v^{(K_x+1)\wedge n}=\begin{cases}
+v^{K_x+1}&\text{if \(K_x=0,1,\dotsc,n-1\)}, \\
+v^{n}&\text{if \(K_x=n,n+1,\dotsc\)}
+\end{cases}
+\)&\(v^{T_x\wedge n}=
+\begin{cases}
+v^{T_x}&\text{if \(T_x\le n\)}, \\
+v^{n}&\text{if \(T_x>n\)}
+\end{cases}
+\) \\
+\midrule
+EPV&\(\Ax{\endowxn}=\Ax{\termxn}+\Ax{\pureendowxn}\)&
+\(\Ax*{\endowxn}=\Ax*{\termxn}+\Ax{\pureendowxn}\)
+\\
+\midrule
+Second moment&\(\Ax[][2]{\endowxn}=\Ax[][2]{\termxn}+\Ax[][2]{\pureendowxn}\)&\(
+\Ax*[][2]{\endowxn}=\Ax*[][2]{\termxn}+\Ax[][2]{\pureendowxn}
+\) \\
+\midrule
+Variance&\makecell[l]{\(\Ax[][2]{\endowxn}-(\Ax{\endowxn})^{2}\) or\\
+\(\vari{Z_{\mathrm{term}}}+\vari{Z_{\mathrm{PE}}}
+-2\underbrace{\Ax{\termxn}\Ax{\pureendowxn}}_{\mathclap{\cov{Z_{\mathrm{term}}}{Z_{\mathrm{PE}}}}}\)
+}&
+\makecell[l]{
+\(\Ax*[][2]{\endowxn}-(\Ax*{\endowxn})^{2}\) or\\
+\(\vari{Z_{\mathrm{term}}}+\vari{Z_{\mathrm{PE}}}
+-2\underbrace{\Ax*{\termxn}\Ax{\pureendowxn}}_{\mathclap{\cov{Z_{\mathrm{term}}}{Z_{\mathrm{PE}}}}}\)
+} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{note}
+\(Z_{\mathrm{term}}\) and \(Z_{\mathrm{PE}}\) denote the PVRV's for
+(\(n\)-year) term life insurance and pure endowment respectively. Note that the
+PVRV for endowment insurance is \(Z_{\mathrm{term}}+Z_{\mathrm{PE}}\).
+\end{note}
+\end{enumerate}
+\item \textbf{\defn{Deferred whole life insurance}.}
+\begin{enumerate}[label={(\arabic*)}]
+\item \emph{Definition:} A DB is paid upon the death of the life insured,
+provided that the death occurs after the deferred period (e.g., \(n\) years).
+\item \emph{Key formulas:}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+&Discrete&Continuous \\
+\midrule
+PVRV&\(\begin{cases}
+0&\text{if \(K_x=0,1,\dotsc,n-1\)}, \\
+v^{K_x+1}&\text{if \(K_x=n,n+1,\dotsc\)}
+\end{cases}
+\)&\(
+\begin{cases}
+0&\text{if \(T_x\le n\)}, \\
+v^{T_x}&\text{if \(T_x>n\)}
+\end{cases}
+\) \\
+\midrule
+EPV&\(\Ax[n|]{x}=\Ax{x}-\Ax{\termxn}=\Ex[n]{x}\Ax{x+n}\)&
+\(\Ax*[n|]{x}=\Ax*{x}-\Ax*{\termxn}=\Ex[n]{x}\Ax*{x+n}\)
+\\
+\midrule \\
+\multicolumn{3}{c}{
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\((x)\)};
+\fill[] (3,0) circle [radius=0.05]
+node[below=0.05cm, font=\large] {\(n\)}
+node[above] {\((x+n)\)};
+\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (3,0) -- (10,0)
+node[midway, above=0.7cm]{\(\Ax*{x+n}\)};
+\draw[-Latex, color=ForestGreen] (3,0.6) to[bend right] (0,0.6);
+\node[] () at (2.5,1.3) {\(\times\Ex[n]{x}\)};
+\draw[-Latex] (3,-0.7) -- (6,0.3);
+\node[] () at (3,-1) {deferred coverage};
+\end{tikzpicture}} \\
+\midrule
+Second moment&\(\Ax[n|][2]{x}=\Ax[2]{x}-\Ax[][2]{\termxn}=\Ex[n][2]{x}\Ax[][2]{x+n}\)&
+\(\Ax*[n|][2]{x}=\Ax*[][2]{x}-\Ax*[][2]{\termxn}=\Ex[n][2]{x}\Ax*[][2]{x+n}\)
+\\
+\midrule
+Variance&\(\Ax[n|][2]{x}-(\Ax[n|]{x})^{2}\)
+&\(\Ax*[n|]{x}-(\Ax*[n|]{x})^{2}\) \\
+\bottomrule
+\end{tabular}
+\end{center}
+For the variance, we can also use a similar approach as the one for endowment
+insurance. We first let \(Z_{\mathrm{WL}}\), \(Z_{\mathrm{term}}\), and
+\(Z_{\mathrm{deferred}}\) denote the PVRV's for whole life insurance,
+\(n\)-year term life insurance, and \(n\)-year deferred whole life insurance
+respectively. Then, we have
+\(Z_{\mathrm{WL}}=Z_{\mathrm{term}}+Z_{\mathrm{deferred}}\), thus
+\begin{align*}
+\vari{Z_{\mathrm{WL}}}&=\vari{Z_{\mathrm{term}}}+\vari{Z_{\mathrm{deferred}}}+2\cov{Z_{\mathrm{term}}}{Z_{\mathrm{deferred}}} \\
+&=\begin{cases}
+\vari{Z_{\mathrm{term}}}+\vari{Z_{\mathrm{deferred}}}-2\Ax{\termxn}\times \Ax[n|]{x}&
+\text{for discrete case}, \\
+\vari{Z_{\mathrm{term}}}+\vari{Z_{\mathrm{deferred}}}-2\Ax*{\termxn}\times \Ax*[n|]{x}&
+\text{for continuous case}.
+\end{cases}
+\end{align*}
+If the variances \(\vari{Z_{\mathrm{WL}}}\) and \(\vari{Z_{\mathrm{term}}}\)
+are known, we can then deduce the desired variance \(\vari{Z_{\mathrm{deferred}}}\).
+\end{enumerate}
+\item \label{it:insurance-recursions} \textbf{Recursive formulas.} The
+recursive formulas here reassemble substantially the recursions of expectations
+of life we have seen in \Cref{subsect:life-exp-recurs}. The intuition is pretty
+much the same.
+\begin{itemize}
+\item \emph{Whole life insurance:}
+\begin{itemize}
+\item \emph{(discrete)} \(\Ax{x}=\Ax{\termxn}+\Ex[n]{x}\Ax{x+n}\overset{(n=1)}{=}v\qx[]{x}+v\px[]{x}\Ax{x+1}\).
+\item \emph{(continuous)} \(\Ax*{x}=\Ax*{\termxn}+\Ex[n]{x}\Ax*{x+n}\).
+\end{itemize}
+\begin{center}
 \begin{tikzpicture}
 \draw[-Latex] (0,0) -- (10,0) node[right]{Time};
 \fill[] (0,0) circle [radius=0.05]
@@ -1046,38 +345,20 @@ node[above] {\((x)\)};
 \fill[] (3,0) circle [radius=0.05]
 node[below] {\(n\)};
 \draw[very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (3,0)
-node[midway, below=0.7cm]{\(\eringx{\endowxn}\)};
+node[midway, below=0.7cm]{\(\Ax*{\termxn}\)};
 \draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (3,0) -- (10,0)
-node[midway, above=0.7cm]{\(\eringx{x+n}\)};
+node[midway, above=0.7cm]{\(\Ax*{x+n}\)};
 \draw[-Latex, color=ForestGreen] (3,0.6) to[bend right] (0,0.6);
-\draw[-Latex, color=ForestGreen] (10,0.7) to[bend right] (0,0.9);
-\node[] () at (2.5,1.4) {\(\times\px[n]{x}\)};
+\node[] () at (2.5,1.4) {\(\times\Ex[n]{x}\)};
 \end{tikzpicture}
-\end{intuition}
-
-\begin{pf}
-Note that
-\[
-\int_{0}^{\infty}\px[t]{x}\dd{t}
-=\int_{0}^{n}\px[t]{x}\dd{t}
-+\underbrace{\int_{n}^{\infty}\px[t]{x}\dd{t}}_{\px[n]{x}\int_{0}^{\infty}\px[t]{x+n}\dd{t}}
-=\eringx{\endowxn}+\px[n]{x}\eringx{x+n}.
-\]
-\end{pf}
-
-\begin{note}
-Generally, for recursion of this ``form'', a proof can be done by ``splitting''
-the integral/sum like above --- ``factoring out'' \(\px[n]{x}\) corresponds to the
-``discounting'' in the intuition.
-\end{note}
-\item \(e_x=e_{\endowxn}+\px[n]{x}e_{x+n}\).
-\begin{note}
-Special case (\(n=1\)): \(e_x=\px{x}(1+e_{x+1})\).
-\end{note}
-\item \(\eringx{\endowxn}=\eringx{x:\angl{m}}+\px[m]{x}\eringx{x+m:\angl{n-m}}\) for any nonnegative integer \(m\le n\).
-
-\begin{intuition}
-
+\end{center}
+\item \emph{Term life insurance:}
+\begin{itemize}
+\item \emph{(discrete)} \(\Ax{\termxn}\overset{(m\le n)}{=}\Ax{\itop{x}:\angl{m}}
++\Ex[m]{x}\Ax{\itop{x}:\angl{n-m}}\overset{(m=1)}{=}v\qx[]{x}+v\px[]{x}\Ax{\itop{x+1}:\angl{n-1}}\).
+\item \emph{(continuous)} \(\Ax*{\termxn}\overset{(m\le n)}{=}\Ax*{x:\angl{m}}+\Ex[m]{x}\Ax*{\itop{x+m}:\angl{n-m}}\).
+\end{itemize}
+\begin{center}
 \begin{tikzpicture}
 \draw[-Latex] (0,0) -- (10,0) node[right]{Time};
 \fill[] (0,0) circle [radius=0.05]
@@ -1088,548 +369,418 @@ node[below] {\(m\)};
 \fill[] (7,0) circle [radius=0.05]
 node[below] {\(n\)};
 \draw[very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (3,0)
-node[midway, below=0.7cm]{\(\eringx{x:\angl{m}}\)};
+node[midway, below=0.7cm]{\(\Ax*{\itop{x}:\angl{m}}\)};
 \draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (3,0) -- (7,0)
-node[midway, above=0.7cm]{\(\eringx{x+m:\angl{n-m}}\)};
+node[midway, above=0.7cm]{\(\Ax*{\itop{x+m}:\angl{n-m}}\)};
 \draw[-Latex, color=ForestGreen] (3,0.6) to[bend right] (0,0.6);
-\draw[-Latex, color=ForestGreen] (7,0.7) to[bend right] (0,0.9);
-\node[] () at (2.5,1.4) {\(\times\px[m]{x}\)};
+\node[] () at (2.5,1.4) {\(\times\Ex[m]{x}\)};
 \end{tikzpicture}
-\end{intuition}
-\item \(e_{\endowxn}=e_{x:\angl{m}}+\px[m]{x}e_{x+m:\angl{n-m}}\) for any nonnegative integer \(m\le n\).
-\end{enumerate}
-\end{proposition}
-\end{enumerate}
+\end{center}
 
-\subsection{Life Tables}
-\label{subsect:life-tables}
-\begin{enumerate}
-\item To construct a life table, we first consider \(\lx{0}\in\N\) newborns
-(lives aged 0):
-
+\item \emph{Endowment insurance:}
+\begin{itemize}
+\item \emph{(discrete)} \(\Ax{\endowxn}\overset{(m\le n)}{=}\Ax{\itop{x}:\angl{m}}
++\Ex[m]{x}\Ax{x:\angl{n-m}}\overset{(m=1)}{=}v\qx[]{x}+v\px[]{x}\Ax{x+1:\angl{n-1}}\). \begin{warning}
+On the RHS of the second expression, be careful about which ``\(A\)'' has a
+``\(1\)'' on top of \(x\), and which does not!
+\end{warning}
+\item \emph{(continuous)} \(\Ax*{\termxn}\overset{(m\le n)}{=}\Ax*{\itop{x}:\angl{m}}+\Ex[m]{x}\Ax*{x+m:\angl{n-m}}\).
+\end{itemize}
+\begin{center}
 \begin{tikzpicture}
-\draw[] (0,0) ellipse [x radius=3, y radius=1];
-\node[] () at (0,0) {\faIcon{baby}};
-\node[] () at (1,0.5) {\faIcon{baby}};
-\node[] () at (1,-0.5) {\faIcon{baby}};
-\node[] () at (1.5,-0.3) {\faIcon{baby}};
-\node[] () at (-1,0) {\faIcon{baby}};
-\node[] () at (-1.5,-0.5) {\faIcon{baby}};
-\node[] () at (0.2,0.5) {\faIcon{baby}};
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\((x)\)};
+\fill[] (3,0) circle [radius=0.05]
+node[below] {\(m\)};
+\fill[] (7,0) circle [radius=0.05]
+node[below] {\(n\)};
+\draw[very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (3,0)
+node[midway, below=0.7cm]{\(\Ax*{\itop{x}:\angl{m}}\)};
+\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (3,0) -- (7,0)
+node[midway, above=0.7cm]{\(\Ax*{x+m:\angl{n-m}}\)};
+\draw[-Latex, color=ForestGreen] (3,0.6) to[bend right] (0,0.6);
+\node[] () at (2.5,1.4) {\(\times\Ex[m]{x}\)};
 \end{tikzpicture}
+\end{center}
+\end{itemize}
+\item Apart from EPV, second moment, and variance,
+another probabilistic quantity of PVRV that is of interest is the
+\emph{percentile}. Recall that the \emph{\(p\)th percentile} of a random variable
+\(X\) is the value \(c\) that makes \(\prob{X\le c}=p\).\footnote{This is
+actually a simplified definition that works for some sufficiently nice random
+variable only. But this definition is sufficient for our purpose here.} Here we
+denote the \(p\)th percentile of \(X\) by \(\pi_{p}(X)\).
+
+\item \label{it:percentile-trick-insurance} \textbf{Percentile trick:} In our case here,
+the random variable of interest is the PVRV, and we denote it by \(Z\). For
+many insurance coverages discussed here, we can write \(Z=g(T_x)\) for some
+strictly \emph{decreasing} continuous function \(g\). Then, the \emph{percentile trick}
+suggests that we actually have
+\[
+\pi_{p}(Z)=\pi_{p}(g(T_x))=g(\pi_{\rc{1-p}}(T_x)).
+\]
+In words, the \(p\)th percentile of \(g(T_x)\) equals \(g\) evaluated at the
+(\rc{\(1-p\)})th percentile of \(T_x\). Because percentiles of \(T_x\) are
+usually easier to find, this trick can allow us to compute percentiles of PVRV
+more efficiently.
+\end{enumerate}
+\subsection{Variations of Basic Insurance Coverages}
+\label{subsect:variations-insurance}
+\begin{enumerate}
+\item We have mentioned at the beginning of \Cref{subsect:basic-insurance} that
+the basic insurance coverages studied in \Cref{subsect:basic-insurance} will
+serve as our building blocks. Now, let us those building blocks to construct
+some more advanced insurance coverages, by introducing some variants to those
+basic coverages. Here, we shall discuss two kinds of variants: (i) \(1/m\)thly
+insurance and (ii) variable insurance benefits. Likewise, we shall explore each
+of them in the following three aspects:
+\begin{enumerate}[label={(\arabic*)}]
+\item \emph{Definition:} meaning of the variant
+\item \emph{Key formulas:} formulas for some key probabilistic quantities of PVRV
+\item \emph{Recursive formulas:} formulas used for recursions
+\end{enumerate}
+
+\item \textbf{\defn{\(1/m\)thly insurance}.}
+\begin{enumerate}[label={(\arabic*)}]
+\item \emph{Definition:} A DB is paid at the end of the \(1/m\)th year of
+death.  (For example, if \(m=12\), then a DB is paid at the end of the
+\emph{month} (``\(1/12\)th year'') of death.)
+
+The \(1/m\)thly insurance serves as a middle ground between ``discrete'' and
+``continuous''.
+
+\item \emph{Key formulas:} The formulas for \(1/m\)thly insurance can generally
+be obtained by modifying the respective formulas for \emph{discrete} case
+suitably. Before discussing the modifications, we first need to introduce a
+preliminary concept, which serves as a middle ground between \(K_x\) and \(T_x\).
+
+The \defn{\(1/m\)thly curtate future lifetime random variable} \(K_x^{(m)}\)
+is defined by \(K_x^{(m)}=\frac{1}{m}\lfloor mT_x\rfloor\). In words,
+\(K_x^{(m)}\) is \(T_x\) \emph{rounded down to the lower \(1/m\)th of a year}.
+
+For example, \(K_x^{(2)}\) is \(T_x\) rounded down to the lower half of a year:
+\begin{center}
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\((x)\)};
+\fill[] (1.5,0) circle [radius=0.05]
+node[below] {1/2};
+\fill[] (3,0) circle [radius=0.05]
+node[below] {1};
+\node[] () at (4,-0.3) {\(\cdots\)};
+\fill[] (5,0) circle [radius=0.05]
+node[below] {\(K_x\)};
+\fill[] (6.5,0) circle [radius=0.05]
+node[below] {\(K_x^{(1/2)}\)};
+\fill[] (7.5,0) circle [radius=0.05]
+node[red, above] {\faIcon{skull}}
+node[below] {\(T_x\)};
+\fill[] (8,0) circle [radius=0.05]
+node[below right] {\(K_x+1\)};
+\end{tikzpicture}
+\end{center}
+The pmf of \(K_x^{(m)}\) is given by
+\(\prob{K_x^{(m)}=\frac{k}{m}}=\px[\frac{k}{m}]{x}\times \qx[\frac{1}{m}]{x+\frac{k}{m}}\)
+for each \(k=0,1,\dotsc\).
+
+
+Using the random variable \(K_x^{(m)}\), we can then specify the modifications
+needed for obtaining the formulas applicable to \(1/m\)thly insurance.
+\begin{itemize}
+\item \emph{PVRV:} Replace \(K_x+1\) by \(K_x^{\mgc{(m)}}+\mgc{1/m}\).
+
+Example (whole life insurance): \(v^{K_x+1}\to v^{K_x^{\mgc{(m)}}+\mgc{1/m}}\).
+\item \emph{EPV:}
+\begin{itemize}
+\item \emph{Notation:} Put ``\((m)\)'' as the right subscript of \(A\) in the
+notation for discrete case.
+\item \emph{Formula:} Still use the general EPV calculation formula in
+\labelcref{it:gen-epv-fmla}.
+\end{itemize}
+
+Example (\(n\)-year term life insurance):
+\[
+\Ax{}[(m)]{}_{\termxn}=\sum_{k=0}^{\rc{mn-1}}v^{\frac{k+1}{m}}\px[\frac{k}{m}]{x}\qx[\frac{1}{m}]{x+\frac{k}{m}}
+=v^{\frac{1}{m}}\qx[\frac{1}{m}]{x}+v^{\frac{2}{m}}\px[\frac{1}{m}]{x}\qx[\frac{1}{m}]{x+\frac{1}{m}}
++\dotsb
++v^{n}\px[\frac{mn-1}{m}]{x}\qx[\frac{1}{m}]{x+\frac{mn-1}{m}}.
+\]
+\end{itemize}
+\item \emph{Recursive formulas:} Again the recursive formulas can be obtained
+by modifying the ones for discrete case in \labelcref{it:insurance-recursions}
+suitably. Let us use whole life insurance (\(\Ax{x}[(m)]\)) as an example:
+\[
+\Ax{x}[\mgc{(m)}]=\Ax{}[\mgc{(m)}]{}_{\termxn}+\Ex[n]{x}\Ax{x+n}[\mgc{(m)}]
+\overset{(n=\mgc{\frac{1}{m}})}{=}v^{\mgc{\frac{1}{m}}}\qx[\mgc{\frac{1}{m}}]{x}+v^{\mgc{\frac{1}{m}}}\px[\mgc{\frac{1}{m}}]{x}\Ax{x+\mgc{\frac{1}{m}}}.
+\]
+\begin{center}
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0}
+node[above] {\((x)\)};
+\fill[] (3,0) circle [radius=0.05]
+node[below] {\(n\)};
+\draw[very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (3,0)
+node[midway, below=0.7cm]{\(\Ax{}[\mgc{(m)}]{}_{\termxn}\)};
+\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (3,0) -- (10,0)
+node[midway, above=0.7cm]{\(\Ax{x+n}[\mgc{(m)}]\)};
+\draw[-Latex, color=ForestGreen] (3,0.6) to[bend right] (0,0.6);
+\node[] () at (2.5,1.4) {\(\times\Ex[n]{x}\)};
+\end{tikzpicture}
+\end{center}
+\end{enumerate}
+\item \label{it:var-benefit-insurance} \textbf{Variable insurance benefits.}
+\begin{enumerate}[label={(\arabic*)}]
+\item \emph{Definition:} This variant refers generally to any kind of insurance
+coverage where the amount of DB can differ for different payment time points.
 
 \begin{note}
-\(\lx{0}\) is known as \defn{radix} (``base'' number) of the life table. A
-common choice is 10000.
+In this case, the amount of DB may no longer stay at the constant \(1\) anymore.
 \end{note}
+\item \emph{Key formulas:}
+\begin{itemize}
+\item \emph{EPV:} Use the general EPV formula in \labelcref{it:gen-epv-fmla}.
+\item \emph{Second moment:} Still use the general EPV formula in
+\labelcref{it:gen-epv-fmla}, but square \emph{both} benefit amount \emph{and}
+discount factor.
+\item \emph{Variance:} Still use the standard formula:
+\(\text{Variance}=\text{Second moment}-\text{EPV}^{2}\) (nothing special).
+\end{itemize}
 
-\item After \(x\) years, some lives may be dead:
-
-\begin{tikzpicture}
-\draw[] (0,0) ellipse [x radius=3, y radius=1];
-\node[] () at (0,0) {\faIcon{skull}};
-\node[] () at (1,0.5) {\faIcon{user}};
-\node[] () at (1,-0.5) {\faIcon{skull}};
-\node[] () at (1.5,-0.3) {\faIcon{user}};
-\node[] () at (-1,0) {\faIcon{user}};
-\node[] () at (-1.5,-0.5) {\faIcon{user}};
-\node[] () at (0.2,0.5) {\faIcon{user}};
-\end{tikzpicture}
-
-\item Let \(\Lx{x}\) be the number of survivors to age \(x\)
-(which is a random variable). To determine \(\Lx{x}\), we shall use an
-\emph{indicator} approach.
-
-\item First we label the \(\lx{0}\) newborns as newborn \(1,2,\dotsc,\lx{0}\).
-Then, define the indicator (random variable) for the survival to age \(x\) for
-newborn \(j\) by:
-\[
-I_{j,x}=\begin{cases}
-1&\text{if newborn \(j\) survives to age \(x\)},\\
-0&\text{otherwise}.
-\end{cases}
-\]
-\begin{tikzpicture}
-\draw[] (0,0) ellipse [x radius=3, y radius=1];
-\node[] (l3) at (0,0) {\faIcon{skull}};
-\node[] () at (1,0.5) {\faIcon{user}};
-\node[] () at (1,-0.5) {\faIcon{skull}};
-\node[] () at (1.5,-0.3) {\faIcon{user}};
-\node[] (l2) at (-1,0) {\faIcon{user}};
-\node[] (l1) at (-1.5,-0.5) {\faIcon{user}};
-\node[] () at (0.2,0.5) {\faIcon{user}};
-\draw[-Latex, blue] (-3, -1.5) -- (l1.south west);
-\node[] () at (-3.5,-1.8) {\(I_{1,x}=1\)};
-\draw[-Latex, blue] (-4, 0) -- (l2.west);
-\node[] () at (-4.7,0) {\(I_{2,x}=1\)};
-\draw[-Latex, blue] (-4, 1.5) -- (l3.north west);
-\node[] () at (-4.5,1.7) {\(I_{3,x}=0\)};
-\end{tikzpicture}
-
-Then, we have \(\displaystyle\mathcal{L}_{x}=\sum_{j=1}^{\lx{0}}I_{j,x}\).
-\item For any age \(x\), the quantity of most interest is the \emph{expected}
-number of survivors to age \(x\): \(\expv{\Lx{x}}\) (Actuarial notation:
-\(\lx{x}\)).
-\item We shall assume that every newborn has the same lifetime distribution.
-Then, without any ambiguity we can write the probability of any newborn
-surviving to age \(x\) by \(\px[x]{0}\). Thus, we have
-\[
-\lx{x}=\sum_{j=1}^{\lx{0}}\px[x]{0}=\px[x]{0}\lx{0},
-\]
-which implies the following:
-\begin{lemma}
-\label{lma:lxl0}
-\(\lx{x}=\lx{0}\,\px[x]{0}\) for any age \(x\).
-\end{lemma}
-
-\item Indeed, we have the following more general result:
-\begin{proposition}
-\label{prp:lxpx}
-\(\lx{x+t}=\lx{x}\,\px[t]{x}\) for any age \(x\) and \(t\ge 0\).
-\end{proposition}
-\begin{pf}
-By \cref{lma:lxl0}, we have \(\lx{x+t}=\lx{0}\,\px[x+t]{0}\) and
-\(\lx{x}=\lx{0}\,\px[x]{0}\). Then the result follows since
-\(\px[x+t]{0}=\px[x]{0}\,\px[t]{x}\).
-\end{pf}
-
-Typically \(\lx{x}\) for different ages \(x\) are given in a life table, and
-hence this result is useful for computing various probabilities based on life
-table, e.g.:
-\begin{enumerate}
-\item \(\displaystyle \px[t]{x}=\frac{\lx{x+t}}{\lx{x}}\)
-\item \(\displaystyle \qx[t]{x}=1-\frac{\lx{x+t}}{\lx{x}}\)
-\item \(\displaystyle \qx[u|t]{x}=\frac{\lx{x+u}-\lx{x+u+t}}{\lx{x}}\)
-\end{enumerate}
-
-\item A life table sometimes also provides values for ``\(d\)'', which can be
-seen as ``dual'' of ``\(\lx{}\)'':
+Example (whole life insurance with DB amount being \(b_t\) when paid at time
+\(t\)):
 \begin{center}
-\begin{tabular}{ccc}
+\begin{tabular}{lll}
 \toprule
-&Survivors&Deaths\\
+&Discrete&Continuous \\
 \midrule
-number\ &\(\mathcal{L}\)&\(\mathcal{D}\)\\
-exp.\ number &\(\lx{}\)&\(\dx{}\)\\
+PVRV&\(b_{K_x+1}\times v^{K_x+1}\)&\(b_{T_x}\times v^{T_x}\) \\
+EPV&\(\displaystyle \sum_{k=0}^{\infty}\brc{b_{k+1}}\vc{v^{k+1}}\mgc{\px[k]{x}\qx[]{x+k}}\)&
+\(\displaystyle \int_{0}^{\infty}\brc{b_t}\vc{e^{-\delta t}}\mgc{\px[t]{x}\mu_{x+t}\dd{t}}\)
+\\
+Second moment&\(\displaystyle \sum_{k=0}^{\infty}\brc{b_{k+1}^{\blc{2}}}\vc{v^{\blc{2}(k+1)}}\mgc{\px[k]{x}\qx[]{x+k}}\)&\(
+\displaystyle \int_{0}^{\infty}\brc{b_t^{\blc{2}}}\vc{e^{-\blc{2}\delta t}}\mgc{\px[t]{x}\mu_{x+t}\dd{t}}
+\) \\
+Variance&\(\text{Second moment}-\text{EPV}^{2}\)&\(\text{Second moment}-\text{EPV}^{2}\) \\
 \bottomrule
 \end{tabular}
 \end{center}
-\item The number of deaths between ages \(x\) and \(x+n\) is
-\(\Dx[n]{x}\) (a random variables).
-\begin{note}
-``between'' here can be understood in either non-strict or strict sense --- it
-does not affect the probability as the lifetime random variable is continuous.
-\end{note}
-
-\item The expected number of deaths between ages \(x\) and \(x+n\) is
-\(\expv{\Dx[n]{x}}\) (Actuarial notation: \(\dx[n]{x}\); ``\(n\)'' can be
-dropped if \(n=1\)).
-\item We can have a similar indicator-based development here. Define the
-indicator for the death between ages \(x\) and \(x+n\) for newborn \(j\) by
-\[
-{}_n I_{j,x}=
-\begin{cases}
-1&\text{if newborn \(j\) dies between ages \(x\) and \(x+n\)},\\
-0&\text{otherwise}.
+\item \emph{Recursive formulas:} There is not any ``nice'' recursive formula
+for this case in general. But in the following, we will study two special
+cases: \emph{arithmetically increasing insurance} and \emph{geometrically
+increasing insurance}.  There are some ``nice'' recursive formulas available
+for the former one.
+\end{enumerate}
+\item\label{it:arith-insur} \textbf{\defn{Arithmetically increasing insurance}.}
+\begin{enumerate}[label={(\arabic*)}]
+\item \emph{Definition:} The amount of DB paid at time \(t\) (if payable) is
+\(t\).
+\item \emph{Key formulas:} Let us use arithmetically increasing
+\emph{\(n\)-year term life insurance} as an example.
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+&Discrete&Continuous \\
+\midrule
+PVRV&\(\begin{cases}
+(K_x+1)v^{K_x+1}&\text{if \(K_x=0,1,\dotsc,n-1\)} \\
+0&\text{if \(K_x=n,n+1,\dotsc\)} \\
 \end{cases}
-\]
-Then similarly we have
-\(\displaystyle\Dx[n]{x}=\sum_{j=1}^{\lx{0}}{}_nI_{j,x}\). Hence,
-\(\displaystyle\dx[n]{x}=\sum_{j=1}^{\lx{0}}(\px[x]{0}-\px[x+n]{0})=\lx{x}-\lx{x+n}.\)
-\item We can readily deduce the following results:
-\begin{proposition}
-\label{prp:life-table-relationships}
-For any age \(x\) and \(n\in\N\),
-\begin{enumerate}
-\item \(\qx[n]{x}=\dx[n]{x}/\lx{x}\).
-\item \(\dx[n]{x}=\dx{x}+\dx{x+1}+\dotsb+\dx{x+n-1}\).
+\)&\(
+\begin{cases}
+T_xv^{T_x}&\text{if \(T_x\le n\)}, \\
+0&\text{if \(T_x>n\)}
+\end{cases}
+\) \\
+EPV&\(\displaystyle \IA_{\termxn}=\sum_{k=0}^{n-1}\brc{(k+1)}\vc{v^{k+1}}\mgc{\px[k]{x}\qx[]{x+k}}\)&
+\(\displaystyle \IbA*_{\termxn}=\int_{0}^{n}\brc{t}\vc{e^{-\delta t}}\mgc{\px[t]{x}\mu_{x+t}\dd{t}}\)
+\\
+Second moment&\(\displaystyle \sum_{k=0}^{n-1}\brc{(k+1)^{\blc{2}}}\vc{v^{\blc{2}(k+1)}}\mgc{\px[k]{x}\qx[]{x+k}}\)&\(
+\displaystyle \int_{0}^{n}\brc{t^{\blc{2}}}\vc{e^{-\blc{2}\delta t}}\mgc{\px[t]{x}\mu_{x+t}\dd{t}}
+\) \\
+Variance&\(\text{Second moment}-\text{EPV}^{2}\)&\(\text{Second moment}-\text{EPV}^{2}\) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\item \emph{Recursive formulas:} There are two ``nice'' recursive formulas
+available.
+\begin{itemize}
+\item \(\IA_{\termxn}=\vc{v\qx[]{x}}+v\px[]{x}\qty(\brc{\IA_{\itop{x+1}:\angl{n-1}}}+\mgc{\Ax{\itop{x+1}:\angl{n-1}}})\).
+\begin{center}
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1}
+node[above, violet] {\faIcon{money-bill-wave}};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2}
+node[above, magenta] {\faIcon{money-bill-wave}}
+node[above=0.3cm, brown] {\faIcon{money-bill-wave}};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3}
+node[above, magenta] {\faIcon{money-bill-wave}}
+node[above=0.3cm, brown] {\faIcon{money-bill-wave}}
+node[above=0.6cm, brown] {\faIcon{money-bill-wave}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4}
+node[above, magenta] {\faIcon{money-bill-wave}}
+node[above=0.3cm, brown] {\faIcon{money-bill-wave}}
+node[above=0.6cm, brown] {\faIcon{money-bill-wave}}
+node[above=0.9cm, brown] {\faIcon{money-bill-wave}};
+\node[thick, brown] () at (8.7,1) {\(\cdots\)};
+\node[thick, magenta] () at (8.7,0.3) {\(\cdots\)};
+\draw[-Latex, violet] (3,-0.3) -- (2.3,0)
+node[pos=-0.4] {\(v\qx{x}\)};
+\draw[-Latex, magenta] (11,0.3) -- (9,0.3)
+node[pos=-0.45] {\(\Ax{\itop{x+1}:\angl{n-1}}\)};
+\draw[brown, thick, decorate,decoration={mirror, brace, amplitude=5pt, raise=15pt}] (8.5,0.5) -- (8.5,1.5)
+node[midway, right=1cm] {\(\IA_{\itop{x+1}:\angl{n-1}}\)};
+\draw[-Latex, ForestGreen] (3.7,0.2) to[bend right] (0,0.1);
+\node[] () at (3,1.1) {\(\times v\px{x}\)};
+\end{tikzpicture}
+\end{center}
+\item \(\IA_{\termxn}=\vc{\Ax{\termxn}}+v\px[]{x}\brc{\IA_{\itop{x+1}:\angl{n-1}}}\).
+\begin{center}
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1}
+node[above, violet] {\faIcon{money-bill-wave}};
+\fill[] (4,0) circle [radius=0.05]
+node[below] {2}
+node[above, violet] {\faIcon{money-bill-wave}}
+node[above=0.3cm, brown] {\faIcon{money-bill-wave}};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {3}
+node[above, violet] {\faIcon{money-bill-wave}}
+node[above=0.3cm, brown] {\faIcon{money-bill-wave}}
+node[above=0.6cm, brown] {\faIcon{money-bill-wave}};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {4}
+node[above, violet] {\faIcon{money-bill-wave}}
+node[above=0.3cm, brown] {\faIcon{money-bill-wave}}
+node[above=0.6cm, brown] {\faIcon{money-bill-wave}}
+node[above=0.9cm, brown] {\faIcon{money-bill-wave}};
+\node[thick, brown] () at (8.7,1) {\(\cdots\)};
+\node[thick, violet] () at (8.7,0.3) {\(\cdots\)};
+\draw[-Latex, violet] (11,0.3) -- (9,0.3)
+node[pos=-0.3] {\(\Ax{\termxn}\)};
+\draw[brown, thick, decorate,decoration={mirror, brace, amplitude=5pt, raise=15pt}] (8.5,0.5) -- (8.5,1.5)
+node[midway, right=1cm] {\(\IA_{\itop{x+1}:\angl{n-1}}\)};
+\draw[-Latex, ForestGreen] (3.7,0.5) to[bend right] (0,0.1);
+\node[] () at (3,1.2) {\(\times v\px{x}\)};
+\end{tikzpicture}
+\end{center}
+\end{itemize}
 \end{enumerate}
-\end{proposition}
-\end{enumerate}
-\subsection{Fractional Age Assumptions}
-\begin{enumerate}
-\item In a life table, often the quantities (\(\lx{x},\dx{x}\) etc.) are given
-only for \emph{integer} ages. In such case, it is impossible to compute probabilities
-involving \emph{fractional} ages and years (e.g. \(\px[0.5]{50.2},
-\qx[0.7]{60}\) etc.), without further assumptions.
-\item To improve the flexibility, we may impose some additional assumptions.
-The three most common \emph{fractional age assumptions} are: \begin{enumerate}
-\item uniform distribution of deaths (UDD) (the most common one);
-\item constant force of mortality
-\item Balducci assumption (not very common; not inside SOA Exam FAM
-syllabus currently)
-\end{enumerate}
-
-\item The \defn{uniform distribution of deaths} (UDD) assumption is given by: for
-any integer age \(x\in\N_0\), and any \(t\in[0,1)\), assume that
-\(\qx[t]{x}=t\qx{x}\).
-\begin{warning}
-This is \underline{not} \(\px[t]{x}=t\px{x}\).
-\end{warning}
-\item \label{it:udd-approach} Under UDD, to compute quantities involving fractional ages and years,
-a general approach is to express them in terms of \(\qx[t]{x}\) where
-\(x\in\N_0\text{ and }t\in[0,1)\), using, e.g., properties in \cref{prp:act-notation-prop}.
-\item Here we highlight two properties under UDD:
-\begin{enumerate}
-\item \label{it:udd-only-length} For any integer age \(x\) and any \(u,t\ge 0\) such that \(u+t\in[0,1)\),
-\(\qx[u|t]{x}=t\qx{x}\).
-
-\begin{pf}
-Note that \(\qx[u|t]{x}=\qx[u+t]{x}-\qx[u]{x}=(u+t)\qx{x}-u\qx{x}=t\qx{x}\).
-\end{pf}
-
+\item\label{it:geometric-insur} \textbf{\defn{Geometrically increasing insurance}.}
+\begin{enumerate}[label={(\arabic*)}]
+\item \emph{Definition:} \emph{(only applicable to the discrete case)} The
+amount of DB paid at time \rc{\(k+1\)} (if payable) is
+\((1+j)^{\rc{k}}\) for any \(k=0,1,\dotsc\).
 \begin{note}
-This means as long as \(u+t\in[0,1)\) (next integer time is not ``crossed''),
-the ``\(q\)'' probability depends only on the \emph{length} of the time interval
-covered (``location'' of the interval \emph{within} the fraction does not
-matter).
+With this definition, the amount of DB at time \(1\) (the first possible DB) is
+\(1\).
 \end{note}
-
-\item \label{it:udd-fom-fmla}
-For any integer age \(x\) and any \(t\in[0,1)\), \(\displaystyle
-\mu_{x+t}=\frac{q_x}{1-tq_x}\).
+\item \emph{Key formulas: }Let us use geometrically increasing \emph{\(n\)-year
+term life insurance} as an example.
+\[
+\text{EPV}=\frac{1}{1+j}A_{x:\angl{n}i^{*}}\overset{(i=j)}{=}\frac{1}{1+j}\qx[n]{x}
+\]
+where \(i^*=(i-j)/(1+j)\).
 
 \begin{pf}
 Note that
 \[
-\mu_{x+t}=\frac{f_x(t)}{\px[t]{x}}
-=\frac{\dv{}{t}\qx[t]{x}}{1-\qx[t]{x}}
-=\frac{\dv{}{t}tq_x}{1-tq_x}
-=\frac{q_x}{1-tq_x}.
+\text{EPV}=\sum_{k=0}^{n-1}(1+j)^{k}v^{k+1}\px[k]{x}\qx{x+k}
+=\frac{1}{1+j}\sum_{k=0}^{n-1}\underbrace{\qty(\frac{1+i}{1+j})^{-(k+1)}}_{\vc{(1+i^{*})^{-(k+1)}}}\mgc{\px[k]{x}\qx{x+k}},
 \]
+and that when \(i^*=0\), we have
+\(A_{x:\angl{n}i^{*}}=\expv{\indicset{T_x<n}}=\qx[n]{x}\), where
+\(\indicset{\cdot}\) denotes the indicator function.
 \end{pf}
 \end{enumerate}
-
-
-
-\item Under UDD, the mean and variance of \(T_x\) and \(K_x\) are related in a rather simple way.
-First we shall state a lemma:
-\begin{lemma}
-\label{lma:udd-equiv-def}
-The UDD assumption we state is \emph{equivalent} to
-the following: For any integer age \(x\), writing
-\(T_x=K_x+U_x\), we have:
-\begin{enumerate}
-\item \(K_x\) and \(U_x\) are independent;
-\item \(U_x\sim U[0,1)\) (hence the name ``uniform distribution of deaths'').
 \end{enumerate}
-\end{lemma}
+\subsection{Relating \(\bar{A}\), \(A\), and \(A^{(m)}\)}
+\begin{enumerate}
+\item In \Cref{subsect:basic-insurance,subsect:variations-insurance}, we have
+studied formulas for EPVs of continuous (``\(\Ax*{}\)''), discrete
+(``\(\Ax{}\)'') and \(1/m\)thly (``\(\Ax{}[(m)]\)'') insurances. Here, we would
+like to investigate their relationship. This is of interest since in many
+tables (like the SOA FAM-L table or the AM92 table), only the values of
+discrete EPVs (those ``\(\Ax{}\)s'') can be found, but not the values of
+continuous EPVs (those ``\(\Ax*{}\)''s) or \(1/m\)thly EPVs (those
+``\(\Ax{}[(m)]\)''s).
+
+\item Here we will discuss two kinds of formulas that relate these EPVs:
+\begin{itemize}
+\item \emph{UDD:} Formulas that work under the UDD assumption
+\item \emph{Claims acceleration approach:} \underline{Approximation} formulas that work in general
+\end{itemize}
+
+\item \label{it:udd-relate-insurance} \textbf{UDD.} We can organize the UDD
+formulas into three groups:
+\begin{itemize}
+\item \emph{\(\Ax{}\overset{\text{UDD}}{\to}\Ax*{}\):} The common feature
+shared by all the formulas here is that the adjustment factor \vc{\(i/\delta\)}
+is multiplied:
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Type&Formula \\
+\midrule
+Whole life&\(\displaystyle \Ax*{x}=\vc{\frac{i}{\delta}}\Ax{x}\) \\
+Term life&\(\displaystyle \Ax*{\termxn}=\vc{\frac{i}{\delta}}\Ax{\termxn}\) \\
+Deferred whole life&\(\displaystyle \Ax*[n|]{x}=\vc{\frac{i}{\delta}}\Ax[n|]{x}\) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{warning}
+We do \underline{not} have ``\(\displaystyle \Ax*{\endowxn}=\frac{i}{\delta}\Ax{\endowxn}\)''.
+The correct formula for the endowment insurance should be
+\(\displaystyle \Ax*{\endowxn}=\frac{i}{\delta}\Ax{\termxn}
++\underbrace{\Ax{\pureendowxn}}_{\mathclap{\text{no \(i/\delta\)!}}}.\)
+\end{warning}
+\item \emph{\(\Ax{}\overset{\text{UDD}}{\to}\Ax{}[(m)]\):} Change \(i/\delta\to
+i/\vc{i^{(m)}}\) and \(\Ax*{}\to \vc{\Ax{}[(m)]}\) in the formulas for
+\(\Ax{}\overset{\text{UDD}}{\to}\Ax*{}\).
+\item \emph{\(\Ax[][2]{}\overset{\text{UDD}}{\to}\Ax*[][2]{}\):} Change
+\(i/\delta\to \vc{i^{*}/\delta^*}\) and \(\Ax{}\to \vc{\Ax[][2]{}}\) in the
+formulas for \(\Ax{}\overset{\text{UDD}}{\to}\Ax*{}\),
+where \(\delta^*=2\delta\) and \(i^*=2i+i^2\) is the effective interest rate
+equivalent to the double force of interest \(2\delta\).
+\end{itemize}
+\item \label{it:claims-acc} \textbf{\defn{Claims acceleration approach}.} This
+approach gives us \emph{approximation} formulas for \(\Ax{}\to\Ax*{}\) and
+\(\Ax{}\to\Ax{}[(m)]\). The pro \faIcon[regular]{thumbs-up} of this approach is
+that it does not require the UDD assumption, but the con
+\faIcon[regular]{thumbs-down} is that it is only an \emph{approximation}! The
+formulas are as follows.
+\begin{itemize}
+\item \emph{\(\Ax{}\overset{\approx}{\to}\Ax{}[(m)]\):} Change \(i/i^{(m)}\to
+\vc{(1+i)^{(m-1)/2m}}\) and replace ``\(=\)'' by ``\(\approx\)'' in the
+formulas for \(\Ax{}\overset{\text{UDD}}{\to}\Ax{}[(m)]\).
 
 \begin{note}
-This result is seldom used directly in solving problems.
+The heuristic idea behind is that for \(1/m\)thly insurances, the average
+payment time of DB is the \(\frac{m+1}{2m}\)th of the year of death under UDD,
+which is \(1-\frac{m+1}{2m}=\frac{m-1}{2m}\) years earlier than the end of the
+year of death for the discrete case. Hence, multiplying
+\vc{\((1+i)^{(m-1)/2m}\)} is an attempt to ``bring the DB earlier'' (or
+\underline{accelerate} the \underline{claim} payment) through reducing the
+magnitude of discounting.
 \end{note}
-
-\begin{pf}
-Omitted. (It is non-trivial, but also not too complex. See \textcite[Section~3.3.1]{dickson2019actuarial}.)
-\end{pf}
-
-\begin{proposition}
-\label{prp:udd-mean-variance}
-Under UDD, for any integer age \(x\),
-\begin{enumerate}
-\item \(\eringx{x}=e_x+1/2\);
-\item \(\vari{T_x}=\vari{K_x}+1/12\).
-\end{enumerate}
-\end{proposition}
-
-\begin{pf}
-Using \cref{lma:udd-equiv-def}, the result follows readily as
-\(\expv{U_x}=1/2\) and \(\vari{U_x}=1/12\).
-\end{pf}
-
-\item The \defn{constant force of mortality} assumption is given by: for any
-integer age \(x\) and any \(t\in[0,1)\), assume that \(\mu_{x+t}=\mu_x^*\),
-where \(\mu_x^*>0\) depends only on the fixed integer age \(x\).
-\item The following is the key property for constant force of mortality
-assumption:
-\begin{proposition}
-\label{prp:cfm-key-prop}
-\(\px[t]{x}=(\px{x})^t\) for any integer age \(x\) and any \(t\in[0,1)\).
-\end{proposition}
-\begin{pf}
-We have
-\[
-\px[t]{x}=\exp\qty\Bigg(-\int_{0}^{t}\underbrace{\mu_{x+s}}_{\mu_x^*}\,ds)
-=e^{-t\mu_x^*}
-=(\px{x})^t.
-\]
-\end{pf}
-\item Like \labelcref{it:udd-approach}, a general approach under constant force
-of mortality assumption is to express the quantities to be computed in terms of
-\(\px[t]{x}\) where \(x\in\N_0\) and \(t\in[0,1)\). For example,
-\[\mu_x^*=\mu_{x+t}
-=-\frac{1}{\px[t]{x}}\dv{}{t}\px[t]{x}
-=-\frac{1}{(\px{x})^t}\dv{}{t}(\px{x})^t
-=-\frac{(\px{x})^t\ln\px{x}}{(\px{x})^t}
-=-\ln\px{x}.
-\]
-This also shows how we calculate the constant force of mortality based on life
-table (recall \(\px{x}=\lx{x+1}/\lx{x}\)).
-
-\item The \defn{Balducci assumption} is given by: for any integer age \(x\) and
-any \(t\in [0,1)\), assume that \(\qx[1-t]{x+t}=(1-t)\qx{x}\). \begin{note}
-It is like the ``tail'' version of UDD.
-\end{note}
-\item Again, like \labelcref{it:udd-approach}, a general approach under
-Balducci assumption is to express the quantities to be found in terms of
-\(\qx[1-t]{x+t}\) where \(x\in\N_0\) and \(t\in[0,1)\).
-\end{enumerate}
-\subsection{Select and Ultimate Survival Model}
-\begin{enumerate}
-\item Recall the assumption in \labelcref{it:key-assum}. It is reasonable if
-there is no ``external'' information between age 0 and age \(x\). But what if
-there is indeed new ``external'' information during that interval?
-
-\begin{tikzpicture}
-\draw[-Latex] (0,0) -- (10,0) node[right]{Age};
-\fill[] (0,0) circle [radius=0.05]
-node[above] (age0) {\faIcon{baby}}
-node[below] {0};
-\fill[] (2,0) circle [radius=0.05]
-node[below] {1};
-\fill[] (4,0) circle [radius=0.05]
-node[below] {2};
-\fill[] (6,0) circle [radius=0.05]
-node[below] {3};
-\fill[] (8,0) circle [radius=0.05]
-node[below] {4};
-\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (9,0)
-node[midway, above=0.7cm]{\(T_0\)};
-\end{tikzpicture}
-
-\begin{tikzpicture}
-\draw[-Latex] (0,0) -- (10,0) node[right]{Age};
-\fill[] (0,0) circle [radius=0.05]
-node[below] {0};
-\fill[] (2,0) circle [radius=0.05]
-node[below] {1};
-\fill[] (4,0) circle [radius=0.05] node[below] {2};
-\fill[] (6,0) circle [radius=0.05]
-node[below] {3};
-\fill[] (8,0) circle [radius=0.05]
-node[below] {4};
-\fill[] (3.5,0) circle [radius=0.05]
-node[below=0.05, font=\large] {\(x\)};
-\node[] (life) at (3.5,0.3) {\faIcon{user}};
-\node[red!50!black] (info) at (1.5,0.3) {\faIcon{info-circle}};
-\draw[pen colour=red!50!black, very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (3.5,0) -- (9.5,0)
-node[midway, above=0.7cm]{???};
-\draw[-Latex] (2,-1) -- (info);
-\node[] () at (2.5,-1.2) {new ``external'' information};
-\end{tikzpicture}
-
-\item A common source of new ``external'' information is \emph{underwriting}.
-When the life purchases an insurance policy between age 0 and age \(x\),
-an underwriting \faIcon{search} on him is often triggered. As \faIcon{building}
-learns more about the health status of the life (the ``external'' information),
-the lifetime distribution modelled for him may be adjusted.
-
-\item To incorporate this effect, we shall use the \emph{select and ultimate
-survival model}. This is a generalization to the model discussed in
-\cref{subsect:life-tables} (called \defn{aggregate survival model}), which
-allows flexibility for incorporating the ``external'' information coming from
-underwriting or something similar in nature (this is known as \defn{selection}
-in the model).
-\item Illustration of the selection process:
-
-\begin{tikzpicture}
-\draw[] (0,0) ellipse [x radius=3, y radius=1];
-\node[] () at (0,0) {\faIcon{baby}};
-\node[] () at (1,0.5) {\faIcon{baby}};
-\node[] () at (1,-0.5) {\faIcon{baby}};
-\node[] () at (1.5,-0.3) {\faIcon{baby}};
-\node[] () at (-1,0) {\faIcon{baby}};
-\node[] () at (-1.5,-0.5) {\faIcon{baby}};
-\node[] () at (0.2,0.5) {\faIcon{baby}};
-\draw[] (7,-2) ellipse [x radius=2, y radius=1];
-\draw[-Latex, brown] (1,0.5) to[bend left] node[above=0.2cm]{select at age 4} (6,-1.5);
-\node[brown] () at (6,-1.8) {\faIcon{user}};
-\draw[-Latex, brown] (1,-0.5) to[bend right] node[below=0.3cm]{select at age 8} (7,-2.2);
-\node[brown] () at (7.2,-1.8) {\faIcon{user}};
-\node[] () at (7,-0.5) {group};
-\end{tikzpicture}
-
-At age 10:
-
-\begin{tikzpicture}
-\draw[] (0,0) ellipse [x radius=3, y radius=1];
-\node[] () at (0,0) {\faIcon{skull}};
-\node[brown] () at (1,0.5) {\faIcon{child}};
-\node[brown] () at (1,-0.5) {\faIcon{skull}};
-\node[] () at (1.5,-0.3) {\faIcon{child}};
-\node[] () at (-1,0) {\faIcon{child}};
-\node[] () at (-1.5,-0.5) {\faIcon{child}};
-\node[] () at (0.2,0.5) {\faIcon{child}};
-\end{tikzpicture}
-
-The selected lives would have different survival distributions from others.
-
-\item The \defn{select and ultimate survival model} is an aggregate survival
-model with the following features added:
-\begin{enumerate}
-\item The survival distribution of a life can depend on the age at which
-the life was \emph{selected}. (So different lives at the same age can be have
-different survival distributions, unlike plain aggregate survival model.)
-\item The effect on the survival distribution by the selection will
-\emph{disappear} after \(d>0\) years (often an integer), called \defn{select
-period}. That is, the survival distribution of a life selected \emph{at
-least} \(d\) years ago is the same as the distribution for a life at the same
-age but never selected before.
-\end{enumerate}
-\begin{tikzpicture}
-\draw[-Latex] (0,0) -- (10,0) node[right]{Time since selection};
-\fill[] (0,0) circle [radius=0.05]
-node[below] {0};
-\fill[] (4,0) circle [radius=0.05]
-node[below] {\(d\)};
-\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt, mirror}] (0,0) -- (4,0)
-node[midway, below=0.7cm, text width=3cm, font=\small]{distribution depends on current age \& age at selection}
-node[midway, above=0.3cm]{``select'' part};
-\draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt, mirror}] (4,0) -- (10,0)
-node[midway, below=0.7cm, text width=3cm, font=\small]{distribution depends on current age \st{\& age at selection}}
-node[midway, above=0.3cm]{``ultimate'' part};
-\end{tikzpicture}
-\item In the select and ultimate survival model, a life \emph{selected} at age
-\(x\) and \emph{currently} aged \(x+s\) (\(s\ge 0\)) is denoted by \(([x]+s)\)
-(rarely written directly like this). Then other notations apply similarly,
-e.g.,
-\begin{itemize}
-\item future lifetime random variable: \(T_{[x]+s}\)
-\item \(\px[t]{[x]+s}=S_{[x]+s}(t)=\prob{T_{[x]+s}>t}\)
-\item \(\qx[t]{[x]+s}=F_{[x]+s}(t)=\prob{T_{[x]+s}\le t}\)
-\item \(\eringx{[x]+s}=\expv{T_{[x]+s}}\)
-\item etc.
+\item \emph{\(\Ax{}\overset{\approx}{\to}\Ax*{}\):} Let \(m\to\infty\), i.e.,
+change \((1+i)^{(m-1)/2m}\to (1+i)^{1/2}\), in the formulas for
+\(\Ax{}\overset{\approx}{\to}\Ax{}[(m)]\).
 \end{itemize}
-Also, we have \(T_{[x]+s}\eqd T_{x+s}\) for any \(s\ge d\), by the
-definition of select period. So in such case, ``\([x]\)'' in the notations can
-be replaced by ``\(x\)''.
-
-\item We shall impose a similar assumption as the one in
-\labelcref{it:key-assum} for the ``select'' life: For any age at selection
-\([x]\) and any \(t\ge 0\),
-\[
-(T_{[x]}-t|T_{[x]}>t)\eqd T_{[x]+t}.
-\]
-This assumption makes sense since we are considering time periods \emph{after}
-selection, so there should not be \emph{new} ``external'' information in those
-periods (the ``external'' information from selection has already been
-incorporated).
-\item As a result, previous formulas ``modelled''/``started'' at age \(x\)
-can be readily adapted (change ``\(x\)'' to ``\([x]\)'') for the ``select''
-life.
-\begin{warning}
-However, formulas that ``pass through'' the selection age \(x\) generally do
-not apply anymore. For example, we do \underline{not} have
-``\(\px[3]{x-1}=\px{x-1}\,\px[2]{[x]}\)''.
-\end{warning}
-\item We can also impose fractional age assumption for the ``select'' life
-(assuming the select period \(d\ge 1\)), where ``\(x\)'' is changed to
-``\([x]\)'' in the assumptions: For any \(x\in\N_0\) and any \(t\in[0,1)\),
-\begin{enumerate}
-\item UDD:  assume \(\qx[t]{[x]}=t\qx{[x]}\).
-\item constant force of mortality:  assume \(\mu_{[x]+t}=\mu_{[x]}^{*}\).
-\item Balducci assumption:  assume \(\qx[1-t]{[x]+t}=(1-t)\qx{[x]}\).
-\end{enumerate}
-Consequently, we have analogous properties for fractional age assumptions for
-the ``select'' life.
-\end{enumerate}
-
-\subsection{Select Life Tables}
-\begin{enumerate}
-\item Computations of quantities in the select and ultimate survival model are
-usually based on a \defn{select life table}, which includes also the life table
-functions (e.g. ``\(\lx{}\)'' and ``\(\dx{}\)'') for lives selected at
-different ages.
-\item It turns out that the ``bottom-up'' approach for constructing the tables
-like \cref{subsect:life-tables} is not very feasible as there are many
-complications when age at selection can also impact the survival distribution.
-\item We shall instead construct the tables such that an analogous result,
-which holds in \cref{subsect:life-tables}, is satisfied: For any age \(x\)
-and any \(t,u\ge 0\),
-\begin{equation}
-\label{eq:select-table-req1}
-\lx{[x]+t+u}=\lx{[x]+t}\,\px[u]{[x]+t}.
-\end{equation}
-Besides, due to the select period \(d\), a natural requirement is
-\begin{equation}
-\label{eq:select-table-req2}
-\lx{[x]+t}=\lx{x+t}
-\end{equation}
-for any \(t\ge d\).
-
-\item It turns out that, after imposing both
-\cref{eq:select-table-req1,eq:select-table-req2}, there is exactly one way to
-construct the tables (based on some pre-specified values for ``select''
-survival probabilities, as well as ``ultimate'' life table function:
-\(\lx{x}\)'s):
-\begin{proposition}
-\label{prp:construct-select-table}
-Both \cref{eq:select-table-req1,eq:select-table-req2} hold true iff
-\[
-\lx{[x]+t}=\frac{\lx{x+d}}{\px[d-t]{[x]+t}}
-\]
-for any \(0\le t< d\), and
-\[
-\lx{[x]+t}=\lx{x+t}
-\]
-for any \(t\ge d\), where \(d\) is the select period.
-\end{proposition}
-\begin{pf}
-``\(\Rightarrow\)'': \Cref{eq:select-table-req2} forces \(\lx{[x]+t}=\lx{x+t}\)
-for any \(t\ge d\). After that, \cref{eq:select-table-req1} implies that
-\(\lx{[x]+d}=\lx{x+d}=\lx{[x]+t}\,\px[d-t]{[x]+t}\) for any \(0\le t<d\).
-
-``\(\Leftarrow\)'': Under the assumption, for any age \(x\) and any \(t,u\ge
-0\), firstly \cref{eq:select-table-req2} immediately holds. Next, consider:
-\begin{itemize}
-\item \underline{Case 1}: \(t+u<d\)\\
-We have
-\[
-\lx{[x]+t+u}=\frac{\lx{x+d}}{\px[d-t-u]{[x]+t+u}}
-\quad\text{and}\quad
-\lx{[x]+t}=\frac{\lx{x+d}}{\px[d-t]{[x]+t}},
-\]
-so
-\[
-\frac{\lx{[x]+t+u}}{\lx{[x]+t}}=\frac{\px[d-t]{[x]+t}}{\px[d-t-u]{[x]+t+u}}
-=\px[u]{[x]+t}.
-\]
-\item \underline{Case 2}: \(t\ge d\) (and \(t+u\ge d\))\\
-In this case we have \(\lx{[x]+t+u}=\lx{x+t+u}\) and \(\lx{[x]+t}=\lx{x+t}\),
-thus
-\[
-\frac{\lx{[x]+t+u}}{\lx{[x]+t}}=\frac{\lx{x+t+u}}{\lx{x+t}}=\px[u]{x+t}=\px[u]{[x]+t}.
-\]
-\item \underline{Case 3}: \(t< d\) and \(t+u\ge d\)\\
-Here we have \(\lx{[x]+t+u}=\lx{x+t+u}\) and
-\(\lx{[x]+t}=\lx{x+d}/\px[d-t]{[x]+t}\). Hence,
-\[
-\frac{\lx{[x]+t+u}}{\lx{[x]+t}}
-=\frac{\lx{x+t+u}}{\lx{x+d}}\px[d-t]{[x]+t}
-=\px[t+u-d]{[x]+d}\,\px[d-t]{[x]+t}
-=\px[u]{[x]+t}.
-\]
-\begin{tikzpicture}
-\draw[-Latex] (0,0) -- (10,0) node[right]{Age};
-\fill[] (0,0) circle [radius=0.05]
-node[below] {0};
-\fill[] (1,0) circle [radius=0.05]
-node[below=0.05] {\([x]+t\)};
-\fill[] (4,0) circle [radius=0.05]
-node[below=0.05] {\([x]+d\)};
-\fill[] (8,0) circle [radius=0.05]
-node[below=0.05] {\([x]+t+u\)};
-\draw[-Latex] (1,0.2) to[bend left] (4,0.2);
-\draw[-Latex] (4,0.2) to[bend left] (8,0.2);
-\node[font=\small] () at (2.5, 1) {lives for \(d-t\) years};
-\node[font=\small] () at (6.5, 1) {lives for \(t+u-d\) more years};
-\node[] () at (2.5,1.5) {``select'' part};
-\node[] () at (6.5,1.5) {``ultimate'' part};
-\draw[densely dashed] (4,2) -- (4,-2);
-\draw[-Latex] (1,-0.5) to[bend right] (8,-0.5);
-\node[] () at (4.5, -1) {lives for \(u\) years};
-\end{tikzpicture}
-\end{itemize}
-So in any of the cases, \cref{eq:select-table-req1} holds.
-\end{pf}
 \end{enumerate}
