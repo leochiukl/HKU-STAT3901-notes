@@ -5,15 +5,15 @@
 behaviour of PVRV for life insurance and life annuity, and now we should have a
 better understanding on the potential loss to the insurer, arising from the
 benefit payments made in insurance/annuity products. Of course, the insurer
-would not offer the insurance/annuity products \emph{free-of-charge}, and one
+would \emph{not} offer the insurance/annuity products free-of-charge, and one
 of the most important tasks for pricing actuaries is to price the products
 appropriately:
 \begin{itemize}
 \item If the premiums charged (i.e., amounts of money to be paid by the
 policyholder) are too low, the potential loss could not be sufficiently
-covered, leading to a high risk of \emph{bankruptcy} for the insurer!
-\item If the premiums charged are too high, the insurer could lose a lot of
-business \faIcon{users} due to market competition.
+covered, leading to a high risk of \emph{bankruptcy} for the insurer!  \item If
+the premiums charged are too high, the insurer could lose a lot of business
+\(\cancel{\text{\faIcon{users}}}\) due to market competition.
 \end{itemize}
 \item Pricing the products suitably is by no means an easy task. Actually, in
 practice the insurer often has a whole actuarial pricing team to deal with
@@ -40,9 +40,9 @@ here is the \emph{equivalence principle}. To illustrate this principle,
 consider the following simple example about premiums of an insurance coverage.
 
 Suppose the insurer offers a discrete whole life insurance coverage to an
-individual aged \(x\), with death benefit (or \emph{\underline{s}um insured})
-\(S\). At the beginning of each year, the policyholder would pay a fixed amount
-of premium \(P\) to the insurer, whenever he is alive.
+individual aged \(x\), with death benefit (or \underline{s}um insured) \(S\).
+At the beginning of each year, the policyholder would pay a fixed amount of
+premium \(P\) to the insurer, whenever he is alive.
 \begin{center}
 \begin{tikzpicture}
 \draw[-Latex] (0,0) -- (10,0) node[right]{Time};
@@ -152,7 +152,7 @@ Here \(\epvt{0}{\cdot}\) refers to the time-0 EPV.
 \item \emph{\defn{net premium}:} premium set by \underline{equivalence
 principle} with \underline{expenses ignored}
 \item \emph{\defn{gross premium}:} premium with \underline{expenses considered}
-(may or may not be set by equivalence principle)
+(which may or may not be set by equivalence principle)
 \item \emph{\defn{fully discrete}:} Both benefits and premiums are only payable
 at discrete time points within policy term. More specifically, the discrete
 time points refer to:
@@ -223,11 +223,8 @@ Pure endowment&
 \bottomrule
 \end{tabular}
 \end{center}
-\begin{note}
-The most important formulas to be memorized \faIcon{brain} are those
-``ratio formulas'' (``\(\Ax{}/\ax**{}\)'' or ``\(\Ax*{}/\ax*{}\)''). The rest
-of the formulas are just simple corollaries (try to derive them!).
-\end{note}
+We can observe that all the net premiums here take a simple ratio form
+(``\(\Ax{}/\ax**{}\)'' or ``\(\Ax*{}/\ax*{}\)'').
 \item \textbf{Gross premium.}
 \begin{itemize}
 \item \emph{Common types of expenses (for fully discrete case):}
@@ -240,7 +237,7 @@ Initial&Incurred at the policy issuance.&Commissions to agents \\
 Renewal&Incurred at each premium payment time except the first.
 &Costs for issuing annual statements \\
 Termination/Settlement&Incurred when paying DB or endowment
-benefit&Costs for paperwork required to settle the claim of DB/endowment benefit \\
+benefit.&Costs for paperwork required to settle the claim of DB/endowment benefit \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -254,7 +251,8 @@ Notations for these expenses:
 For fully continuous case, the renewal expenses would become a stream of
 payments, incurring simultaneously with the stream of continuous premium
 payments. In such case, the notation \(e\) would denote the \emph{rate} of
-renewal expense instead.
+renewal expense instead. Also, typically the initial expense is assumed to be
+zero in the fully continuous case.
 
 \begin{center}
 \begin{tikzpicture}
@@ -379,11 +377,12 @@ Whole life&\(\rc{m}P\times \ax**{x}[(m)]\text{\quad(often use: UDD/Woolhouse ...
 \item \label{it:prem-refund} \textbf{Refund of premiums.}
 \begin{enumerate}[label={(\arabic*)}]
 \item \emph{Definition:} The total amount of premium paid (\underline{with} or
-\underline{without} interest accumulation) is added on top of the DB. (Thus the
-premiums are ``\underline{refunded}'' when death occurs within the policy
-term.)
+\underline{without} interest accumulation) is added on top of the
+\underline{DB}.
 
-Usually this variant is applied on \(n\)-year policies with DB.
+Thus, the premiums are ``\underline{refunded}'' when death \faIcon{skull}
+occurs within the policy term. Usually this variant is applied on \(n\)-year
+policies.
 \item \emph{Key formulas:}
 \begin{itemize}
 \item \emph{Generic formula for calculating premium:} We can just insert the
@@ -400,7 +399,7 @@ solve for the premium \(P\):
 &\(\epvt{0}{\text{premium refund}}\) \\
 \midrule
 Without interest&\(P\IA_{\termxn}\) \\
-With interest&\(\underbrace{P\ax**{\endowxn}}_{\text{EPV of refund with interest}}\rc{-}\underbrace{\rc{\px[n]{x}\times P\ax**{\endowxn}}}_{\text{no refund if not dead in \(n\) years}}\) \\
+With interest&\(\underbrace{P\ax**{\endowxn}}_{\text{EPV of refund with interest}}\blc{-}\underbrace{\blc{\px[n]{x}\times P\ax**{\angl{n}}}}_{\text{no refund if not dead in \(n\) years}}\) \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -414,21 +413,45 @@ node[below] {0};
 \fill[] (2,0) circle [radius=0.05]
 node[below] {1};
 \fill[] (4,0) circle [radius=0.05]
+node[below] {\(K_x=2\)};
+\fill[] (5,0) circle [radius=0.05]
+node[above] {\faIcon{skull}};
+\fill[] (6,0) circle [radius=0.05]
+node[below] {\(K_x+1=3\)};
+\fill[] (8,0) circle [radius=0.05]
+node[below] {\(n=4\)};
+\foreach \x in {0,...,2} {
+	\node[ForestGreen] () at (0+2*\x, 0.6) {\(P\)};
+	\draw[-Latex] (0+2*\x, 0.8) to[bend left] (6,1.2);
+}
+\draw[->, red, line width=0.3mm] (6,0.2) -- (6,0.6)
+node[pos=1.8] {\(P\sx**{\angl{3}}\)};
+\draw[-Latex, violet] (5.6,0.8) to[bend left] node[midway, auto]{\(\times v^{3}\)} (0,-0.4);
+\node[] () at (0,-0.9) {PV: \(P\ax**{\angl{3}}\)};
+\end{tikzpicture}
+\begin{tikzpicture}
+\draw[-Latex] (0,0) -- (10,0) node[right]{Time};
+\fill[] (0,0) circle [radius=0.05]
+node[below] {0};
+\fill[] (2,0) circle [radius=0.05]
+node[below] {1};
+\fill[] (4,0) circle [radius=0.05]
 node[below] {2};
 \fill[] (6,0) circle [radius=0.05]
-node[below] {\(K_x=3\)};
-\fill[] (7,0) circle [radius=0.05]
-node[above] {\faIcon{skull}};
+node[below] {3};
 \fill[] (8,0) circle [radius=0.05]
-node[below] {\(K_x+1=4\)};
+node[below=0.3cm] {\faIcon{child}}
+node[below, font=\small] {\(K_x\wedge n=n=4\)};
 \foreach \x in {0,...,3} {
 	\node[ForestGreen] () at (0+2*\x, 0.6) {\(P\)};
 	\draw[-Latex] (0+2*\x, 0.8) to[bend left] (8,1.2);
 }
 \draw[->, red, line width=0.3mm] (8,0.2) -- (8,0.6)
-node[pos=1.8] {\(P\sx**{\angl{K_x+1}}\)};
-\draw[-Latex, violet] (7.6,0.8) to[bend left] node[midway, auto]{\(\times v^{K_x+1}\)} (0,-0.4);
-\node[] () at (0,-0.9) {PV: \(P\ax**{\angl{K_x+1}}\)};
+node[pos=1.8, cross out, draw] {\(P\sx**{\angl{4}}\)};
+\draw[-Latex, violet, dashed] (7.6,0.8) to[bend left] node[midway, auto]{\(\times v^{4}\)} (0.7,-0.9);
+\node[] () at (0,-0.9) {PV: \(P\ax**{\angl{4}}\)};
+\node[blue] () at (0.3,-1.4) {\(-P\ax**{\angl{4}}\)};
+\node[blue] () at (1.3,-1.8) {(cancel out extra refund)};
 \end{tikzpicture}
 \end{center}
 \end{itemize}

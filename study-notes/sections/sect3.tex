@@ -34,8 +34,7 @@ shall explore each kind of life annuity in the following three aspects:
 \item \emph{Definition:} meaning of the annuity
 \item \emph{Key formulas:} formulas for some key probabilistic quantities of PVRV
 \item \emph{Recursive formulas:} formulas used for recursions (to be discussed
-after studying the first two aspects for all four kinds of basic insurance
-coverages)
+after studying the first two aspects for all four kinds of basic life annuities)
 \end{enumerate}
 Henceforth, we shall assume that the amount of \emph{each} benefit payment is
 \(1\) (for discrete life annuities) or the \emph{rate} of benefit
@@ -361,7 +360,7 @@ superscript ``\((m)\)'' from STAT2902).
 \end{itemize}
 \item \emph{EPV:}
 \begin{itemize}
-\item \emph{Notation:} Put ``\((m)\)'' as the right subscript of
+\item \emph{Notation:} Put ``\((m)\)'' as the right superscript of
 \(\ax**{}\) or \(\ax{}\) in the notation for discrete case.
 \item \emph{Formula:}
 \begin{itemize}
@@ -370,8 +369,8 @@ superscript ``\((m)\)'' from STAT2902).
 \labelcref{it:gen-epv-fmla} (remember that the amount of each payment is
 \(1/m\) rather than \(1\) \warn{}).
 \item \emph{(due-immediate)} Change \(\ax{}\to \ax{}[\mgc{(m)}]\), \(\ax**{}\to
-\ax**{}[\mgc{(m)}]\) and \(1\to 1/m\) (both \(-1\to \mgc{-1/m}\) and \(\Ex[n]{x}\to
-\mgc{(1/m)\Ex[n]{x}}\) (if applicable)).
+\ax**{}[\mgc{(m)}]\) and \(1\to \mgc{1/m}\) (both \(-1\to \mgc{-1/m}\) and \((1)\Ex[n]{x}\to
+\mgc{(1/m)}\Ex[n]{x}\) (if applicable)).
 \end{itemize}
 \item \emph{Variance:} \emph{(due only)} Change \(\Ax{}\to \Ax{}[\mgc{(m)}]\).
 \end{itemize}
@@ -810,6 +809,10 @@ example:
 \[\mgc{\frac{\delta}{i^{(m)}}}\ax*{\endowxn}=\mgc{\frac{\delta}{i^{(m)}}}\ax*{x:\angl{m}}
 +\Ex[m]{x}\times \mgc{\frac{\delta}{i^{(m)}}}\ax*{x+m:\angl{n-m}}.\]
 \end{enumerate}
+\item With selection at age \(x\), all the previous ``\(a\)'' symbols and
+formulas can still be used, after replacing ``\(x\)'' by \([x]\) and
+simplifying ``\([x]+t\)'' to ``\(x+t\)'' if \(t\ge \underset{\text{(select
+period)}}{d}\).
 \end{enumerate}
 \subsection{Relating \(\bar{a}\), \(\ddot{a}\) and \(\ddot{a}^{(m)}\)}
 \begin{enumerate}
@@ -838,8 +841,7 @@ Deferred whole life&\(\ax**[n|]{x}[(m)]=\alpha(m)\ax**[n|]{x}\rc{-}\beta(m)\rc{\
 \end{tabular}
 \end{center}
 We have \(\displaystyle \alpha(m)=\frac{id}{i^{(m)}d^{(m)}}\) and
-\(\displaystyle \beta(m)=\frac{i-i^{(m)}}{i^{(m)}d^{(m)}}\). Selected values of
-\(\alpha(m)\) and \(\beta(m)\) are given in some tables, e.g., SOA FAM-L table.
+\(\displaystyle \beta(m)=\frac{i-i^{(m)}}{i^{(m)}d^{(m)}}\).
 \item \emph{\(\ax**{}\overset{\text{UDD}}{\to}\ax*{}\):} Let \(m\to\infty\),
 which changes \(\ax**{}[(m)]\to\ax*{}\), in the UDD formulas for
 \(\ax**{}\overset{\text{UDD}}{\to}\ax**{}[(m)]\). More specifically, make the
@@ -847,10 +849,14 @@ following changes on the UDD formulas for
 \(\ax**{}\overset{\text{UDD}}{\to}\ax**{}[(m)]\):
 \begin{itemize}
 \item \(\ax**{}[(m)]\to \ax*{}\).
-\item \(\displaystyle \alpha(m)\to \frac{id}{\mgc{\delta^2}}\).
-\item \(\displaystyle \beta(m)\to \frac{i-\mgc{\delta}}{\mgc{\delta^2}}\).
+\item \(\displaystyle \alpha(m)\to \alpha(\infty)=\frac{id}{\mgc{\delta^2}}\).
+\item \(\displaystyle \beta(m)\to \beta(\infty)=\frac{i-\mgc{\delta}}{\mgc{\delta^2}}\).
 \end{itemize}
 \end{itemize}
+\begin{note}
+Values of \(\alpha(m)\) and \(\beta(m)\) at \(i=0.05\) for some \(m\)
+(including \(m=\infty\)) can be found in the SOA FAM-L table.
+\end{note}
 \item \label{it:woolhouse} \textbf{\defn{Woolhouse's formula}.} Woolhouse's
 formula is an approximation formula for \(\ax**{}\to\ax**{}[(m)]\) and
 \(\ax**{}\to\ax*{}\).  Like the claims acceleration approach for the insurance

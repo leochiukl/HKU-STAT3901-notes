@@ -98,7 +98,7 @@ Variance&\(\Ax[][2]{x}-\Ax{x}^{2}\)&\(\Ax*[][2]{x}-\Ax*{x}^{2}\) \\
 \item The second moment is actually just the EPV evaluated at double force of
 interest, i.e., \(\delta\to 2\delta\) or \(v\to v^2\).
 \item EPV stands for \defn{expected present value}. Sometimes the term
-``\defn{actuarial present value}'' (APV) is used instead.
+\defn{actuarial present value} (APV) is used instead.
 \end{remark}
 \end{enumerate}
 \item \label{it:gen-epv-fmla} \ystar{} \textbf{Important note.} Here we can
@@ -355,8 +355,8 @@ node[midway, above=0.7cm]{\(\Ax*{x+n}\)};
 \item \emph{Term life insurance:}
 \begin{itemize}
 \item \emph{(discrete)} \(\Ax{\termxn}\overset{(m\le n)}{=}\Ax{\itop{x}:\angl{m}}
-+\Ex[m]{x}\Ax{\itop{x}:\angl{n-m}}\overset{(m=1)}{=}v\qx[]{x}+v\px[]{x}\Ax{\itop{x+1}:\angl{n-1}}\).
-\item \emph{(continuous)} \(\Ax*{\termxn}\overset{(m\le n)}{=}\Ax*{x:\angl{m}}+\Ex[m]{x}\Ax*{\itop{x+m}:\angl{n-m}}\).
++\Ex[m]{x}\Ax{\itop{x+m}:\angl{n-m}}\overset{(m=1)}{=}v\qx[]{x}+v\px[]{x}\Ax{\itop{x+1}:\angl{n-1}}\).
+\item \emph{(continuous)} \(\Ax*{\termxn}\overset{(m\le n)}{=}\Ax*{\itop{x}:\angl{m}}+\Ex[m]{x}\Ax*{\itop{x+m}:\angl{n-m}}\).
 \end{itemize}
 \begin{center}
 \begin{tikzpicture}
@@ -380,11 +380,11 @@ node[midway, above=0.7cm]{\(\Ax*{\itop{x+m}:\angl{n-m}}\)};
 \item \emph{Endowment insurance:}
 \begin{itemize}
 \item \emph{(discrete)} \(\Ax{\endowxn}\overset{(m\le n)}{=}\Ax{\itop{x}:\angl{m}}
-+\Ex[m]{x}\Ax{x:\angl{n-m}}\overset{(m=1)}{=}v\qx[]{x}+v\px[]{x}\Ax{x+1:\angl{n-1}}\). \begin{warning}
++\Ex[m]{x}\Ax{x+m:\angl{n-m}}\overset{(m=1)}{=}v\qx[]{x}+v\px[]{x}\Ax{x+1:\angl{n-1}}\). \begin{warning}
 On the RHS of the second expression, be careful about which ``\(A\)'' has a
 ``\(1\)'' on top of \(x\), and which does not!
 \end{warning}
-\item \emph{(continuous)} \(\Ax*{\termxn}\overset{(m\le n)}{=}\Ax*{\itop{x}:\angl{m}}+\Ex[m]{x}\Ax*{x+m:\angl{n-m}}\).
+\item \emph{(continuous)} \(\Ax*{\endowxn}\overset{(m\le n)}{=}\Ax*{\itop{x}:\angl{m}}+\Ex[m]{x}\Ax*{x+m:\angl{n-m}}\).
 \end{itemize}
 \begin{center}
 \begin{tikzpicture}
@@ -709,6 +709,10 @@ and that when \(i^*=0\), we have
 \(\indicset{\cdot}\) denotes the indicator function.
 \end{pf}
 \end{enumerate}
+\item With selection at age \(x\), all the previous ``\(A\)'' symbols and
+formulas can still be used, after replacing ``\(x\)'' by \([x]\) and
+simplifying ``\([x]+t\)'' to ``\(x+t\)'' if \(t\ge \underset{\text{(select
+period)}}{d}\).
 \end{enumerate}
 \subsection{Relating \(\bar{A}\), \(A\), and \(A^{(m)}\)}
 \begin{enumerate}

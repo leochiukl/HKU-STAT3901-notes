@@ -60,7 +60,7 @@ node[midway, below=0.7cm, font=\small]{``aged 1'' in daily life};
 \end{tikzpicture}
 \end{center}
 
-For convenience, sometimes we shall denote a life aged \(x\) by \((x)\).
+For convenience, sometimes we denote a life aged \(x\) by \((x)\).
 
 \item A survival model describes the probabilistic behaviours of the lifetime
 via a random variable known as \emph{future lifetime random variable}. As its
@@ -123,9 +123,9 @@ Examples:
 
 The notations involving ``\(p\)'' and ``\(q\)'' are the so-called
 \emph{actuarial notations}, which are shorthands used by actuaries to simplify
-presentations\footnote{Perhaps a secondary purpose is to gatekeep and ``scare
-away'' people that are unfamiliar with actuarial science? \faIcon[regular]{laugh-wink}}. It is quite normal
-for beginners to find them somewhat confusing and unnecessary
+presentations\footnote{Perhaps a secondary purpose is to ``scare away'' people
+that are unfamiliar with actuarial science?  \faIcon[regular]{laugh-wink}}. It
+is quite normal for beginners to find them somewhat confusing and unnecessary
 \faIcon[regular]{grimace}.  Nonetheless, you would (hopefully!) appreciate them
 more as you learn more about life contingencies in STAT3901 and also STAT3909.
 
@@ -189,7 +189,9 @@ There is \underline{not} a ``factorization formula for \(q\)''!
 
 \item\label{it:utqx-fmlas} \emph{Formulas for \(\qx[u|t]{x}\):}
 \begin{itemize}
-\item \emph{``\(\gc{p}\times \rc{q}\)'' form:} \(\qx[u|t]{x}=\underbrace{\gc{\px[u]{x}}}_{\text{survive \(u\) yrs.}}\times \underbrace{\rc{\qx[t]{x+u}}}_{\text{die in the subsequent \(t\) yrs.}}\)
+\item \emph{``\(\gc{p}\times \rc{q}\)'' form:} 
+\[\qx[u|t]{x}=\underbrace{\gc{\px[u]{x}}}_{\text{survive \(u\) yrs.}}\times 
+\underbrace{\rc{\qx[t]{x+u}}}_{\text{die in the subsequent \(t\) yrs.}}\]
 \begin{center}
 \begin{tikzpicture}
 \draw[-Latex] (0,0) -- (10,0) node[right]{Age};
@@ -209,13 +211,15 @@ node[midway, above=0.3cm, red]{\faIcon{skull} in these \(t\) years};
 \end{center}
 The two sides of the equation are pretty much referring to the same thing in this case.
 
-\item \emph{``\(p-p\)'' form:}
+\item \emph{``\(\gc{p}-\gc{p}\)'' form:}
 \[
-\qx[u|t]{x}=\underbrace{\px[u]{x}}_{\text{survive \(u\) yrs.}}\;\underbrace{-\px[u+t]{x}}_{\text{but not survive \(u+t\) yrs}}
+\qx[u|t]{x}=\underbrace{\gc{\px[u]{x}}}_{\text{survive \(u\) yrs.}}\;
+\underbrace{-\gc{\px[u+t]{x}}}_{\text{but not survive \(u+t\) yrs}}
 \]
-\item \emph{``\(q-q\)'' form:}
+\item \emph{``\(\rc{q}-\rc{q}\)'' form:}
 \[
-\qx[u|t]{x}=\underbrace{\qx[u+t]{x}}_{\text{die in \(u+t\) yrs.}}\;\underbrace{-\qx[u]{x}}_{\text{but not die in \(u\) yrs.}}
+\qx[u|t]{x}=\underbrace{\rc{\qx[u+t]{x}}}_{\text{die in \(u+t\) yrs.}}\;
+\underbrace{-\rc{\qx[u]{x}}}_{\text{but not die in \(u\) yrs.}}
 \]
 \end{itemize}
 \end{enumerate}
@@ -236,10 +240,10 @@ Here, instead of considering interest, which \underline{increases} the
 \item \label{it:fom} The \defn{force of mortality} at age \(x\), denoted by
 \(\mu_x\), is defined by
 \[
-\mu_x=-\frac{S_0'(x)}{S_0(x)}=-\dv{}{x}\ln S_0(x)
+\mu_x=\rc{-}\frac{S_0'(x)}{S_0(x)}=\rc{-}\dv{}{x}\ln S_0(x).
 \]
 The value \(\mu_x\times \Delta x\) can be interpreted as the approximated
-probability for \((x)\) to die in \(\Delta x\) years, when \(\Delta x\) is
+probability for \((x)\) to \rc{die} in \(\Delta x\) years, when \(\Delta x\) is
 small.
 \begin{center}
 \begin{tikzpicture}
@@ -260,9 +264,7 @@ node[midway, above=0.3cm]{\faIcon{skull}};
 For example, if you are now aged \(x\) and your force of mortality at age \(x\)
 is \(\mu_x\), then the approximated probability for you to die \faIcon{skull}
 within the next 24 hours would be \(\mu_x\times (1/365)\) (hopefully very
-small!), assuming 1 day equals \(1/365\) years.
-
-
+small!) (assuming 1 day equals \(1/365\) years).
 
 \item After defining force of mortality, let us introduce some formulas related
 to it:
@@ -325,7 +327,7 @@ Scalar multiplication&\(\mu_{x+s}\to k\mu_{x+s}\quad\forall s\in[0,t]\)&\(\px[t]
 \end{center}
 \begin{note}
 These formulas are helpful for handling questions involving changes in force of
-mortality, which are often due to some revisions on the mortality assumption.
+mortality, which usually arise from some revisions on the mortality assumption.
 \end{note}
 \end{enumerate}
 \end{enumerate}
@@ -383,16 +385,16 @@ Note that
 =\int_{0}^{\infty}\px[t]{x}\dd{t}.
 \]
 \end{pf}
-\item \emph{(Not commonly used) Second moment:} \(\displaystyle
-\expv{T_x^2}=2\int_{0}^{\infty}t\times \px[t]{x}\dd{t}\).
+\item \emph{(Less commonly used) Second moment:} \(\displaystyle
+\expv{T_x^2}=\int_{0}^{\infty}2t\times \px[t]{x}\dd{t}\).
 
 \begin{pf}
 By introducing a double integral and changing order of integrations, we have
 \[
-\expv{T_x^2}=\int_{0}^{\infty}s^2f_x(t)\dd{s}
-=\int_{0}^{\infty}\int_{0}^{s}2tf_x(t)\dd{t}\dd{s}
-=2\int_{0}^{\infty}t\int_{t}^{\infty}f_x(s)\dd{s}\dd{t}
-=2\int_{0}^{\infty}t\times \px[t]{x}\dd{t}.
+\expv{T_x^2}=\int_{0}^{\infty}\vc{s^2}f_x(s)\dd{s}
+=\int_{0}^{\infty}\vc{\int_{0}^{s}2t}f_x(s)\vc{\dd{t}}\dd{s}
+=\int_{0}^{\infty}2t\int_{t}^{\infty}f_x(s)\dd{s}\dd{t}
+=\int_{0}^{\infty}2t\times \px[t]{x}\dd{t}.
 \]
 \end{pf}
 \end{itemize}
@@ -430,7 +432,7 @@ Note that
 \]
 (Here \(\sum_{k=1}^{K_x}1\) is regarded as \(0\) if \(K_x=0\).)
 \end{pf}
-\item \emph{(Not commonly used) Second moment:} \(\displaystyle
+\item \emph{(Less commonly used) Second moment:} \(\displaystyle
 \expv{K_x^2}=\sum_{k=1}^{\infty}(2k-1)\px[k]{x}\).
 
 \begin{pf}
@@ -444,7 +446,10 @@ By introducing a double \underline{sum} and changing order of
 \]
 \begin{note}
 Here, \(\sum_{k=1}^{j}(2k-1)=0\) when \(j=0\). One can prove that
-\(\sum_{k=1}^{j}(2k-1)=j^{2}\) for any \(j=1,2,\dotsc\) by induction.
+\(\sum_{k=1}^{j}(2k-1)=j^{2}\) for any \(j=1,2,\dotsc\) by induction, or a proof
+without words (see
+\href{https://en.m.wikipedia.org/wiki/Proof_without_words#Sum_of_odd_numbers}{this
+Wikipedia page}).
 \end{note}
 \end{pf}
 
@@ -464,56 +469,6 @@ Note that
 =\sum_{k=1}^{n}\px[k]{x}.
 \]
 \end{pf}
-\end{itemize}
-\end{enumerate}
-\subsection{Mortality Laws}
-\label{subsect:mortality-laws}
-\begin{enumerate}
-\item So far we have primarily discussed calculations of probabilistic
-quantities given a survival model. But how should we select a survival model
-for modelling the lifetime? We will discuss two approaches in
-\Cref{sect:surv-models}:
-\begin{enumerate}[label={(\arabic*)}]
-\item Mortality laws (to be discussed here)
-\item Life tables (to be discussed in \Cref{subsect:life-tables})
-\end{enumerate}
-The first one is based on some parametric formulas of forces of mortality, and
-the second one is a data-based approach.
-
-\item \label{it:mort-laws-fmlas} Here we will introduce three kinds of
-mortality laws:
-\begin{enumerate}[label={(\arabic*)}]
-\item Exponential (or constant force of mortality)
-\item Generalized uniform (or generalized de Moivre's law)
-\item Makeham's law
-\end{enumerate}
-The formulas for \(\mu_x\), \(\px[t]{x}\), \(\eringx{x}\) and \(\vari{T_x}\) for
-these mortality laws are as follows.
-
-\begin{center}
-\begin{tabular}{llll}
-\toprule
-&Exponential&\makecell{Generalized uniform/de Moivre\\ (\(\alpha=1\):
-uniform/de Moivre)}&\makecell{Makeham\\ (\(A=0\): Gompertz)} \\
-\midrule
-Parameters&\(\mu>0\)&\(\alpha>0\), \(\omega>x\)&\(A,B>0\), \(c>1\) \\
-Distribution of \(T_x\)&\(\expo{\mu}\)\footnote{Here \(\mu\) is the \emph{rate}
-parameter of the exponential distribution.}&\(\alpha=1\):
-\(\unif[0,\omega-x]\)&(not standard) \\
-\(\mu_x\)&\(\mu\)&\(\displaystyle \frac{\alpha}{\omega-x}\)&\(A+Bc^x\) \\
-\(\px[t]{x}\)&\(e^{-\mu t}\)&\(\displaystyle \qty(1-\frac{t}{\omega-x})^{\alpha}\)&\(\displaystyle \exp\qty[-At-\frac{B}{\ln c}c^{x}(c^t-1)]\) \\
-\(\eringx{x}\)&\(1/\mu\)&\(\displaystyle \frac{\omega-x}{\alpha+1}\)&(no closed form) \\
-\(\vari{T_x}\)&\(1/\mu^2\)&\(\alpha=1\): \(\displaystyle \frac{(\omega-x)^{2}}{12}\)&(no closed form) \\
-\bottomrule
-\end{tabular}
-\end{center}
-The formula of \(\px[t]{x}\) for Makeham's law is rather complex, but it is not
-necessary to memorize it because:
-\begin{itemize}
-\item \emph{(in SOA exam FAM)} it is included in the SOA FAM-L table
-\item \emph{(in STAT3901)} we can just memorize the formula of \(\mu_x\)
-instead and use \labelcref{it:fom2surv} to perform calculations related to
-the survival function
 \end{itemize}
 \end{enumerate}
 \subsection{Recursions for Expectations of Life}
@@ -541,9 +496,9 @@ node[above] {\((x)\)};
 \fill[] (3,0) circle [radius=0.05]
 node[below] {\(n\)};
 \draw[very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (3,0)
-node[midway, below=0.7cm]{\(\eringx{\endowxn}\)};
+node[midway, below=0.7cm]{\(e_{\endowxn}\)};
 \draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (3,0) -- (10,0)
-node[midway, above=0.7cm]{\(\eringx{x+n}\)};
+node[midway, above=0.7cm]{\(e_{x+n}\)};
 \draw[-Latex, color=ForestGreen] (3,0.6) to[bend right] (0,0.6);
 \node[] () at (2.5,1.4) {\(\times\px[n]{x}\)};
 \end{tikzpicture}
@@ -562,20 +517,84 @@ node[below] {\(m\)};
 \fill[] (7,0) circle [radius=0.05]
 node[below] {\(n\)};
 \draw[very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=15pt}] (0,0) -- (3,0)
-node[midway, below=0.7cm]{\(\eringx{x:\angl{m}}\)};
+node[midway, below=0.7cm]{\(e_{x:\angl{m}}\)};
 \draw[very thick, decorate,decoration={calligraphic brace, amplitude=5pt, raise=15pt}] (3,0) -- (7,0)
-node[midway, above=0.7cm]{\(\eringx{x+m:\angl{n-m}}\)};
+node[midway, above=0.7cm]{\(e_{x+m:\angl{n-m}}\)};
 \draw[-Latex, color=ForestGreen] (3,0.6) to[bend right] (0,0.6);
 \node[] () at (2.5,1.4) {\(\times\px[m]{x}\)};
 \end{tikzpicture}
 \end{center}
 \end{itemize}
+\emph{(If you are interested)} The idea behind these pictures is related to how
+we derive the recursive formulas, namely by ``splitting'' the terms and
+factoring out some constants. For example:
+\begin{align*}
+e_x&=\vc{e_{\endowxn}}+\brc{\px[n+1]{x}+\px[n+2]{x}+\px[n+3]{x}+\dotsb} \\
+&=\vc{e_{\endowxn}}+\brc{\gc{\px[n]{x}}\times \px{x+n}
++\gc{\px[n]{x}}\times \px[2]{x+n}
++\gc{\px[n]{x}}\times \px[3]{x+n}+\dotsb} \\
+&=\vc{e_{\endowxn}}+\brc{\gc{\px[n]{x}}(\px{x+n}+\px[2]{x+n}+\px[3]{x+n}+\dotsb)} \\
+&=\vc{e_{\endowxn}}+\underbrace{\gc{\px[n]{x}}}_{\mathclap{\text{``like'' discounting factor}}}\brc{e_{x+n}}. \\
+\end{align*}
+
 \item Recursions here are helpful for recalculating expectations of life after
 changes in mortality assumption in early time period. For example, if there is
 an adjustment on the value of \(p_x\) only, then we can utilize the recursive
 formula \(e_x=p_x(1+e_{x+1})\) to recalculate \(e_x\) conveniently, since
 \(e_{x+1}\) would not be affected by this adjustment, and we just need to
 update the value of \(p_x\) on the RHS to get the new \(e_x\).
+\end{enumerate}
+\subsection{Mortality Laws}
+\label{subsect:mortality-laws}
+\begin{enumerate}
+\item So far we have primarily discussed calculations of probabilistic
+quantities given a survival model. But how should we select a survival model
+for modelling the lifetime? We will discuss two approaches in
+\Cref{sect:surv-models}:
+\begin{enumerate}[label={(\arabic*)}]
+\item Mortality laws (to be discussed here)
+\item Life tables (to be discussed in \Cref{subsect:life-tables})
+\end{enumerate}
+The first one is based on some parametric formulas for forces of mortality, and
+the second one is a data-based approach.
+
+\item \label{it:mort-laws-fmlas} Here we will introduce three kinds of
+mortality laws:
+\begin{enumerate}[label={(\arabic*)}]
+\item \defn{Exponential} (or constant force of mortality)
+\item \defn{Generalized uniform} (or \defn{generalized de Moivre's law})
+\item \defn{Makeham's law}
+\end{enumerate}
+The formulas for \(\mu_x\), \(\px[t]{x}\), \(\eringx{x}\) and \(\vari{T_x}\) for
+these mortality laws are as follows.
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+&Exponential&\makecell{Generalized uniform/de Moivre\\ (\(\alpha=1\):
+uniform/de Moivre)}&\makecell{Makeham\\ (\(A=0\): Gompertz)} \\
+\midrule
+Parameters&\(\mu>0\)&\(\alpha>0\), \(\omega>x\)&\(A,B>0\), \(c>1\) \\
+Distribution of \(T_x\)&\(\expo{\mu}\)&\(\alpha=1\):
+\(\unif[0,\omega-x]\)&(not standard) \\
+\(\mu_x\)&\(\mu\)&\(\displaystyle \frac{\alpha}{\omega-x}\)&\(A+Bc^x\) \\
+\(\px[t]{x}\)&\(e^{-\mu t}\)&\(\displaystyle \qty(1-\frac{t}{\omega-x})^{\alpha}\)&\(\displaystyle \exp\qty[-At-\frac{B}{\ln c}c^{x}(c^t-1)]\) \\
+\(\eringx{x}\)&\(1/\mu\)&\(\displaystyle \frac{\omega-x}{\alpha+1}\)&(no closed form) \\
+\(\vari{T_x}\)&\(1/\mu^2\)&\(\alpha=1\): \(\displaystyle \frac{(\omega-x)^{2}}{12}\)&(no closed form) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{note}
+Here \(\mu\) is the \emph{rate} parameter of the exponential distribution.
+\end{note}
+The formula of \(\px[t]{x}\) for Makeham's law is rather complex, but it is not
+necessary to memorize it because:
+\begin{itemize}
+\item \emph{(in SOA exam FAM)} it is included in the SOA FAM-L table
+\item \emph{(in STAT3901)} we can just memorize the formula of \(\mu_x\)
+instead and use \labelcref{it:fom2surv} to perform calculations related to
+the survival function
+\end{itemize}
 \end{enumerate}
 \subsection{Life Tables}
 \label{subsect:life-tables}
@@ -585,10 +604,11 @@ model the lifetime, instead of the mortality laws in
 \Cref{subsect:mortality-laws}. Although there are some ``nice'' formulas
 available for those mortality laws, they can only describe lifetimes in certain
 ``preconfigured'' ways, which limits the flexibility. On the other hand, life
-table can be constructed based on historical data about mortality experience of
-individuals, which allows a more accurate description of the pattern of human
-mortality. Particularly, as the insurer has sold many policies, a large amount
-of data is available for constructing some custom life tables.
+table can be constructed based on historical data about real mortality
+experience of individuals, which allows a more accurate description of the
+pattern of human mortality. Particularly, as the insurer has sold many
+policies, a large amount of data would be available for constructing some
+custom life tables.
 
 \item A basic life table looks like the following:
 \begin{center}
@@ -626,7 +646,7 @@ based on the theoretical meanings of \(\lx{x}\) and \(\dx{x}\) above):
 \begin{center}
 \begin{tabular}{ccc}
 \toprule
-&using \(\lx{x}\)&using \(\dx{x}(=\lx{x}-\lx{x+1})\) \\
+Probability&Using \(\lx{x}\)&Using \(\dx{x}(=\lx{x}-\lx{x+1})\) \\
 \midrule
 \(\px[t]{x}\)&\(\displaystyle \frac{\lx{x+t}}{\lx{x}}\)&\diagbox[dir=NE]{}{}\\
 \(\qx[t]{x}\)&\(\displaystyle 1-\frac{\lx{x+t}}{\lx{x}}\)
@@ -640,26 +660,32 @@ based on the theoretical meanings of \(\lx{x}\) and \(\dx{x}\) above):
 \subsection{Fractional Age Assumptions}
 \begin{enumerate}
 \item In a life table, often the quantities (\(\lx{x},\dx{x}\) etc.) are given
-only for \emph{integer} ages. In such case, it is impossible to compute probabilities
-involving \emph{fractional} ages and years (e.g. \(\px[0.5]{50.2},
-\qx[0.7]{60}\), etc.), without further assumptions.
+only for \emph{integer} ages \(x\). In such case, it is impossible to compute
+probabilities involving \emph{fractional} ages and years (e.g.
+\(\px[0.5]{50.2}, \qx[0.7]{60}\), etc.), without further assumptions.
 
-To improve the flexibility, we may impose some additional assumptions on the
-behaviour of the lifetime in fractional age (called \emph{fractional age
-assumptions}). The fractional age assumptions to be discussed here are:
+To improve the flexibility, we may impose an additional assumption on the
+behaviour of the lifetime in fractional age (called \defn{fractional age
+assumption}). The fractional age assumptions to be discussed here are:
 \begin{itemize}
-\item \emph{(most common)} uniform distribution of deaths (UDD);
-\item constant force of mortality (CFM)
-\item \emph{(least common)} Balducci assumption
+\item \emph{(most common)} \defn{uniform distribution of deaths} (UDD): \\
+\underline{linear} interpolation between \(\lx{x}\) and \(\lx{x+1}\).
+\item \defn{constant force of mortality} (CFM): \\
+\underline{exponential} interpolation between \(\lx{x}\) and \(\lx{x+1}\),
+i.e.,  linear interpolation between \(\ln\lx{x}\) and \(\ln\lx{x+1}\).
+\item \emph{(least common)} \defn{Balducci assumption}: \\
+\underline{hyperbolic} interpolation between \(\lx{x}\) and \(\lx{x+1}\), i.e.,
+linear interpolation between \(1/\lx{x}\) and \(1/\lx{x+1}\).
 \end{itemize}
 
 \item \label{it:faa-fmlas} The following collects some key \faIcon{key}
 formulas for the fractional age assumptions. While memorizing \faIcon{brain}
 all the formulas below can allow you to solve problems more efficiently
 \faIcon[regular]{thumbs-up}, it is not necessary to do so. Instead, one can
-just memorize the most important formulas below (labelled with ``\ystar{}''),
-because it is not too hard to derive the rest of the formulas just by using the
-formulas with ``\ystar{}'' (try it!).
+just memorize the more commonly used formulas below (labelled with
+``\ystar{}''), because it is not too hard to derive the rest of the formulas
+(which are less commonly used) just by using the formulas with ``\ystar{}''
+(try it!).
 
 In the table below, we assume that \(x\) is an integer age and that \(s,t\ge
 0\) are any values satisfying \(0\le s+t\le 1\).
@@ -668,23 +694,60 @@ In the table below, we assume that \(x\) is an integer age and that \(s,t\ge
 \toprule
 &UDD&CFM&Balducci \\
 \midrule
-\(\px[t]{x}\)&(use \(1-\qx[t]{x}\))&\(=\px[t]{x+s}=\underset{\text{\ystar{}}}{(\px[]{x})^{t}}\)&(use \(\displaystyle \frac{\px[]{x}}{\px[1-t]{x+t}}=\frac{\px[]{x}}{1-\qx[1-t]{x+t}}\)) \\
-\(\qx[t]{x}\)&\(=\qx[s|t]{x}=\underset{\text{\ystar{}}}{t\qx[]{x}}\)&(use \(1-\px[t]{x}\))&(use \(1-\px[t]{x}\))\\
-\(\qx[t]{x+s}\)&\(\displaystyle \frac{t\qx[]{x}}{1-t\qx[]{x}}\)&(use \(1-\px[t]{x+s}\))&\diagbox[dir=NE]{}{} \\
+\(\lx{x+t}\)&\(=\overset{\text{\ystar{}}}{(1-t)\lx{x}+t\lx{x+1}}=\lx{x}-t\dx{x}\)
+&\ystar{}\(\lx{x}^{1-t}\lx{x+1}^{t}\)
+&\ystar{}solve \(\displaystyle \frac{1}{\lx{x+t}}=\frac{1-t}{\lx{x}}+\frac{t}{\lx{x+1}}\) \\
+\(\px[t]{x}\)&\diagbox[dir=NE]{}{}
+&\(=\px[t]{x+s}=\underset{\text{\ystar{}}}{(\px[]{x})^{t}}\)
+& \diagbox[dir=NE]{}{}\\
+\(\qx[t]{x}\)&\(=\qx[s|t]{x}=\underset{\text{\ystar{}}}{t\qx[]{x}}\)
+&\diagbox[dir=NE]{}{}&\diagbox[dir=NE]{}{}\\
+\(\qx[t]{x+s}\)&\(\displaystyle\frac{t\qx[]{x}}{1-s\qx[]{x}}\)&\diagbox[dir=NE]{}{}&\diagbox[dir=NE]{}{} \\
 \(\qx[1-t]{x+t}\)&\diagbox[dir=NE]{}{}&\diagbox[dir=NE]{}{}&\ystar{} \((1-t)\qx[]{x}\) \\
 \(\mu_{x+t}\)&\(\displaystyle \frac{\qx[]{x}}{1-t\qx[]{x}}\)&\(=\mu_x=-\ln p_x\quad\forall t\)&\diagbox[dir=NE]{}{} \\
 \(f_x(t)\)&\(\qx[]{x}\quad\forall t\)&\(\mu_x e^{-\mu_x t}\)&\diagbox[dir=NE]{}{} \\
-\(\lx{x+t}\)&\(=(1-t)\lx{x}+t\lx{x+1}=\lx{x}-t\dx{x}\)&\(\lx{x}^{1-t}\lx{x+1}^{t}\)
-&(solve \(\displaystyle \frac{1}{\lx{x+t}}=\frac{1-t}{\lx{x}}+\frac{t}{\lx{x+1}}\)) \\
-\(\eringx{x}\)&\(e_x+1/2\)&\diagbox[dir=NE]{}{}&\diagbox[dir=NE]{}{} \\
-\(\vari{T_x}\)&\(\vari{K_x}+1/12\)&\diagbox[dir=NE]{}{}&\diagbox[dir=NE]{}{} \\
+\(\eringx{x}\)&\ystar{} \(e_x+1/2\)&\diagbox[dir=NE]{}{}&\diagbox[dir=NE]{}{} \\
+\(\vari{T_x}\)&\ystar{} \(\vari{K_x}+1/12\)&\diagbox[dir=NE]{}{}&\diagbox[dir=NE]{}{} \\
 \bottomrule
 \end{tabular}
 \end{center}
+\begin{remark}
+\item The ``\(1/2\)'' and ``\(1/12\)'' in the UDD formulas for \(\eringx{x}\) and
+\(\vari{T_x}\) correspond to the mean and variance of \(\unif[0,1]\). The idea
+is that under UDD, actually we can write \(T_x=K_x+U_x\), where \(K_x\) and
+\(U_x\sim\unif[0,1]\) are independent.
+\item There are no ``nice'' relationships between \(\eringx{x}\) \& \(e_x\)
+and \(\vari{T_x}\) \& \(\vari{K_x}\) for CFM and Balducci.
+\end{remark}
+
+For finding quantities whose formulas are not found in the table, a general
+strategy is to express them in terms of some quantities with known formulas.
+Notably, often it is helpful to express them in terms of ``\(\lx{}\)''s. For
+example:
+\[
+\displaystyle \qx[0.7|1.4]{41.6}=\frac{\lx{42.3}-\lx{43.7}}{\lx{41.6}}
+=\text{(use \(
+\begin{cases}
+\lx{x+t}=(1-t)\lx{x}+t\lx{x+1}&\text{for UDD} \\
+\lx{x+t}=\lx{x}^{1-t}\lx{x+1}^{t}&\text{for CFM} \\
+1/\lx{x+t}=(1-t)/\lx{x}+t/\lx{x+1}&\text{for Balducci}
+\end{cases}
+\) ...)}.
+\]
 \begin{note}
-The ``\(1/2\)'' and ``\(1/12\)'' for UDD correspond to the mean and variance of
-\(\unif[0,1]\). The idea is that under UDD, actually we can write
-\(T_x=K_x+U_x\), where \(K_x\) and \(U_x\sim\unif[0,1]\) are independent.
+For this example, in case we are only given \(\qx{x}\) for \(x=41,42,43\), we
+can ``artificially generate'' the values of ``\(\lx{}\)''s by setting
+\(\lx{41}\) as a certain positive value, say \(100\) without loss of
+generality\footnote{The value set would not affect the result due to the
+cancelling effect of numerator and denominator.}. After that, we can find the
+values of ``\(\lx{}\)''s by:
+\[
+\lx{42}=100(1-\qx{41}),\quad
+\lx{43}=100(1-\qx{41})(1-\qx{42}),\quad
+\lx{44}=100(1-\qx{41})(1-\qx{42})(1-\qx{43}).
+\]
+We can then compute \(\lx{42.3}\), \(\lx{43.7}\), and \(\lx{41.6}\) using
+appropriate formulas.
 \end{note}
 \end{enumerate}
 \subsection{Select Survival Models and Tables}
@@ -731,6 +794,7 @@ the select period is \(d\) years, since the effect from selection has already
 been gone. Examples:
 \begin{itemize}
 \item ``\(\qx[u|t]{x}\)'' would become ``\(\qx[u|t]{\mgc{[x]}}\)''.
+\item ``\(\eringx{x}\)'' would become ``\(\eringx{\mgc{[x]}}\)''.
 \item The factorization formula ``\(\px[t+u]{x}=\px[t]{x}\times \px[u]{x+t}\)'' would become
 ``\(\px[t+u]{\mgc{[x]}}=\px[t]{\mgc{[x]}}\times \px[u]{\mgc{[x]+t}}\)''.
 \begin{warning}
@@ -739,7 +803,8 @@ Not ``\(\px[t+u]{\mgc{[x]}}=\px[t]{\mgc{[x]}}\times \px[u]{\rc{[x+t]}}\)''!
 \underline{not} the case here.
 \end{warning}
 
-Assuming \(t\ge d\), we should simplify it further to ``\(\px[t+u]{\mgc{[x]}}=\px[t]{\mgc{[x]}}\times \px[u]{\orc{x+t}}\)''
+Assuming \(t\ge d\), we should simplify it further to
+``\(\px[t+u]{\mgc{[x]}}=\px[t]{\mgc{[x]}}\times \px[u]{\orc{x+t}}\)''
 
 \begin{warning}
 Do \underline{not} change ``\(\mgc{[x]}\)'' to ``\(x\)''!
@@ -766,7 +831,7 @@ Age \(x\)&\(\lx{[x]}\)&\(\lx{[x-1]+1}\)&\(\lx{[x-2]+2}\)&\(\lx{x}(=\lx{x-3+3})\)
 32&\mgc{9860.23}&\blc{9875.12}&\vc{9882.12}&9897.14 \\
 33&9825.13&\mgc{9830.04}&\blc{9842.11}&\vc{9847.89} \\
 34&9801.43&9804.06&\mgc{9812.61}&\blc{9818.33} \\
-34&9762.13&9768.96&9775.37&\mgc{9788.19} \\
+35&9762.13&9768.96&9775.37&\mgc{9788.19} \\
 \vdots&\vdots&\vdots&\vdots&\vdots \\
 \bottomrule
 \end{tabular}
@@ -790,68 +855,44 @@ Age \(x\)&\(\lx{[x]}\)&\(\lx{[x]+1}\)&\(\lx{[x]+2}\)&\(\lx{x+3}(=\lx{[x]+3})\)\\
 
 Using these select tables, we can use the formulas in
 \labelcref{it:life-table-to-probs} (with some slight adjustments) to compute
-various probabilities. For example, we have: 
+various quantities. For example, we have:
 \begin{itemize}
 \item \(\displaystyle\px[2]{[31]}=\frac{\lx{[31]+2}}{\lx{[31]}}\).
 \item \(\displaystyle\px[2]{[31]+1}=\frac{\lx{34}}{\lx{[31]+1}}\).
 \item \(\dx{[x]}=\lx{[x]}-\lx{[x]+1}\).
 \end{itemize}
 
-\item Lastly, let us explore several formulas which are exclusive to select
+\item Lastly, let us explore several typical problems related to select
 survival model.
 \begin{enumerate}
-\item \label{it:select-lxt} \emph{Calculating \(\lx{[x]+t}\) for any
+\item \label{it:select-lxt} \emph{Calculating \(\lx{[x]+t}\) with
 \(t\in[0,d)\):} Given \(\gc{\lx{x+d}}\) and some probabilities that allow us to
 compute \(\gc{\px[d-t]{[x]+t}}\), we can find \(\lx{[x]+t}\) by
 \[
 \gc{\px[d-t]{[x]+t}}=\frac{\gc{\lx{x+d}}}{\lx{[x]+t}}.
 \]
-\item \label{it:select-at-x-to-xp1} \emph{Going from \([x]\) to \([x+1]\):}
-
-\begin{itemize}
-\item  \emph{Direction.}
-\begin{itemize}
-\item \emph{Based on select life table in format 1:}
+\item \label{it:select-at-x-to-xp1} \emph{Going from \([x]\) to \([x+1]\):} An
+useful idea is to relate each of the select quantities for \([x]\) and
+\([x+1]\) with a \underline{common} ultimate quantity, to build a ``bridge''
+between the select quantities for \([x]\) and \([x+1]\). Once we have the
+``bridge'', we can go from \([x]\) to \([x+1]\) via the intermediate ultimate
+quantity.
 \begin{center}
-\begin{tabular}{ccccc}
-\toprule
-Age \(x\)&\(\lx{[x]}\)&\(\lx{[x-1]+1}\)&\(\lx{[x-2]+2}\)&\(\lx{x}(=\lx{x-3+3})\)\\
-\midrule
-30&\(\gc{\lx{[30]}} \searrow\)&&& \\
-31&\(\lx{[31]}=\text{\faIcon{question}}\)&\(\searrow\)&& \\
-32&&\(\nwarrow\)&\(\searrow\)& \\
-33&&&\(\nwarrow\)&\(\downarrow\) \\
-34&&&&\(\nwarrow\) \\
-\vdots&\vdots&\vdots&\vdots&\vdots \\
-\bottomrule
-\end{tabular}
+\begin{tikzpicture}
+\node[] (s1) at (0,1) {\(\lx{[x]}\)};
+\node[] (s2) at (0,-1) {\(\lx{[x+1]}\)};
+\node[] (ult) at (2,0) {\(\lx{x+d+1}\)};
+\draw[<->] (s1) -- (ult);
+\draw[<->] (s2) -- (ult);
+\end{tikzpicture}
+\begin{tikzpicture}
+\node[] (s1) at (0,1) {\(\eringx{[x]}\)};
+\node[] (s2) at (0,-1) {\(\eringx{[x+1]}\)};
+\node[] (ult) at (2,0) {\(\eringx{x+d+1}\)};
+\draw[<->] (s1) -- (ult);
+\draw[<->] (s2) -- (ult);
+\end{tikzpicture}
 \end{center}
-\item \emph{Based on select life table in format 2:}
-\begin{center}
-\begin{tabular}{ccccc}
-\toprule
-Age \(x\)&\(\lx{[x]}\)&\(\lx{[x]+1}\)&\(\lx{[x]+2}\)&\(\lx{x+3}(=\lx{[x]+3})\)\\
-\midrule
-30&\(\gc{\lx{[30]}} \rightarrow\)&\(\rightarrow\)&\(\rightarrow\)&\(\downarrow\) \\
-31&\(\lx{[31]}=\text{\faIcon{question}}\)&\(\leftarrow\)&\(\leftarrow\)&\(\leftarrow\) \\
-\vdots&\vdots&\vdots&\vdots&\vdots \\
-\bottomrule
-\end{tabular}
-\end{center}
-\end{itemize}
-\item \emph{Formulas.}
-\begin{center}
-\begin{tabular}{ccccc}
-\toprule
-Age \(x\)&\(\lx{[x]}\)&\(\lx{[x]+1}\)&\(\lx{[x]+2}\)&\(\lx{x+3}(=\lx{[x]+3})\)\\
-\midrule
-30&\(\gc{\lx{[30]}} \overset{(\times \px[]{[30]})}{\rightarrow}\)&\(\overset{(\times \px[]{[30]+1})}{\rightarrow}\)
-&\(\overset{(\times \px[]{[30]+2})}{\rightarrow}\)&\(\downarrow (\times \px[]{33})\) \\
-31&\(\lx{[31]}\) \cmark&\(\overset{(\times 1/\px[]{[31]})}{\leftarrow}\)&\(\overset{(\times 1/\px[]{[31]+1})}{\leftarrow}\)&\(\overset{(\times 1/\px[]{[31]+2})}{\leftarrow}\) \\
-\vdots&\vdots&\vdots&\vdots&\vdots \\
-\bottomrule
-\end{tabular}
-\end{center}
-\end{itemize}
+(\(d\): select period)
 \end{enumerate}
 \end{enumerate}

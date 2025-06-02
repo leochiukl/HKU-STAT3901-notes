@@ -45,9 +45,9 @@ benefits and expenses}} -\pvt{t}{\text{future \textbf{gross} premiums}}\)
 \end{itemize}
 Here \(\pvt{t}{\cdot}\) refers to the time-\(t\) present value, and we also
 assume that the policy is still in force at time \(t\) (particularly this means
-the underlying life insured is still alive at time \(t\)).\footnote{This extra
+the underlying life is still alive at time \(t\)).\footnote{This extra
 assumption is needed here, since unlike the case for equivalence principle, the
-policy may have already been vanished at time \(t\) (because the life insured
+policy may have already been vanished at time \(t\) (because the underlying life
 has already been dead \faIcon{skull} or the policy has already been expired).
 But in such case, it does not make sense to talk about future loss at such
 time, which is something that does not even exist.}
@@ -88,12 +88,12 @@ kind of policy value we are referring to.
 \item Intuitively, this definition suggests that we should set aside a reserve
 amount that equals exactly the amount of money we would expect to lose in the
 future.\footnote{This approach may be quite natural at the first glance, but
-actually setting the reserve in this way is rather risky \warn{} because if the
-future experience turns out to be worse than expected (not that uncommon), we
-would not have enough money to cover the loss anymore, which can lead to
-disastrous consequences!  This can explain why our framework here is more like
-a ``toy model'' than a legitimate approach to be used directly in practice.
-Practically, perhaps some extra ``buffer'' is needed.}
+actually setting the reserve in this way is somewhat risky \warn{} because if
+the future experience turns out to be worse than expected (not that uncommon),
+we would not have enough money in our reserve to cover the loss anymore, which
+can lead to disastrous consequences!  This can explain why our framework here
+is more like a ``toy model'' than a legitimate approach to be used directly in
+practice.  Practically, perhaps some extra ``buffer'' is needed, to be safe.}
 \end{remark}
 
 \item The basic topics in policy values to be discussed here are:
@@ -115,9 +115,13 @@ Conditions&Boundary value\\
 (no condition)&\(\Vx[0]{}[n]=0\)\\
 \midrule
 \makecell[l]{(i) gross premium is set by equivalence principle, and \\ (ii)
-\(\text{policy value basis}=\text{premium basis}\)\footnote{\defn{Basis} means
-a set of assumptions. Note that policy value basis and premium basis \emph{can}
-be different!}}& \(\Vx[0]{}[g]=0\)\\
+\(\text{policy value basis}=\text{premium basis}\)}& \(\Vx[0]{}[g]=0\)\\
+\multicolumn{2}{l}{
+\begin{note}
+\defn{Basis} means a set of assumptions. Note that policy value basis and
+premium basis \emph{can} be different!
+\end{note}
+} \\
 \midrule
 \(n\)-year term life insurance&\(\Vx[n]{}[g]=0\) \\
 \midrule
@@ -158,13 +162,33 @@ Quantity&Shortcut formula \\
 {S\qty(\frac{\Ax{x+t}-\Ax{x}}{1-\Ax{x}})}
 \) \\
 \(\vari{L_t^{g}}\)&\(\displaystyle
-\qty(S+E+\frac{G-e}{d})^{2}\underbrace{\qty(\Ax[][2]{x+t}-\Ax{x+t}^{2})}_{\mathclap{\text{Variance of WL PVRV \faIcon{at} time \(t\)}}}
+\qty(S+E+\frac{G-e}{d})^{2}\underbrace{\qty(\Ax[][2]{x+t}-\Ax{x+t}^{2})}_{\mathclap{\text{Variance of WL PVRV for \((x+t)\)}}}
 \) \\
 \bottomrule
 \end{tabular}
 \end{center}
+
+\begin{pf}
+Here we only prove the formulas for \(\Vx[t]{}[n]\) for illustration and leave
+the proof for the variance formula as exercise.
+\begin{itemize}
+\item \[
+\Vx[t]{}[n]=S\underbrace{\Ax{x+t}}_{\mathclap{1-d\ax**{x+t}}}
+-\underbrace{S\qty(\frac{1}{\ax**{x}}-d)}_{\text{net premium}}\ax**{x+t}
+=S\qty(1-\frac{\ax**{x+t}}{\ax**{x}}).
+\]
+\item
+\[
+\Vx[t]{}[n]=S\Ax{x+t}-\underbrace{S\cdot \frac{d\Ax{x}}{1-\Ax{x}}}_{\text{net premium}}
+\overbrace{\ax**{x+t}}^{\mathclap{(1-\Ax{x+t})/d}}
+=S\qty(\frac{\Ax{x+t}(1-\Ax{x})-\Ax{x}(1-\Ax{x+t})}{1-\Ax{x}})
+=S\qty(\frac{\Ax{x+t}-\Ax{x}}{1-\Ax{x}}).
+\]
+\end{itemize}
+\end{pf}
+
 To obtain the shortcut formulas for other cases, perform the following changes
-on the two formulas above:
+on the shortcut formulas above:
 \begin{itemize}
 \item \emph{(\(n\)-year endowment)} Change \(
 \begin{cases}
@@ -177,7 +201,7 @@ on the two formulas above:
 \Ax{x+t}\to\Ax{x+t:\angl{n-t}} \\
 \ax**{x+t}\to\ax**{x+t:\angl{n-t}}
 \end{cases}
-\) (\(0\le t\le n\))
+\) (\(0\le t\le n\)).
 \item \emph{(\(1/m\)thly insurances and premiums)} Add superscript \((m)\) to
 \(\ax**{}\) and \(A\), and change \(d\to d^{(m)}\).
 
@@ -194,7 +218,7 @@ and \(d\to\delta\).
 \item In \Cref{subsect:policy-val-basic} we have studied some relatively
 basic topics in policy values. Armed with our basic understanding in policy
 values, we can now have some further and more advanced discussions on policy
-values. The topics to be discussed can be organized into the following two
+values. The topics to be discussed can be organized into the following three
 themes:
 \begin{itemize}
 \item \emph{Theme 1: Policy value recursions:} Since policy values are defined
@@ -218,9 +242,11 @@ obtained by \underline{modifying} the \underline{net premiums} in the net
 premium policy value approach. A common example that will be discussed here is
 the \emph{full preliminary term (FPT) reserves}.
 \end{itemize}
-Apart from these, there are still some more advanced topics in policy values,
-but we shall leave the discussion to the section titled ``Policy Values II'' in
-the STAT3909 study notes.
+Apart from these, there are still some advanced topics in policy values, but we
+shall leave the discussions of them to the section titled ``Policy Values II''
+in the
+\href{https://leochiukl.github.io/files/stat3909-study-notes.pdf}{STAT3909
+study notes}.
 
 \subsubsection*{Theme 1: Policy value recursions}
 \item \label{it:wyhiwyn-policy-val-recurs}
@@ -233,14 +259,30 @@ value recursive formula to illustrate this ``slogan'':
 \[
 \boxed{\underbrace{(\Vx[t]{}+G_t-e_t)(1+i)}_{\text{what you have}}=
 \underbrace{\qx{x+t}(S_{t+1}+E_{t+1})+\px{x+t}(\Vx[t+1]{}[])}_{\text{what you need (expected)}}}
+\footnote{
+Here an implicit assumption is that when the life survives \faIcon{at} time
+\(t+1\), the only amount needed is the time-\(t+1\) policy value and no extra
+amount is required. This holds true for insurance products (even for endowment
+insurance with \(t=n-1\), as the policy value \(\Vx[n]{}[]\) would include the
+endowment benefit by convention), but not for annuity products. But this should
+normally not be an issue since almost all problems requiring the usage of
+policy value recursions would be about insurances. In the rare case where we
+need to use policy value recursions for annuity products, we can use a similar
+intuition and adapt the recursion formula by adding the survival benefit for
+the ``survival'' case and removing the payments for the ``death'' case:
+\[
+\qx{x+t}(S_{t+1}+E_{t+1})+\px{x+t}(\Vx[t+1]{}[])
+\to\px{x+t}(\Vx[t+1]{}[]+\text{survival benefit}).
+\]
+}
 \]
 (\(t\) is an integer).
 Notations:
 \begin{itemize}
 \item \(G_t\): gross premium at time \(t\)
 \item \(e_t\): sum of initial and renewal expenses at time \(t\)
-\item \(S_{t+1}\): amount of sum insured (death benefit) at time \(t+1\) (if payable)
-\item \(E_{t+1}\): settlement expense at time \(t+1\) (if payable)
+\item \(S_{t+1}\): amount of sum insured (death benefit) at time \(t+1\)
+\item \(E_{t+1}\): settlement expense at time \(t+1\)
 \end{itemize}
 \begin{center}
 \begin{tikzpicture}
@@ -277,19 +319,41 @@ Since \(\qx{x+t}\) only appears in one place in this formula, it can be useful
 for questions asking us to solve for \(\qx{x+t}\) given some policy values.
 \end{note}
 
-The \defn{net amount at risk}\footnote{It is also known as \defn{death strain
-at risk} (DSAR) or \defn{sum at risk} (SAR).} \(\underbrace{S_{t+1}+E_{t+1}}_{\text{payment needed}}-\underbrace{\Vx[t+1]{}[]}_{\text{reserve available}}\)
-can be interpreted as the \emph{additional} amount of money to be paid to dying
-member over the reserve available.
+The \defn{net amount at risk} (also known as \defn{death strain at risk} (DSAR)
+or \defn{sum at risk} (SAR)) \(\underbrace{S_{t+1}+E_{t+1}}_{\text{payment
+needed}}-\underbrace{\Vx[t+1]{}[]}_{\text{reserve available}}\) can be
+interpreted as the \emph{additional} amount of money to be paid to dying member
+over the reserve available.
 
 This recursive formula in NAAR form expresses ``what you need'' in a different
 way. Instead of dividing the situation into (i) the life dies \faIcon{skull} in
 this year and (ii) the life survives this year, it partitions ``what you need''
-into (i) reserve amount and (ii) extra amount over reserve.
+into (i) reserve amount and (ii) extra amount needed over the reserve.
 
-\item \emph{Interim policy values:} (\(t\) is an integer and \(0< s< 1\))
-This variation suggests the behaviour of policy value between integer time
-points.
+\begin{center}
+\begin{tikzpicture}
+\draw[] (0,0) rectangle (2,1);
+\node[] () at (1, 1.4) {\(\Vx[t]{}\)};
+\draw[->, ForestGreen, line width=0.3mm] (0.6,-0.5) to (0.6,0.2);
+\node[ForestGreen] () at (0.6,-0.8) {\(G_t\)};
+\draw[->, red, line width=0.3mm] (1.4,0.2) to (1.4,-0.5);
+\node[red] () at (1.4,-0.8) {\(e_t\)};
+\draw[-Latex, blue] (1,0.5) to[bend left] node[midway, auto]{\(\times (1+i)\)} (7,0.5);
+\draw[] (4,-0.5) rectangle (10,1);
+\node[] () at (11.5,0.25) {(what you have)};
+\node[] () at (7,0.25) {\((\Vx[t]{}+G_t-e_t)(1+i)\)};
+\node[rotate=90] () at (7,-1) {\faIcon{equals}};
+\draw[] (4,-3) rectangle (8,-1.5);
+\node[] () at (11.5,-2.25) {(what you need)};
+\node[] () at (6,-2.25) {\(\Vx[t+1]{}[]\)};
+\draw[] (8,-3) rectangle (10,-1.5);
+\node[text width=2cm] () at (9.1,-2.25) {extra for \faIcon{skull} (expected)};
+\end{tikzpicture}
+\end{center}
+
+\item \emph{Interim policy values:} This variation suggests the behaviour of
+policy values between integer time points. \\
+(\(t\) is an integer and \(0< s< 1\))
 \begin{itemize}
 \item \emph{Relating \(\Vx[t]{}[]\) and \(\Vx[t+s]{}[]\):}
 \[
@@ -324,11 +388,11 @@ in the following picture:
 \end{center}
 In short, the amount \(\rc{v^{1-s}}(S_{t+1}+E_{t+1})\) is NOT referring to the
 amount you need to pay \faIcon{at} time \(t+s\) (which is not year-end), but is
-referring to the amount you need to \underline{save} \faIcon{at} time \(t+s\),
+referring to the amount you need to \underline{save} \faIcon{at} time \(t+s\)
 for the amount that \underline{will} surely be paid \faIcon{at} time \(t+1\),
-if the death \faIcon{skull} occurs in the time period \((t,t+s]\).
+if death \faIcon{skull} occurs in the time period \((t,t+s]\).
 \begin{note}
-Of course, death \faIcon{skull} can still occur in the remaining period
+Of course, death \faIcon{skull} can also occur in the remaining period
 \((t+s,1]\), but that is incorporated in the time-\(t+s\) policy value
 \(\Vx[t+s]{}[]\).
 \end{note}
@@ -357,15 +421,16 @@ following picture can help us to understand this better:
 \node[] () at (11.5,-2.25) {(what you need)};
 \node[] () at (7,-2.5) {\faIcon{child} (prob.: \(\px[1-s]{x+t+s}\)): \(\Vx[t+1]{}[]\)};
 \node[] () at (7,-2) {\faIcon{skull} (prob.: \(\qx[1-s]{x+t+s}\)): \((S_{t+1}+E_{t+1})\)};
-\node[text width=4.5cm] () at (7, -3.8) {(need to \underline{pay}
-\faIcon{skull} payment \faIcon{at} time \(t+1\) if death occurs)};
+\node[] () at (7, -3.4) {(need to \underline{pay}
+\faIcon{skull} payment here if death occurs)};
+\node[] () at (7,1.8) {(time \(t+1\))};
 \end{tikzpicture}
 \end{center}
 \end{itemize}
 \item \emph{\(1/m\)thly version:} (\(t=0,1/m,2/m,\dotsc\)) The idea of policy
 value recursion in the \(1/m\)thly case (\(1/m\)thly insurance and premiums) is
 pretty much the same; We are just considering \(1/m\)th of a year instead of a
-year at a time. The recursive formulas are analogous to the ones for annual
+year at a time. The recursive formulas are analogous to the ones for the annual
 case:
 \begin{align*}
 \overset{\text{(what you have)}}{(\Vx[t]{}[]+G_t-e_t)(1+i)^{\frac{1}{m}}}
@@ -444,6 +509,11 @@ node[pos=-0.2]{linear interpolation};
 \end{axis}
 \end{tikzpicture}
 \end{center}
+\begin{note}
+This approximation can be adapted to the \(1/m\)thly case, by considering the
+graph like above for the \(1/m\)thly case, where jumps occur per \(1/m\) of a
+year rather than per year.
+\end{note}
 \item \emph{Refunding policy value upon death:}
 \begin{itemize}
 \item \emph{Settings:}
@@ -465,8 +535,8 @@ premium policy value.
 \[
 \boxed{(\Vx[t]{}[n]+P)(1+i)=\qx{x+t}F_{t}+\Vx[t+1]{}[n]}
 \]
-(\(t=0,\dotsc,n-1\)).
-\item \emph{Approach 2: Using specialized formula.}
+(\(t=0,\dotsc,n-1\)), to solve for the quantities desired.
+\item \emph{(Less commonly used) Approach 2: Using specialized formula.}
 \[
 \boxed{\Vx[t]{}[n]=P\sx**{\angl{t}}-\sum_{j=1}^{t}\qx{x+j-1}F_{j}(1+i)^{t-j}}
 \]
@@ -504,32 +574,31 @@ With this formula, we can deduce:
 \end{enumerate}
 \subsubsection*{Theme 2: Other types of policy values}
 \item \textbf{Retrospective policy values.} \\
-\emph{Idea.} Instead of considering how much money we would expect to lose in
-the future (like we did in \Cref{subsect:policy-val-basic}), we will deduce the
-policy value (reserve) at time \(t\) by calculating ``what we have''
-\faIcon{piggy-bank} for a block of policies at time \(t\), and then dividing it
-by the expected number of survivors at that time, to obtain the ``share
-\faIcon{pizza-slice} available'' per survivor.
-
-To better understand what this means, suppose that we have \(n\) policies with
-identical terms and no expenses (for simplicity). Then, at time \(t\):
-\begin{itemize}
-\item ``what we have'' (expected): the expected time-\(t\) accumulated
-value of all the prior net cash flows received:
-\[
-n\times [\epvt{0}{\underbrace{\text{past net premiums (per policy)}}_{\text{received}}}
--\epvt{0}{\underbrace{\text{past benefits (per policy)}}_{\text{paid}}}]\times
-(1+i)^{t}.
-\]
-\item expected number of survivors: \(n\times \px[t]{x}\).
-\end{itemize}
-Then, the ``share available'' per survivor at time \(t\) is
+\emph{Idea.} In \Cref{subsect:policy-val-basic}, we compute the reserve (policy
+value) to be set at time \(t\) by considering the time-\(t\) \emph{future}
+loss. Now, instead of having such a prospective view, here we set the
+time-\(t\) reserve as the share \faIcon{pizza-slice} available in the
+``expected pool of money \faIcon{coins}'' (accumulated from the net
+cash flows received between now and time \(t\)) per expected survivor
+\faIcon{at} time \(t\)\footnote{We are now at time 0, and the actual number of
+survivors \faIcon{at} time \(t\) is not known. So we are considering expected
+number of survivors here.}:
 \begin{align*}
-&\frac{n\times [\epvt{0}{\text{past net premiums}}
--\epvt{0}{\text{past benefits}}]\times (1+i)^{t}}{n\times \px[t]{x}} \\
-&\quad=\frac{\epvt{0}{\text{past net premiums}}
--\epvt{0}{\text{past benefits}}}{\Ex[t]{x}}.
+& \frac{\epvt{0}{
+\overbrace{\lx{x}\times \text{NCFs received between now and time \(t\)}}^{\text{all NCFs injected to the ``pool''}}}
+\times \overbrace{(1+i)^{t}}^{\text{accumulate}}}
+{\underbrace{\lx{x+t}}_{\text{expected number of survivors \faIcon{at} time \(t\)}}}\\
+&\quad=\frac{\lx{x}\times \epvt{0}{\text{NCFs received}}\times (1+i)^{t}}{\lx{x+t}} \\
+&\quad=\frac{\epvt{0}{\text{NCFs received}}}{\Ex[t]{x}}.
 \end{align*}
+\begin{note}
+The value \(\epvt{0}{\text{NCFs received}}/\Ex[t]{x}\) is called the ``expected
+accumulated value'' or \emph{(more common)} ``\defn{actuarial accumulated
+value} (AAV)'' of the NCFs received. The rationale is that, as seen above, it
+is indeed the mean \underline{accumulated value} of NCFs received (of
+\(\lx{x}\) policies with identical terms), per \underline{expected} survivor.
+\end{note}
+
 This leads to the following definition of retrospective policy values.
 
 \begin{enumerate}[label={(\arabic*)}]
@@ -569,16 +638,13 @@ policy value as
 \end{align*}
 \end{warning}
 
-\begin{remark}
-\item Often we just use the notation \(\Vx[t]{}[R]\) to denote both the retrospective
+\begin{note}
+Often we just use the notation \(\Vx[t]{}[R]\) to denote both the retrospective
 net premium and gross premium policy values, as further adding the superscript
 \(n\) or \(g\) to this notation would make it clumsy. Usually we should be able
 to tell which kind of retrospective policy value is being considered from the
 context.
-\item While the usual policy value is the expected \underline{present} value of
-\underline{future loss}, the retrospective policy value is the expected
-\underline{accumulated} value of \underline{past gain}.
-\end{remark}
+\end{note}
 \item \emph{Key property:} The most important result for retrospective policy
 values is the following, which tells us \emph{when} the usual policy value and
 the retrospective one coincide.\footnote{These two policy values can
@@ -595,8 +661,8 @@ Let \(\Vx[t]{}[]\) and \(\Vx[t]{}[R]\) be the time-\(t\) usual and
 retrospective gross premium policy values respectively. Then,
 \(\Vx[t]{}[]=\Vx[t]{}[R]\) if:
 \begin{enumerate}
-\item The gross premiums are set by equivalence principle.
-\item Bases for the premiums and both policy values are the same.
+\item the gross premiums are set by equivalence principle, and
+\item bases for the premiums and both policy values are the same.
 \end{enumerate}
 \end{proposition}
 \begin{pf}
@@ -632,43 +698,78 @@ and the result follows.
 \end{enumerate}
 \item \label{it:expense-policy-val} \textbf{Expense policy values.}
 
-(Here we shall assume that the premiums are level, which is often the case.)
-\begin{enumerate}[label={(\arabic*)}]
-\item \emph{Definition:}
+Throughout the discussions here, we shall make the following assumptions.
 \begin{itemize}
-\item The \defn{expense loading} \(P^e\) is the difference between gross and
-net premiums: \(G-P\). It gives us the increase in premium due to the inclusion
-of \underline{expenses}.
+\item Net/gross premiums are level.
+\item Premium and policy value bases are the same.
+\item Gross premiums are set by equivalence principle.
+\end{itemize}
+\begin{enumerate}[label={(\arabic*)}]
+\item \emph{Definitions:}
+\begin{itemize}
+\item The \defn{expense loading} (or \defn{expense premium}) \(P^e\) is the
+level amount added on top of the net premium to fund expenses, i.e., the amount
+that solves the following equation:
+\[
+\underset{\text{(in terms of \(P^e\))}}{\epvt{0}{\text{expense loadings}}}
+=\underset{\text{(often in terms of gross premium \(P^g\))}}{\epvt{0}{\text{expenses}}}.
+\]
+\begin{note}
+Often the ``\(\text{gross}-\text{net}\)'' formula below is more useful for
+computing expense loading.
+\end{note}
 \item The time-\(t\) \defn{expense policy value} is defined by
 \[
 \Vx[t]{}[e]=\epvt{t}{\text{future \underline{expenses}}}
 -\epvt{t}{\text{future \underline{expense} loadings}}.
 \]
 \end{itemize}
-\item \emph{Key formulas:} (Throughout we shall assume that the gross premiums
-are determined by equivalence principle, and that premium and policy value
-bases are the same, which are typically the cases.)
+\item \emph{Key formulas:}
 \begin{itemize}
-\item \emph{\(\text{Gross}-\text{net}\) formula for \(\Vx[t]{}[e]\):}
-\[
-\Vx[t]{}[e]=\boxed{\Vx[t]{}[g]-\Vx[t]{}[n]}.
-\]
-\item \emph{Expense-only formula for \(P^e\):}
-\[
-\underbrace{\epvt{0}{\text{expense loadings}}}_{\text{in terms of \(P^e\)}}
-=\epvt{0}{\text{expenses}},
-\]
-which follows from the observation that
-\(\Vx[0]{}[e]=\Vx[0]{}[g]-\Vx[0]{}[n]=0-0=0\).
-\item \emph{Signs of \(\Vx[t]{}[e]\):}
+\item \emph{\(\text{Gross}-\text{net}\) formulas:}
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Quantity&Formula \\
+\midrule
+\(P^e\)&\(\underset{\text{(gross premium)}}{P^g}-\underset{\text{(net premium)}}{P^n}\) \\
+\(\Vx[t]{}[e]\)&\(\Vx[t]{}[g]-\Vx[t]{}[n]\) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{pf}
+For the formula of \(P^e\), by equivalence principle we have
+\begin{align*}
+\epvt{0}{\text{gross premiums}}
+-\epvt{0}{\text{net premiums}}
+&=\epvt{0}{\text{benefits}}+\epvt{0}{\text{expenses}}
+-\epvt{0}{\text{benefits}} \\
+&=\epvt{0}{\text{expenses}} \\
+&=\epvt{0}{\text{expense loadings}}.
+\end{align*}
+Since both gross and net premiums are level, we deduce that \(P^e=P^g-P^n\).
+
+Next, for the formula of \(\Vx[t]{}[e]\), since \(P^e=P^g-P^n\), we have
+\begin{align*}
+\Vx[t]{}[e]&=\epvt{t}{\text{future expenses}}-\epvt{t}{\text{future expense loadings}} \\
+&=\epvt{t}{\text{future benefits}}+\epvt{t}{\text{future
+expenses}}-\epvt{t}{\text{future \textbf{gross} premiums}} \\
+&\quad-[\epvt{t}{\text{future benefits}}-\epvt{t}{\text{future \textbf{net} premiums}}] \\
+&=\Vx[t]{}[g]-\Vx[t]{}[n].
+\end{align*}
+\end{pf}
+
+\item \emph{Signs of \(\Vx[t]{}[e]\) (discrete case):}
 \begin{itemize}
 \item \emph{level discrete expenses over time:} \\
-\(\boxed{P^e=\text{amount of each expense}}\) and \(\boxed{\Vx[t]{}[e]=0}\) (which implies that
+\(\boxed{P^e=\text{amount of each expense}}\) and
+\(\boxed{\Vx[t]{}[e]=0}\) (which implies that
 \(\Vx[t]{}[n]=\Vx[t]{}[g]\)\footnote{ It may appear counterintuitive that the
 net premium and gross premium policy values are identical in this case,
 considering that the latter include expenses but the former does not. However,
 this effect is compensated by the difference between gross and net premiums in
-the policy value calculations.  }) for any \(t\ge 0\).
+the policy value calculations.}) for any \(t\ge 0\).
+
 \item \emph{(more common) non-level discrete expenses over time:}\\
 Here we suppose that the renewal expenses are level, and the initial expense
 \(I\) is higher than the renewal expense \(e\) \emph{(typically the case)}.
@@ -682,11 +783,11 @@ The negative expense policy value (in absolute value) is sometimes called the
 \end{note}
 \end{itemize}
 \item \emph{Recursive formulas for \(\Vx[t]{}[e]\):} They can be obtained by
-treating \(\Vx[t]{}[e]\) as the policy value of another ``policy'' obtained by
-stripping off all ``non-expense-related'' elements:
+treating \(\Vx[t]{}[e]\) as the policy value of another ``policy'' obtained
+after stripping off all non-expense-related elements:
 \begin{itemize}
 \item remove sum insured (i.e., set it to zero)
-\item \(G\to P^e\)
+\item \(P^g\to P^e\)
 \item keep initial/renewal and settlement expenses as the original amounts
 \end{itemize}
 
@@ -730,9 +831,9 @@ is the \emph{full preliminary term reserves}.
 premiums given by:
 \begin{enumerate}
 \item \emph{(beginning of first year)} \defn{first year cost of insurance}:
-\[\Px[1]{x}=\epvt{0}{\text{DB \faIcon{at} time \(\le 1\)}}
-=\underbrace{S}_{\mathclap{\text{DB}}}\times v\qx{x}\]
-\item \emph{(the rest)} level amount \(P^{\mathrm{FPT}}\) that solves
+\[\alpha=\epvt{0}{\text{DB \faIcon{at} time \(\le 1\)}}
+=\underbrace{S}_{\mathclap{\text{DB}}}\times v\qx{x}.\]
+\item \emph{(the rest)} level amount \(\beta=P^{\mathrm{FPT}}\) that solves the
 equivalence principle:
 \[\epvt{1}{\text{net premiums of \(P^{\mathrm{FPT}}\)}}
 =
@@ -741,10 +842,7 @@ equivalence principle:
 =\epvt{1}{\text{benefits \faIcon{at} time \(>1\)}}}.
 \]
 \end{enumerate}
-\begin{note}
-Here we assume the original policy is an insurance with policy term at least
-\(2\) years.
-\end{note}
+
 \begin{center}
 \begin{tikzpicture}
 \draw[-Latex] (0,0) -- (10,0) node[right]{Time};
@@ -759,18 +857,27 @@ node[below] {3};
 \fill[] (8,0) circle [radius=0.05]
 node[below] {4};
 \draw[->, ForestGreen, line width=0.3mm] (0,0.6) -- (0,0.2)
-node[pos=-0.5] {\(\Px[1]{x}\)};
-\foreach \x in {1,...,3} {
+node[pos=-0.5] {\(\alpha\)};
+\foreach \x in {1,...,4} {
 	\draw[->, blue, line width=0.3mm] (0+2*\x,0.6) -- (0+2*\x,0.2)
 	node[pos=-0.5] {\(P^{\mathrm{FPT}}\)};
 }
-\node[blue] () at (7,0.5) {\(\cdots\)};
+\node[blue] () at (9,0.5) {\(\cdots\)};
 \draw[pen colour=ForestGreen, very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=5pt}] (0,-0.4) -- (2,-0.4)
-node[midway, below=0.4cm]{\(Sv\qx{x}\)};
-\draw[pen colour=blue, very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=5pt}] (2,-0.4) -- (9,-0.4)
+node[midway, below=0.4cm]{\(Sv\qx{x}\)}
+node[midway, below=0.9cm, text width=2cm]{``full preliminary term''};
+\draw[pen colour=blue, very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=5pt}] (2,-0.4) -- (9.5,-0.4)
 node[midway, below=0.4cm]{\(\epvt{1}{\text{benefits \faIcon{at} time \(>1\)}}\)};
 \end{tikzpicture}
 \end{center}
+\begin{remark}
+\item Here we assume the original policy is an insurance with policy term at
+least \(2\) years.
+\item In case there is a selection at age \(x\), the ``\blc{insurance issued to
+a life aged \(x+1\)}'' would become ``\blc{insurance issued to a life aged
+\([x]+1\)}'' (not \([x+1]\) \warn{}). The idea is that this policy issuance is
+only notional and would not trigger selection at age \(x+1\) again.
+\end{remark}
 \item \emph{Key formulas:}
 \begin{itemize}
 \item \emph{Properties:}
@@ -779,16 +886,17 @@ node[midway, below=0.4cm]{\(\epvt{1}{\text{benefits \faIcon{at} time \(>1\)}}\)}
 \item \emph{(less conservative)} If \(\underset{\text{(first year cost of insurance)}}{Sv\qx{x}}<\underset{\text{(level net
 premium)}}{P}\) (often the case), then \(P^{\mathrm{FPT}}>P\) and
 \(\Vx[t]{}[\mathrm{FPT}]<\Vx[t]{}[n]\) for any \(t>0\).
-\item For any \(t\ge 1\), \(\Vx[t]{}[\mathrm{FPT}]\) is the time-\(t-1\) net
-premium policy value for \blc{insurance issued to \((x+1)\)} (providing the
-remaining coverage, after the first year).
+\item \emph{(relationship with usual policy value)} For any \(t\ge 1\),
+\(\Vx[t]{}[\mathrm{FPT}]\) is the \underline{time-\(t-1\)} net premium policy
+value for \blc{insurance issued to \((x+1)\)} (providing the remaining
+coverage, after the first year).
 \end{itemize}
 \item \emph{Shortcuts for fully discrete WL/endowment insurances:} Suppose the
 sum insured is \(S\).
 \begin{center}
 \begin{tabular}{ll}
 \toprule
-Type&\(\Vx[t]{}[\mathrm{FPT}]\quad (t\ge 1)\) \\
+Insurance type&\(\Vx[t]{}[\mathrm{FPT}]\quad (t\ge 1)\) \\
 \midrule
 WL& \(\displaystyle \underset{\text{(only \(\ax**{}\))}}
 {S\qty(1-\frac{\ax**{x+t}}{\ax**{\blc{x+1}}})}
@@ -806,7 +914,7 @@ WL& \(\displaystyle \underset{\text{(only \(\ax**{}\))}}
 \end{tabular}
 \end{center}
 These follow from the property that \(\Vx[t]{}[\mathrm{FPT}]\) is the
-time-\vc{\(t-1\)} net premium policy value for \blc{insurance issued to
+\underline{time-\(t-1\)} net premium policy value for \blc{insurance issued to
 \((x+1)\)}, for any \(t\ge 1\).
 \end{itemize}
 \end{enumerate}
