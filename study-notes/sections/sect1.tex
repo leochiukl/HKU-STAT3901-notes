@@ -590,10 +590,10 @@ Here \(\mu\) is the \emph{rate} parameter of the exponential distribution.
 The formula of \(\px[t]{x}\) for Makeham's law is rather complex, but it is not
 necessary to memorize it because:
 \begin{itemize}
-\item \emph{(in SOA exam FAM)} it is included in the SOA FAM-L table
+\item \emph{(in SOA exam FAM)} it is included in the SOA FAM-L table.
 \item \emph{(in STAT3901)} we can just memorize the formula of \(\mu_x\)
 instead and use \labelcref{it:fom2surv} to perform calculations related to
-the survival function
+the survival function.
 \end{itemize}
 \end{enumerate}
 \subsection{Life Tables}
@@ -624,24 +624,35 @@ Age \(x\)&\(\lx{x}\)&\(\dx{x}\) \\
 \bottomrule
 \end{tabular}
 \end{center}
-The idea behind the construction of life table is that we start with monitoring
-the survival status of a large group of people at a certain starting age (e.g.,
-30 here), and then we check the number of survivors in the group in each of the
-subsequent ages. Through this, we can deduce some behaviour about the human
-mortality. Fractional values appear in the life table because the values are
-scaled such that \(\lx{30}=10000\) exactly (for convenience). For more
-details about the construction of life table, see \textcite{bowers1997actuarial}.
+The idea behind the construction of life table is to monitor
+the survival status of a large group of people at a certain starting age
+\(x_{0}\) (e.g., 30 here), which are assumed to follow the same survival
+distribution. By checking the number of survivors in the group regularly, we
+can deduce some behaviour about the human mortality.
 
-\item \label{it:life-table-to-probs} Theoretically, by construction, the symbol
-\(\lx{x}\) refers to the \emph{expected} number of survivors to age \(x\), and
-the symbol \(\dx{x}\) refers to the \emph{expected} number of deaths
-\faIcon{skull} between age \(x\) and age \(x+1\). (In practice, the values of
-\(\lx{x}\)'s and \(\dx{x}\)'s in a life table are often inserted/estimated
-based on some real past mortality figures.)
 
-Practically, to use the life table for calculating probabilistic quantities
-about the lifetime, we would use the following formulas (which are derived
-based on the theoretical meanings of \(\lx{x}\) and \(\dx{x}\) above):
+\item \textbf{Meanings of \(\lx{x}\) and \(\dx{x}\).} In a life table, the
+symbol \(\lx{x}\) refers to the expected number of survivors to age \(x\), and
+the symbol \(\dx{x}\) refers to the expected number of deaths \faIcon{skull}
+between ages \(x\) and \(x+1\), for all \(x\ge x_{0}\). Letting \(n\) be the
+number of people in the group at the starting age \(x_{0}\), we have:
+\[
+\lx{x}=n\times \underbrace{\px[x-x_{0}]{x_{0}}}_{\mathclap{\text{survive to age \(x\)}}}
+\quad\text{and}\quad
+\dx{x}=n\times \underbrace{\qx[x-x_{0}|]{x_{0}}}_{\mathclap{\text{die between ages \(x\) and \(x+1\)}}}
+\]
+since all the \(n\) lives have the same survival distribution, and thus the
+same survival/death probabilities.
+\begin{note}
+In practice, the values of \(\lx{x}\)'s and \(\dx{x}\)'s in a life table are
+often estimated based on some real past mortality figures.
+\end{note}
+
+\item \textbf{Converting life table quantities to probabilistic
+quantities.}\label{it:life-table-to-probs} To use the life table for
+calculating probabilistic quantities about the lifetime, we can use the
+following formulas (with \(x,u,t\) being nonnegative integers), which can be
+derived based on the meanings of \(\lx{x}\) and \(\dx{x}\) above:
 
 \begin{center}
 \begin{tabular}{ccc}
@@ -656,11 +667,16 @@ Probability&Using \(\lx{x}\)&Using \(\dx{x}(=\lx{x}-\lx{x+1})\) \\
 \bottomrule
 \end{tabular}
 \end{center}
+The formula \(\px[t]{x}=\lx{x+t}/\lx{x}\) can be obtained by
+noting that \(\px[t]{x}=\px[x+t-x_{0}]{x_{0}}/\px[x-x_{0}]{x_{0}}\) (or
+\(\px[x+t-x_{0}]{x_{0}}=\px[x-x_{0}]{x_{0}}\times \px[t]{x}\)), which follows from
+the factorization formula in \labelcref{it:p-factorize}. Other formulas can be
+derived based on this formula in a straightforward manner (try it!).
 \end{enumerate}
 \subsection{Fractional Age Assumptions}
 \begin{enumerate}
 \item In a life table, often the quantities (\(\lx{x},\dx{x}\) etc.) are given
-only for \emph{integer} ages \(x\). In such case, it is impossible to compute
+only for \emph{integer} ages \(x\). In such a case, it is impossible to compute
 probabilities involving \emph{fractional} ages and years (e.g.
 \(\px[0.5]{50.2}, \qx[0.7]{60}\), etc.), without further assumptions.
 
