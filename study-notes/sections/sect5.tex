@@ -34,7 +34,7 @@ practice, consider having an actuarial internship in valuation team
 \label{subsect:policy-val-basic}
 \begin{enumerate}
 \item Like \emph{equivalence principle} discussed in \Cref{sect:premiums},  the
-concept of policy value is related to a random variable. Such random variable
+concept of policy value is related to a random variable. Such a random variable
 is called time-\(t\) (present value of) \defn{future loss random variable},
 which again has two forms, depending on whether the expenses are considered:
 \begin{itemize}
@@ -55,19 +55,16 @@ time, which is something that does not even exist.}
 \begin{warning}
 There may be an ambiguity on whether the benefits/premiums/expenses
 \emph{precisely at time \(t\)} should be included as ``future''
-benefits/premiums/expenses. For consistency, we shall follow this convention:
-\begin{itemize}
-\item \underline{Benefits} and \underline{benefit}-related expenses (i.e.,
-settlement expenses) \faIcon{at} time \(t\): NOT included.
-\item \underline{Premiums} and \underline{premium}-related expenses (i.e.,
-initial and renewal expenses) \faIcon{at} time \(t\): included.
-\end{itemize}
-With this convention, we can express the time-\(t\) gross loss as
-\begin{align*}
-L_t^g&=\pvt{t}{\text{benefits and benefit-related expenses \faIcon{at} time \(\rc{>} t\)}} \\
-&\quad+\pvt{t}{\text{premium-related expenses \faIcon{at} time \(\rc{\ge}t\)}}
--\pvt{t}{\text{\textbf{gross} premiums \faIcon{at} time \(\rc{\ge}t\)}}.
-\end{align*}
+benefits/premiums/expenses. For consistency, we shall follow the convention
+that (i) end-of-period payments (with time \(t\) being the end of that period)
+are \emph{excluded} while (ii) start-of-period payments (with time \(t\) being
+the start of that period) are \emph{included}.
+
+Very often, this convention amounts to (i) excluding all \underline{benefits}
+and \underline{benefit}-related expenses at that time (as they are mostly
+end-of-period payments, for insurance at least), and (ii) including all
+\underline{premiums} and \underline{premium}-related expenses at that time (as
+they are most start-of-period payments).
 \end{warning}
 \item With time-\(t\) future loss random variable, we can define the
 time-\(t\) \defn{policy value}, which again has two forms, depending on whether
@@ -260,7 +257,7 @@ value recursive formula to illustrate this ``slogan'':
 \boxed{\underbrace{(\Vx[t]{}+G_t-e_t)(1+i)}_{\text{what you have}}=
 \underbrace{\qx{x+t}(S_{t+1}+E_{t+1})+\px{x+t}(\Vx[t+1]{}[])}_{\text{what you need (expected)}}}
 \footnote{
-Here an implicit assumption is that when the life survives \faIcon{at} time
+Here an implicit assumption is that when the life survives at time
 \(t+1\), the only amount needed is the time-\(t+1\) policy value and no extra
 amount is required. This holds true for insurance products (even for endowment
 insurance with \(t=n-1\), as the policy value \(\Vx[n]{}[]\) would include the
@@ -288,12 +285,12 @@ Notations:
 \begin{tikzpicture}
 \draw[] (0,0) rectangle (2,1);
 \node[] () at (1, 1.4) {\(\Vx[t]{}\)};
-\node[] () at (1, 1.9) {(amount reserved \faIcon{at} time \(t\))};
+\node[] () at (1, 1.9) {(amount reserved at time \(t\))};
 \draw[->, ForestGreen, line width=0.3mm] (0.6,-0.5) to (0.6,0.2);
 \node[ForestGreen] () at (0.6,-0.8) {\(G_t\)};
 \draw[->, red, line width=0.3mm] (1.4,0.2) to (1.4,-0.5);
 \node[red] () at (1.4,-0.8) {\(e_t\)};
-\node[] () at (1, -1.2) {(net cash flows \faIcon{at} time \(t\))};
+\node[] () at (1, -1.2) {(net cash flows at time \(t\))};
 \draw[-Latex, blue] (1,0.5) to[bend left] node[midway, auto]{\(\times (1+i)\)} (7,0.5);
 \draw[] (4,-0.5) rectangle (10,1);
 \node[] () at (11.5,0.25) {(what you have)};
@@ -382,14 +379,14 @@ in the following picture:
 \node[] () at (11.5,-2.25) {(what you need)};
 \node[] () at (7,-2.5) {\faIcon{child} (prob.: \(\px[s]{x+t}\)): \(\Vx[t+s]{}[]\)};
 \node[] () at (7,-2) {\faIcon{skull} (prob.: \(\qx[s]{x+t}\)): \(\rc{v^{1-s}}(S_{t+1}+E_{t+1})\)};
-\node[font=\small] () at (11,-4) {\faIcon{skull} Payment \faIcon{at} time \(t+1\): \(S_{t+1}+E_{t+1}\)};
+\node[font=\small] () at (11,-4) {\faIcon{skull} Payment at time \(t+1\): \(S_{t+1}+E_{t+1}\)};
 \draw[-Latex, blue] (4.5,-2.2) to[bend right] node[midway, auto, swap]{\(\times (1+i)^{1-s}\)} (8,-4);
 \end{tikzpicture}
 \end{center}
 In short, the amount \(\rc{v^{1-s}}(S_{t+1}+E_{t+1})\) is NOT referring to the
-amount you need to pay \faIcon{at} time \(t+s\) (which is not year-end), but is
-referring to the amount you need to \underline{save} \faIcon{at} time \(t+s\)
-for the amount that \underline{will} surely be paid \faIcon{at} time \(t+1\),
+amount you need to pay at time \(t+s\) (which is not year-end), but is
+referring to the amount you need to \underline{save} at time \(t+s\)
+for the amount that \underline{will} surely be paid at time \(t+1\),
 if death \faIcon{skull} occurs in the time period \((t,t+s]\).
 \begin{note}
 Of course, death \faIcon{skull} can also occur in the remaining period
@@ -409,9 +406,9 @@ following picture can help us to understand this better:
 \begin{center}
 \begin{tikzpicture}
 \draw[] (0,0) rectangle (2,1);
-\node[text width=3cm] () at (1, 2.2) {(amount reserved \faIcon{at} time \(t+s\))};
+\node[text width=3cm] () at (1, 2.2) {(amount reserved at time \(t+s\))};
 \node[] () at (1, 1.4) {\(\Vx[t+s]{}\)};
-\node[text width=4cm] () at (1, -1) {(no premiums/expenses \faIcon{at} time \(t+s\))};
+\node[text width=4cm] () at (1, -1) {(no premiums/expenses at time \(t+s\))};
 \draw[-Latex, blue] (1,0.5) to[bend left] node[midway, auto]{\(\times (1+i)^{1-s}\)} (7,0.5);
 \draw[] (4,-0.5) rectangle (10,1);
 \node[] () at (11.5,0.25) {(what you have)};
@@ -540,7 +537,7 @@ premium policy value.
 \[
 \boxed{\Vx[t]{}[n]=P\sx**{\angl{t}}-\sum_{j=1}^{t}\qx{x+j-1}F_{j}(1+i)^{t-j}}
 \]
-(\(t=0,\dotsc,n\)).
+(\(t=1,\dotsc,n\)).
 
 \emph{How to use this formula:}
 \begin{enumerate}[label={(\arabic*)}]
@@ -580,14 +577,14 @@ loss. Now, instead of having such a prospective view, here we set the
 time-\(t\) reserve as the share \faIcon{pizza-slice} available in the
 ``expected pool of money \faIcon{coins}'' (accumulated from the net
 cash flows received between now and time \(t\)) per expected survivor
-\faIcon{at} time \(t\)\footnote{We are now at time 0, and the actual number of
-survivors \faIcon{at} time \(t\) is not known. So we are considering expected
+at time \(t\)\footnote{We are now at time 0, and the actual number of
+survivors at time \(t\) is not known. So we are considering expected
 number of survivors here.}:
 \begin{align*}
 & \frac{\epvt{0}{
 \overbrace{\lx{x}\times \text{NCFs received between now and time \(t\)}}^{\text{all NCFs injected to the ``pool''}}}
 \times \overbrace{(1+i)^{t}}^{\text{accumulate}}}
-{\underbrace{\lx{x+t}}_{\text{expected number of survivors \faIcon{at} time \(t\)}}}\\
+{\underbrace{\lx{x+t}}_{\text{expected number of survivors at time \(t\)}}}\\
 &\quad=\frac{\lx{x}\times \epvt{0}{\text{NCFs received}}\times (1+i)^{t}}{\lx{x+t}} \\
 &\quad=\frac{\epvt{0}{\text{NCFs received}}}{\Ex[t]{x}}.
 \end{align*}
@@ -619,9 +616,9 @@ Again, there may be an ambiguity on whether the benefits/premiums/expenses
 benefits/premiums/expenses. For consistency, we shall follow this convention:
 \begin{itemize}
 \item \underline{Benefits} and \underline{benefit}-related expenses (i.e.,
-settlement expenses) \faIcon{at} time \(t\): included.
+settlement expenses) at time \(t\): included.
 \item \underline{Premiums} and \underline{premium}-related expenses (i.e.,
-initial and renewal expenses) \faIcon{at} time \(t\): NOT included.
+initial and renewal expenses) at time \(t\): NOT included.
 \end{itemize}
 This is \underline{opposite} to the convention used for the usual policy
 value!
@@ -631,10 +628,10 @@ policy value as
 \begin{align*}
 \Vx[t]{}[R]&=
 \frac{1}{\Ex[t]{x}}
-\big(\epvt{0}{\text{gross premiums \faIcon{at} time \(\rc{<}t\)}}
--\epvt{0}{\text{premium-related expenses \faIcon{at} time \(\rc{<}t\)}}
+\big(\epvt{0}{\text{gross premiums at time \(\rc{<}t\)}}
+-\epvt{0}{\text{premium-related expenses at time \(\rc{<}t\)}}
 \\
-&\quad-\epvt{0}{\text{benefits and benefit-related expenses \faIcon{at} time \(\rc{\le}t\)}}\big).
+&\quad-\epvt{0}{\text{benefits and benefit-related expenses at time \(\rc{\le}t\)}}\big).
 \end{align*}
 \end{warning}
 
@@ -673,17 +670,17 @@ carefully.
 Note that
 \begin{align*}
 \vc{\Ex[t]{x}}\times \Vx[t]{}[]&=
-\epvt{\vc{0}}{\text{benefits and benefit-related expenses \faIcon{at} time \(\rc{>} t\)}} \\
-&\quad+\epvt{\vc{0}}{\text{premium-related expenses \faIcon{at} time \(\rc{\ge}t\)}}
--\epvt{\vc{0}}{\text{gross premiums \faIcon{at} time \(\rc{\ge}t\)}}
+\epvt{\vc{0}}{\text{benefits and benefit-related expenses at time \(\rc{>} t\)}} \\
+&\quad+\epvt{\vc{0}}{\text{premium-related expenses at time \(\rc{\ge}t\)}}
+-\epvt{\vc{0}}{\text{gross premiums at time \(\rc{\ge}t\)}}
 \end{align*}
 and
 \begin{align*}
 -\Ex[t]{x}\times \Vx[t]{}[R]
-&=-\epvt{0}{\text{gross premiums \faIcon{at} time \(\rc{<}t\)}}
-+\epvt{0}{\text{premium-related expenses \faIcon{at} time \(\rc{<}t\)}}
+&=-\epvt{0}{\text{gross premiums at time \(\rc{<}t\)}}
++\epvt{0}{\text{premium-related expenses at time \(\rc{<}t\)}}
 \\
-&\quad+\epvt{0}{\text{benefits and benefit-related expenses \faIcon{at} time \(\rc{\le}t\)}}.
+&\quad+\epvt{0}{\text{benefits and benefit-related expenses at time \(\rc{\le}t\)}}.
 \end{align*}
 Hence,
 \begin{align*}
@@ -831,7 +828,7 @@ is the \emph{full preliminary term reserves}.
 premiums given by:
 \begin{enumerate}
 \item \emph{(beginning of first year)} \defn{first year cost of insurance}:
-\[\alpha=\epvt{0}{\text{DB \faIcon{at} time \(\le 1\)}}
+\[\alpha=\epvt{0}{\text{DB at time \(\le 1\)}}
 =\underbrace{S}_{\mathclap{\text{DB}}}\times v\qx{x}.\]
 \item \emph{(the rest)} level amount \(\beta=P^{\mathrm{FPT}}\) that solves the
 equivalence principle:
@@ -839,7 +836,7 @@ equivalence principle:
 =
 \underset{\text{(EPV of benefits for \blc{insurance issued to \((x+1)\)})}}
 {\epvt{1}{\text{future benefits}}
-=\epvt{1}{\text{benefits \faIcon{at} time \(>1\)}}}.
+=\epvt{1}{\text{benefits at time \(>1\)}}}.
 \]
 \end{enumerate}
 
@@ -867,7 +864,7 @@ node[pos=-0.5] {\(\alpha\)};
 node[midway, below=0.4cm]{\(Sv\qx{x}\)}
 node[midway, below=0.9cm, text width=2cm]{``full preliminary term''};
 \draw[pen colour=blue, very thick, decorate,decoration={mirror, calligraphic brace, amplitude=5pt, raise=5pt}] (2,-0.4) -- (9.5,-0.4)
-node[midway, below=0.4cm]{\(\epvt{1}{\text{benefits \faIcon{at} time \(>1\)}}\)};
+node[midway, below=0.4cm]{\(\epvt{1}{\text{benefits at time \(>1\)}}\)};
 \end{tikzpicture}
 \end{center}
 \begin{remark}

@@ -344,7 +344,7 @@ Note that \(K_x\) is a nonnegative discrete random variable.
 
 \item To compute probabilities related to \(K_x\), the typical strategy is to
 relate it with \(T_x\), as we are more familiar with probability calculations
-for \(T_x\). Here are some formulas: For any \(k=0,1,,\dotsc\),
+for \(T_x\). Here are some formulas: For any \(k=0,1,\dotsc\),
 \begin{itemize}
 \item \label{it:pmf-kx} \emph{probability mass function (pmf) of \(K_x\):}
 \(\prob{K_x=k}=\qx[k|]{x}\overset{\text{\labelcref{it:utqx-fmlas}}}{=}\px[k]{x}\qx{x+k}\)
@@ -384,6 +384,7 @@ Note that
 =\int_{0}^{\infty}\expv{\indicset{t<T_x}}\dd{t}
 =\int_{0}^{\infty}\px[t]{x}\dd{t}.
 \]
+where \(\indicset{\cdot}\) denotes the indicator function.
 \end{pf}
 \item \emph{(Less commonly used) Second moment:} \(\displaystyle
 \expv{T_x^2}=\int_{0}^{\infty}2t\times \px[t]{x}\dd{t}\).
@@ -637,9 +638,14 @@ the symbol \(\dx{x}\) refers to the expected number of deaths \faIcon{skull}
 between ages \(x\) and \(x+1\), for all \(x\ge x_{0}\). Letting \(n\) be the
 number of people in the group at the starting age \(x_{0}\), we have:
 \[
-\lx{x}=n\times \underbrace{\px[x-x_{0}]{x_{0}}}_{\mathclap{\text{survive to age \(x\)}}}
-\quad\text{and}\quad
-\dx{x}=n\times \underbrace{\qx[x-x_{0}|]{x_{0}}}_{\mathclap{\text{die between ages \(x\) and \(x+1\)}}}
+\lx{x}=\expv{\sum_{i=1}^{n}\indicset{\text{person \(i\) survives to age \(x\)}}}
+=n\times \underbrace{\px[x-x_{0}]{x_{0}}}_{\mathclap{\text{survive to age \(x\)}}}
+\]
+and
+\[
+\dx{x}=\expv{\sum_{i=1}^{n}\indicset{\text{person \(i\) dies between ages \(x\) and \(x+1\)}}}
+=n\times \underbrace{\qx[x-x_{0}|]{x_{0}}}_{\mathclap{\text{die between ages
+\(x\) and \(x+1\)}}},
 \]
 since all the \(n\) lives have the same survival distribution, and thus the
 same survival/death probabilities.
@@ -712,7 +718,7 @@ In the table below, we assume that \(x\) is an integer age and that \(s,t\ge
 \midrule
 \(\lx{x+t}\)&\(=\overset{\text{\ystar{}}}{(1-t)\lx{x}+t\lx{x+1}}=\lx{x}-t\dx{x}\)
 &\ystar{}\(\lx{x}^{1-t}\lx{x+1}^{t}\)
-&\ystar{}solve \(\displaystyle \frac{1}{\lx{x+t}}=\frac{1-t}{\lx{x}}+\frac{t}{\lx{x+1}}\) \\
+&\ystar{}\(\big((1-t)/\lx{x}+t/\lx{x+1}\big)^{-1}\) \\
 \(\px[t]{x}\)&\diagbox[dir=NE]{}{}
 &\(=\px[t]{x+s}=\underset{\text{\ystar{}}}{(\px[]{x})^{t}}\)
 & \diagbox[dir=NE]{}{}\\
@@ -792,19 +798,19 @@ A common example where ``selection'' arises is \emph{underwriting}
 \faIcon{search}. The idea is that after performing underwriting on an
 individual at age \(x\) (``selection'' at age \(x\)), the insurer knows more
 information about the individual and thus may apply a survival model that is
-different from the ``standard'' one for that individual. For example, a more
-``adverse'' model may be used if it is known that the individual is quite
-unhealthy.
+different from the ``standard'' one for that individual. For example, an
+``improved'' model may be used if it is known that the individual passes the
+health checks and is unlikely to have serious diseases.
 
 As time passes, the information collected from the underwriting should become
 more outdated and less relevant. This feature corresponds to the concept of
 \emph{select period}, which specifies a time length after which the information
-from underwriting is completely not applicable, so the survival model becomes
-the ``standard'' one again.
+from underwriting is completely inapplicable (or negligible), so the survival
+model becomes the ``standard'' one again.
 
 \item With selection at age \(x\), previous symbols and formulas can still be
-used with only one change: replacing every ``\(x\)'' by ``\([x]\)'' to indicate
-the age at selection. Furthermore, we should simplify ``\([x]+t\)'' (for a life
+used with only two changes: (i) replacing every ``\(x\)'' by ``\([x]\)'' to
+indicate the age at selection, and (ii) simplifying ``\([x]+t\)'' (for a life
 aged \(x+t\) and selected at age \(x\)) to just ``\(x+t\)'' if \(t\ge d\), when
 the select period is \(d\) years, since the effect from selection has already
 been gone. Examples:
@@ -834,7 +840,7 @@ square brackets, in addition to the ordinary ones.
 
 A select life table can have the following two formats:
 \begin{itemize}
-\item \emph{(used in AM92 table) Format 1: Current age fixed in each row.}
+\item \emph{(Used in AM92 table) Format 1: Current age fixed in each row.}
 
 For example, suppose the select period is 3 years:
 \begin{center}
@@ -852,7 +858,7 @@ Age \(x\)&\(\lx{[x]}\)&\(\lx{[x-1]+1}\)&\(\lx{[x-2]+2}\)&\(\lx{x}(=\lx{x-3+3})\)
 \bottomrule
 \end{tabular}
 \end{center}
-\item \emph{(more common form in SOA exam) Format 2: Age at selection fixed in each row.}
+\item \emph{(More common form in SOA exam) Format 2: Age at selection fixed in each row.}
 
 For example, suppose the select period is 3 years:
 \begin{center}
@@ -892,7 +898,7 @@ useful idea is to relate each of the select quantities for \([x]\) and
 \([x+1]\) with a \underline{common} ultimate quantity, to build a ``bridge''
 between the select quantities for \([x]\) and \([x+1]\). Once we have the
 ``bridge'', we can go from \([x]\) to \([x+1]\) via the intermediate ultimate
-quantity.
+quantity (\(d\): select period):
 \begin{center}
 \begin{tikzpicture}
 \node[] (s1) at (0,1) {\(\lx{[x]}\)};
@@ -909,6 +915,5 @@ quantity.
 \draw[<->] (s2) -- (ult);
 \end{tikzpicture}
 \end{center}
-(\(d\): select period)
 \end{enumerate}
 \end{enumerate}

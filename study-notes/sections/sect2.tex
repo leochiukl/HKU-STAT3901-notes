@@ -304,7 +304,7 @@ Second moment&\(\Ax[n|][2]{x}=\Ax[2]{x}-\Ax[][2]{\termxn}=\Ex[n][2]{x}\Ax[][2]{x
 \\
 \midrule
 Variance&\(\Ax[n|][2]{x}-(\Ax[n|]{x})^{2}\)
-&\(\Ax*[n|]{x}-(\Ax*[n|]{x})^{2}\) \\
+&\(\Ax*[n|][2]{x}-(\Ax*[n|]{x})^{2}\) \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -413,7 +413,7 @@ actually a simplified definition that works for some sufficiently nice random
 variable only. But this definition is sufficient for our purpose here.} Here we
 denote the \(p\)th percentile of \(X\) by \(\pi_{p}(X)\).
 
-\item \label{it:percentile-trick-insurance} \textbf{Percentile trick:} In our case here,
+\item \label{it:percentile-trick-insurance} \textbf{Percentile trick.} In our case here,
 the random variable of interest is the PVRV, and we denote it by \(Z\). For
 many insurance coverages discussed here, we can write \(Z=g(T_x)\) for some
 strictly \emph{decreasing} continuous function \(g\). Then, the \emph{percentile trick}
@@ -709,10 +709,10 @@ and that when \(i^*=0\), we have
 \(\indicset{\cdot}\) denotes the indicator function.
 \end{pf}
 \end{enumerate}
-\item With selection at age \(x\), all the previous ``\(A\)'' symbols and
-formulas can still be used, after replacing ``\(x\)'' by \([x]\) and
-simplifying ``\([x]+t\)'' to ``\(x+t\)'' if \(t\ge \underset{\text{(select
-period)}}{d}\).
+\item \textbf{Incorporating selection.} With selection at age \(x\), all the
+previous ``\(A\)'' symbols and formulas can still be used, after replacing
+``\(x\)'' by \([x]\) and simplifying ``\([x]+t\)'' to ``\(x+t\)'' if \(t\ge
+\underset{\text{(select period)}}{d}\).
 \end{enumerate}
 \subsection{Relating \(\bar{A}\), \(A\), and \(A^{(m)}\)}
 \begin{enumerate}
