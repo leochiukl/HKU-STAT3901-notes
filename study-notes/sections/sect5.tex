@@ -58,7 +58,10 @@ There may be an ambiguity on whether the benefits/premiums/expenses
 benefits/premiums/expenses. For consistency, we shall follow the convention
 that (i) end-of-period payments (with time \(t\) being the end of that period)
 are \emph{excluded} while (ii) start-of-period payments (with time \(t\) being
-the start of that period) are \emph{included}.
+the start of that period) are \emph{included}. This can be intuitively
+explained by treating the end-of-period payments occurring at a time that is
+``slightly earlier'' than time \(t\), and start-of-period payments occurring at
+a time that is ``slightly later'' than time \(t\).
 
 Very often, this convention amounts to (i) excluding all \underline{benefits}
 and \underline{benefit}-related expenses at that time (as they are mostly
@@ -80,17 +83,13 @@ the expenses are considered:
 Here \(\epvt{t}{\cdot}\) refers to the time-\(t\) EPV.
 
 \begin{remark}
-\item We may drop the superscript (\(n\) or \(g\)) if it is clear from context which
-kind of policy value we are referring to.
-\item Intuitively, this definition suggests that we should set aside a reserve
-amount that equals exactly the amount of money we would expect to lose in the
-future.\footnote{This approach may be quite natural at the first glance, but
-actually setting the reserve in this way is somewhat risky \warn{} because if
-the future experience turns out to be worse than expected (not that uncommon),
-we would not have enough money in our reserve to cover the loss anymore, which
-can lead to disastrous consequences!  This can explain why our framework here
-is more like a ``toy model'' than a legitimate approach to be used directly in
-practice.  Practically, perhaps some extra ``buffer'' is needed, to be safe.}
+\item We may drop the superscript (\(n\) or \(g\)) if it is clear from context
+which kind of policy value we are referring to.  \item Intuitively, this
+definition suggests that we should set aside a reserve amount that equals the
+amount of money we would expect to lose in the future.  Averaging this over a
+large number of policies, the reserve should be close to the average loss,
+assuming that the \emph{law of large numbers} is applicable\footnote{In
+practice, perhaps some extra ``buffer'' for the reserve is needed, to be safe.}.
 \end{remark}
 
 \item The basic topics in policy values to be discussed here are:
@@ -111,14 +110,7 @@ Conditions&Boundary value\\
 \midrule
 (no condition)&\(\Vx[0]{}[n]=0\)\\
 \midrule
-\makecell[l]{(i) gross premium is set by equivalence principle, and \\ (ii)
-\(\text{policy value basis}=\text{premium basis}\)}& \(\Vx[0]{}[g]=0\)\\
-\multicolumn{2}{l}{
-\begin{note}
-\defn{Basis} means a set of assumptions. Note that policy value basis and
-premium basis \emph{can} be different!
-\end{note}
-} \\
+gross premium is set by equivalence principle& \(\Vx[0]{}[g]=0\)\\
 \midrule
 \(n\)-year term life insurance&\(\Vx[n]{}[g]=0\) \\
 \midrule
@@ -613,26 +605,12 @@ This leads to the following definition of retrospective policy values.
 \begin{warning}
 Again, there may be an ambiguity on whether the benefits/premiums/expenses
 \emph{precisely at time \(t\)} should be included as ``past''
-benefits/premiums/expenses. For consistency, we shall follow this convention:
-\begin{itemize}
-\item \underline{Benefits} and \underline{benefit}-related expenses (i.e.,
-settlement expenses) at time \(t\): included.
-\item \underline{Premiums} and \underline{premium}-related expenses (i.e.,
-initial and renewal expenses) at time \(t\): NOT included.
-\end{itemize}
-This is \underline{opposite} to the convention used for the usual policy
-value!
-
-With this convention, we can express the time-\(t\) retrospective gross premium
-policy value as
-\begin{align*}
-\Vx[t]{}[R]&=
-\frac{1}{\Ex[t]{x}}
-\big(\epvt{0}{\text{gross premiums at time \(\rc{<}t\)}}
--\epvt{0}{\text{premium-related expenses at time \(\rc{<}t\)}}
-\\
-&\quad-\epvt{0}{\text{benefits and benefit-related expenses at time \(\rc{\le}t\)}}\big).
-\end{align*}
+benefits/premiums/expenses. For consistency, we shall follow this convention
+that (i) end-of-period payments (with time \(t\) being the end of that period)
+are \emph{included} while (ii) start-of-period payments (with time \(t\) being
+the start of that period) are \emph{excluded}. This is \underline{opposite} to
+the convention used for the usual policy value, because we are considering past
+rather than future here!
 \end{warning}
 
 \begin{note}
